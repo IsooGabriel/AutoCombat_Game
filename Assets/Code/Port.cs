@@ -9,15 +9,6 @@ public enum PortDirection
 
 public class Port
 {
-    public string Name { get; }
-    public Type DataType { get; }       // int, float, bool Ç»Ç«
-    public PortDirection Direction { get; }
-    public INode Owner { get; }         // èäëÆÉmÅ[Éh
-
-    private List<Port> _connections = new();
-
-    public IEnumerable<Port> Connections => _connections;
-
     public Port(string name, Type dataType, PortDirection direction, INode owner)
     {
         Name = name;
@@ -25,6 +16,16 @@ public class Port
         Direction = direction;
         Owner = owner;
     }
+
+    public string Name { get; }
+    public Type DataType { get; }
+    public PortDirection Direction { get; }
+    public INode Owner { get; }
+
+    private List<Port> _connections = new();
+
+    public IEnumerable<Port> Connections => _connections;
+
 
     public void Connect(Port other)
     {

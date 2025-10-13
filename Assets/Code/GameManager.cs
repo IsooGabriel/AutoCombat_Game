@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 public class GameManager
 {
@@ -10,17 +9,18 @@ public class GameManager
     {
         get
         {
-            if (_instance == null)
+            if (_instance != null)
             {
-                lock (_lock)
-                {
-                    if (_instance == null)
-                    {
-                        _instance = new GameManager();
-                    }
-                }
+                return _instance;
             }
-            return _instance;
+            lock (_lock)
+            {
+                if (_instance == null)
+                {
+                    _instance = new GameManager();
+                }
+                return _instance;
+            }
         }
     }
 
@@ -42,7 +42,7 @@ public class GameManager
     }
     public void EntityDie(Entity entity)
     {
-        if(entity == Player)
+        if (entity == Player)
         {
             if (loseUI != null)
             {

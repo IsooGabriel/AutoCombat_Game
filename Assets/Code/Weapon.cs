@@ -1,11 +1,11 @@
 using System;
-using System.Numerics;
-using static UnityEngine.GraphicsBuffer;
-
+using UnityEngine;
 public class Weapon
 {
-    private Entity user;
+    protected Entity user;
 
+    [SerializeField]
+    protected decimal range = 1;
     public Action<Entity> hit;
 
     public Weapon(Entity user)
@@ -13,9 +13,9 @@ public class Weapon
         this.user = user;
     }
 
-    public virtual bool Attack(Vector3 direction)
+    public virtual bool Attack(Vector2 direction)
     {
-        return true;
+        return false;
     }
 
     public void Hit(Entity target)

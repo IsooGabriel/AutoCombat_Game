@@ -1,8 +1,6 @@
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Entity:MonoBehaviour
+public class Entity : MonoBehaviour
 {
     private int hp;
     private int attack;
@@ -36,6 +34,11 @@ public class Entity:MonoBehaviour
             Die();
         }
         return true;
+    }
+
+    public bool AttackTarget(Vector2 direction)
+    {
+        return weapon.Attack(direction);
     }
 
     protected virtual void Die()
