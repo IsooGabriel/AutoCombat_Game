@@ -15,5 +15,6 @@ public class AddNode : MonoBehaviour, INode
     public IEnumerable<Port> OutputPorts { get; private set; }
     public void Execute(NodeContext context)
     {
+        List<Port> decimals = INode.GetPorts<decimal>(OutputPorts);
     }
 }
