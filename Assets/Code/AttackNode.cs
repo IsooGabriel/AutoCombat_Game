@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class AttackNode : INode
 {
-    [SerializeField]
     private Entity user;
 
     public IEnumerable<Port> InputPorts { get; private set; }
     public IEnumerable<Port> OutputPorts { get; private set; }
+    public NodeContext contextLog { get; private set; }
     public AttackNode()
     {
-        InputPorts = new List<Port> { new Port("TryAttack", typeof(bool), PortDirection.Input, this), new Port("direction", typeof(Vector2), PortDirection.Input, this) };
-        OutputPorts = new List<Port> { new Port("hit", typeof(bool), PortDirection.Output, this) };
+        InputPorts = new List<Port> {new Port("setAttack", typeof(bool), PortDirection.Input, this, true), new Port("direction", typeof(Vector2), PortDirection.Input, this) };
+        OutputPorts = new List<Port> { new Port("conti", typeof(bool), PortDirection.Output, this), new Port("hit", typeof(bool), PortDirection.Output, this) };
     }
 
     public void Execute(NodeContext context)
@@ -31,8 +31,10 @@ public class AttackNode : INode
             return;
         }
         Vector2 direction = context.GetValue<Vector2>(InputPorts.ElementAt(1));
-
-        if (user == GameManager.Instance.Player)
+        if(contextLog.TryGetValue(out direction))
+        {
+        }
+        else if (user == GameManager.Instance.Player)
         {
             direction = GameManager.Instance.Enemy.transform.position;
         }
@@ -44,6 +46,11 @@ public class AttackNode : INode
         {
             return;
         }
-        user.AttackTarget(user.transform.right);
+        user.AttackTarget(direction);
+        user.Weapon.hit += OnHit;
+    }
+    private void OnHit(Entity other)
+    {
+        INode.Output(true, this);
     }
 }

@@ -9,7 +9,6 @@ public class Entity : MonoBehaviour
     private int moveSpeed;
     private int attackSpeed;
     private Weapon weapon;
-    private NodeManager nodeManager;
 
     public int Hp { get => hp; set => hp = value; }
     public int Attack { get => attack; set => attack = value; }

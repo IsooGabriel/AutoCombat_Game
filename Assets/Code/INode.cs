@@ -6,6 +6,8 @@ public interface INode
 {
     IEnumerable<Port> InputPorts { get; }
     IEnumerable<Port> OutputPorts { get; }
+    NodeContext contextLog { get; }
+
     void Execute(NodeContext context);
     static public List<Port> GetPorts<T>(IEnumerable<Port> ports)
     {
@@ -25,7 +27,7 @@ public interface INode
         bool hasInput = false;
         foreach (var port in ports)
         {
-            if (port.isRequired)
+            if (port.IsRequired)
             {
                 if (port.Connections == null || port.Connections.Count() == 0)
                 {
@@ -51,5 +53,17 @@ public interface INode
         }
         return hasInput;
     }
-
+    static public bool Output<T>(T value, INode self)
+    {
+        foreach (var port in self.OutputPorts)
+        {
+            NodeContext context = new();
+            context.SetValue(port, value);
+            foreach (var output in port.GetConnections<T>())
+            {
+                output.Owner.Execute(context);
+            }
+        }
+        return true;
+    }
 }
