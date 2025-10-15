@@ -1,7 +1,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 
 public interface INode
 {
@@ -13,7 +12,7 @@ public interface INode
         List<Port> result = new List<Port>();
         foreach (var port in ports)
         {
-            if(!(port.DataType is T))
+            if (!(port.DataType is T))
             {
                 continue;
             }
@@ -21,4 +20,36 @@ public interface INode
         }
         return result;
     }
+    static public bool CheckExecutable(IEnumerable<Port> ports, NodeContext context)
+    {
+        bool hasInput = false;
+        foreach (var port in ports)
+        {
+            if (port.isRequired)
+            {
+                if (port.Connections == null || port.Connections.Count() == 0)
+                {
+                    return false;
+                }
+            }
+            if (port.Connections.Count() == 0)
+            {
+                continue;
+            }
+            foreach (var connectedPort in port.Connections)
+            {
+                if (context.CheckRegister(connectedPort))
+                {
+                    continue;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            hasInput = true;
+        }
+        return hasInput;
+    }
+
 }

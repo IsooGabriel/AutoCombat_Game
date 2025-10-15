@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 
 public class NodeManager
 {
@@ -25,7 +24,7 @@ public class NodeManager
     {
         return new List<INode>(nodes);
     }
-    
+
     public bool Run()
     {
         return true;

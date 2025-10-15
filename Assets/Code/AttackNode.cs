@@ -17,6 +17,10 @@ public class AttackNode : INode
 
     public void Execute(NodeContext context)
     {
+        if (!INode.CheckExecutable(InputPorts, context))
+        {
+            return;
+        }
         if (user == null)
         {
             Debug.LogError("User entity is not set.");
@@ -28,13 +32,9 @@ public class AttackNode : INode
         }
         Vector2 direction = context.GetValue<Vector2>(InputPorts.ElementAt(1));
 
-        //if ( && dirObj is Vector2 dir)
-        //{
-        //    direction = dir;
-        //}
         if (user == GameManager.Instance.Player)
         {
-           direction = GameManager.Instance.Enemy.transform.position;
+            direction = GameManager.Instance.Enemy.transform.position;
         }
         else if (user == GameManager.Instance.Enemy)
         {
@@ -44,6 +44,6 @@ public class AttackNode : INode
         {
             return;
         }
-            user.AttackTarget(user.transform.right);
+        user.AttackTarget(user.transform.right);
     }
 }

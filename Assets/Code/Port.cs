@@ -21,6 +21,7 @@ public class Port
     public Type DataType { get; }
     public PortDirection Direction { get; }
     public INode Owner { get; }
+    public bool isRequired = false;
 
     private List<Port> _connections = new();
 
