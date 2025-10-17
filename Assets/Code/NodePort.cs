@@ -4,23 +4,19 @@
 public class NodePort
 {
     public string name;
-    public PortType type;
+    public Type type;
     public bool isRequired;
     public bool isInput;
+    public bool isExecutionPort;
+    public Node owner;
 
-    public NodePort(string name, PortType type, bool isRequired, bool isInput)
+    public NodePort(string name, Type type, bool isRequired, bool isInput, bool isExecutionPort, Node owner)
     {
         this.name = name;
         this.type = type;
         this.isRequired = isRequired;
         this.isInput = isInput;
+        this.isExecutionPort = isExecutionPort;
+        this.owner = owner;
     }
-}
-
-public enum PortType
-{
-    Execution,
-    Float,
-    Bool,
-    Vector2
 }

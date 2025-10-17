@@ -1,22 +1,130 @@
-﻿using System.Collections.Generic;
-using System;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class GraphExecutor
 {
     public CharacterController character;
     private Dictionary<string, Node> nodes;
     private Queue<Node> executionQueue;
-    private HashSet<string> executedThisTick; // 同一ノードの重複実行防止
+
+
+    #region public関数
+
 
     public GraphExecutor(GraphData graphData, CharacterController character)
     {
         this.character = character;
         LoadGraph(graphData);
     }
+
+    /// <summary>
+    /// 1tick分実行
+    /// </summary>
+    public void ExecuteTick()
+    {
+        executionQueue = new Queue<Node>();
+
+        Node startNode = nodes.Values.FirstOrDefault(n => n.nodeType == "Start");
+        if (startNode != null)
+        {
+            executionQueue.Enqueue(startNode);
+        }
+
+        while (executionQueue.Count > 0)
+        {
+            Node node = executionQueue.Dequeue();
+
+            // 重複実行防止
+            if (node.useLimit == 0)
+            {
+                continue;
+            }
+
+            // 必須ポートが満たされているか確認
+            if (!CanExecute(node))
+            {
+                continue;
+            }
+
+            node.useLimit--;
+            node.Execute(this);
+
+            // データをクリア(次tickのため)
+            node.inputData.Clear();
+        }
+    }
+
+    /// <summary>
+    /// ノードが次のノードを実行キューに追加
+    /// </summary>
+    /// <param name="node">ポートの親</param>
+    /// <param name="portName">発火させるポート名</param>
+    public void EnqueueConnected(Node node, string portName)
+    {
+        if (node.connectedOutputs.ContainsKey(portName))
+        {
+            foreach (var connected in node.connectedOutputs[portName])
+            {
+                executionQueue.Enqueue(connected);
+            }
+        }
+    }
+
+    /// <summary>
+    /// ノードがデータを次のノードに送る
+    /// </summary>
+    /// <param name="node">送信元ノード</param>
+    /// <param name="portName">送信に使うポート名</param>
+    /// <param name="data">送るデータ</param>
+    public bool SendData(Node node, string portName, object data)
+    {
+        bool isSent = false;
+        if (!node.connectedOutputs.ContainsKey(portName))
+        {
+            return false;
+        }
+        foreach (var targetPort in node.outputPorts)
+        {
+            if (targetPort == null)
+            {
+                continue;
+            }
+            Node targetNode = targetPort.owner;
+            if (targetNode == null)
+            {
+                continue;
+            }
+            if (targetNode.inputData == null || targetNode.inputData.Count <= 0)
+            {
+                continue;
+            }
+            if (targetNode.inputData.ContainsKey(targetPort.name))
+            {
+                if (targetNode.inputData[targetPort.name] != null)
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                targetNode.inputData.Add(targetPort.name, data);
+                return true;
+            }
+
+            targetNode.inputData[targetPort.name] = data;
+
+            isSent = true;
+        }
+        return isSent;
+    }
+
+
+    #endregion
+
+    #region private関数
+
 
     private void LoadGraph(GraphData graphData)
     {
@@ -65,47 +173,14 @@ public class GraphExecutor
         Type nodeType = Type.GetType(type + "Node");
         return (Node)Activator.CreateInstance(nodeType);
     }
-
-    // 1tick分実行
-    public void ExecuteTick()
-    {
-        executionQueue = new Queue<Node>();
-        executedThisTick = new HashSet<string>();
-
-        Node startNode = nodes.Values.FirstOrDefault(n => n.nodeType == "Start");
-        if (startNode != null)
-        {
-            executionQueue.Enqueue(startNode);
-        }
-
-        while (executionQueue.Count > 0)
-        {
-            Node node = executionQueue.Dequeue();
-
-            // 重複実行防止
-            if (executedThisTick.Contains(node.id))
-            {
-                continue;
-            }
-
-            // 必須ポートが満たされているか確認
-            if (!CanExecute(node))
-            {
-                continue;
-            }
-
-            executedThisTick.Add(node.id);
-            node.Execute(this);
-
-            // データをクリア(次tickのため)
-            node.inputData.Clear();
-        }
-    }
-
     private bool CanExecute(Node node)
     {
-        foreach (var port in node.inputPorts.Where(p => p.isRequired))
+        foreach (var port in node.inputPorts)
         {
+            if (port == null || !port.isRequired)
+            {
+                continue;
+            }
             if (!node.inputData.ContainsKey(port.name))
             {
                 return false;
@@ -113,43 +188,11 @@ public class GraphExecutor
         }
         return true;
     }
-
-    /// <summary>
-    /// ノードが次のノードを実行キューに追加
-    /// </summary>
-    /// <param name="node">ポートの親</param>
-    /// <param name="portName">発火させるポート名</param>
-    public void EnqueueConnected(Node node, string portName)
-    {
-        if (node.connectedOutputs.ContainsKey(portName))
-        {
-            foreach (var connected in node.connectedOutputs[portName])
-            {
-                executionQueue.Enqueue(connected);
-            }
-        }
-    }
-
-    // ノードがデータを次のノードに送る
-    public void SendData(Node node, string portName, object data)
-    {
-        if (node.connectedOutputs.ContainsKey(portName))
-        {
-            foreach (var connected in node.connectedOutputs[portName])
-            {
-                // 対応する入力ポート名を見つける(簡略化)
-                var inputPort = connected.inputPorts.FirstOrDefault(p => p.type == GetPortType(portName, node));
-                if (inputPort != null)
-                {
-                    connected.inputData[inputPort.name] = data;
-                    executionQueue.Enqueue(connected);
-                }
-            }
-        }
-    }
-
-    private PortType GetPortType(string portName, Node node)
+    private Type GetPortType(string portName, Node node)
     {
         return node.outputPorts.First(p => p.name == portName).type;
     }
+
+
+    #endregion
 }

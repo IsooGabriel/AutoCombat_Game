@@ -1,0 +1,15 @@
+{
+    "nodes": [
+        {
+            "id": "START_NODE",
+            "type": "startNode",
+            "position": {
+                "x": 10.0,
+                "y": 0.0
+            }
+        }
+    ],
+    "startNodeId": "START_NODE",
+    "graphName": "New AI",
+    "author": ""
+}
