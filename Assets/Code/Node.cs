@@ -6,9 +6,10 @@ using UnityEngine;
 public abstract class Node
 {
     public string id;
-    public string nodeType;
+    public NodeType nodeType;
     public Vector2 position;
     public int useLimit = 10;
+    public int useCount = 0;
 
     [NonSerialized] public NodePort[] inputPorts;
     [NonSerialized] public NodePort[] outputPorts;

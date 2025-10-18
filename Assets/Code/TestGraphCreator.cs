@@ -11,7 +11,13 @@ public class TestGraphCreator : MonoBehaviour
 
         // Startノードは既に存在するので、そこから接続を追加
         var startNode = graph.nodes[0]; // 必ず存在
-
+        graph.nodes.Add(new NodeData()
+        {
+            id = Guid.NewGuid().ToString(),
+            type = NodeType.DEBUG,
+            position = new Vector2(200, 0)
+        });
+        graph.nodes[0].outputConnections["exec"].Add(graph.nodes[1].id);
         // 保存
         string json = JsonUtility.ToJson(graph, true);
         System.IO.File.WriteAllText(Application.dataPath + $"/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);

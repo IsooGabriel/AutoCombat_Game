@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public class GraphExecutor
 {
@@ -25,8 +23,8 @@ public class GraphExecutor
     public void ExecuteTick()
     {
         executionQueue = new Queue<Node>();
-
-        Node startNode = nodes.Values.FirstOrDefault(n => n.nodeType == "Start");
+        var executed = new HashSet<string>();
+        Node startNode = nodes.Values.FirstOrDefault(n => n.nodeType == NodeType.Start);
         if (startNode != null)
         {
             executionQueue.Enqueue(startNode);
@@ -35,11 +33,18 @@ public class GraphExecutor
         while (executionQueue.Count > 0)
         {
             Node node = executionQueue.Dequeue();
-
-            // 重複実行防止
-            if (node.useLimit == 0)
+            if (!executed.Contains(node.id))
+            {
+                node.useCount = 1;
+                executed.Add(node.id);
+            }
+            else if (node.useCount >= node.useLimit)
             {
                 continue;
+            }
+            else
+            {
+                node.useCount++;
             }
 
             // 必須ポートが満たされているか確認
@@ -48,11 +53,12 @@ public class GraphExecutor
                 continue;
             }
 
-            node.useLimit--;
             node.Execute(this);
 
-            // データをクリア(次tickのため)
-            node.inputData.Clear();
+        }
+        foreach (var node in executed)
+        {
+            nodes[node].inputData.Clear();
         }
     }
 
@@ -128,22 +134,14 @@ public class GraphExecutor
 
     private void LoadGraph(GraphData graphData)
     {
-        nodes = new Dictionary<string, Node>();
+        nodes.Clear();
 
-        // ノードの生成
         foreach (var nodeData in graphData.nodes)
         {
-            Node node = CreateNodeFromType(nodeData.type);
+            var node = NodeFactory.Create(nodeData.type);
             node.id = nodeData.id;
             node.position = nodeData.position;
             node.Initialize();
-
-            // 定数入力値を設定
-            if (nodeData.inputValues != null)
-            {
-                // TODO: リフレクションで設定
-            }
-
             nodes[node.id] = node;
         }
 
@@ -153,26 +151,22 @@ public class GraphExecutor
             Node node = nodes[nodeData.id];
             node.connectedOutputs = new Dictionary<string, List<Node>>();
 
-            if (nodeData.outputConnections != null)
+            if (nodeData.outputConnections == null)
             {
-                foreach (var kvp in nodeData.outputConnections)
-                {
-                    string portName = kvp.Key;
-                    List<Node> connected = kvp.Value
-                        .Select(id => nodes[id])
-                        .ToList();
-                    node.connectedOutputs[portName] = connected;
-                }
+                continue;
+            }
+
+            foreach (var kvp in nodeData.outputConnections)
+            {
+                string portName = kvp.Key;
+                List<Node> connected = kvp.Value
+                    .Select(id => nodes[id])
+                    .ToList();
+                node.connectedOutputs[portName] = connected;
             }
         }
     }
 
-    private Node CreateNodeFromType(string type)
-    {
-        // リフレクションで動的生成
-        Type nodeType = Type.GetType(type + "Node");
-        return (Node)Activator.CreateInstance(nodeType);
-    }
     private bool CanExecute(Node node)
     {
         foreach (var port in node.inputPorts)
@@ -188,11 +182,40 @@ public class GraphExecutor
         }
         return true;
     }
-    private Type GetPortType(string portName, Node node)
-    {
-        return node.outputPorts.First(p => p.name == portName).type;
-    }
-
 
     #endregion
+}
+
+public static class NodeFactory
+{
+    private static Dictionary<NodeType, System.Func<Node>> _creators = new()
+    {
+        { NodeType.Start, () => new StartNode() },
+        //{ NodeType.Move, () => new MoveNode() },
+        //{ NodeType.Attack, () => new AttackNode() },
+        //{ NodeType.Jump, () => new JumpNode() },
+        //{ NodeType.GetDistance, () => new GetDistanceNode() },
+        //{ NodeType.GetHP, () => new GetHPNode() },
+        //{ NodeType.Compare, () => new CompareNode() },
+        //{ NodeType.Branch, () => new BranchNode() },
+        { NodeType.DEBUG, () => new _DebugNode() },
+    };
+
+    public static Node Create(NodeType type)
+    {
+        if (_creators.TryGetValue(type, out var creator))
+        {
+            return creator();
+        }
+
+        throw new System.ArgumentException($"Unknown node type: {type}");
+    }
+
+    // エディタで使うノードタイプ一覧(Startを除外)
+    public static IEnumerable<NodeType> GetCreatableNodeTypes()
+    {
+        return System.Enum.GetValues(typeof(NodeType))
+            .Cast<NodeType>()
+            .Where(t => t != NodeType.Start && t != NodeType.DEBUG);
+    }
 }

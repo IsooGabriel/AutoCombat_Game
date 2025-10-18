@@ -4,7 +4,7 @@ public class _DebugNode : Node
 {
     public override void Initialize()
     {
-        nodeType = "_Debug";
+        nodeType = NodeType.DEBUG;
         inputPorts = new NodePort[]
         {
             new("exec", typeof(object), true, true, true, this),

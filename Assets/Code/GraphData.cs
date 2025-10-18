@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 [Serializable]
 public class GraphData
@@ -16,7 +16,7 @@ public class GraphData
         nodes.Add(new NodeData()
         {
             id = startNodeId,
-            type = "startNode",
+            type = NodeType.Start,
             position = new Vector2(10, 0)
         });
     }
@@ -26,8 +26,20 @@ public class GraphData
 public class NodeData
 {
     public string id;
-    public string type;
+    public NodeType type;
     public Vector2 position;
     public Dictionary<string, List<string>> outputConnections = new();
     public Dictionary<string, object> inputValues = new();
+}
+public enum NodeType
+{
+    Start,
+    Move,
+    Attack,
+    Jump,
+    GetDistance,
+    GetHP,
+    Compare,
+    Branch,
+    DEBUG
 }
