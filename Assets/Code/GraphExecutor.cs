@@ -4,7 +4,7 @@ using System.Linq;
 public class GraphExecutor
 {
     public CharacterController character;
-    private Dictionary<string, Node> nodes;
+    private Dictionary<string, Node> nodes = new Dictionary<string, Node> { };
     private Queue<Node> executionQueue;
 
 
@@ -82,7 +82,7 @@ public class GraphExecutor
     /// ノードがデータを次のノードに送る
     /// </summary>
     /// <param name="node">送信元ノード</param>
-    /// <param name="portName">送信に使うポート名</param>
+    /// <param name="portName">送信元ポート名</param>
     /// <param name="data">送るデータ</param>
     public bool SendData(Node node, string portName, object data)
     {
@@ -151,15 +151,15 @@ public class GraphExecutor
             Node node = nodes[nodeData.id];
             node.connectedOutputs = new Dictionary<string, List<Node>>();
 
-            if (nodeData.outputConnections == null)
+            if (nodeData.outputConnections == null || nodeData.outputConnections.Count == 0)
             {
                 continue;
             }
 
-            foreach (var kvp in nodeData.outputConnections)
+            foreach (var pair in nodeData.outputConnections)
             {
-                string portName = kvp.Key;
-                List<Node> connected = kvp.Value
+                string portName = pair.fromPortName;
+                List<Node> connected = pair.GetNodesID()
                     .Select(id => nodes[id])
                     .ToList();
                 node.connectedOutputs[portName] = connected;

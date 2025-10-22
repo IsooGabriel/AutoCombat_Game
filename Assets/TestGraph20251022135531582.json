@@ -1,0 +1,34 @@
+{
+    "nodes": [
+        {
+            "id": "START_NODE",
+            "type": 0,
+            "position": {
+                "x": 10.0,
+                "y": 0.0
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "exec",
+                    "toPortNode": [
+                        {
+                            "NodeId": "82fca7fe-b0eb-4dc8-abfc-723a06ce0b39",
+                            "PortName": "exec"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "82fca7fe-b0eb-4dc8-abfc-723a06ce0b39",
+            "type": 8,
+            "position": {
+                "x": 200.0,
+                "y": 0.0
+            },
+            "outputConnections": []
+        }
+    ],
+    "graphName": "New AI",
+    "author": ""
+}

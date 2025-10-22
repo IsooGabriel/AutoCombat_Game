@@ -8,11 +8,11 @@ public class _DebugNode : Node
         inputPorts = new NodePort[]
         {
             new("exec", typeof(object), true, true, true, this),
-            new("input", typeof(object), true, true, false, this)
+            new("input", typeof(object), false, true, false, this)
         };
         outputPorts = new NodePort[]
         {
-            new("exec", typeof(Type), true, false, true, this)
+            new("exec", typeof(Type), false, false, true, this)
         };
     }
     public override void Execute(GraphExecutor executor)

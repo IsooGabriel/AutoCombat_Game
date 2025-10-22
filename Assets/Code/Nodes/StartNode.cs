@@ -13,5 +13,6 @@ public class StartNode : Node
     public override void Execute(GraphExecutor executor)
     {
         executor.EnqueueConnected(this, "exec");
+        executor.SendData(this, "exec", null);
     }
 }

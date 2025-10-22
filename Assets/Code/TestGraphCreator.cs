@@ -17,7 +17,7 @@ public class TestGraphCreator : MonoBehaviour
             type = NodeType.DEBUG,
             position = new Vector2(200, 0)
         });
-        graph.nodes[0].outputConnections["exec"].Add(graph.nodes[1].id);
+        graph.GetConection("exec").toPortNode.Add(new PortOfNode(graph.nodes[1].id, "exec"));
         // 保存
         string json = JsonUtility.ToJson(graph, true);
         System.IO.File.WriteAllText(Application.dataPath + $"/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);
