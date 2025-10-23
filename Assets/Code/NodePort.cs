@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class NodePort
@@ -9,6 +10,7 @@ public class NodePort
     public bool isInput;
     public bool isExecutionPort;
     public Node owner;
+    public Dictionary<Node,string> outputConections = new () { };
 
     public NodePort(string name, Type type, bool isRequired, bool isInput, bool isExecutionPort, Node owner)
     {

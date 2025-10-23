@@ -20,12 +20,12 @@ public class GraphData
             position = new Vector2(10, 0),
             outputConnections = new()
             {
-                new PortConection("exec", new (){} ),
+                new PortConections("exec", new (){} ),
             }
         });
     }
 
-    public PortConection GetConection(string portName, string nodeID = startNodeId)
+    public PortConections GetConection(string portName, string nodeID = startNodeId)
     {
         foreach (var node in nodes)
         {
@@ -51,25 +51,30 @@ public class NodeData
     public string id;
     public NodeType type;
     public Vector2 position;
-    public List<PortConection> outputConnections = new();
+    public List<PortConections> outputConnections = new();
     public Dictionary<string, object> inputValues = new();
 }
 [Serializable]
-public class PortConection
+public class PortConections
 {
     public string fromPortName;
-    public List<PortOfNode> toPortNode = new();
-    public PortConection(string fromPortName, List<PortOfNode> toPortNode)
+    public List<PortOfNode> toPortNodes = new();
+    public PortConections(string fromPortName, List<PortOfNode> toPortNode)
     {
         this.fromPortName = fromPortName;
-        this.toPortNode = toPortNode;
+        this.toPortNodes = toPortNode;
     }
+
+    /// <summary>
+    /// 接続先ノードのID一覧を取得
+    /// </summary>
+    /// <returns></returns>
     public string[] GetNodesID()
     {
         List<string> nodeIDs = new() { };
-        foreach (var portOfNode in toPortNode)
+        foreach (var portOfNode in toPortNodes)
         {
-            nodeIDs.Add(portOfNode.NodeId);
+            nodeIDs.Add(portOfNode.nodeId);
         }
         return nodeIDs.ToArray();
     }
@@ -77,12 +82,12 @@ public class PortConection
 [Serializable]
 public class PortOfNode
 {
-    public string NodeId;
-    public string PortName;
+    public string nodeId;
+    public string portName;
     public PortOfNode(string nodeId, string portName)
     {
-        NodeId = nodeId;
-        PortName = portName;
+        this.nodeId = nodeId;
+        this.portName = portName;
     }
 }
 public enum NodeType

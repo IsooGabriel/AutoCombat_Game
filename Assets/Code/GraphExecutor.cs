@@ -48,13 +48,12 @@ public class GraphExecutor
             }
 
             // 必須ポートが満たされているか確認
-            if (!CanExecute(node))
+            if (!CheckExecutable(node) && node.nodeType != NodeType.Start)
             {
                 continue;
             }
 
             node.Execute(this);
-
         }
         foreach (var node in executed)
         {
@@ -69,11 +68,15 @@ public class GraphExecutor
     /// <param name="portName">発火させるポート名</param>
     public void EnqueueConnected(Node node, string portName)
     {
-        if (node.connectedOutputs.ContainsKey(portName))
+        foreach(var port in node.outputPorts)
         {
-            foreach (var connected in node.connectedOutputs[portName])
+            if(port.name != portName)
             {
-                executionQueue.Enqueue(connected);
+                continue;
+            }
+            foreach (var connected in port.outputConections)
+            {
+                executionQueue.Enqueue(connected.Key);
             }
         }
     }
@@ -87,41 +90,41 @@ public class GraphExecutor
     public bool SendData(Node node, string portName, object data)
     {
         bool isSent = false;
-        if (!node.connectedOutputs.ContainsKey(portName))
+        foreach (var port in node.outputPorts)
         {
-            return false;
-        }
-        foreach (var targetPort in node.outputPorts)
-        {
-            if (targetPort == null)
+            if (port.name != portName)
             {
                 continue;
             }
-            Node targetNode = targetPort.owner;
-            if (targetNode == null)
+            foreach (var targetNode in node.outputPorts)
             {
-                continue;
-            }
-            if (targetNode.inputData == null || targetNode.inputData.Count <= 0)
-            {
-                continue;
-            }
-            if (targetNode.inputData.ContainsKey(targetPort.name))
-            {
-                if (targetNode.inputData[targetPort.name] != null)
+                if (targetNode == null)
                 {
                     continue;
                 }
-            }
-            else
-            {
-                targetNode.inputData.Add(targetPort.name, data);
-                return true;
-            }
+                //if (targetNode.inputData == null)
+                //{
+                //    targetNode.inputData = new Dictionary<string, object>();
+                //}
 
-            targetNode.inputData[targetPort.name] = data;
+                /////////////////////////////////////////////////////////////////ここだよ
+                //if (targetNode.inputData.ContainsKey(targetNode.name))
+                //{
+                //    if (targetNode.inputData[targetNode.name] != null)
+                //    {
+                //        continue;
+                //    }
+                //}
+                //else
+                //{
+                //    targetNode.inputData.Add(targetNode.name, data);
+                //    return true;
+                //}
 
-            isSent = true;
+                //targetNode.inputData[targetNode.name] = data;
+
+                isSent = true;
+            }
         }
         return isSent;
     }
@@ -149,25 +152,35 @@ public class GraphExecutor
         foreach (var nodeData in graphData.nodes)
         {
             Node node = nodes[nodeData.id];
-            node.connectedOutputs = new Dictionary<string, List<Node>>();
-
             if (nodeData.outputConnections == null || nodeData.outputConnections.Count == 0)
             {
                 continue;
             }
-
-            foreach (var pair in nodeData.outputConnections)
+            foreach (var output in node.outputPorts)
             {
-                string portName = pair.fromPortName;
-                List<Node> connected = pair.GetNodesID()
+                output.outputConections.Clear();
+            }
+
+            foreach (var portConections in nodeData.outputConnections)
+            {
+                NodePort myPort = node.outputPorts.FirstOrDefault(port => port.name == portConections.fromPortName);
+                List<Node> connectedNodes = portConections.GetNodesID()
                     .Select(id => nodes[id])
                     .ToList();
-                node.connectedOutputs[portName] = connected;
+                foreach (var portNode in portConections.toPortNodes)
+                {
+                    if (!nodes.ContainsKey(portNode.nodeId))
+                    {
+                        continue;
+                    }
+                    Node targetNode = nodes.FirstOrDefault(node => node.Key == portNode.nodeId).Value;
+                    myPort.outputConections.Add((targetNode, portNode.portName));
+                }
             }
         }
     }
 
-    private bool CanExecute(Node node)
+    private bool CheckExecutable(Node node)
     {
         foreach (var port in node.inputPorts)
         {

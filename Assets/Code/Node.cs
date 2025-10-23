@@ -14,7 +14,6 @@ public abstract class Node
     [NonSerialized] public NodePort[] inputPorts = new NodePort[] { };
     [NonSerialized] public NodePort[] outputPorts = new NodePort[] { };
 
-    [NonSerialized] public Dictionary<string, List<Node>> connectedOutputs = new Dictionary<string, List<Node>> { };
     [NonSerialized] public Dictionary<string, object> inputData = new Dictionary<string, object> { };
 
     public abstract void Initialize();
