@@ -11,8 +11,8 @@ public abstract class Node
     public int useLimit = 1;
     public int useCount = 0;
 
-    [NonSerialized] public NodePort[] inputPorts = new NodePort[] { };
-    [NonSerialized] public NodePort[] outputPorts = new NodePort[] { };
+    [NonSerialized] public Port[] inputPorts = new Port[] { };
+    [NonSerialized] public Port[] outputPorts = new Port[] { };
 
     [NonSerialized] public Dictionary<string, object> inputData = new Dictionary<string, object> { };
 

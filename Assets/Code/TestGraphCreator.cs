@@ -20,7 +20,7 @@ public class TestGraphCreator : MonoBehaviour
         graph.GetConection("exec").toPortNodes.Add(new PortOfNode(graph.nodes[1].id, "exec"));
         // 保存
         string json = JsonUtility.ToJson(graph, true);
-        System.IO.File.WriteAllText(Application.dataPath + $"/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);
+        System.IO.File.WriteAllText(Application.dataPath + $"/Jsons/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);
         Debug.Log("Graph created with Start node!"+ Application.dataPath);
     }
 }

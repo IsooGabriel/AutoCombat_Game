@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 
 [Serializable]
-public class NodePort
+public class Port
+
 {
     public string name;
     public Type type;
@@ -12,7 +13,7 @@ public class NodePort
     public Node owner;
     public Dictionary<Node,string> outputConections = new () { };
 
-    public NodePort(string name, Type type, bool isRequired, bool isInput, bool isExecutionPort, Node owner)
+    public Port(string name, Type type, bool isRequired, bool isInput, bool isExecutionPort, Node owner)
     {
         this.name = name;
         this.type = type;

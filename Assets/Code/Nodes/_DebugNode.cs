@@ -5,12 +5,12 @@ public class _DebugNode : Node
     public override void Initialize()
     {
         nodeType = NodeType.DEBUG;
-        inputPorts = new NodePort[]
+        inputPorts = new Port[]
         {
             new("exec", typeof(object), true, true, true, this),
             new("input", typeof(object), false, true, false, this)
         };
-        outputPorts = new NodePort[]
+        outputPorts = new Port[]
         {
             new("exec", typeof(Type), false, false, true, this)
         };

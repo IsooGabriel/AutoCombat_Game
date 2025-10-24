@@ -6,8 +6,8 @@ public class StartNode : Node
     public override void Initialize()
     {
         nodeType = NodeType.Start;
-        inputPorts = new NodePort[0];
-        outputPorts = new NodePort[] {new("exec", typeof(Type),true,false,true,this) };
+        inputPorts = new Port[0];
+        outputPorts = new Port[] {new("exec", typeof(Type),true,false,true,this) };
     }
 
     public override void Execute(GraphExecutor executor)

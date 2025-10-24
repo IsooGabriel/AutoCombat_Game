@@ -69,7 +69,7 @@ public class PortConections
     /// 接続先ノードのID一覧を取得
     /// </summary>
     /// <returns></returns>
-    public string[] GetNodesID()
+    public string[] GetNodeIDs()
     {
         List<string> nodeIDs = new() { };
         foreach (var portOfNode in toPortNodes)

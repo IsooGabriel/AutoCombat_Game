@@ -10,17 +10,17 @@
             "outputConnections": [
                 {
                     "fromPortName": "exec",
-                    "toPortNode": [
+                    "toPortNodes": [
                         {
-                            "NodeId": "82fca7fe-b0eb-4dc8-abfc-723a06ce0b39",
-                            "PortName": "exec"
+                            "nodeId": "8deb93d9-5ff4-4d75-b969-98e36a16765b",
+                            "portName": "exec"
                         }
                     ]
                 }
             ]
         },
         {
-            "id": "82fca7fe-b0eb-4dc8-abfc-723a06ce0b39",
+            "id": "8deb93d9-5ff4-4d75-b969-98e36a16765b",
             "type": 8,
             "position": {
                 "x": 200.0,
