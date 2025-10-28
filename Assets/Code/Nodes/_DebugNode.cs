@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 public class _DebugNode : Node
 {
@@ -17,6 +18,7 @@ public class _DebugNode : Node
     }
     public override void Execute(GraphExecutor executor)
     {
+        UnityEngine.Debug.Log($"発火ノードが実行されている:{inputData.Count}");
         if (inputData.TryGetValue("input", out object value))
         {
             UnityEngine.Debug.Log($"_DebugNode: {value}");

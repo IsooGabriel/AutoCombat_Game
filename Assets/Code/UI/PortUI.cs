@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-
 public class PortUI : MonoBehaviour
 {
     [SerializeField]
@@ -9,7 +9,7 @@ public class PortUI : MonoBehaviour
     [SerializeField]
     public PortTypeHue portTypeHue;
 
-    public LineRenderer[] outputLines;
+    public List<LineRenderer> outputLines;
 
     public enum PortTypeHue
     {
@@ -21,16 +21,26 @@ public class PortUI : MonoBehaviour
 
     public void OnClick()
     {
-        if(GraphEditorManager.isSelected == false)
+        if (GraphEditorManager.isSelected == false)
         {
+            Debug.Log("portëIë");
             GraphEditorManager.selectedPort = this;
             GraphEditorManager.isSelected = true;
         }
         else
         {
+            Debug.Log("portê⁄ë±");
             GraphEditorManager.ConectPorts(GraphEditorManager.selectedPort, this);
             GraphEditorManager.isSelected = false;
             GraphEditorManager.selectedPort = null;
+        }
+    }
+
+    public void Start()
+    {
+        if (port.owner == null)
+        {
+            port.owner = owner.node;
         }
     }
 }

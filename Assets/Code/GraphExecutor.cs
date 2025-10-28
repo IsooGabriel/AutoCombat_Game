@@ -76,7 +76,7 @@ public class GraphExecutor
             }
             foreach (var connected in port.outputConections)
             {
-                executionQueue.Enqueue(connected.Key);
+                executionQueue.Enqueue(connected.Item1);
             }
         }
     }
@@ -98,29 +98,29 @@ public class GraphExecutor
             }
             foreach (var inputPort in outputPort.outputConections)
             {
-                if (inputPort.Key == null)
+                if (inputPort.node == null)
                 {
                     continue;
                 }
-                if (inputPort.Key.inputData == null)
+                if (inputPort.node.inputData == null)
                 {
-                    inputPort.Key.inputData = new Dictionary<string, object>();
+                    inputPort.node.inputData = new Dictionary<string, object>();
                 }
 
-                if (inputPort.Key.inputData.ContainsKey(inputPort.Value))
+                if (inputPort.node.inputData.ContainsKey(inputPort.portName))
                 {
-                    if (inputPort.Key.inputData[inputPort.Value] != null)
+                    if (inputPort.node.inputData[inputPort.portName] != null)
                     {
                         continue;
                     }
                 }
                 else
                 {
-                    inputPort.Key.inputData.Add(inputPort.Value, data);
+                    inputPort.node.inputData.Add(inputPort.portName, data);
                     continue;
                 }
 
-                inputPort.Key.inputData[inputPort.Value] = data;
+                inputPort.node.inputData[inputPort.portName] = data;
 
                 isSent = true;
             }
@@ -174,7 +174,7 @@ public class GraphExecutor
                     {
                         continue;
                     }
-                    myPort.outputConections.Add(targetNode, portNode.portName);
+                    myPort.outputConections.Add((targetNode, portNode.portName));
                 }
             }
         }

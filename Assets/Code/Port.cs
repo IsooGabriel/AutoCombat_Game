@@ -11,8 +11,28 @@ public class Port
     public bool isInput;
     public bool isExecutionPort;
     public Node owner;
-    public Dictionary<Node,string> outputConections = new () { };
+    public List<(Node node, string portName)> outputConections = new() { };
 
+    public List<(Node, string)> GetConections()
+    {
+        return outputConections;
+    }
+    public List<(Node, string)> GetConections(string nodeID)
+    {
+        List<(Node, string)> connections = new List<(Node, string)>();
+        foreach (var connection in outputConections)
+        {
+            if (connection.Item1.id == nodeID)
+            {
+                connections.Add(connection);
+            }
+        }
+        return connections;
+    }
+    public List<(Node, string)> GetConections(Node node)
+    {
+        return GetConections(node.id);
+    }
     public Port(string name, Type type, bool isRequired, bool isInput, bool isExecutionPort, Node owner)
     {
         this.name = name;
