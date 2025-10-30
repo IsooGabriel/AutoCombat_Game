@@ -19,3 +19,14 @@ public abstract class Node
     public abstract void Initialize();
     public abstract void Execute(GraphExecutor executor);
 }
+
+public class BaseNode:Node
+{
+    public override void Initialize()
+    {
+        id = Guid.NewGuid().ToString();
+    }
+    public override void Execute(GraphExecutor executor)
+    {
+    }
+}

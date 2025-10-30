@@ -8,7 +8,8 @@ public class PortUI : MonoBehaviour
     public NodeUI owner;
     [SerializeField]
     public PortTypeHue portTypeHue;
-
+    [SerializeField]
+    public Transform portPosition;
     public List<LineRenderer> outputLines;
 
     public enum PortTypeHue

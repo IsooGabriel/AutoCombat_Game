@@ -56,6 +56,7 @@ MonoBehaviour:
     isExecutionPort: 0
   owner: {fileID: 0}
   portTypeHue: 0
+  portPosition: {fileID: 5451762255015983839}
   outputLines: []
 --- !u!1 &1529352951209022317
 GameObject:
@@ -534,6 +535,7 @@ MonoBehaviour:
     isExecutionPort: 0
   owner: {fileID: 0}
   portTypeHue: 0
+  portPosition: {fileID: 3536474920848302356}
   outputLines: []
 --- !u!1 &6044829545190428119
 GameObject:

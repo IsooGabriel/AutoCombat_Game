@@ -1,30 +1,54 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-public class GraphEditorManager
+public class GraphEditorManager : MonoBehaviour
 {
-    static public GraphEditorManager Instance = new GraphEditorManager();
+    static public GraphEditorManager Instance = null;
     static public bool isSelected = false;
     static public PortUI selectedPort = null;
+    private float lineWidth = 0.05f;
+    public List<NodeUI> nodes = new List<NodeUI>();
+    public GameObject nodesParent;
+    public GameObject[] nodePrefabs;
+
+    static public GraphData graphData;
+
+    #region ä÷êî
+
+    static public void AddNode(NodeType type)
+    {
+        Node node = NodeFactory.Create(type);
+        NodeData nodeData = new NodeData()
+        {
+            id = node.id,
+            type = type,
+            position = new Vector2(0, 0)
+        };
+        graphData.nodes.Add(nodeData);
+    }
+
 
     static public void ConectPorts(PortUI from, PortUI to)
     {
-        if (!GraphEditorManager.Instance.IsConectable(from, to))
+        if (from.port.isInput && !to.port.isInput)
+        {
+            (from, to) = (to, from);
+        }
+        if (!GraphEditorManager.Instance.CheckConectable(from, to))
         {
             return;
         }
-        if(from.port.outputConections == null)
+        if (from.port.outputConections == null)
         {
-            from.port.outputConections = new System.Collections.Generic.List<(Node, string)>();
+            from.port.outputConections = new List<(Node, string)>();
         }
         from.port.outputConections.Add((to.port.owner, to.port.name));
-        LineRenderer line = new LineRenderer();
-        line.positionCount = 2;
-        line.SetPosition(0, from.transform.position);
-        line.SetPosition(1, to.transform.position);
-        from.outputLines.Add(line);
+
+        GraphEditorManager.Instance.SetLine(from, to);
         Debug.Log(" ê⁄ ë± äÆ óπ ");
     }
 
-    public bool IsConectable(PortUI from, PortUI to)
+    public bool CheckConectable(PortUI from, PortUI to)
     {
         Debug.Log("ê⁄ë±â¬î\Ç©ämîFíÜ...");
         if (from == null || to == null)
@@ -44,5 +68,58 @@ public class GraphEditorManager
             return false;
         }
         return true;
+    }
+
+    private void SetLine(PortUI from, PortUI to)
+    {
+        GameObject conectionObj = new GameObject();
+        ConectionUI conection = conectionObj.AddComponent<ConectionUI>();
+        conection.fromPort = from;
+        conection.toPort = to;
+        conection.name = $"from_{from.port.name}_to_{to.port.name}";
+        conection.transform.parent = from.transform;
+        if (conection.lineRenderer == null)
+        {
+            conection.lineRenderer = conectionObj.AddComponent<LineRenderer>();
+        }
+        LineRenderer line = conection.lineRenderer;
+        line.positionCount = 2;
+        line.material = new Material(Shader.Find("Sprites/Default"));
+        line.startWidth = GraphEditorManager.Instance.lineWidth;
+        line.endWidth = GraphEditorManager.Instance.lineWidth;
+        line.startColor = Color.HSVToRGB((int)to.portTypeHue, 90f, 80f);
+        line.endColor = Color.HSVToRGB((int)to.portTypeHue, 90f, 80f);
+        line.SetPosition(0, from.portPosition.position);
+        line.SetPosition(1, to.portPosition.position);
+        from.outputLines.Add(line);
+    }
+    public void SaveGraph()
+    {
+        HashSet<string> usedNodeIds = new HashSet<string>();
+        foreach (var nodeUI in GraphEditorManager.Instance.nodes)
+        {
+            usedNodeIds.Add(nodeUI.node.id);
+        }
+        string json = JsonUtility.ToJson(graphData, true);
+        System.IO.File.WriteAllText(Application.dataPath + $"/Jsons/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);
+    }
+
+    #endregion
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        graphData = new GraphData()
+        {
+            nodes = new List<NodeData>(),
+        };
     }
 }

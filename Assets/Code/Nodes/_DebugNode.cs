@@ -5,6 +5,7 @@ public class _DebugNode : Node
 {
     public override void Initialize()
     {
+        id = Guid.NewGuid().ToString();
         nodeType = NodeType.DEBUG;
         inputPorts = new Port[]
         {
