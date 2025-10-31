@@ -3,7 +3,8 @@ using System.Linq;
 
 public class GraphExecutor
 {
-    public CharacterController character;
+    public Character player;
+    public Character enemy;
     private Dictionary<string, Node> nodes = new Dictionary<string, Node> { };
     private Queue<Node> executionQueue;
 
@@ -11,9 +12,10 @@ public class GraphExecutor
     #region public関数
 
 
-    public GraphExecutor(GraphData graphData, CharacterController character)
+    public GraphExecutor(GraphData graphData, Character player, Character enemy)
     {
-        this.character = character;
+        this.player = player;
+        this.enemy = enemy;
         LoadGraph(graphData);
     }
 
@@ -141,9 +143,9 @@ public class GraphExecutor
         foreach (var nodeData in graphData.nodes)
         {
             var node = NodeFactory.Create(nodeData.type);
+            node.Initialize();
             node.id = nodeData.id;
             node.position = nodeData.position;
-            node.Initialize();
             nodes[node.id] = node;
         }
 

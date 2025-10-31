@@ -1,5 +1,4 @@
 ﻿using System;
-using static TreeEditor.TreeEditorHelper;
 
 public class StartNode : Node
 {
@@ -7,7 +6,7 @@ public class StartNode : Node
     {
         nodeType = NodeType.Start;
         inputPorts = new Port[0];
-        outputPorts = new Port[] {new("exec", typeof(Type),true,false,true,this) };
+        outputPorts = new Port[] { new("exec", typeof(Type), true, false, true, this) };
     }
 
     public override void Execute(GraphExecutor executor)

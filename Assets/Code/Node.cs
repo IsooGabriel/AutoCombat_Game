@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -17,16 +17,10 @@ public abstract class Node
     [NonSerialized] public Dictionary<string, object> inputData = new Dictionary<string, object> { };
 
     public abstract void Initialize();
-    public abstract void Execute(GraphExecutor executor);
-}
-
-public class BaseNode:Node
-{
-    public override void Initialize()
+    public virtual void EditorInitialize()
     {
+        Initialize();
         id = Guid.NewGuid().ToString();
     }
-    public override void Execute(GraphExecutor executor)
-    {
-    }
+    public abstract void Execute(GraphExecutor executor);
 }

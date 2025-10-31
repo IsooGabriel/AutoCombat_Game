@@ -18,11 +18,18 @@ public class GraphEditorManager : MonoBehaviour
     static public void AddNode(NodeType type)
     {
         Node node = NodeFactory.Create(type);
+        node.EditorInitialize();
+        node.position = Vector2.zero;
+        NodeUI nodeUI = Instantiate(
+            GraphEditorManager.Instance.nodePrefabs[(int)type],
+            GraphEditorManager.Instance.nodesParent.transform
+        ).GetComponent<NodeUI>();
+        nodeUI.transform.position = node.position;
         NodeData nodeData = new NodeData()
         {
             id = node.id,
             type = type,
-            position = new Vector2(0, 0)
+            position = node.position
         };
         graphData.nodes.Add(nodeData);
     }
@@ -113,7 +120,7 @@ public class GraphEditorManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }

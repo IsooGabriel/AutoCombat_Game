@@ -10,6 +10,7 @@ public class GraphData
     public string graphName = "New AI";
     public string author = "";
     public DateTime createdDate = DateTime.Now;
+    public Status aditionalStatus = new() { hp = 0, attack = 0, attackCooltime = 0, criticalChance = 0, criticalDamage = 0 };
 
     public GraphData()
     {

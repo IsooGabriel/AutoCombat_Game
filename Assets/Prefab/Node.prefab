@@ -419,7 +419,19 @@ PrefabInstance:
       objectReference: {fileID: 2391374102005097908}
     - target: {fileID: 3376407015552718463, guid: 4e89ce4dd548ff044b1bd22c15e9ec54, type: 3}
       propertyPath: port.name
-      value: a
+      value: Execute
+      objectReference: {fileID: 0}
+    - target: {fileID: 3376407015552718463, guid: 4e89ce4dd548ff044b1bd22c15e9ec54, type: 3}
+      propertyPath: portTypeHue
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3376407015552718463, guid: 4e89ce4dd548ff044b1bd22c15e9ec54, type: 3}
+      propertyPath: port.isRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3376407015552718463, guid: 4e89ce4dd548ff044b1bd22c15e9ec54, type: 3}
+      propertyPath: port.isExecutionPort
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3990478306271308805, guid: 4e89ce4dd548ff044b1bd22c15e9ec54, type: 3}
       propertyPath: m_AnchorMax.y
@@ -528,6 +540,14 @@ PrefabInstance:
     - target: {fileID: 4955860433480110843, guid: 4e89ce4dd548ff044b1bd22c15e9ec54, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602189033529351939, guid: 4e89ce4dd548ff044b1bd22c15e9ec54, type: 3}
+      propertyPath: m_text
+      value: Execute
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602189033529351939, guid: 4e89ce4dd548ff044b1bd22c15e9ec54, type: 3}
+      propertyPath: m_fontSize
+      value: 9.9
       objectReference: {fileID: 0}
     - target: {fileID: 7106181220256431486, guid: 4e89ce4dd548ff044b1bd22c15e9ec54, type: 3}
       propertyPath: m_Name
@@ -653,6 +673,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1583591554240420826, guid: 40d57063add9b224ca48b0babd90d4c8, type: 3}
+      propertyPath: m_text
+      value: Execute
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583591554240420826, guid: 40d57063add9b224ca48b0babd90d4c8, type: 3}
+      propertyPath: m_fontSize
+      value: 9.9
+      objectReference: {fileID: 0}
     - target: {fileID: 3241353653803530663, guid: 40d57063add9b224ca48b0babd90d4c8, type: 3}
       propertyPath: m_Name
       value: Outputs
@@ -683,7 +711,15 @@ PrefabInstance:
       objectReference: {fileID: 2391374102005097908}
     - target: {fileID: 6971233128045613734, guid: 40d57063add9b224ca48b0babd90d4c8, type: 3}
       propertyPath: port.name
-      value: A
+      value: Execute
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971233128045613734, guid: 40d57063add9b224ca48b0babd90d4c8, type: 3}
+      propertyPath: portTypeHue
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971233128045613734, guid: 40d57063add9b224ca48b0babd90d4c8, type: 3}
+      propertyPath: port.isExecutionPort
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8487282805858832786, guid: 40d57063add9b224ca48b0babd90d4c8, type: 3}
       propertyPath: owner
