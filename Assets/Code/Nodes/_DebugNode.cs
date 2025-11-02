@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 
 public class _DebugNode : Node
 {
@@ -8,18 +7,18 @@ public class _DebugNode : Node
         nodeType = NodeType.DEBUG;
         inputPorts = new Port[]
         {
-            new("exec", typeof(object), true, true, true, this),
-            new("input", typeof(object), false, true, false, this)
+            new("exec", typeof(bool), true, true, true, this),
+            new("input", typeof(bool), false, true, false, this)
         };
         outputPorts = new Port[]
         {
-            new("exec", typeof(Type), false, false, true, this)
+            new("exec", typeof(bool), false, false, true, this)
         };
     }
     public override void Execute(GraphExecutor executor)
     {
         UnityEngine.Debug.Log($"発火ノードが実行されている:{inputData.Count}");
-        if (inputData.TryGetValue("input", out object value))
+        if (inputData.TryGetValue("input", out List<object> value))
         {
             UnityEngine.Debug.Log($"_DebugNode: {value}");
         }

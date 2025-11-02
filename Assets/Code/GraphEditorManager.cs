@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 public class GraphEditorManager : MonoBehaviour
 {
@@ -9,21 +10,23 @@ public class GraphEditorManager : MonoBehaviour
     private float lineWidth = 0.05f;
     public List<NodeUI> nodes = new List<NodeUI>();
     public GameObject nodesParent;
-    public GameObject[] nodePrefabs;
+    public NodePrefab[] nodePrefabs;
 
     static public GraphData graphData;
 
     #region ä÷êî
 
-    static public void AddNode(NodeType type)
+    public void AddNode(NodeType type)
     {
         Node node = NodeFactory.Create(type);
         node.EditorInitialize();
         node.position = Vector2.zero;
+
         NodeUI nodeUI = Instantiate(
-            GraphEditorManager.Instance.nodePrefabs[(int)type],
+            GraphEditorManager.Instance.nodePrefabs.FirstOrDefault(p => p.type == type).prefab,
             GraphEditorManager.Instance.nodesParent.transform
         ).GetComponent<NodeUI>();
+        nodeUI.node.EditorInitialize();
         nodeUI.transform.position = node.position;
         NodeData nodeData = new NodeData()
         {
@@ -32,6 +35,12 @@ public class GraphEditorManager : MonoBehaviour
             position = node.position
         };
         graphData.nodes.Add(nodeData);
+    }
+    public void AddNode(string typeName)
+    {
+        NodeType type;
+        Enum.TryParse(typeName, out type);
+        AddNode(type);
     }
 
 
@@ -57,7 +66,6 @@ public class GraphEditorManager : MonoBehaviour
 
     public bool CheckConectable(PortUI from, PortUI to)
     {
-        Debug.Log("ê⁄ë±â¬î\Ç©ämîFíÜ...");
         if (from == null || to == null)
         {
             return false;
@@ -129,4 +137,11 @@ public class GraphEditorManager : MonoBehaviour
             nodes = new List<NodeData>(),
         };
     }
+}
+
+[Serializable]
+public class NodePrefab
+{
+    public NodeType type;
+    public GameObject prefab;
 }

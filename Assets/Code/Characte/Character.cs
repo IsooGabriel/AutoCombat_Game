@@ -27,7 +27,7 @@ public class Character : MonoBehaviour
 
     public Action<Character> Attack(GraphExecutor exector, Vector2 direction)
     {
-        weapon.Attack(exector.player == this ? exector.enemy : exector.player);
+        weapon.Attack(exector.myCharacter == this ? exector.enemy : exector.myCharacter);
         return weapon.hitAttack;
     }
 }

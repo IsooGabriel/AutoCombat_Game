@@ -14,13 +14,13 @@ public abstract class Node
     [NonSerialized] public Port[] inputPorts = new Port[] { };
     [NonSerialized] public Port[] outputPorts = new Port[] { };
 
-    [NonSerialized] public Dictionary<string, object> inputData = new Dictionary<string, object> { };
+    [NonSerialized] public Dictionary<string, List<object>> inputData = new Dictionary<string, List<object>> { };
 
     public abstract void Initialize();
+    public abstract void Execute(GraphExecutor executor);
     public virtual void EditorInitialize()
     {
         Initialize();
         id = Guid.NewGuid().ToString();
     }
-    public abstract void Execute(GraphExecutor executor);
 }

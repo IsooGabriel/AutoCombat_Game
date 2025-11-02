@@ -3,7 +3,7 @@ using System.Linq;
 
 public class GraphExecutor
 {
-    public Character player;
+    public Character myCharacter;
     public Character enemy;
     private Dictionary<string, Node> nodes = new Dictionary<string, Node> { };
     private Queue<Node> executionQueue;
@@ -12,9 +12,9 @@ public class GraphExecutor
     #region public関数
 
 
-    public GraphExecutor(GraphData graphData, Character player, Character enemy)
+    public GraphExecutor(GraphData graphData, Character myCharacter, Character enemy)
     {
-        this.player = player;
+        this.myCharacter = myCharacter;
         this.enemy = enemy;
         LoadGraph(graphData);
     }
@@ -106,7 +106,7 @@ public class GraphExecutor
                 }
                 if (inputPort.node.inputData == null)
                 {
-                    inputPort.node.inputData = new Dictionary<string, object>();
+                    inputPort.node.inputData = new Dictionary<string, List<object>>();
                 }
 
                 if (inputPort.node.inputData.ContainsKey(inputPort.portName))
@@ -118,11 +118,11 @@ public class GraphExecutor
                 }
                 else
                 {
-                    inputPort.node.inputData.Add(inputPort.portName, data);
+                    inputPort.node.inputData.Add(inputPort.portName, new() { data });
                     continue;
                 }
 
-                inputPort.node.inputData[inputPort.portName] = data;
+                inputPort.node.inputData[inputPort.portName].Add(data);
 
                 isSent = true;
             }
@@ -206,7 +206,7 @@ public static class NodeFactory
     private static Dictionary<NodeType, System.Func<Node>> _creators = new()
     {
         { NodeType.Start, () => new StartNode() },
-        //{ NodeType.Move, () => new MoveNode() },
+        { NodeType.Move, () => new MoveNode() },
         //{ NodeType.Attack, () => new AttackNode() },
         //{ NodeType.Jump, () => new JumpNode() },
         //{ NodeType.GetDistance, () => new GetDistanceNode() },
