@@ -23,4 +23,10 @@ public abstract class Node
         Initialize();
         id = Guid.NewGuid().ToString();
     }
+    public virtual void SetData(NodeData data)
+    {
+        id = data.id;
+        position = data.position;
+        nodeType = data.type;
+    }
 }

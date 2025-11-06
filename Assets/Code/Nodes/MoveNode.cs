@@ -10,10 +10,15 @@ public class MoveNode : Node
             new Port("Execute", typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
             new Port("direction", typeof(Vector2), true, true, false, this),
         };
+        outputPorts = new Port[]
+        {
+            new Port("Execute", typeof(bool), isRequired:true, isInput:false, isExecutionPort:true, this),
+            new Port("newPosition", typeof(Vector2), true, false, false, this),
+        };
     }
     public override void Execute(GraphExecutor executor)
     {
-        if(!inputData.ContainsKey("direction"))
+        if (!inputData.ContainsKey("direction"))
         {
             return;
         }

@@ -12,7 +12,7 @@ public class GraphEditorManager : MonoBehaviour
     public GameObject nodesParent;
     public NodePrefab[] nodePrefabs;
 
-    static public GraphData graphData;
+    public GraphData graphData;
 
     #region 関数
 
@@ -26,15 +26,28 @@ public class GraphEditorManager : MonoBehaviour
             GraphEditorManager.Instance.nodePrefabs.FirstOrDefault(p => p.type == type).prefab,
             GraphEditorManager.Instance.nodesParent.transform
         ).GetComponent<NodeUI>();
-        nodeUI.node.EditorInitialize();
+        nodeUI.node = node;
         nodeUI.transform.position = node.position;
-        NodeData nodeData = new NodeData()
+
+        SetPortUIsPort(nodeUI.inputPorts, node.inputPorts);
+        SetPortUIsPort(nodeUI.outputPorts, node.outputPorts);
+
+        Instance.nodes.Add(nodeUI);
+    }
+    private void SetPortUIsPort(PortUI[] portUIs, Port[] ports)
+    {
+        for (int i = 0; i < portUIs.Length; ++i)
         {
-            id = node.id,
-            type = type,
-            position = node.position
-        };
-        graphData.nodes.Add(nodeData);
+            if (ports == null || ports.Length <= i || ports[i] == null)
+            {
+                if (portUIs[i] != null)
+                {
+                    Destroy(portUIs[i].gameObject);
+                }
+                continue;
+            }
+            portUIs[i].port = ports[i];
+        }
     }
     public void AddNode(string typeName)
     {
@@ -113,10 +126,61 @@ public class GraphEditorManager : MonoBehaviour
         HashSet<string> usedNodeIds = new HashSet<string>();
         foreach (var nodeUI in GraphEditorManager.Instance.nodes)
         {
+            if (usedNodeIds.Contains(nodeUI.node.id))
+            {
+                continue;
+            }
+            NodeData nodeData = GenerateNodeData(nodeUI);
+            Instance.graphData.nodes.Add(nodeData);
             usedNodeIds.Add(nodeUI.node.id);
         }
-        string json = JsonUtility.ToJson(graphData, true);
+        string json = JsonUtility.ToJson(Instance.graphData, true);
         System.IO.File.WriteAllText(Application.dataPath + $"/Jsons/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);
+        Debug.Log("グラフ保存完了");
+    }
+
+    /// <summary>
+    /// ノードUIからノードデータを生成する
+    /// </summary>
+    /// <param name="nodeUI"></param>
+    /// <returns></returns>
+    public NodeData GenerateNodeData(NodeUI nodeUI)
+    {
+
+        Node node = nodeUI.node;
+        NodeData nodeData = new NodeData()
+        {
+            id = node.id,
+            type = node.nodeType,
+            position = nodeUI.transform.position
+        };
+        nodeData.outputConnections = new() { };
+        if (node.outputPorts == null || node.outputPorts.Length == 0)
+        {
+            return nodeData;
+        }
+
+        for (int i = 0; i < node.outputPorts.Length; ++i)
+        {
+            nodeData.outputConnections.Add(new PortConections(node.outputPorts[i].name, new() { }));
+
+            if (node.outputPorts[i].outputConections == null || node.outputPorts[i].outputConections.Count == 0)
+            {
+                continue;
+            }
+
+            for (int j = 0; j < node.outputPorts[i].outputConections.Count; ++j)
+            {
+                nodeData.outputConnections[i].toPortNodes.Add(
+                    new PortOfNode(
+                        node.outputPorts[i].outputConections[j].node.id,
+                        node.outputPorts[i].outputConections[j].portName
+                    )
+                );
+            }
+        }
+        Debug.Log("ノードデータ生成完了");
+        return nodeData;
     }
 
     #endregion
@@ -132,10 +196,11 @@ public class GraphEditorManager : MonoBehaviour
         {
             Instance = this;
         }
-        graphData = new GraphData()
+        Instance.graphData = new GraphData()
         {
             nodes = new List<NodeData>(),
         };
+        AddNode(NodeType.Start);
     }
 }
 
