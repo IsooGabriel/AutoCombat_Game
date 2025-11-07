@@ -14,16 +14,14 @@ public class GraphData
 
     public GraphData()
     {
-        nodes.Add(new NodeData()
-        {
-            id = startNodeId,
-            type = NodeType.Start,
-            position = new Vector2(10, 0),
-            outputConnections = new()
-            {
-                new PortConections("exec", new (){} ),
-            }
-        });
+        nodes.Add(
+            new NodeData(
+                startNodeId,
+                NodeType.Start,
+                new Vector2(10, 0),
+                new() { new PortConections("exec", new() { }) }
+            )
+        );
     }
 
     public PortConections GetConection(string portName, string nodeID = startNodeId)
@@ -49,11 +47,19 @@ public class GraphData
 [Serializable]
 public class NodeData
 {
+    public NodeData(string id, NodeType type, Vector2 position, List<PortConections> outputConnection, List<(string portID, object value)> inpuValues = null)
+    {
+        this.id = id;
+        this.type = type;
+        this.position = position;
+        this.outputConnections = outputConnection;
+        this.inputValues = inpuValues;
+    }
     public string id;
     public NodeType type;
     public Vector2 position;
     public List<PortConections> outputConnections = new();
-    public Dictionary<string, object> inputValues = new();
+    public List<(string portID, object value)> inputValues = new();
 }
 [Serializable]
 public class PortConections

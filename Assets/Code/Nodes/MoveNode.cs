@@ -5,6 +5,7 @@ public class MoveNode : Node
 {
     public override void Initialize()
     {
+        nodeType = NodeType.Move;
         inputPorts = new Port[]
         {
             new Port("Execute", typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),

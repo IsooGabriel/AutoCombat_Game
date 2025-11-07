@@ -180,6 +180,7 @@ public class GraphExecutor
                 }
             }
         }
+        myCharacter.aditionalStatus = graphData.aditionalStatus;
     }
 
     private bool CheckExecutable(Node node)

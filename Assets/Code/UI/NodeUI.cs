@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class NodeUI : MonoBehaviour
 {
-    [SerializeField]
     public Node node = new _DebugNode();
     [SerializeField]
     public PortUI[] inputPorts;

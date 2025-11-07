@@ -31,6 +31,7 @@ public class Character : MonoBehaviour
         return weapon.hitAttack;
     }
 }
+[Serializable]
 public class Status
 {
     public decimal hp { get; set; }

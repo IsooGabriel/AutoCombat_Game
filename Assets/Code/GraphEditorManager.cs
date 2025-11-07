@@ -5,14 +5,19 @@ using UnityEngine;
 public class GraphEditorManager : MonoBehaviour
 {
     static public GraphEditorManager Instance = null;
-    static public bool isSelected = false;
-    static public PortUI selectedPort = null;
+    public bool isSelected = false;
+    public PortUI selectedPort = null;
     private float lineWidth = 0.05f;
-    public List<NodeUI> nodes = new List<NodeUI>();
+    public List<NodeUI> nodeUIs = new List<NodeUI>();
     public GameObject nodesParent;
     public NodePrefab[] nodePrefabs;
 
     public GraphData graphData;
+
+    public readonly float portUISaturation = 0.7f;
+    public readonly float portUIValue = 0.8f;
+    public readonly float portUISerectSaturation = 0.25f;
+    public readonly float portUISerectValue = 0.9f;
 
     #region ä÷êî
 
@@ -32,7 +37,7 @@ public class GraphEditorManager : MonoBehaviour
         SetPortUIsPort(nodeUI.inputPorts, node.inputPorts);
         SetPortUIsPort(nodeUI.outputPorts, node.outputPorts);
 
-        Instance.nodes.Add(nodeUI);
+        Instance.nodeUIs.Add(nodeUI);
     }
     private void SetPortUIsPort(PortUI[] portUIs, Port[] ports)
     {
@@ -115,8 +120,8 @@ public class GraphEditorManager : MonoBehaviour
         line.material = new Material(Shader.Find("Sprites/Default"));
         line.startWidth = GraphEditorManager.Instance.lineWidth;
         line.endWidth = GraphEditorManager.Instance.lineWidth;
-        line.startColor = Color.HSVToRGB((int)to.portTypeHue, 90f, 80f);
-        line.endColor = Color.HSVToRGB((int)to.portTypeHue, 90f, 80f);
+        line.startColor = Color.HSVToRGB(((float)from.portTypeHue) / 360, portUISaturation, portUIValue);
+        line.endColor = Color.HSVToRGB(((float)to.portTypeHue) / 360, portUISaturation, portUIValue);
         line.SetPosition(0, from.portPosition.position);
         line.SetPosition(1, to.portPosition.position);
         from.outputLines.Add(line);
@@ -124,12 +129,13 @@ public class GraphEditorManager : MonoBehaviour
     public void SaveGraph()
     {
         HashSet<string> usedNodeIds = new HashSet<string>();
-        foreach (var nodeUI in GraphEditorManager.Instance.nodes)
+        foreach (var nodeUI in GraphEditorManager.Instance.nodeUIs)
         {
             if (usedNodeIds.Contains(nodeUI.node.id))
             {
                 continue;
             }
+            nodeUI.node.position = nodeUI.transform.position;
             NodeData nodeData = GenerateNodeData(nodeUI);
             Instance.graphData.nodes.Add(nodeData);
             usedNodeIds.Add(nodeUI.node.id);
@@ -148,13 +154,7 @@ public class GraphEditorManager : MonoBehaviour
     {
 
         Node node = nodeUI.node;
-        NodeData nodeData = new NodeData()
-        {
-            id = node.id,
-            type = node.nodeType,
-            position = nodeUI.transform.position
-        };
-        nodeData.outputConnections = new() { };
+        NodeData nodeData = new NodeData(node.id, node.nodeType, nodeUI.transform.position, new() { });
         if (node.outputPorts == null || node.outputPorts.Length == 0)
         {
             return nodeData;
