@@ -8,9 +8,9 @@ public class Character : MonoBehaviour
     const decimal speed = 1;
     public Weapon weapon;
     public Action<Character> takeDamage;
- 
 
-    public void TakeDamage(decimal damage)
+
+    public void TakeDamage(int damage)
     {
         baseStatus.hp -= damage;
         takeDamage?.Invoke(this);
@@ -34,9 +34,9 @@ public class Character : MonoBehaviour
 [Serializable]
 public class Status
 {
-    public decimal hp { get; set; }
-    public decimal attack { get; set; }
-    public decimal attackCooltime { get; set; }
-    public decimal criticalChance { get; set; }
-    public decimal criticalDamage { get; set; }
+    public int hp;
+    public int attack;
+    public float attackCooltime;
+    public float criticalChance;
+    public float criticalDamage;
 }

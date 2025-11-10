@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
 
     private void SetDamage(Character target)
     {
-        target.TakeDamage(damage);
+        target.TakeDamage((int)damage);
         hitAttack?.Invoke(target);
     }
     public virtual void Attack(Character target)

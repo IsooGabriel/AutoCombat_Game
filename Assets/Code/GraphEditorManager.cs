@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 public class GraphEditorManager : MonoBehaviour
 {
@@ -12,12 +13,19 @@ public class GraphEditorManager : MonoBehaviour
     public GameObject nodesParent;
     public NodePrefab[] nodePrefabs;
 
-    public GraphData graphData;
+    public GraphData graphData = new();
 
     public readonly float portUISaturation = 0.7f;
     public readonly float portUIValue = 0.8f;
     public readonly float portUISerectSaturation = 0.25f;
     public readonly float portUISerectValue = 0.9f;
+
+    public TMP_InputField additionalHP;
+    public TMP_InputField additionalAttack;
+    public TMP_InputField additionalAttackCT;
+    public TMP_InputField additionalCriticalChance;
+    public TMP_InputField additionalCriticalDamage;
+
 
     #region 関数
 
@@ -60,6 +68,81 @@ public class GraphEditorManager : MonoBehaviour
         Enum.TryParse(typeName, out type);
         AddNode(type);
     }
+
+
+    #region 追加ステータス
+
+    public void UpdateAdditionalStatus()
+    {
+        additionalHP.text = Instance.graphData.aditionalStatus.hp.ToString();
+        additionalAttack.text = $"{Instance.graphData.aditionalStatus.attack}";
+        additionalAttackCT.text = $"{Instance.graphData.aditionalStatus.attackCooltime}";
+        additionalCriticalChance.text = $"{Instance.graphData.aditionalStatus.criticalChance}";
+        additionalCriticalDamage.text = $"{Instance.graphData.aditionalStatus.criticalDamage}";
+    }
+
+    public void AddHP(int value)
+    {
+        Instance.graphData.aditionalStatus.hp += value;
+    }
+    public void SetHP(int value)
+    {
+        Instance.graphData.aditionalStatus.hp = value;
+    }
+    public void SetHP(string value)
+    {
+        Instance.SetHP(int.Parse(value));
+    }
+    public void AddAttack(int value)
+    {
+        Instance.graphData.aditionalStatus.attack += value;
+    }
+    public void SetAttack(int value)
+    {
+        Instance.graphData.aditionalStatus.attack = value;
+    }
+    public void SetAttack(string value)
+    {
+        Instance.SetAttack(int.Parse(value));
+    }
+    public void AddAttackCT(int value)
+    {
+        Instance.graphData.aditionalStatus.attackCooltime += value;
+    }
+    public void SetAttackCT(int value)
+    {
+        Instance.graphData.aditionalStatus.attackCooltime = value;
+    }
+    public void SetAttackCT(string value)
+    {
+        Instance.SetAttackCT(int.Parse(value));
+    }
+    public void AddCriticalChance(int value)
+    {
+        Instance.graphData.aditionalStatus.criticalChance += value;
+    }
+    public void SetCriticalChance(int value)
+    {
+        Instance.graphData.aditionalStatus.criticalChance = value;
+    }
+    public void SetCriticalChance(string value)
+    {
+        Instance.SetCriticalChance(int.Parse(value));
+    }
+    public void AddCriticalDamage(int value)
+    {
+        Instance.graphData.aditionalStatus.criticalDamage += value;
+    }
+    public void SetCriticalDamage(int value)
+    {
+        Instance.graphData.aditionalStatus.criticalDamage = value;
+    }
+    public void SetCriticalDamage(string value)
+    {
+        Instance.SetCriticalDamage(int.Parse(value));
+    }
+
+    #endregion
 
 
     static public void ConectPorts(PortUI from, PortUI to)
@@ -140,6 +223,7 @@ public class GraphEditorManager : MonoBehaviour
             Instance.graphData.nodes.Add(nodeData);
             usedNodeIds.Add(nodeUI.node.id);
         }
+        Instance.graphData.aditionalStatus.hp = 100;
         string json = JsonUtility.ToJson(Instance.graphData, true);
         System.IO.File.WriteAllText(Application.dataPath + $"/Jsons/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);
         Debug.Log("グラフ保存完了");
@@ -201,6 +285,7 @@ public class GraphEditorManager : MonoBehaviour
             nodes = new List<NodeData>(),
         };
         AddNode(NodeType.Start);
+        UpdateAdditionalStatus();
     }
 }
 

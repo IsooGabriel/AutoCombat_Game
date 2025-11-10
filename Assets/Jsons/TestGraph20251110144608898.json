@@ -1,0 +1,51 @@
+{
+    "nodes": [
+        {
+            "id": "8965cefe-61a2-4ec1-90bd-dfe19ffd0ac9",
+            "type": 0,
+            "position": {
+                "x": -0.728643000125885,
+                "y": 0.3098830282688141
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "exec",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "b32af8e3-d57a-4948-9ef7-28f9fd7af8a9",
+                            "portName": "Execute"
+                        }
+                    ]
+                }
+            ],
+            "inputValues": []
+        },
+        {
+            "id": "b32af8e3-d57a-4948-9ef7-28f9fd7af8a9",
+            "type": 1,
+            "position": {
+                "x": 5.117253303527832,
+                "y": 0.6113901734352112
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": []
+                },
+                {
+                    "fromPortName": "newPosition",
+                    "toPortNodes": []
+                }
+            ],
+            "inputValues": []
+        }
+    ],
+    "graphName": "New AI",
+    "author": "",
+    "aditionalStatus": {
+        "attack": 0,
+        "attackCooltime": 0.0,
+        "criticalChance": 0.0,
+        "criticalDamage": 0.0
+    }
+}
