@@ -100,8 +100,14 @@ public class PortOfNode
 [Serializable]
 public class InputValue
 {
-    public string portID;
+    public string toPortName;
     public object value;
+
+    public InputValue(string toPortName, object value)
+    {
+        this.toPortName = toPortName;
+        this.value = value;
+    }
 }
 public enum NodeType
 {
@@ -113,5 +119,6 @@ public enum NodeType
     GetHP,
     Compare,
     Branch,
-    DEBUG
+    DEBUG,
+    SetValue,
 }

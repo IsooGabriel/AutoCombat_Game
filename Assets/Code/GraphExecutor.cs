@@ -86,43 +86,31 @@ public class GraphExecutor
     /// <summary>
     /// ノードがデータを次のノードに送る
     /// </summary>
-    /// <param name="node">送信元ノード</param>
-    /// <param name="portName">送信元ポート名</param>
+    /// <param name="fromNode">送信元ノード</param>
+    /// <param name="fromPortName">送信元ポート名</param>
     /// <param name="data">送るデータ</param>
-    public bool SendData(Node node, string portName, object data)
+    /// <returns>送信成功数が1以上かのbool、要するに送信できたかの判定</returns>
+    public bool SendData(Node fromNode, string fromPortName, object data)
     {
         bool isSent = false;
-        foreach (var outputPort in node.outputPorts)
+        foreach (var fromPort in fromNode.outputPorts)
         {
-            if (outputPort.name != portName)
+            if (fromPort.name != fromPortName)
             {
                 continue;
             }
-            foreach (var inputPort in outputPort.outputConections)
+            foreach (var toPort in fromPort.outputConections)
             {
-                if (inputPort.node == null)
+                if (toPort.node == null)
                 {
                     continue;
                 }
-                if (inputPort.node.inputData == null)
+                if (toPort.node.inputData == null)
                 {
-                    inputPort.node.inputData = new Dictionary<string, List<object>>();
+                    toPort.node.inputData = new() { };
                 }
 
-                if (inputPort.node.inputData.ContainsKey(inputPort.portName))
-                {
-                    if (inputPort.node.inputData[inputPort.portName] != null)
-                    {
-                        continue;
-                    }
-                }
-                else
-                {
-                    inputPort.node.inputData.Add(inputPort.portName, new() { data });
-                    continue;
-                }
-
-                inputPort.node.inputData[inputPort.portName].Add(data);
+                toPort.node.inputData.Add(new InputValue(toPort.portName, data));
 
                 isSent = true;
             }
@@ -191,7 +179,7 @@ public class GraphExecutor
             {
                 continue;
             }
-            if (!node.inputData.ContainsKey(port.name))
+            if (!node.inputData.Any(d => d.toPortName == port.name))
             {
                 return false;
             }
@@ -215,6 +203,7 @@ public static class NodeFactory
         //{ NodeType.Compare, () => new CompareNode() },
         //{ NodeType.Branch, () => new BranchNode() },
         { NodeType.DEBUG, () => new _DebugNode() },
+        { NodeType.SetValue, () => new SetValueNode() },
     };
 
     public static Node Create(NodeType type)

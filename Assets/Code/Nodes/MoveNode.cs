@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveNode : Node
@@ -19,11 +19,11 @@ public class MoveNode : Node
     }
     public override void Execute(GraphExecutor executor)
     {
-        if (!inputData.ContainsKey("direction"))
+        if (!InputValueContainsPort("direction"))
         {
             return;
         }
-        Vector2 direction = (Vector2)inputData["direction"].FirstOrDefault(x => x is Vector2);
+        Vector2 direction = TryGetInputValueWithPort("direction", out List<Vector2> directions) == true ? directions[0] : Vector2.zero;
         executor.myCharacter.Move(direction);
     }
 }

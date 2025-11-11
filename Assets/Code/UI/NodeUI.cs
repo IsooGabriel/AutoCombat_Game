@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class NodeUI : MonoBehaviour
 {
     public Node node = new _DebugNode();
@@ -8,7 +7,7 @@ public class NodeUI : MonoBehaviour
     [SerializeField]
     public PortUI[] outputPorts;
 
-    public void Awake()
+    public virtual void Awake()
     {
         node.id = System.Guid.NewGuid().ToString();
     }

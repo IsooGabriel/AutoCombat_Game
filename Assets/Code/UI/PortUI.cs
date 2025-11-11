@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class PortUI : MonoBehaviour
@@ -9,6 +10,8 @@ public class PortUI : MonoBehaviour
     public NodeUI owner;
     [SerializeField]
     public PortTypeHue portTypeHue;
+    [SerializeField]
+    public TextMeshProUGUI tmpUGUI;
     [SerializeField]
     public Transform portPosition;
     [SerializeField]
@@ -52,6 +55,14 @@ public class PortUI : MonoBehaviour
         if (port.owner == null)
         {
             port.owner = owner.node;
+        }
+        if (owner != null && port != null)
+        {
+            port.owner = owner.node;
+        }
+        if (tmpUGUI != null)
+        {
+            tmpUGUI.text = port.name;
         }
     }
 }

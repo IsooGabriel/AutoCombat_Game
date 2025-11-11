@@ -69,7 +69,6 @@ public class GraphEditorManager : MonoBehaviour
         AddNode(type);
     }
 
-
     #region 追加ステータス
 
     public void UpdateAdditionalStatus()
@@ -211,7 +210,7 @@ public class GraphEditorManager : MonoBehaviour
     }
     public void SaveGraph()
     {
-        HashSet<string> usedNodeIds = new HashSet<string>();
+        HashSet<string> usedNodeIds = new HashSet<string>() { };
         foreach (var nodeUI in GraphEditorManager.Instance.nodeUIs)
         {
             if (usedNodeIds.Contains(nodeUI.node.id))
@@ -262,6 +261,10 @@ public class GraphEditorManager : MonoBehaviour
                     )
                 );
             }
+        }
+        for (int i = 0; i < node.inputData.Count; ++i)
+        {
+            nodeData.inputValues.Add(node.inputData[i]);
         }
         Debug.Log("ノードデータ生成完了");
         return nodeData;
