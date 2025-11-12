@@ -47,7 +47,7 @@ public class GraphData
 [Serializable]
 public class NodeData
 {
-    public NodeData(string id, NodeType type, Vector2 position, List<PortConections> outputConnection, List<InputValue> inpuValues = null)
+    public NodeData(string id, NodeType type, Vector2 position, List<PortConections> outputConnection, List<InputValue<float>> inpuValues = null)
     {
         this.id = id;
         this.type = type;
@@ -59,7 +59,7 @@ public class NodeData
     public NodeType type;
     public Vector2 position;
     public List<PortConections> outputConnections = new();
-    public List<InputValue> inputValues = new();
+    public List<InputValue<float>> inputValues = new();
 }
 [Serializable]
 public class PortConections
@@ -98,12 +98,12 @@ public class PortOfNode
     }
 }
 [Serializable]
-public class InputValue
+public class InputValue<T>
 {
     public string toPortName;
-    public object value;
+    public T value;
 
-    public InputValue(string toPortName, object value)
+    public InputValue(string toPortName, T value)
     {
         this.toPortName = toPortName;
         this.value = value;

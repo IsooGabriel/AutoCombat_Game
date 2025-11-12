@@ -1,18 +1,18 @@
 {
     "nodes": [
         {
-            "id": "8965cefe-61a2-4ec1-90bd-dfe19ffd0ac9",
+            "id": "96f65398-5579-4a03-bb65-be05a446aaad",
             "type": 0,
             "position": {
-                "x": -0.728643000125885,
-                "y": 0.3098830282688141
+                "x": -2.671691656112671,
+                "y": -1.24790620803833
             },
             "outputConnections": [
                 {
                     "fromPortName": "exec",
                     "toPortNodes": [
                         {
-                            "nodeId": "b32af8e3-d57a-4948-9ef7-28f9fd7af8a9",
+                            "nodeId": "c5100593-fbff-4135-b3d3-68371af60468",
                             "portName": "Execute"
                         }
                     ]
@@ -21,28 +21,30 @@
             "inputValues": []
         },
         {
-            "id": "b32af8e3-d57a-4948-9ef7-28f9fd7af8a9",
-            "type": 1,
+            "id": "c5100593-fbff-4135-b3d3-68371af60468",
+            "type": 9,
             "position": {
-                "x": 5.117253303527832,
-                "y": 0.6113901734352112
+                "x": 1.24790620803833,
+                "y": -0.6783921122550964
             },
             "outputConnections": [
                 {
-                    "fromPortName": "Execute",
-                    "toPortNodes": []
-                },
-                {
-                    "fromPortName": "newPosition",
+                    "fromPortName": "output number",
                     "toPortNodes": []
                 }
             ],
-            "inputValues": []
+            "inputValues": [
+                {
+                    "toPortName": "data",
+                    "value": 9.999999884841548e26
+                }
+            ]
         }
     ],
     "graphName": "New AI",
     "author": "",
     "aditionalStatus": {
+        "hp": 100,
         "attack": 0,
         "attackCooltime": 0.0,
         "criticalChance": 0.0,

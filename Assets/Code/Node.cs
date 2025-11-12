@@ -14,7 +14,7 @@ public abstract class Node
     [NonSerialized] public Port[] inputPorts = new Port[] { };
     [NonSerialized] public Port[] outputPorts = new Port[] { };
 
-    [NonSerialized] public List<InputValue> inputData = new() { };
+    [NonSerialized] public List<InputValue<object>> inputValues = new() { };
 
     public abstract void Initialize();
     public abstract void Execute(GraphExecutor executor);
@@ -28,12 +28,19 @@ public abstract class Node
         id = data.id;
         position = data.position;
         nodeType = data.type;
-        inputData = data.inputValues ?? new List<InputValue>();
+        if (data.inputValues == null)
+        {
+            data.inputValues = new List<InputValue<float>>() { };
+        }
+        foreach (var value in data.inputValues)
+        {
+            inputValues.Add(new InputValue<object>(value.toPortName, (object)value.value));
+        }
     }
 
     public virtual bool InputValueContainsPort(string toPortName)
     {
-        foreach (var data in inputData)
+        foreach (var data in inputValues)
         {
             if (data.toPortName == toPortName)
             {
@@ -50,13 +57,14 @@ public abstract class Node
             return false;
         }
         bool found = false;
-        foreach (var data in inputData)
+        foreach (var data in inputValues)
         {
             if (data.toPortName != toPortName)
             {
                 continue;
             }
             value.Add((T)data.value);
+            //îGâGêFÇ
             found = true;
         }
         return found;
@@ -69,7 +77,7 @@ public abstract class Node
     {
         value = new List<T>();
         bool found = false;
-        foreach (var data in inputData)
+        foreach (var data in inputValues)
         {
             if (data.value is T typedValue)
             {

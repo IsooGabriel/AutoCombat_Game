@@ -222,7 +222,6 @@ public class GraphEditorManager : MonoBehaviour
             Instance.graphData.nodes.Add(nodeData);
             usedNodeIds.Add(nodeUI.node.id);
         }
-        Instance.graphData.aditionalStatus.hp = 100;
         string json = JsonUtility.ToJson(Instance.graphData, true);
         System.IO.File.WriteAllText(Application.dataPath + $"/Jsons/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);
         Debug.Log("グラフ保存完了");
@@ -262,9 +261,21 @@ public class GraphEditorManager : MonoBehaviour
                 );
             }
         }
-        for (int i = 0; i < node.inputData.Count; ++i)
+        for (int i = 0; i < node.inputValues.Count; ++i)
         {
-            nodeData.inputValues.Add(node.inputData[i]);
+            if (node.inputValues[i] == null)
+            {
+                continue;
+            }
+            if (node.inputValues[i].value.GetType() != typeof(float))
+            {
+                continue;
+            }
+            if (nodeData.inputValues == null)
+            {
+                nodeData.inputValues = new List<InputValue<float>>() { };
+            }
+            nodeData.inputValues.Add(new InputValue<float>(node.inputValues[i].toPortName, (float)node.inputValues[i].value));
         }
         Debug.Log("ノードデータ生成完了");
         return nodeData;

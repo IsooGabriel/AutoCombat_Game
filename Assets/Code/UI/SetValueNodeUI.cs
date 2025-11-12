@@ -9,7 +9,7 @@ public class SetDataNodeUI : NodeUI
         {
             return;
         }
-        node.inputData = new System.Collections.Generic.List<InputValue>() { new InputValue("data", float.Parse(field.text)) };
+        node.inputValues = new System.Collections.Generic.List<InputValue<object>>() { new InputValue<object>("data", (object)float.Parse(field.text)) };
     }
     public override void Awake()
     {

@@ -17,7 +17,7 @@ public class _DebugNode : Node
     }
     public override void Execute(GraphExecutor executor)
     {
-        UnityEngine.Debug.Log($"発火ノードが実行されている:{inputData.Count}");
+        UnityEngine.Debug.Log($"発火ノードが実行されている:{inputValues.Count}");
         if (TryGetInputValueWithPort("input", out List<object> value))
         {
             UnityEngine.Debug.Log($"_DebugNode: {value}");

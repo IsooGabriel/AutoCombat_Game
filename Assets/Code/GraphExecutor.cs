@@ -59,7 +59,7 @@ public class GraphExecutor
         }
         foreach (var node in executed)
         {
-            nodes[node].inputData.Clear();
+            nodes[node].inputValues.Clear();
         }
     }
 
@@ -105,12 +105,12 @@ public class GraphExecutor
                 {
                     continue;
                 }
-                if (toPort.node.inputData == null)
+                if (toPort.node.inputValues == null)
                 {
-                    toPort.node.inputData = new() { };
+                    toPort.node.inputValues = new() { };
                 }
 
-                toPort.node.inputData.Add(new InputValue(toPort.portName, data));
+                toPort.node.inputValues.Add(new InputValue<object>(toPort.portName, (object)data));
 
                 isSent = true;
             }
@@ -179,7 +179,7 @@ public class GraphExecutor
             {
                 continue;
             }
-            if (!node.inputData.Any(d => d.toPortName == port.name))
+            if (!node.inputValues.Any(d => d.toPortName == port.name))
             {
                 return false;
             }
