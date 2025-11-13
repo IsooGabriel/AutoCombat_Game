@@ -121,4 +121,5 @@ public enum NodeType
     Branch,
     DEBUG,
     SetValue,
+    SetVector,
 }
