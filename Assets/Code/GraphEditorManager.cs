@@ -152,13 +152,25 @@ public class GraphEditorManager : MonoBehaviour
         }
         if (!GraphEditorManager.Instance.CheckConectable(from, to))
         {
+            Debug.Log(" ê⁄ ë± ïs â¬ î\ ");
             return;
         }
         if (from.port.outputConections == null)
         {
             from.port.outputConections = new List<(Node, string)>();
         }
+
         from.port.outputConections.Add((to.port.owner, to.port.name));
+        if (from.port.owner is LinkedNode fromLinkedNode)
+        {
+            Array.Resize(ref fromLinkedNode.outputNodes, fromLinkedNode.outputNodes.Length + 1);
+            fromLinkedNode.outputNodes[fromLinkedNode.outputNodes.Length - 1] = to.port.owner;
+        }
+        if (to.port.owner is LinkedNode linkedNode)
+        {
+            Array.Resize(ref linkedNode.inputNodes, linkedNode.inputNodes.Length + 1);
+            linkedNode.inputNodes[linkedNode.inputNodes.Length - 1] = from.port.owner;
+        }
 
         GraphEditorManager.Instance.SetLine(from, to);
         Debug.Log(" ê⁄ ë± äÆ óπ ");
@@ -178,7 +190,7 @@ public class GraphEditorManager : MonoBehaviour
         {
             return false;
         }
-        if (from.port.type != to.port.type)
+        if (from.port.type != to.port.type && !from.port.type.Equals(to.port.type) && !to.port.type.Equals(from.port.type))
         {
             return false;
         }

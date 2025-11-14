@@ -3,43 +3,31 @@ using UnityEngine;
 
 public class SetVectorNode : Node
 {
+    const string portXname = "x";
+    const string portYname = "y";
     public override void Initialize()
     {
         nodeType = NodeType.SetVector;
         inputPorts = new Port[]
         {
             new Port("Execute", typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
+            new Port(portXname, typeof(float), isRequired:false, isInput:true, isExecutionPort:false, this),
+            new Port(portYname, typeof(float), isRequired:false, isInput:true, isExecutionPort:false, this),
         };
         outputPorts = new Port[]
         {
+            new Port("Execute", typeof(bool), false, false, true, this),
             new Port("output vector2", typeof(Vector2), false, false, false, this),
         };
     }
 
     public override void Execute(GraphExecutor executor)
     {
-        if (inputValues.Count < 2)
+        if (TryGetInputValueWithPort(portXname, out List<float> valuesX) &&
+            TryGetInputValueWithPort(portYname, out List<float> valuesY))
         {
-            return;
+            executor.SendData(this, outputPorts[1].name, new List<Vector2>() { new Vector2(valuesX[0], valuesY[0]) });
         }
-        TryGetInputValueWithPort(outputPorts[0].name, out List<float> values);
-        executor.SendData(this, outputPorts[1].name, GenerateVectors(values));
-    }
-
-    private List<Vector2> GenerateVectors(List<float> values)
-    {
-        List<Vector2> vectors = new List<Vector2>();
-        for (int i = 0; i < values.Count; i += 2)
-        {
-            if (i + 1 < values.Count)
-            {
-                vectors.Add(new Vector2(values[i], values[i + 1]));
-            }
-            else if (i < values.Count)
-            {
-                vectors.Add(new Vector2(values[i], 0f));
-            }
-        }
-        return vectors;
+        executor.EnqueueConnected(this, outputPorts[0].name);
     }
 }

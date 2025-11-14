@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 public class SetDataNodeUI : NodeUI
 {
     public TMP_InputField field = null;
@@ -9,7 +10,10 @@ public class SetDataNodeUI : NodeUI
         {
             return;
         }
-        node.inputValues = new System.Collections.Generic.List<InputValue<object>>() { new InputValue<object>("data", (object)float.Parse(field.text)) };
+        node.inputValues = new List<InputValue<object>>()
+        {
+            new InputValue<object>("data", (object)float.Parse(string.IsNullOrEmpty(field.text) ? "0" : field.text))
+        };
     }
     public override void Awake()
     {

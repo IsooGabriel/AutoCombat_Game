@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class GraphData
 {
-    const string version = "0.1";
+    readonly string version = "0.1";
     public List<NodeData> nodes = new();
     const string startNodeId = "START_NODE";
     public string graphName = "New AI";
@@ -122,4 +122,5 @@ public enum NodeType
     DEBUG,
     SetValue,
     SetVector,
+    AND,
 }

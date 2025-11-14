@@ -23,6 +23,14 @@ public abstract class Node
         Initialize();
         id = Guid.NewGuid().ToString();
     }
+    public virtual void StartInitialize()
+    {
+        return;
+    }
+    public virtual void FlameInitialize()
+    {
+        return;
+    }
     public virtual void SetData(NodeData data)
     {
         id = data.id;
@@ -69,7 +77,7 @@ public abstract class Node
         }
         return found;
     }
-    public virtual bool TryGetInputvalueWithPort<T>(Port toPort, out List<T> value)
+    public virtual bool TryGetInputValueWithPort<T>(Port toPort, out List<T> value)
     {
         return TryGetInputValueWithPort<T>(toPort.name, out value);
     }

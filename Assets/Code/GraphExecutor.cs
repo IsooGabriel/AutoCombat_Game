@@ -6,8 +6,8 @@ public class GraphExecutor
     public Character myCharacter;
     public Character enemy;
     private Dictionary<string, Node> nodes = new Dictionary<string, Node> { };
-    private Queue<Node> executionQueue;
-
+    public Queue<Node> executionQueue;
+    public Node startNode = null;
 
     #region public関数
 
@@ -26,7 +26,6 @@ public class GraphExecutor
     {
         executionQueue = new Queue<Node>();
         var executed = new HashSet<string>();
-        Node startNode = nodes.Values.FirstOrDefault(n => n.nodeType == NodeType.Start);
         if (startNode != null)
         {
             executionQueue.Enqueue(startNode);
@@ -204,6 +203,8 @@ public static class NodeFactory
         //{ NodeType.Branch, () => new BranchNode() },
         { NodeType.DEBUG, () => new _DebugNode() },
         { NodeType.SetValue, () => new SetValueNode() },
+        { NodeType.SetVector, () => new SetVectorNode() },
+        { NodeType.AND, () => new ANDNode() },
     };
 
     public static Node Create(NodeType type)
