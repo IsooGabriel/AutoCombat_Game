@@ -21,7 +21,7 @@ public class PortUI : MonoBehaviour
     public enum PortTypeHue
     {
         OTHER = 262,
-        DECIMAL = 32,
+        DECIMAL = 50,
         VECTOR = 326,
         EXECUTION = 130,
     }

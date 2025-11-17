@@ -18,7 +18,7 @@ public class ANDNode : LinkedNode
         inputPorts = new Port[]
         {
             new Port("Execute", typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
-            new Port(elementPortName, typeof(object), isRequired:true, isInput:true, isExecutionPort:false, this),
+            new Port(elementPortName, typeof(object), isRequired:false, isInput:true, isExecutionPort:false, this),
         };
         outputPorts = new Port[]
         {

@@ -1,0 +1,119 @@
+{
+    "nodes": [
+        {
+            "id": "aba1c7ab-dac8-4506-991b-70c8fb1aefb0",
+            "type": 0,
+            "position": {
+                "x": -4.061976909637451,
+                "y": 0.8961471915245056
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "exec",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "42cc2510-962d-4cd7-8636-ef78af16c0ed",
+                            "portName": "Execute"
+                        }
+                    ]
+                }
+            ],
+            "inputValues": []
+        },
+        {
+            "id": "485f387d-8c8a-4215-a6ad-60418ccddf06",
+            "type": 1,
+            "position": {
+                "x": 6.189279556274414,
+                "y": -0.09212705492973328
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": []
+                },
+                {
+                    "fromPortName": "newPosition",
+                    "toPortNodes": []
+                }
+            ],
+            "inputValues": []
+        },
+        {
+            "id": "42cc2510-962d-4cd7-8636-ef78af16c0ed",
+            "type": 9,
+            "position": {
+                "x": -2.6214406490325929,
+                "y": -1.5159128904342652
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "acc18836-188f-402a-bc5f-807975d23fa8",
+                            "portName": "Execute"
+                        }
+                    ]
+                },
+                {
+                    "fromPortName": "output number",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "acc18836-188f-402a-bc5f-807975d23fa8",
+                            "portName": "x"
+                        },
+                        {
+                            "nodeId": "acc18836-188f-402a-bc5f-807975d23fa8",
+                            "portName": "y"
+                        }
+                    ]
+                }
+            ],
+            "inputValues": [
+                {
+                    "toPortName": "output value",
+                    "value": 50.0
+                }
+            ]
+        },
+        {
+            "id": "acc18836-188f-402a-bc5f-807975d23fa8",
+            "type": 10,
+            "position": {
+                "x": 2.1691794395446779,
+                "y": 1.3316580057144166
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "485f387d-8c8a-4215-a6ad-60418ccddf06",
+                            "portName": "Execute"
+                        }
+                    ]
+                },
+                {
+                    "fromPortName": "output vector2",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "485f387d-8c8a-4215-a6ad-60418ccddf06",
+                            "portName": "direction"
+                        }
+                    ]
+                }
+            ],
+            "inputValues": []
+        }
+    ],
+    "graphName": "New AI",
+    "author": "",
+    "aditionalStatus": {
+        "hp": 0,
+        "attack": 0,
+        "attackCooltime": 0.0,
+        "criticalChance": 0.0,
+        "criticalDamage": 0.0
+    }
+}
