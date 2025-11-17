@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Y
+  m_text: y
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -471,12 +471,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   port:
-    name: b
+    name: y
     isRequired: 0
     isInput: 1
     isExecutionPort: 0
   owner: {fileID: 8269456461143548491}
-  portTypeHue: 0
+  portTypeHue: 32
   tmpUGUI: {fileID: 0}
   portPosition: {fileID: 7371343303935417124}
   portImage: {fileID: 788545201027173551}
@@ -510,9 +510,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 965482838403210424, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: port.name
+      value: output vector2
+      objectReference: {fileID: 0}
+    - target: {fileID: 965482838403210424, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: portTypeHue
       value: 326
       objectReference: {fileID: 0}
+    - target: {fileID: 2391374102005097908, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: inputPorts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2391374102005097908, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: 'inputPorts.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2272465113599480220}
     - target: {fileID: 2460284092861710261, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -622,6 +634,14 @@ PrefabInstance:
     - target: {fileID: 2901296327591716692, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844456563717552189, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: port.name
+      value: x
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844456563717552189, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: portTypeHue
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 5761986420672201075, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y

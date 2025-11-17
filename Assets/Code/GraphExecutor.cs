@@ -39,6 +39,10 @@ public class GraphExecutor
                 node.useCount = 1;
                 executed.Add(node.id);
             }
+            else if(node.useLimit < 0)
+            {
+                node.useCount++;
+            }
             else if (node.useCount >= node.useLimit)
             {
                 continue;
@@ -129,17 +133,21 @@ public class GraphExecutor
 
         foreach (var nodeData in graphData.nodes)
         {
-            var node = NodeFactory.Create(nodeData.type);
-            node.Initialize();
-            node.id = nodeData.id;
-            node.position = nodeData.position;
-            nodes[node.id] = node;
+            var newNode = NodeFactory.Create(nodeData.type);
+            newNode.Initialize();
+            newNode.SetData(nodeData);
+            nodes[newNode.id] = newNode;
+            if (newNode.nodeType == NodeType.Start && startNode == null)
+            {
+                startNode = newNode;
+            }
         }
 
+        Node node = null;
         // 接続を構築
         foreach (var nodeData in graphData.nodes)
         {
-            Node node = nodes[nodeData.id];
+            node = nodes[nodeData.id];
             if (nodeData.outputConnections == null || nodeData.outputConnections.Count == 0)
             {
                 continue;

@@ -29,6 +29,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 965482838403210424, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: port.name
+      value: result
+      objectReference: {fileID: 0}
+    - target: {fileID: 965482838403210424, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: portTypeHue
       value: 262
       objectReference: {fileID: 0}
@@ -139,6 +143,10 @@ PrefabInstance:
     - target: {fileID: 2901296327591716692, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844456563717552189, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: port.name
+      value: elements
       objectReference: {fileID: 0}
     - target: {fileID: 4844456563717552189, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: portTypeHue

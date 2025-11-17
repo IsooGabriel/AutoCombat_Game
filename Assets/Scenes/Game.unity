@@ -428,7 +428,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 997290823}
   enemy: {fileID: 486008869}
-  graphJsonFile: {fileID: 0}
+  playerGraphJson: {fileID: 4900000, guid: babd3ac682843b94aa3a0a0b29ca5e5f, type: 3}
+  enemyGraphJson: {fileID: 4900000, guid: babd3ac682843b94aa3a0a0b29ca5e5f, type: 3}
 --- !u!1 &642440842
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,7 +909,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 15, y: 1}
+  m_Size: {x: 15, y: 0.95}
   m_EdgeRadius: 0
 --- !u!1 &1768490001
 GameObject:

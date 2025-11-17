@@ -40,9 +40,12 @@ public abstract class Node
         {
             data.inputValues = new List<InputValue<float>>() { };
         }
-        foreach (var value in data.inputValues)
+        else if(data.inputValues.Count > 0)
         {
-            inputValues.Add(new InputValue<object>(value.toPortName, (object)value.value));
+            foreach (var value in data.inputValues)
+            {
+                inputValues.Add(new InputValue<object>(value.toPortName, (object)value.value));
+            }
         }
     }
 
