@@ -190,7 +190,7 @@ public class GraphEditorManager : MonoBehaviour
         {
             return false;
         }
-        if (from.port.type != to.port.type && !from.port.type.Equals(to.port.type) && !to.port.type.Equals(from.port.type))
+        if (from.port.type != to.port.type)
         {
             return false;
         }
