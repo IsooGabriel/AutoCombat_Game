@@ -23,7 +23,8 @@ public class MoveNode : Node
         {
             return;
         }
-        Vector2 direction = TryGetInputValueWithPort("direction", out List<Vector2> directions) == true ? directions[0] : Vector2.zero;
+        List<Vector2> directions = new() { };
+       Vector2 direction = TryGetInputValueWithPort("direction", out directions) == true ? directions[0] : Vector2.zero;
         executor.myCharacter.Move(direction);
     }
 }

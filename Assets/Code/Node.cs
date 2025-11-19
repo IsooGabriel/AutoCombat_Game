@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,7 +41,7 @@ public abstract class Node
         {
             data.inputValues = new List<InputValue<float>>() { };
         }
-        else if(data.inputValues.Count > 0)
+        else if (data.inputValues.Count > 0)
         {
             foreach (var value in data.inputValues)
             {
@@ -68,14 +69,27 @@ public abstract class Node
             return false;
         }
         bool found = false;
+        object setValue = null;
         foreach (var data in inputValues)
         {
             if (data.toPortName != toPortName)
             {
                 continue;
             }
-            value.Add((T)data.value);
-            //îGâGêFÇ
+            if (data is IEnumerable enumerable)
+            {
+                var enumerator = enumerable.GetEnumerator();
+                if (enumerator.MoveNext())
+                {
+                    var first = enumerator.Current;
+                    Console.WriteLine(first);
+                }
+            }
+            else
+            {
+                value.Add((T)data.value);
+            }
+
             found = true;
         }
         return found;

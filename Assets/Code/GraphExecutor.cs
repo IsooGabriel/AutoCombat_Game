@@ -39,7 +39,7 @@ public class GraphExecutor
                 node.useCount = 1;
                 executed.Add(node.id);
             }
-            else if(node.useLimit < 0)
+            else if (node.useLimit < 0)
             {
                 node.useCount++;
             }
@@ -182,7 +182,7 @@ public class GraphExecutor
     {
         foreach (var port in node.inputPorts)
         {
-            if (port == null || !port.isRequired)
+            if (port == null || !port.isRequired || port.isExecutionPort)
             {
                 continue;
             }

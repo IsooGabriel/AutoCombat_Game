@@ -476,7 +476,7 @@ MonoBehaviour:
     isInput: 1
     isExecutionPort: 0
   owner: {fileID: 8269456461143548491}
-  portTypeHue: 32
+  portTypeHue: 50
   tmpUGUI: {fileID: 0}
   portPosition: {fileID: 7371343303935417124}
   portImage: {fileID: 788545201027173551}
@@ -641,7 +641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4844456563717552189, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: portTypeHue
-      value: 32
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5761986420672201075, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y
