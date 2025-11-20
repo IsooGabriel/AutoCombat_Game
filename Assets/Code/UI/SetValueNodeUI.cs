@@ -12,7 +12,7 @@ public class SetDataNodeUI : NodeUI
         }
         node.inputValues = new List<InputValue<object>>()
         {
-            new InputValue<object>("output value", (object)float.Parse(string.IsNullOrEmpty(field.text) ? "0" : field.text))
+            new InputValue<object>("output value", (object)float.Parse(string.IsNullOrEmpty(field.text) ? "0" : field.text), isUserset:true)
         };
     }
     public override void Awake()

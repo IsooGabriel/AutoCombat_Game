@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ public abstract class Node
         {
             foreach (var value in data.inputValues)
             {
-                inputValues.Add(new InputValue<object>(value.toPortName, (object)value.value));
+                inputValues.Add(new InputValue<object>(value.toPortName, (object)value.value, value.isUserset));
             }
         }
     }
@@ -69,7 +68,6 @@ public abstract class Node
             return false;
         }
         bool found = false;
-        object setValue = null;
         foreach (var data in inputValues)
         {
             if (data.toPortName != toPortName)

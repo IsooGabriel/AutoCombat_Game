@@ -1,7 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public interface IDeathable
+{
+    public void Death();
+}
+
+public class Character : MonoBehaviour, IDeathable
 {
     public Status baseStatus { get; set; } = new() { hp = 10, attack = 1, attackCooltime = 1, criticalChance = 20, criticalDamage = 40 };
     public Status aditionalStatus { get; set; } = new() { hp = 0, attack = 0, attackCooltime = 0, criticalChance = 0, criticalDamage = 0 };
@@ -9,6 +14,12 @@ public class Character : MonoBehaviour
     public Weapon weapon;
     public Action<Character> takeDamage;
 
+
+    public void Death()
+    {
+        takeDamage?.Invoke(this);
+        Destroy(this);
+    }
 
     public void TakeDamage(int damage)
     {

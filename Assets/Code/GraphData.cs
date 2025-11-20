@@ -102,11 +102,13 @@ public class InputValue<T>
 {
     public string toPortName;
     public T value;
+    public bool isUserset = false;
 
-    public InputValue(string toPortName, T value)
+    public InputValue(string toPortName, T value, bool isUserset = false)
     {
         this.toPortName = toPortName;
         this.value = value;
+        this.isUserset = isUserset;
     }
 }
 public enum NodeType

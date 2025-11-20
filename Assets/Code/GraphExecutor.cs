@@ -17,6 +17,7 @@ public class GraphExecutor
         this.myCharacter = myCharacter;
         this.enemy = enemy;
         LoadGraph(graphData);
+        
     }
 
     /// <summary>
@@ -62,7 +63,8 @@ public class GraphExecutor
         }
         foreach (var node in executed)
         {
-            nodes[node].inputValues.Clear();
+            List<InputValue<object>> usersets = nodes[node].inputValues.Where(v => v.isUserset).ToList();
+            nodes[node].inputValues = usersets;
         }
     }
 

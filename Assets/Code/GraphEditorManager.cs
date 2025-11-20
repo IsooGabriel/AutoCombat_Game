@@ -287,7 +287,7 @@ public class GraphEditorManager : MonoBehaviour
             {
                 nodeData.inputValues = new List<InputValue<float>>() { };
             }
-            nodeData.inputValues.Add(new InputValue<float>(node.inputValues[i].toPortName, (float)node.inputValues[i].value));
+            nodeData.inputValues.Add(new InputValue<float>(node.inputValues[i].toPortName, (float)node.inputValues[i].value, isUserset:true));
         }
         Debug.Log("ノードデータ生成完了");
         return nodeData;
