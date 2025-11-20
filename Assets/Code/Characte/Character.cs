@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using VContainer;
 
 public interface IDeathable
 {
@@ -13,7 +14,7 @@ public class Character : MonoBehaviour, IDeathable
     const decimal speed = 5;
     public Weapon weapon;
     public Action<Character> takeDamage;
-
+    public bool isPlayer = false;
 
     public void Death()
     {

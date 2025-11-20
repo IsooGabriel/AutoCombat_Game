@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class GraphRunner : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class GraphRunner : MonoBehaviour
     private float _tickTimer;
     private const float TickInterval = 1f / 30f; // 30tick/秒
 
+    private bool isRunning = false;
 
     private void InstanceExecutor()
     {
@@ -26,16 +29,43 @@ public class GraphRunner : MonoBehaviour
         _enemyExecutor = new GraphExecutor(enemyGraph, enemy, player);
     }
 
+    private void OnPlayerWin()
+    {
+        SceneManager.LoadScene("GraphEditor");
+    }
+    private void OnEnemyWin()
+    {
+        SceneManager.LoadScene("GraphEditor");
+    }
+
 
     void Start()
     {
         Application.targetFrameRate = 30;
 
         InstanceExecutor();
+        isRunning = true;
     }
 
     void Update()
     {
+
+        if (enemy == null)
+        {
+            OnPlayerWin();
+            isRunning = false;
+        }
+        else if (player == null)
+        {
+            OnEnemyWin();
+            isRunning = false;
+        }
+
+        if (!isRunning)
+        {
+            return;
+        }
+
         _tickTimer += Time.deltaTime;
 
         if (_tickTimer >= TickInterval)
