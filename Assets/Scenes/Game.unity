@@ -428,8 +428,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 997290823}
   enemy: {fileID: 486008869}
-  playerGraphJson: {fileID: 4900000, guid: babd3ac682843b94aa3a0a0b29ca5e5f, type: 3}
-  enemyGraphJson: {fileID: 4900000, guid: babd3ac682843b94aa3a0a0b29ca5e5f, type: 3}
+  playerGraphJson: {fileID: 4900000, guid: f45fb692da53c4543a1f1598b9329b01, type: 3}
+  enemyGraphJson: {fileID: 4900000, guid: f45fb692da53c4543a1f1598b9329b01, type: 3}
 --- !u!1 &642440842
 GameObject:
   m_ObjectHideFlags: 0
