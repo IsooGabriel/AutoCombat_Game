@@ -40,7 +40,7 @@ public abstract class Node
         {
             data.inputValues = new List<InputValue<float>>() { };
         }
-        else if(data.inputValues.Count > 0)
+        else if (data.inputValues.Count > 0)
         {
             foreach (var value in data.inputValues)
             {
@@ -74,7 +74,14 @@ public abstract class Node
             {
                 continue;
             }
-            value.Add((T)data.value);
+            if (data.value is T setValue)
+            {
+                value.Add((T)setValue);
+            }
+            else if (data.value is List<T> listSetValue)
+            {
+                value.Add((T)listSetValue[0]);
+            }
             //”G‰GF‚ğ
             found = true;
         }

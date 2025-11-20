@@ -182,7 +182,7 @@ public class GraphExecutor
     {
         foreach (var port in node.inputPorts)
         {
-            if (port == null || !port.isRequired)
+            if (port == null || !port.isRequired || port.isExecutionPort)
             {
                 continue;
             }
