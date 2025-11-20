@@ -1,0 +1,137 @@
+{
+    "nodes": [
+        {
+            "id": "e34dd6d8-0f91-4d0f-94af-a861f15a3eec",
+            "type": 0,
+            "position": {
+                "x": 1.2639408111572266,
+                "y": -1.1895910501480103
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "exec",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "ff6c34ba-8b1e-4c06-bfc5-88b64f807902",
+                            "portName": "Execute"
+                        },
+                        {
+                            "nodeId": "338497a4-0a7f-45c2-8e0c-e60f8a6b8ac2",
+                            "portName": "Execute"
+                        },
+                        {
+                            "nodeId": "b44b778d-7bef-4e01-8b33-77fe8e1a1c32",
+                            "portName": "Execute"
+                        }
+                    ]
+                }
+            ],
+            "inputValues": []
+        },
+        {
+            "id": "ff6c34ba-8b1e-4c06-bfc5-88b64f807902",
+            "type": 1,
+            "position": {
+                "x": 6.00371789932251,
+                "y": -1.5427508354187012
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": []
+                },
+                {
+                    "fromPortName": "newPosition",
+                    "toPortNodes": []
+                }
+            ],
+            "inputValues": []
+        },
+        {
+            "id": "338497a4-0a7f-45c2-8e0c-e60f8a6b8ac2",
+            "type": 11,
+            "position": {
+                "x": 3.513011932373047,
+                "y": -3.4758362770080568
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "ff6c34ba-8b1e-4c06-bfc5-88b64f807902",
+                            "portName": "Execute"
+                        }
+                    ]
+                },
+                {
+                    "fromPortName": "result",
+                    "toPortNodes": []
+                }
+            ],
+            "inputValues": []
+        },
+        {
+            "id": "b44b778d-7bef-4e01-8b33-77fe8e1a1c32",
+            "type": 9,
+            "position": {
+                "x": -1.3197027444839478,
+                "y": 0.8178439736366272
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "87015bc6-6f58-424b-8e2b-d96f20d8f462",
+                            "portName": "Execute"
+                        }
+                    ]
+                },
+                {
+                    "fromPortName": "output number",
+                    "toPortNodes": []
+                }
+            ],
+            "inputValues": []
+        },
+        {
+            "id": "87015bc6-6f58-424b-8e2b-d96f20d8f462",
+            "type": 10,
+            "position": {
+                "x": 4.126394748687744,
+                "y": 0.6691452264785767
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "338497a4-0a7f-45c2-8e0c-e60f8a6b8ac2",
+                            "portName": "Execute"
+                        }
+                    ]
+                },
+                {
+                    "fromPortName": "output vector2",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "338497a4-0a7f-45c2-8e0c-e60f8a6b8ac2",
+                            "portName": "element"
+                        }
+                    ]
+                }
+            ],
+            "inputValues": []
+        }
+    ],
+    "graphName": "New AI",
+    "author": "",
+    "aditionalStatus": {
+        "hp": 0,
+        "attack": 0,
+        "attackCooltime": 0.0,
+        "criticalChance": 0.0,
+        "criticalDamage": 0.0
+    }
+}

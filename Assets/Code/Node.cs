@@ -11,6 +11,8 @@ public abstract class Node
     public int useLimit = 1;
     public int useCount = 0;
 
+    public string executePortName = "Execute";
+
     [NonSerialized] public Port[] inputPorts = new Port[] { };
     [NonSerialized] public Port[] outputPorts = new Port[] { };
 

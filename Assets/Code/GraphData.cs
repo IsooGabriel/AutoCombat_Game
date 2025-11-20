@@ -125,4 +125,5 @@ public enum NodeType
     SetValue,
     SetVector,
     AND,
+    IF,
 }
