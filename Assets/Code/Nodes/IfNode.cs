@@ -12,7 +12,7 @@ public class IfNode : Node
         nodeType = NodeType.IF;
         inputPorts = new Port[]
         {
-            new Port(executePortName, typeof(IfSettings), isRequired:true, isInput:true, isExecutionPort:true, this),
+            new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
             new Port("value A", typeof(float), isRequired:true, isInput:true, isExecutionPort:true, this),
             new Port("value B", typeof(float), isRequired:true, isInput:true, isExecutionPort:false, this),
         };

@@ -28,9 +28,16 @@ public class ConectionUI : MonoBehaviour
     }
     void Update()
     {
-        Vector3 startPos = fromPort.portPosition.position;
-        Vector3 endPos = toPort.portPosition.position;
-        lineRenderer.SetPosition(0, startPos);
-        lineRenderer.SetPosition(1, endPos);
+        try
+        {
+            Vector3 startPos = fromPort.portPosition.position;
+            Vector3 endPos = toPort.portPosition.position;
+            lineRenderer.SetPosition(0, startPos);
+            lineRenderer.SetPosition(1, endPos);
+        }
+        catch
+        {
+            Destroy(gameObject);
+        }
     }
 }

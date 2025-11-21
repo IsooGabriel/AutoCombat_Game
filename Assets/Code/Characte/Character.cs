@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using VContainer;
 
 public interface IDeathable
 {
@@ -33,7 +32,15 @@ public class Character : MonoBehaviour, IDeathable
         direction.Normalize();
         float multiply = (float)speed * Time.deltaTime;
         direction = new Vector2(direction.x * multiply, direction.y * multiply);
-        transform.position += (Vector3)direction;
+
+        if (TryGetComponent<Rigidbody2D>(out var rb))
+        {
+            rb.AddForce(direction * 75, ForceMode2D.Force);
+        }
+        else
+        {
+            transform.position += (Vector3)direction;
+        }
         return transform.position;
     }
 

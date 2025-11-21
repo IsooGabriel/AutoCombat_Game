@@ -1,18 +1,24 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 public class GraphEditorManager : MonoBehaviour
 {
+    public Camera graphCamera;
+
     static public GraphEditorManager Instance = null;
     public bool isSelected = false;
+    [NonSerialized]
     public PortUI selectedPort = null;
     private float lineWidth = 0.05f;
     public List<NodeUI> nodeUIs = new List<NodeUI>();
     public GameObject nodesParent;
     public NodePrefab[] nodePrefabs;
-
     public GraphData graphData = new();
 
     public readonly float portUISaturation = 0.7f;
@@ -25,6 +31,10 @@ public class GraphEditorManager : MonoBehaviour
     public TMP_InputField additionalAttackCT;
     public TMP_InputField additionalCriticalChance;
     public TMP_InputField additionalCriticalDamage;
+
+    public PlayerInput playerInput;
+    public EventSystem eventSystem;
+    public GraphicRaycaster raycaster;
 
 
     #region 関数
@@ -68,6 +78,48 @@ public class GraphEditorManager : MonoBehaviour
         Enum.TryParse(typeName, out type);
         AddNode(type);
     }
+
+    public void DeleteObject(InputAction.CallbackContext context)
+    {
+        // Pointer 用のデータ作成
+        PointerEventData pointerData = new PointerEventData(eventSystem);
+        pointerData.position = Mouse.current.position.ReadValue();
+
+        // UI レイキャスト
+        List<RaycastResult> results = new List<RaycastResult>();
+        raycaster.Raycast(pointerData, results);
+
+        if (results.Count == 0) return;
+
+        // 最前面の UI オブジェクトを取得（Button を含む）
+        GameObject topUI = results[0].gameObject;
+
+        // interface を探す（Button の子にも付けられるように）
+        var rightClickable = topUI.GetComponentInParent<NodeUI>();
+        if (rightClickable.node is StartNode)
+        {
+            return;
+        }
+        if (rightClickable != null)
+        {
+            nodeUIs.Remove(rightClickable);
+            Node deleteNode = rightClickable.node;
+            graphData.nodes.RemoveAll(n => n.id == deleteNode.id);
+
+            foreach (var nodeDeta in graphData.nodes)
+            {
+                foreach (var portConection in nodeDeta.outputConnections)
+                {
+                    portConection.toPortNodes.RemoveAll(p => p.nodeId == deleteNode.id);
+
+                }
+            }
+
+            Destroy(rightClickable.gameObject);
+        }
+    }
+
+
 
     #region 追加ステータス
 
@@ -190,6 +242,10 @@ public class GraphEditorManager : MonoBehaviour
         {
             return false;
         }
+        if (from.port.isExecutionPort && to.port.isExecutionPort)
+        {
+            return true;
+        }
         if (from.port.type != to.port.type && from.port.type.GetType() != to.port.type.GetType())
         {
             return false;
@@ -204,6 +260,7 @@ public class GraphEditorManager : MonoBehaviour
         conection.fromPort = from;
         conection.toPort = to;
         conection.name = $"from_{from.port.name}_to_{to.port.name}";
+        conection.name = $"from{from.name}OF{from.owner.node.id}to{to.name}OF{to.owner.node.id}";
         conection.transform.parent = from.transform;
         if (conection.lineRenderer == null)
         {
@@ -220,7 +277,7 @@ public class GraphEditorManager : MonoBehaviour
         line.SetPosition(1, to.portPosition.position);
         from.outputLines.Add(line);
     }
-    public void SaveGraph()
+    public void SaveGraph(string path)
     {
         HashSet<string> usedNodeIds = new HashSet<string>() { };
         foreach (var nodeUI in GraphEditorManager.Instance.nodeUIs)
@@ -235,8 +292,15 @@ public class GraphEditorManager : MonoBehaviour
             usedNodeIds.Add(nodeUI.node.id);
         }
         string json = JsonUtility.ToJson(Instance.graphData, true);
-        System.IO.File.WriteAllText(Application.dataPath + $"/Jsons/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);
-        Debug.Log("グラフ保存完了");
+        //System.IO.File.WriteAllText(Application.dataPath + $"/Jsons/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);
+        path = Path.Combine(Application.persistentDataPath, path);
+
+        File.WriteAllText(path, json);
+    }
+
+    public void SaveGraph()
+    {
+        SaveGraph("PlaeyreData.json");
     }
 
     /// <summary>
@@ -287,7 +351,7 @@ public class GraphEditorManager : MonoBehaviour
             {
                 nodeData.inputValues = new List<InputValue<float>>() { };
             }
-            nodeData.inputValues.Add(new InputValue<float>(node.inputValues[i].toPortName, (float)node.inputValues[i].value, isUserset:true));
+            nodeData.inputValues.Add(new InputValue<float>(node.inputValues[i].toPortName, (float)node.inputValues[i].value, isUserset: true));
         }
         Debug.Log("ノードデータ生成完了");
         return nodeData;
@@ -313,6 +377,11 @@ public class GraphEditorManager : MonoBehaviour
         AddNode(NodeType.Start);
         UpdateAdditionalStatus();
     }
+
+    private void OnEnable()
+    {
+        playerInput.actions["Delete"].performed += DeleteObject;
+    }
 }
 
 [Serializable]
@@ -320,4 +389,10 @@ public class NodePrefab
 {
     public NodeType type;
     public GameObject prefab;
+}
+
+
+public interface IInteractable
+{
+    void Delete();
 }

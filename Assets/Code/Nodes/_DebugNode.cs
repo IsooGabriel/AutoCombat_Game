@@ -28,12 +28,12 @@ public class _DebugNode : Node
         }
         executor.EnqueueConnected(this, "exec");
 
-#if !UNITY_EDITOR
-        Form form = new Form();
-        form.Text = "Warning";
-        form.Width = 300;
-        form.Height = 200;
-        form.Show();
-#endif
+//#if !UNITY_EDITOR
+//        Form form = new Form();
+//        form.Text = "Warning";
+//        form.Width = 300;
+//        form.Height = 200;
+//        form.Show();
+//#endif
     }
 }

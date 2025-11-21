@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
@@ -18,8 +19,16 @@ public class GraphRunner : MonoBehaviour
 
     private void InstanceExecutor()
     {
-        var playerGraph = JsonUtility.FromJson<GraphData>(playerGraphJson.text);
-        var enemyGraph = JsonUtility.FromJson<GraphData>(enemyGraphJson.text);
+        string path = Path.Combine(Application.persistentDataPath, "PlaeyreData.json");
+        string json = File.ReadAllText(path);
+
+        string enemypath = Path.Combine(Application.persistentDataPath, "EnemyData.json");
+        string enemyjson = File.ReadAllText(enemypath);
+
+        var playerGraph = JsonUtility.FromJson<GraphData>(json);
+        var enemyGraph = JsonUtility.FromJson<GraphData>(enemyjson);
+        //var playerGraph = JsonUtility.FromJson<GraphData>(playerGraphJson.text);
+        //var enemyGraph = JsonUtility.FromJson<GraphData>(enemyGraphJson.text);
         if (playerGraph == null || enemyGraph == null || player == null || enemy == null)
         {
             Debug.LogError("なんかたんない");
