@@ -11,6 +11,9 @@ public class GraphEditorManager : MonoBehaviour
 {
     public Camera graphCamera;
 
+    [NonSerialized]
+    public readonly string editorLayer = "GraphEditor";
+
     static public GraphEditorManager Instance = null;
     public bool isSelected = false;
     [NonSerialized]
@@ -275,6 +278,7 @@ public class GraphEditorManager : MonoBehaviour
         line.endColor = Color.HSVToRGB(((float)to.portTypeHue) / 360, portUISaturation, portUIValue);
         line.SetPosition(0, from.portPosition.position);
         line.SetPosition(1, to.portPosition.position);
+        line.gameObject.layer = LayerMask.NameToLayer(Instance.editorLayer);
         from.outputLines.Add(line);
     }
     public void SaveGraph(string path)

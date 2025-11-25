@@ -216,6 +216,7 @@ public static class NodeFactory
         { NodeType.SetVector, () => new SetVectorNode() },
         { NodeType.AND, () => new ANDNode() },
         { NodeType.IF, () => new IfNode() },
+        { NodeType.BreakVector, () => new BreakVectorNode() },
     };
 
     public static Node Create(NodeType type)

@@ -1,22 +1,24 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class PortUI : MonoBehaviour
 {
-    [SerializeField]
+    [NonSerialized]
     public Port port;
     [SerializeField]
     public NodeUI owner;
     [SerializeField]
     public PortTypeHue portTypeHue;
-    [SerializeField]
+    [SerializeField, Header("É|Å[Égñº")]
     public TextMeshProUGUI tmpUGUI;
     [SerializeField]
     public Transform portPosition;
     [SerializeField]
     public Image portImage;
-    public List<LineRenderer> outputLines;
+    [NonSerialized]
+    public List<LineRenderer> outputLines = new();
 
     public enum PortTypeHue
     {

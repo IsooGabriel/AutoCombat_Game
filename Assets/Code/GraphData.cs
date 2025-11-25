@@ -126,4 +126,5 @@ public enum NodeType
     SetVector,
     AND,
     IF,
+    BreakVector,
 }
