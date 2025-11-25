@@ -15,10 +15,12 @@ public class GraphEditorManager : MonoBehaviour
     public readonly string editorLayer = "GraphEditor";
 
     static public GraphEditorManager Instance = null;
+    [NonSerialized]
     public bool isSelected = false;
     [NonSerialized]
     public PortUI selectedPort = null;
     private float lineWidth = 0.05f;
+    [NonSerialized]
     public List<NodeUI> nodeUIs = new List<NodeUI>();
     public GameObject nodesParent;
     public NodePrefab[] nodePrefabs;
@@ -122,7 +124,15 @@ public class GraphEditorManager : MonoBehaviour
         }
     }
 
-
+    public void ResetGraph()
+    {
+        graphData = null;
+        foreach (var nodeUI in nodeUIs)
+        {
+            Destroy(nodeUI.gameObject);
+        }
+        nodeUIs.Clear();
+    }
 
     #region 追加ステータス
 
@@ -299,7 +309,7 @@ public class GraphEditorManager : MonoBehaviour
         //System.IO.File.WriteAllText(Application.dataPath + $"/Jsons/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);
         path = Path.Combine(Application.persistentDataPath, path);
 
-        File.WriteAllText(path, json);
+        File.WriteAllText(path, json,  System.Text.Encoding.UTF8);
     }
 
     public void SaveGraph()
