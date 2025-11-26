@@ -11,7 +11,16 @@ public class GraphEditorLoader : MonoBehaviour
 
     private void Start()
     {
-        Application.OpenURL($"file://{Asset}");
+        System.Diagnostics.Process.Start(
+            new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "explorer",
+                Arguments = $@"/select,{Application.persistentDataPath}",
+                UseShellExecute = true,
+                Verb = "open"
+            }
+        );
+        Debug.Log(Application.persistentDataPath);
     }
 
     public void LoadJson(string path)
@@ -34,7 +43,7 @@ public class GraphEditorLoader : MonoBehaviour
             }
             prefab = Instantiate(prefab, new Vector3(nodeData.position.x, nodeData.position.y, 0), Quaternion.identity);
             nodeUI = prefab.GetComponent<NodeUI>();
-            if(prefab == null)
+            if (prefab == null)
             {
                 continue;
             }
