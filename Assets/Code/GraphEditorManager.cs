@@ -41,6 +41,8 @@ public class GraphEditorManager : MonoBehaviour
     public EventSystem eventSystem;
     public GraphicRaycaster raycaster;
 
+    private readonly string defaultPath = "\\GraphData\\";
+
 
     #region ä÷êî
 
@@ -291,7 +293,8 @@ public class GraphEditorManager : MonoBehaviour
         line.gameObject.layer = LayerMask.NameToLayer(Instance.editorLayer);
         from.outputLines.Add(line);
     }
-    public void SaveGraph(string path)
+
+    public void SaveGraph(string path, string graphName , string author)
     {
         HashSet<string> usedNodeIds = new HashSet<string>() { };
         foreach (var nodeUI in GraphEditorManager.Instance.nodeUIs)
@@ -305,16 +308,47 @@ public class GraphEditorManager : MonoBehaviour
             Instance.graphData.nodes.Add(nodeData);
             usedNodeIds.Add(nodeUI.node.id);
         }
+        Instance.graphData.createdDate = DateTime.Now;
+        Instance.graphData.graphName = graphName;
+        Instance.graphData.author = author;
         string json = JsonUtility.ToJson(Instance.graphData, true);
-        //System.IO.File.WriteAllText(Application.dataPath + $"/Jsons/TestGraph{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json", json);
-        path = Path.Combine(Application.persistentDataPath, path);
+        EnsureDirectoryExists(path);
 
-        File.WriteAllText(path, json,  System.Text.Encoding.UTF8);
+        File.WriteAllText(path, json, System.Text.Encoding.UTF8);
+    }
+    public void SaveGraph(string graphName, string author)
+    {
+        string parent = Application.persistentDataPath.Replace("/", "\\");
+        
+        SaveGraph($"{parent}{defaultPath}{SanitizeFileName(graphName)}{SanitizeFileName(author)}{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.acjson", graphName, author);
+    }
+    public void SaveGraph(string path)
+    {
+        SaveGraph(path, $"_DEFAULT_{System.Guid.NewGuid().ToString()}", $"_DEFAULT_{System.Guid.NewGuid().ToString()}");
     }
 
     public void SaveGraph()
     {
         SaveGraph("PlaeyreData.json");
+    }
+
+    public static string SanitizeFileName(string name)
+    {
+        char[] invalidChars = Path.GetInvalidFileNameChars();
+        foreach (char c in invalidChars)
+        {
+            name = name.Replace(c, '_');
+        }
+        name = name.Replace('/', '_').Replace('\\', '_');
+        return name;
+    }
+    private void EnsureDirectoryExists(string path)
+    {
+        path = Path.GetDirectoryName(path);
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
     }
 
     /// <summary>

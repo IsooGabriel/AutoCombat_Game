@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class GraphEditorLoader : MonoBehaviour
 {
@@ -11,16 +12,11 @@ public class GraphEditorLoader : MonoBehaviour
 
     private void Start()
     {
+        string path = Application.persistentDataPath.Replace("/", "\\");
         System.Diagnostics.Process.Start(
-            new System.Diagnostics.ProcessStartInfo
-            {
-                FileName = "explorer",
-                Arguments = $@"/select,{Application.persistentDataPath}",
-                UseShellExecute = true,
-                Verb = "open"
-            }
+        "explorer.exe",
+        path
         );
-        Debug.Log(Application.persistentDataPath);
     }
 
     public void LoadJson(string path)

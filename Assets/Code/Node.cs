@@ -84,7 +84,6 @@ public abstract class Node
             {
                 value.Add((T)listSetValue[0]);
             }
-            //�G�G�F��
             found = true;
         }
         return found;
