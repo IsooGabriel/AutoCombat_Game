@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using TMPro;
-public class SetDataNodeUI : NodeUI
+public class SetValueNodeUI : NodeUI
 {
     public TMP_InputField field = null;
+    public const string settingKey = "output value";
 
     public void SetData()
     {
@@ -12,8 +13,13 @@ public class SetDataNodeUI : NodeUI
         }
         node.inputValues = new List<InputValue<object>>()
         {
-            new InputValue<object>("output value", (object)float.Parse(string.IsNullOrEmpty(field.text) ? "0" : field.text), isUserset:true)
+            new InputValue<object>(settingKey, (object)float.Parse(string.IsNullOrEmpty(field.text) ? "0" : field.text), isUserset:true)
         };
+    }
+    public void SetData(float value)
+    {
+        field.text = value.ToString();
+        SetData();
     }
     public override void Awake()
     {

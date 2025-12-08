@@ -17,18 +17,21 @@ class GetPositionNodeUI : NodeUI
         setting.value = 0;
         SetSetting();
     }
-
-    public void SetSetting()
+    public void SetSetting(GetPositionSettings value)
     {
         node.inputValues = new List<InputValue<object>>()
         {
             new InputValue<object>
             (
                 GetPositionNode.positionTypeDataName,
-                (object)(float)setting.value,
+                (object)(float)value,
                 isUserset:true
             )
         };
+    }
+    public void SetSetting()
+    {
+        SetSetting((GetPositionSettings)setting.value);
     }
 }
 

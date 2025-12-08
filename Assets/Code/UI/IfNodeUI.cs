@@ -30,9 +30,13 @@ public class IfNodeUI : NodeUI
         setting.value = 0;
     }
 
+    public void SetSetting(IfSettings value)
+    {
+        SetInputValue((float)value, settingKey);
+    }
     public void SetSetting()
     {
-        SetInputValue(setting.value, settingKey);
+        SetSetting((IfSettings)setting.value);
     }
     public void SetValueA(string value)
     {
