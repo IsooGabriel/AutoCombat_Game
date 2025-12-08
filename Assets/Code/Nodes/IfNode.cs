@@ -3,7 +3,6 @@ public class IfNode : Node
     private IfSettings ifSettings;
     private bool result;
 
-    private readonly string settingPortName = "if setting";
     private readonly string valueAPortName = "value A";
     private readonly string valueBPortName = "value B";
 
@@ -25,16 +24,15 @@ public class IfNode : Node
 
     public override void Execute(GraphExecutor executor)
     {
-        if (TryGetInputValueWithPort<IfSettings>(settingPortName, out var settings))
+        if (TryGetInputValueWithPort<IfSettings>(IfNodeUI.settingKey, out ifSettings))
         {
-            ifSettings = settings[0];
         }
         else
         {
             return;
         }
-        float valueA = TryGetInputValueWithPort<float>(valueAPortName, out var valuesA) ? valuesA[0] : 0f;
-        float valueB = TryGetInputValueWithPort<float>(valueBPortName, out var valuesB) ? valuesB[0] : 0f;
+        float valueA = TryGetInputValueWithPort<float>(valueAPortName, out float valuesA) ? valuesA : 0f;
+        float valueB = TryGetInputValueWithPort<float>(valueBPortName, out float valuesB) ? valuesB : 0f;
         switch (ifSettings)
         {
             case IfSettings.Equals:

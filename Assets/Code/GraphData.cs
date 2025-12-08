@@ -127,4 +127,5 @@ public enum NodeType
     AND,
     IF,
     BreakVector,
+    GetPosition,
 }

@@ -10,7 +10,9 @@ public enum IfSettings
 }
 public class IfNodeUI : NodeUI
 {
-    private string settingKey = "if setting";
+    public const string settingKey = "if setting";
+    public const string valueAPortKey = "valueA";
+    public const string valueBPortKey = "valueB";
     public TMP_Dropdown setting;
     private Dictionary<IfSettings, string> settings = new Dictionary<IfSettings, string>()
     {
@@ -30,9 +32,34 @@ public class IfNodeUI : NodeUI
 
     public void SetSetting()
     {
-        node.inputValues = new List<InputValue<object>>()
+        SetInputValue(setting.value, settingKey);
+    }
+    public void SetValueA(string value)
+    {
+        SetInputValue(float.Parse(value), valueAPortKey);
+    }
+    public void SetValueB(string value)
+    {
+        SetInputValue(float.Parse(value), valueAPortKey);
+    }
+
+    private void SetInputValue(float value, string key)
+    {
+        foreach (var inputvalue in node.inputValues)
         {
-            new InputValue<object>(settingKey, (object)(IfSettings)setting.value, isUserset:true)
-        };
+            if (inputvalue.toPortName != key)
+            {
+                continue;
+            }
+            inputvalue.value = (object)(float)value;
+            return;
+        }
+        node.inputValues.Add(
+            new InputValue<object>(
+                key,
+                (float)value,
+                isUserset: true
+            )
+        );
     }
 }

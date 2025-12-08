@@ -620,17 +620,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85c6b99c2de5884ea6d357917a5c06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port:
-    name: b
-    isRequired: 0
-    isInput: 1
-    isExecutionPort: 0
   owner: {fileID: 2854508121597946046}
   portTypeHue: 50
   tmpUGUI: {fileID: 0}
   portPosition: {fileID: 2509143195111103644}
   portImage: {fileID: 2855574208513419912}
-  outputLines: []
 --- !u!1 &4113891138774234513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,7 +1635,19 @@ MonoBehaviour:
       m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2854508121597946046}
+        m_TargetAssemblyTypeName: IfNodeUI, Assembly-CSharp
+        m_MethodName: SetSetting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!1 &9012870154167270125
 GameObject:
