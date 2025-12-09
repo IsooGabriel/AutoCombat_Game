@@ -9,9 +9,11 @@ public class NodeMoveSystem : MonoBehaviour
     public Vector2 pivotOffset = new Vector2(0f, -40f);
     private bool isDragging = true;
 
+    public bool IsDragging { get => isDragging; set => isDragging = value; }
+
     public void OnClick()
     {
-        isDragging = !isDragging;
+        IsDragging = !IsDragging;
     }
 
     private void Awake()
@@ -25,9 +27,14 @@ public class NodeMoveSystem : MonoBehaviour
             canvas = GetComponentInParent<Canvas>();
         }
     }
+
+    private void Start()
+    {
+        Awake();
+    }
     private void Update()
     {
-        if (!isDragging)
+        if (!IsDragging)
         {
             return;
         }

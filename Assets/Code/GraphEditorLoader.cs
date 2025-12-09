@@ -8,7 +8,7 @@ public class GraphEditorLoader : MonoBehaviour
 {
     [SerializeField]
     private GraphEditorManager manager;
-    private readonly string graphPath= "GraphData";
+    private readonly string graphPath = "GraphData";
     private string path;
     private GraphData graphData;
 
@@ -43,19 +43,7 @@ public class GraphEditorLoader : MonoBehaviour
         public int FlagsEx;
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            string path = OpenFileDialog();
-            if (!string.IsNullOrEmpty(path))
-            {
-                Debug.Log("選択されたファイル: " + path);
-            }
-        }
-    }
-
-    string OpenFileDialog()
+    private string OpenFileDialog()
     {
         OpenFileName ofn = new OpenFileName();
         ofn.lStructSize = Marshal.SizeOf(ofn);
@@ -67,6 +55,10 @@ public class GraphEditorLoader : MonoBehaviour
         ofn.lpstrTitle = "ファイルを選択";
         ofn.lpstrInitialDir = $"{Application.persistentDataPath.Replace("/", "\\")}\\{graphPath}\\";
 
+        if (!Directory.Exists(ofn.lpstrInitialDir))
+        {
+            Directory.CreateDirectory(ofn.lpstrInitialDir);
+        }
         if (GetOpenFileName(ref ofn))
         {
             return ofn.lpstrFile;
@@ -76,12 +68,13 @@ public class GraphEditorLoader : MonoBehaviour
 
     public void SelectFile()
     {
-       this.path = OpenFileDialog().Replace("/", "\\");
-        if (!string.IsNullOrEmpty(path))
+        this.path = OpenFileDialog().Replace("/", "\\");
+        if (string.IsNullOrEmpty(path))
         {
-            LoadJson(path);
-            LoadEditor();
+            return;
         }
+        LoadJson(path);
+        LoadEditor();
     }
     public void LoadJson(string path)
     {
@@ -92,6 +85,7 @@ public class GraphEditorLoader : MonoBehaviour
 
     public void LoadEditor()
     {
+        manager.ResetGraph();
         GameObject prefab = null;
         NodeUI nodeUI = null;
         foreach (var nodeData in graphData.nodes)
@@ -114,9 +108,9 @@ public class GraphEditorLoader : MonoBehaviour
             }
 
 
-            if(nodeUI is SetValueNodeUI setValueNodeUI)
+            if (nodeUI is SetValueNodeUI setValueNodeUI)
             {
-                if(nodeData.inputValues != null || nodeData.inputValues.Count != 0)
+                if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
                 {
                     foreach (var inputValue in nodeData.inputValues)
                     {
@@ -129,9 +123,9 @@ public class GraphEditorLoader : MonoBehaviour
                 }
                 setValueNodeUI.SetData();
             }
-            else if(nodeUI is IfNodeUI ifNodeUI)
+            else if (nodeUI is IfNodeUI ifNodeUI)
             {
-                if(nodeData.inputValues != null || nodeData.inputValues.Count != 0)
+                if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
                 {
                     foreach (var inputValue in nodeData.inputValues)
                     {
@@ -144,9 +138,9 @@ public class GraphEditorLoader : MonoBehaviour
                 }
                 ifNodeUI.SetSetting();
             }
-            else if(nodeUI is GetPositionNodeUI getPositionNodeUI)
+            else if (nodeUI is GetPositionNodeUI getPositionNodeUI)
             {
-                if(nodeData.inputValues != null || nodeData.inputValues.Count != 0)
+                if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
                 {
                     foreach (var inputValue in nodeData.inputValues)
                     {
@@ -159,10 +153,45 @@ public class GraphEditorLoader : MonoBehaviour
                 }
                 getPositionNodeUI.SetSetting();
             }
-                prefab.transform.parent = manager.nodesParent.transform;
+            if (prefab.TryGetComponent<NodeMoveSystem>(out var moveSystem))
+            {
+                moveSystem.IsDragging = false;
+            }
+            prefab.transform.localScale = Vector3.one;
+            prefab.transform.parent = manager.nodesParent.transform;
+            nodeUI.node = NodeFactory.Create(nodeData.type);
             nodeUI.node.SetData(nodeData);
             manager.nodeUIs.Add(nodeUI);
             nodeUI.node.Initialize();
+            nodeUI.node.id = nodeData.id;
         }
+        foreach (var nodeData in graphData.nodes)
+        {
+            if (nodeData.outputConnections == null || nodeData.outputConnections.Count == 0)
+            {
+                continue;
+            }
+            foreach (var outputConnection in nodeData.outputConnections)
+            {
+                if(outputConnection.toPortNodes == null || outputConnection.toPortNodes.Count == 0)
+                {
+                    continue;
+                }
+                var fromNodeUI = manager.nodeUIs.First(n => n.node.id == nodeData.id);
+                foreach (var conection in outputConnection.toPortNodes)
+                {
+                    var toNodeUI = manager.nodeUIs.First(n => n.node.id == conection.nodeId);
+                    GraphEditorManager.ConectPorts(
+                        fromNodeUI.outputPorts.First(p => p.name == outputConnection.fromPortName),
+                        toNodeUI.inputPorts.First(p => p.name == conection.portName)
+                    );
+                }
+            }
+        }
+    }
+
+    private void Start()
+    {
+        manager = GraphEditorManager.Instance;
     }
 }
