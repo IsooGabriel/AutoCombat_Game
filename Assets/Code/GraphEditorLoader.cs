@@ -107,8 +107,8 @@ public class GraphEditorLoader : MonoBehaviour
                 continue;
             }
 
-            prefab.transform.localScale = Vector3.one;
             prefab.transform.parent = manager.nodesParent.transform;
+            prefab.transform.localScale = Vector3.one;
             nodeUI.node = NodeFactory.Create(nodeData.type);
             nodeUI.node.SetData(nodeData);
             manager.nodeUIs.Add(nodeUI);
