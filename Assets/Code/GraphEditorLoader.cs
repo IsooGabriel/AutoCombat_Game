@@ -107,6 +107,13 @@ public class GraphEditorLoader : MonoBehaviour
                 continue;
             }
 
+            prefab.transform.localScale = Vector3.one;
+            prefab.transform.parent = manager.nodesParent.transform;
+            nodeUI.node = NodeFactory.Create(nodeData.type);
+            nodeUI.node.SetData(nodeData);
+            manager.nodeUIs.Add(nodeUI);
+            nodeUI.node.Initialize();
+            nodeUI.node.id = nodeData.id;
 
             if (nodeUI is SetValueNodeUI setValueNodeUI)
             {
@@ -157,13 +164,6 @@ public class GraphEditorLoader : MonoBehaviour
             {
                 moveSystem.IsDragging = false;
             }
-            prefab.transform.localScale = Vector3.one;
-            prefab.transform.parent = manager.nodesParent.transform;
-            nodeUI.node = NodeFactory.Create(nodeData.type);
-            nodeUI.node.SetData(nodeData);
-            manager.nodeUIs.Add(nodeUI);
-            nodeUI.node.Initialize();
-            nodeUI.node.id = nodeData.id;
         }
         foreach (var nodeData in graphData.nodes)
         {
