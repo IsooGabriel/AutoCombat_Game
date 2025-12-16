@@ -13,8 +13,8 @@ public class GetPositionNode : Node
         };
         outputPorts = new Port[]
         {
-            new Port(executePortName, typeof(bool), isRequired:false, isInput:true, isExecutionPort:true, this),
-            new Port(positionPortName, typeof(Vector2), false, true, false, this),
+            new Port(executePortName, typeof(bool), isRequired:false, isInput:false, isExecutionPort:true, this),
+            new Port(positionPortName, typeof(Vector2), false, false, false, this),
         };
     }
 

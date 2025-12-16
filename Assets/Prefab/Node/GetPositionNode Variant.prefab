@@ -1242,6 +1242,10 @@ PrefabInstance:
       propertyPath: owner
       value: 
       objectReference: {fileID: 1102541988941141614}
+    - target: {fileID: 965482838403210424, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: portTypeHue
+      value: 326
+      objectReference: {fileID: 0}
     - target: {fileID: 1733952516563230604, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: owner
       value: 

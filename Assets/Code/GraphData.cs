@@ -6,6 +6,7 @@ public class GraphData
 {
     readonly string version = "0.1";
     public List<NodeData> nodes = new();
+    public List<LinkedNodeData> linkedNodes = new();
     const string startNodeId = "START_NODE";
     public string graphName = "New AI";
     public string author = "";
@@ -62,6 +63,19 @@ public class NodeData
     public List<InputValue<float>> inputValues = new();
 }
 [Serializable]
+public class LinkedNodeData
+{
+    public string id;
+    public List<string> inputNodeIDs = new();
+    public List<string> outputNodeIDs = new();
+    public LinkedNodeData(string id, List<string> inputNodeIDs, List<string> outputNodeIDs)
+    {
+        this.id = id;
+        this.inputNodeIDs = inputNodeIDs;
+        this.outputNodeIDs = outputNodeIDs;
+    }
+}
+[Serializable]
 public class PortConections
 {
     public string fromPortName;
@@ -113,7 +127,7 @@ public class InputValue<T>
 }
 public enum NodeType
 {
-    Start,
+    Start =0,
     Move,
     Attack,
     Jump,

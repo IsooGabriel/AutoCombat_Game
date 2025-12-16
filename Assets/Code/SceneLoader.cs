@@ -1,9 +1,33 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEngine.InputSystem.InputAction;
 public class SceneLoader : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerInput playerInput;
     public void OnClick(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    private void OnGraphEditor(CallbackContext context)
+    {
+        SceneManager.LoadScene("GraphEditor");
+    }
+    private void OnGame(CallbackContext context)
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    private void OnEnable()
+    {
+        playerInput.actions["GraphEditor"].performed += OnGraphEditor;
+        playerInput.actions["Game"].performed += OnGame;
+    }
+    private void OnDisable()
+    {
+        playerInput.actions["GraphEditor"].performed -= OnGraphEditor;
+        playerInput.actions["Game"].performed -= OnGame;
     }
 }

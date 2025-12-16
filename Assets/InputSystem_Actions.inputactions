@@ -1123,6 +1123,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "SceneLoard",
+            "id": "4b67e419-c467-42f9-bbfb-1d059a1595fc",
+            "actions": [
+                {
+                    "name": "GraphEditor",
+                    "type": "Button",
+                    "id": "898c41bd-4770-4f0b-8310-8e8008d02b16",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Game",
+                    "type": "Button",
+                    "id": "05b31801-6f53-4e96-bded-0b79b633c8a4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "71214ab3-9d15-41f9-a530-335ec673d506",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GraphEditor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ff116b33-826a-4fa5-841d-6b6db960ec09",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Game",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

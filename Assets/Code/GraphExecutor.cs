@@ -6,6 +6,7 @@ public class GraphExecutor
     public Character myCharacter;
     public Character enemy;
     private Dictionary<string, Node> nodes = new Dictionary<string, Node> { };
+    private Dictionary<string, LinkedNode> linkedNodes = new Dictionary<string, LinkedNode> { };
     public Queue<Node> executionQueue;
     public Node startNode = null;
 
@@ -83,6 +84,7 @@ public class GraphExecutor
             }
             foreach (var connected in port.outputConections)
             {
+                SendData(node, node.executePortName, (bool)true);
                 executionQueue.Enqueue(connected.Item1);
             }
         }
@@ -132,6 +134,8 @@ public class GraphExecutor
     private void LoadGraph(GraphData graphData)
     {
         nodes.Clear();
+        linkedNodes.Clear();
+
 
         foreach (var nodeData in graphData.nodes)
         {
@@ -176,6 +180,42 @@ public class GraphExecutor
                     myPort.outputConections.Add((targetNode, portNode.portName));
                 }
             }
+        }
+
+        LinkedNode linkedNode = null;
+        foreach (var linkedNodeData in graphData.linkedNodes)
+        {
+            if(nodes[linkedNodeData.id]is LinkedNode lNode)
+            {
+                linkedNodes[linkedNodeData.id] = lNode;
+            }
+            else
+            {
+                continue;
+            }
+            linkedNode = nodes[linkedNodeData.id] as LinkedNode;
+
+            List<Node> inputNodes = new List<Node> { };
+            List<Node> outputNodes = new List<Node> { };
+            foreach (var inputID in linkedNodeData.inputNodeIDs)
+            {
+                if(!nodes.ContainsKey(inputID))
+                {
+                    continue;
+                }
+                inputNodes.Add(nodes[inputID]);
+            }
+            foreach (var outputID in linkedNodeData.outputNodeIDs)
+            {
+                if (!nodes.ContainsKey(outputID))
+                {
+                    continue;
+                }
+                outputNodes.Add(nodes[outputID]);
+            }
+            linkedNode.inputNodes = inputNodes.ToArray();
+            linkedNode.outputNodes = outputNodes.ToArray();
+            nodes[linkedNodeData.id] = linkedNode;
         }
         myCharacter.aditionalStatus = graphData.aditionalStatus;
     }

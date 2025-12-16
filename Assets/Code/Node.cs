@@ -84,15 +84,23 @@ public abstract class Node
             {
                 value.Add((T)listSetValue[0]);
             }
-            found = true;
+            if(value.Count <= 0)
+            {
+                return false;
+            }
+                found = true;
         }
         return found;
     }
     public virtual bool TryGetInputValueWithPort<T>(string toPortName, out T value)
     {
-        bool reslut = TryGetInputValueWithPort<T>(toPortName, out List<T> values);
-        value = values[0];
-        return reslut;
+        if (TryGetInputValueWithPort<T>(toPortName, out List<T> values))
+        {
+            value = values[0];
+            return true;
+        }
+        value = default;
+        return false;
     }
     public virtual bool TryGetInputValueWithPort<T>(Port toPort, out List<T> value)
     {

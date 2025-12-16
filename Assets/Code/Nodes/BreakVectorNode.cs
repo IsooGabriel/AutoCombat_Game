@@ -22,7 +22,14 @@ public class BreakVectorNode : Node
     }
     public override void Execute(GraphExecutor executor)
     {
-        TryGetInputValueWithPort(toVectorPort, out Vector2 vector);
+        if(!TryGetInputValueWithPort(toVectorPort, out Vector2 vector))
+        {
+            if(!TryGetInputValueWithPort(toVectorPort, out Vector3 vector3))
+            {
+                return;
+            }
+            vector = vector3;
+        }
         float x = vector.x;
         float y = vector.y;
         executor.SendData(this, fromXPort, x);

@@ -41,8 +41,9 @@ public class GraphEditorManager : MonoBehaviour
     public EventSystem eventSystem;
     public GraphicRaycaster raycaster;
 
-    private readonly string defaultPath = "\\GraphData\\";
-
+    public const string defaultPath = "GraphData";
+    public const string playerDataFileName = "player.acjson";
+    public const string enemyDataFileName = "enemy.acjson";
 
     #region ä÷êî
 
@@ -307,6 +308,22 @@ public class GraphEditorManager : MonoBehaviour
             NodeData nodeData = GenerateNodeData(nodeUI);
             Instance.graphData.nodes.Add(nodeData);
             usedNodeIds.Add(nodeUI.node.id);
+
+            if(nodeUI.node is LinkedNode linkedNode)
+            {
+                List<string>Å@inputIDs = new List<string>();
+                List<string> outputIDs = new List<string>();
+                foreach (var inputNode in linkedNode.inputNodes)
+                {
+                    inputIDs.Add(inputNode.id);
+                }
+                foreach (var outputNode in linkedNode.outputNodes)
+                {
+                    outputIDs.Add(outputNode.id);
+                }
+                LinkedNodeData linkedNodeData = new LinkedNodeData(linkedNode.id, inputIDs, outputIDs);
+                Instance.graphData.linkedNodes.Add(linkedNodeData);
+            }
         }
         Instance.graphData.createdDate = DateTime.Now;
         Instance.graphData.graphName = graphName;
@@ -320,7 +337,7 @@ public class GraphEditorManager : MonoBehaviour
     {
         string parent = Application.persistentDataPath.Replace("/", "\\");
         
-        SaveGraph($"{parent}{defaultPath}{SanitizeFileName(graphName)}{SanitizeFileName(author)}{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.acjson", graphName, author);
+        SaveGraph($"{parent}\\{defaultPath}\\{SanitizeFileName(graphName)}{SanitizeFileName(author)}{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.acjson", graphName, author);
     }
     public void SaveGraph(string path)
     {
@@ -330,6 +347,11 @@ public class GraphEditorManager : MonoBehaviour
     public void SaveGraph()
     {
         SaveGraph("PlaeyreData.json");
+    }
+    public void SaveGraphTestVersion(bool isPlayer = true)
+    {
+        string parent = Application.persistentDataPath.Replace("/", "\\");
+        SaveGraph($"{parent}\\{defaultPath}\\{(isPlayer ? playerDataFileName:enemyDataFileName)}");
     }
 
     public static string SanitizeFileName(string name)
@@ -358,7 +380,6 @@ public class GraphEditorManager : MonoBehaviour
     /// <returns></returns>
     public NodeData GenerateNodeData(NodeUI nodeUI)
     {
-
         Node node = nodeUI.node;
         NodeData nodeData = new NodeData(node.id, node.nodeType, nodeUI.transform.position, new() { });
         if (node.outputPorts == null || node.outputPorts.Length == 0)

@@ -24,12 +24,16 @@ public class IfNode : Node
 
     public override void Execute(GraphExecutor executor)
     {
-        if (TryGetInputValueWithPort<IfSettings>(IfNodeUI.settingKey, out ifSettings))
+        if (!TryGetInputValueWithPort<IfSettings>(IfNodeUI.settingKey, out ifSettings))
         {
-        }
-        else
-        {
-            return;
+            if (TryGetInputValueWithPort<float>(IfNodeUI.settingKey, out float settingInt))
+            {
+                ifSettings = (IfSettings)settingInt;
+            }
+            else
+            {
+                return;
+            }
         }
         float valueA = TryGetInputValueWithPort<float>(valueAPortName, out float valuesA) ? valuesA : 0f;
         float valueB = TryGetInputValueWithPort<float>(valueBPortName, out float valuesB) ? valuesB : 0f;
@@ -51,7 +55,7 @@ public class IfNode : Node
                 break;
         }
 
-        if(result)
+        if (result)
         {
             executor.EnqueueConnected(this, outputPorts[0].name);
         }
