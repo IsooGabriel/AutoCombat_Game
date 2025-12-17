@@ -19,7 +19,7 @@ public class GraphRunner : MonoBehaviour
 
     private void InstanceExecutor()
     {
-        string path = $"{(Application.persistentDataPath.Replace("/", "\\"))}\\{GraphEditorManager.defaultPath}\\{GraphEditorManager.playerDataFileName}";
+        string path = $"{(Application.persistentDataPath.Replace("/", "\\"))}\\{EnemyGraphLoader.enemyGraphPath}";
         string json = File.ReadAllText(path);
         string enemypath = $"{(Application.persistentDataPath.Replace("/", "\\"))}\\{GraphEditorManager.defaultPath}\\{GraphEditorManager.enemyDataFileName}";
         string enemyjson = File.ReadAllText(enemypath);
