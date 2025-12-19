@@ -7,7 +7,7 @@ using UnityEngine;
 public class GraphEditorLoader : MonoBehaviour
 {
     [SerializeField]
-    private GraphEditorManager manager;
+    private GraphEditorManager manager => GraphEditorManager.Instance;
     private readonly string graphPath = "GraphData";
     private string path;
     private GraphData graphData;
@@ -114,6 +114,8 @@ public class GraphEditorLoader : MonoBehaviour
             manager.nodeUIs.Add(nodeUI);
             nodeUI.node.Initialize();
             nodeUI.node.id = nodeData.id;
+            manager.SetPortUIsPort(nodeUI.inputPorts, nodeUI.node.inputPorts);
+            manager.SetPortUIsPort(nodeUI.outputPorts, nodeUI.node.outputPorts);
 
             if (nodeUI is SetValueNodeUI setValueNodeUI)
             {
@@ -128,7 +130,6 @@ public class GraphEditorLoader : MonoBehaviour
                         setValueNodeUI.SetData((float)inputValue.value);
                     }
                 }
-                setValueNodeUI.SetData();
             }
             else if (nodeUI is IfNodeUI ifNodeUI)
             {
@@ -143,7 +144,6 @@ public class GraphEditorLoader : MonoBehaviour
                         ifNodeUI.SetSetting((IfSettings)(int)inputValue.value);
                     }
                 }
-                ifNodeUI.SetSetting();
             }
             else if (nodeUI is GetPositionNodeUI getPositionNodeUI)
             {
@@ -158,7 +158,6 @@ public class GraphEditorLoader : MonoBehaviour
                         getPositionNodeUI.SetSetting((GetPositionSettings)(int)inputValue.value);
                     }
                 }
-                getPositionNodeUI.SetSetting();
             }
             if (prefab.TryGetComponent<NodeMoveSystem>(out var moveSystem))
             {
@@ -190,8 +189,8 @@ public class GraphEditorLoader : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        manager = GraphEditorManager.Instance;
-    }
+    //private void Start()
+    //{
+    //    manager = GraphEditorManager.Instance;
+    //}
 }

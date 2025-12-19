@@ -65,7 +65,7 @@ public class GraphEditorManager : MonoBehaviour
 
         Instance.nodeUIs.Add(nodeUI);
     }
-    private void SetPortUIsPort(PortUI[] portUIs, Port[] ports)
+    public void SetPortUIsPort(PortUI[] portUIs, Port[] ports)
     {
         for (int i = 0; i < portUIs.Length; ++i)
         {

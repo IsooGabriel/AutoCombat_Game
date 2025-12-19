@@ -288,7 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d79acb5dc261e47b8e4ac886b3692d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 38037051}
 --- !u!1 &104507663
 GameObject:
   m_ObjectHideFlags: 0
@@ -6153,6 +6152,10 @@ PrefabInstance:
     - target: {fileID: 5175458100439565689, guid: b5409c6baacd0ae49b51551b7b6ae034, type: 3}
       propertyPath: m_Name
       value: GoToGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175458100439565689, guid: b5409c6baacd0ae49b51551b7b6ae034, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6117510841298081701, guid: b5409c6baacd0ae49b51551b7b6ae034, type: 3}
       propertyPath: m_Color.b
