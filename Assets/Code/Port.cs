@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class Port
 
 {
-    public string name;
-    public Type type;
+    public string portName;
+    public Type portType;
     public bool isRequired;
     public bool isInput;
     public bool isExecutionPort;
@@ -35,8 +35,8 @@ public class Port
     }
     public Port(string name, Type type, bool isRequired, bool isInput, bool isExecutionPort, Node owner)
     {
-        this.name = name;
-        this.type = type;
+        this.portName = name;
+        this.portType = type;
         this.isRequired = isRequired;
         this.isInput = isInput;
         this.isExecutionPort = isExecutionPort;

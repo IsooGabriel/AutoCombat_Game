@@ -228,7 +228,7 @@ public class GraphEditorManager : MonoBehaviour
             from.port.outputConections = new List<(Node, string)>();
         }
 
-        from.port.outputConections.Add((to.port.owner, to.port.name));
+        from.port.outputConections.Add((to.port.owner, to.port.portName));
         if (from.port.owner is LinkedNode fromLinkedNode)
         {
             Array.Resize(ref fromLinkedNode.outputNodes, fromLinkedNode.outputNodes.Length + 1);
@@ -262,7 +262,7 @@ public class GraphEditorManager : MonoBehaviour
         {
             return true;
         }
-        if (from.port.type != to.port.type && from.port.type.GetType() != to.port.type.GetType())
+        if (from.port.portType != to.port.portType && from.port.portType.GetType() != to.port.portType.GetType())
         {
             return false;
         }
@@ -275,7 +275,7 @@ public class GraphEditorManager : MonoBehaviour
         ConectionUI conection = conectionObj.AddComponent<ConectionUI>();
         conection.fromPort = from;
         conection.toPort = to;
-        conection.name = $"from_{from.port.name}_to_{to.port.name}";
+        conection.name = $"from_{from.port.portName}_to_{to.port.portName}";
         conection.name = $"from{from.name}OF{from.owner.node.id}to{to.name}OF{to.owner.node.id}";
         conection.transform.parent = from.transform;
         if (conection.lineRenderer == null)
@@ -389,7 +389,7 @@ public class GraphEditorManager : MonoBehaviour
 
         for (int i = 0; i < node.outputPorts.Length; ++i)
         {
-            nodeData.outputConnections.Add(new PortConections(node.outputPorts[i].name, new() { }));
+            nodeData.outputConnections.Add(new PortConections(node.outputPorts[i].portName, new() { }));
 
             if (node.outputPorts[i].outputConections == null || node.outputPorts[i].outputConections.Count == 0)
             {

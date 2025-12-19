@@ -54,7 +54,7 @@ public class ANDNode : LinkedNode
             default:
                 throw new Exception("Unsupported connection type in ANDNode");
         }
-        executor.EnqueueConnected(this, outputPorts[0].name);
+        executor.EnqueueConnected(this, outputPorts[0].portName);
     }
 
     public override void FlameInitialize()
@@ -170,23 +170,23 @@ public class ANDNode : LinkedNode
                 visitedNodes.Add(toPort.node);
                 foreach (var inputPort in toPort.node.inputPorts)
                 {
-                    if (inputPort.name != toPort.portName)
+                    if (inputPort.portName != toPort.portName)
                     {
                         continue;
                     }
-                    if (inputPort.type == typeof(Vector2))
+                    if (inputPort.portType == typeof(Vector2))
                     {
                         return typeof(Vector2);
                     }
-                    if (inputPort.type == typeof(float))
+                    if (inputPort.portType == typeof(float))
                     {
                         connectionType = typeof(float);
                     }
-                    else if (inputPort.type == typeof(bool))
+                    else if (inputPort.portType == typeof(bool))
                     {
                         connectionType = typeof(bool);
                     }
-                    connectionType = inputPort.type;
+                    connectionType = inputPort.portType;
                     break;
                 }
             }

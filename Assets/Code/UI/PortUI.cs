@@ -64,7 +64,7 @@ public class PortUI : MonoBehaviour
         }
         if (tmpUGUI != null)
         {
-            tmpUGUI.text = port.name;
+            tmpUGUI.text = port.portName;
         }
     }
 }

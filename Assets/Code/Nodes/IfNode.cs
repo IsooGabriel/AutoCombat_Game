@@ -57,11 +57,11 @@ public class IfNode : Node
 
         if (result)
         {
-            executor.EnqueueConnected(this, outputPorts[0].name);
+            executor.EnqueueConnected(this, outputPorts[0].portName);
         }
         else
         {
-            executor.EnqueueConnected(this, outputPorts[1].name);
+            executor.EnqueueConnected(this, outputPorts[1].portName);
         }
     }
 }

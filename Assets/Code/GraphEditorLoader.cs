@@ -172,7 +172,7 @@ public class GraphEditorLoader : MonoBehaviour
             }
             foreach (var outputConnection in nodeData.outputConnections)
             {
-                if(outputConnection.toPortNodes == null || outputConnection.toPortNodes.Count == 0)
+                if (outputConnection.toPortNodes == null || outputConnection.toPortNodes.Count == 0)
                 {
                     continue;
                 }
@@ -181,8 +181,8 @@ public class GraphEditorLoader : MonoBehaviour
                 {
                     var toNodeUI = manager.nodeUIs.First(n => n.node.id == conection.nodeId);
                     GraphEditorManager.ConectPorts(
-                        fromNodeUI.outputPorts.First(p => p.name == outputConnection.fromPortName),
-                        toNodeUI.inputPorts.First(p => p.name == conection.portName)
+                        fromNodeUI.outputPorts.First(p => p.port.portName == outputConnection.fromPortName),
+                        toNodeUI.inputPorts.First(p => p.port.portName == conection.portName)
                     );
                 }
             }

@@ -78,7 +78,7 @@ public class GraphExecutor
     {
         foreach (var port in node.outputPorts)
         {
-            if (port.name != portName)
+            if (port.portName != portName)
             {
                 continue;
             }
@@ -102,7 +102,7 @@ public class GraphExecutor
         bool isSent = false;
         foreach (var fromPort in fromNode.outputPorts)
         {
-            if (fromPort.name != fromPortName)
+            if (fromPort.portName != fromPortName)
             {
                 continue;
             }
@@ -165,7 +165,7 @@ public class GraphExecutor
 
             foreach (var portConections in nodeData.outputConnections)
             {
-                Port myPort = node.outputPorts.FirstOrDefault(port => port.name == portConections.fromPortName);
+                Port myPort = node.outputPorts.FirstOrDefault(port => port.portName == portConections.fromPortName);
                 if (myPort == null)
                 {
                     continue;
@@ -228,7 +228,7 @@ public class GraphExecutor
             {
                 continue;
             }
-            if (!node.inputValues.Any(d => d.toPortName == port.name))
+            if (!node.inputValues.Any(d => d.toPortName == port.portName))
             {
                 return false;
             }

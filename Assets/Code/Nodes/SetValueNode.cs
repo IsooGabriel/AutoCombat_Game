@@ -18,9 +18,9 @@ public class SetValueNode : Node
     {
         if (CheckValidence())
         {
-            executor.SendData(this, outputPorts[1].name, new List<float>() { (float)inputValues[0].value });
+            executor.SendData(this, outputPorts[1].portName, new List<float>() { (float)inputValues[0].value });
         }
-        executor.EnqueueConnected(this, outputPorts[0].name);
+        executor.EnqueueConnected(this, outputPorts[0].portName);
     }
     public bool CheckValidence(int index = 0)
     {

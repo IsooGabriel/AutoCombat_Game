@@ -13,7 +13,7 @@ public class ConectionUI : MonoBehaviour
     public void OnClickRight()
     {
         fromPort.outputLines.Remove(lineRenderer);
-        fromPort.port.outputConections.RemoveAll(conn => conn.Item1 == toPort.port.owner && conn.Item2 == toPort.port.name);
+        fromPort.port.outputConections.RemoveAll(conn => conn.Item1 == toPort.port.owner && conn.Item2 == toPort.port.portName);
         Destroy(gameObject);
     }
 

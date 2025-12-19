@@ -26,8 +26,8 @@ public class SetVectorNode : Node
         if (TryGetInputValueWithPort(portXname, out List<float> valuesX) &&
             TryGetInputValueWithPort(portYname, out List<float> valuesY))
         {
-            executor.SendData(this, outputPorts[1].name, new List<Vector2>() { new Vector2(valuesX[0], valuesY[0]) });
+            executor.SendData(this, outputPorts[1].portName, new List<Vector2>() { new Vector2(valuesX[0], valuesY[0]) });
         }
-        executor.EnqueueConnected(this, outputPorts[0].name);
+        executor.EnqueueConnected(this, outputPorts[0].portName);
     }
 }

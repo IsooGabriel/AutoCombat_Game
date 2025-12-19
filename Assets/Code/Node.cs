@@ -104,7 +104,7 @@ public abstract class Node
     }
     public virtual bool TryGetInputValueWithPort<T>(Port toPort, out List<T> value)
     {
-        return TryGetInputValueWithPort<T>(toPort.name, out value);
+        return TryGetInputValueWithPort<T>(toPort.portName, out value);
     }
     public virtual bool TryGetInputValueWithType<T>(out List<T> value)
     {
