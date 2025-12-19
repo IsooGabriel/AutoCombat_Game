@@ -22,6 +22,10 @@ public class SceneLoader : MonoBehaviour
 
     private void OnEnable()
     {
+        if(playerInput == null)
+        {
+            playerInput = GetComponent<PlayerInput>();
+        }
         playerInput.actions["GraphEditor"].performed += OnGraphEditor;
         playerInput.actions["Game"].performed += OnGame;
     }

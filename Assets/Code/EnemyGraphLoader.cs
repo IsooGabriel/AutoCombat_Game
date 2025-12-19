@@ -3,20 +3,23 @@ using UnityEngine;
 
 public class EnemyGraphLoader : MonoBehaviour
 {
-    public const string enemyGraphDir = "EnemyGraph";
-    public const string enemyGraphPath = enemyGraphDir+"\\enemy.acjson";
+    public const string graphDirectory = "EnemyGraph";
+    public const string graphFile = "enemy";
+    public const string graphExtension = ".json";
+    public const string graphPath = graphDirectory + "\\" + graphFile + graphExtension;
 
+    
     void Start()
     {
-        if (!Directory.Exists(Application.persistentDataPath.Replace("/", "\\") + $"\\{enemyGraphDir}"))
+        if (!Directory.Exists(Application.persistentDataPath.Replace("/", "\\") + $"\\{graphDirectory}"))
         {
-            Directory.CreateDirectory(Application.persistentDataPath.Replace("/", "\\") + $"\\{enemyGraphDir}");
+            Directory.CreateDirectory(Application.persistentDataPath.Replace("/", "\\") + $"\\{graphDirectory}");
         }
 
-        TextAsset json = Resources.Load<TextAsset>(enemyGraphPath);
+        TextAsset json = Resources.Load<TextAsset>(graphDirectory+"/"+graphFile);
 
-        string data = json.text;
-        string path = Application.persistentDataPath.Replace("/", "\\")+ $"\\{enemyGraphPath}";
+        string data = json?.text;
+        string path = Application.persistentDataPath.Replace("/", "\\") + $"\\{graphPath}";
 
         File.WriteAllText(path, data, System.Text.Encoding.UTF8);
     }
