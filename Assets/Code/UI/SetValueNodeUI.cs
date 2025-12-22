@@ -1,9 +1,22 @@
 ﻿using System.Collections.Generic;
 using TMPro;
-public class SetValueNodeUI : NodeUI
+public class SetValueNodeUI : NodeUI, IUserVariable
 {
     public TMP_InputField field = null;
     public const string settingKey = "output value";
+    public string[] names => new string[] { settingKey };
+
+
+    public bool TrySetVariable(float value, string name)
+    {
+        if (name != settingKey)
+        {
+            return false;
+        }
+        SetData(value);
+        field.text = value.ToString();
+        return true;
+    }
 
     public void SetData()
     {

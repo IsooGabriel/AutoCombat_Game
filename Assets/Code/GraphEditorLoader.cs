@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class GraphEditorLoader : MonoBehaviour
@@ -43,52 +44,62 @@ public class GraphEditorLoader : MonoBehaviour
         public int FlagsEx;
     }
 
-    private string OpenFileDialog()
-    {
-        OpenFileName ofn = new OpenFileName();
-        ofn.lStructSize = Marshal.SizeOf(ofn);
-        ofn.lpstrFilter = "グラフデータ\0*.json;*.acjson\0";
-        ofn.lpstrFile = new string(new char[256]);
-        ofn.nMaxFile = ofn.lpstrFile.Length;
-        ofn.lpstrFileTitle = new string(new char[64]);
-        ofn.nMaxFileTitle = ofn.lpstrFileTitle.Length;
-        ofn.lpstrTitle = "ファイルを選択";
-        ofn.lpstrInitialDir = $"{Application.persistentDataPath.Replace("/", "\\")}\\{graphPath}\\";
 
-        if (!Directory.Exists(ofn.lpstrInitialDir))
-        {
-            Directory.CreateDirectory(ofn.lpstrInitialDir);
-        }
-        if (GetOpenFileName(ref ofn))
-        {
-            return ofn.lpstrFile;
-        }
-        return null;
-    }
-
-    public void SelectFile()
+    public async void SelectFile()
     {
-        this.path = OpenFileDialog().Replace("/", "\\");
+        this.path = await OpenFileDialog();
         if (string.IsNullOrEmpty(path))
         {
             return;
         }
-        LoadJson(path);
+        manager.ResetGraph();
+        manager.graphData = LoadJson(path);
         LoadEditor();
     }
-    public void LoadJson(string path)
+
+    private Task<string> OpenFileDialog()
+    {
+        string prevDir = Environment.CurrentDirectory;
+        try
+        {
+            OpenFileName ofn = new OpenFileName();
+            ofn.lStructSize = Marshal.SizeOf(ofn);
+            ofn.lpstrFilter = "グラフデータ\0*.json;*.acjson\0";
+            ofn.lpstrFile = new string(new char[256]);
+            ofn.nMaxFile = ofn.lpstrFile.Length;
+            ofn.lpstrFileTitle = new string(new char[64]);
+            ofn.nMaxFileTitle = ofn.lpstrFileTitle.Length;
+            ofn.lpstrTitle = "ファイルを選択";
+            ofn.lpstrInitialDir = $"{Application.persistentDataPath.Replace("/", "\\")}\\{graphPath}\\";
+
+            if (!Directory.Exists(ofn.lpstrInitialDir))
+            {
+                Directory.CreateDirectory(ofn.lpstrInitialDir);
+            }
+            if (GetOpenFileName(ref ofn))
+            {
+                return Task.FromResult<string>(ofn.lpstrFile);
+            }
+            return null;
+        }
+        finally
+        {
+            Environment.CurrentDirectory = prevDir;
+        }
+    }
+
+    public GraphData LoadJson(string path)
     {
         this.path = path;
         string json = File.ReadAllText(path, System.Text.Encoding.UTF8);
-        graphData = JsonUtility.FromJson<GraphData>(json);
+        return JsonUtility.FromJson<GraphData>(json);
     }
 
     public void LoadEditor()
     {
-        manager.ResetGraph();
         GameObject prefab = null;
         NodeUI nodeUI = null;
-        foreach (var nodeData in graphData.nodes)
+        foreach (var nodeData in manager.graphData.nodes)
         {
             prefab = manager.nodePrefabs.First(p => p.type == nodeData.type).prefab;
             if (prefab == null)
@@ -117,54 +128,62 @@ public class GraphEditorLoader : MonoBehaviour
             manager.SetPortUIsPort(nodeUI.inputPorts, nodeUI.node.inputPorts);
             manager.SetPortUIsPort(nodeUI.outputPorts, nodeUI.node.outputPorts);
 
-            if (nodeUI is SetValueNodeUI setValueNodeUI)
+            if (nodeUI is IUserVariable userVariable)
             {
-                if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
+                foreach (var inputValue in nodeData.inputValues)
                 {
-                    foreach (var inputValue in nodeData.inputValues)
-                    {
-                        if (inputValue.toPortName != SetValueNodeUI.settingKey)
-                        {
-                            continue;
-                        }
-                        setValueNodeUI.SetData((float)inputValue.value);
-                    }
+                    userVariable.TrySetVariable((float)inputValue.value, inputValue.toPortName);
                 }
             }
-            else if (nodeUI is IfNodeUI ifNodeUI)
-            {
-                if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
-                {
-                    foreach (var inputValue in nodeData.inputValues)
-                    {
-                        if (inputValue.toPortName != IfNodeUI.settingKey)
-                        {
-                            continue;
-                        }
-                        ifNodeUI.SetSetting((IfSettings)(int)inputValue.value);
-                    }
-                }
-            }
-            else if (nodeUI is GetPositionNodeUI getPositionNodeUI)
-            {
-                if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
-                {
-                    foreach (var inputValue in nodeData.inputValues)
-                    {
-                        if (inputValue.toPortName != GetPositionNode.positionTypeDataName)
-                        {
-                            continue;
-                        }
-                        getPositionNodeUI.SetSetting((GetPositionSettings)(int)inputValue.value);
-                    }
-                }
-            }
+
+            //if (nodeUI is SetValueNodeUI setValueNodeUI)
+            //{
+            //    if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
+            //    {
+            //        foreach (var inputValue in nodeData.inputValues)
+            //        {
+            //            if (inputValue.toPortName != SetValueNodeUI.settingKey)
+            //            {
+            //                continue;
+            //            }
+            //            setValueNodeUI.SetData((float)inputValue.value);
+            //        }
+            //    }
+            //}
+            //else if (nodeUI is IfNodeUI ifNodeUI)
+            //{
+            //    if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
+            //    {
+            //        foreach (var inputValue in nodeData.inputValues)
+            //        {
+            //            if (inputValue.toPortName != IfNodeUI.settingKey)
+            //            {
+            //                continue;
+            //            }
+            //            ifNodeUI.SetSetting((IfSettings)(int)inputValue.value);
+            //        }
+            //    }
+            //}
+            //else if (nodeUI is GetPositionNodeUI getPositionNodeUI)
+            //{
+            //    if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
+            //    {
+            //        foreach (var inputValue in nodeData.inputValues)
+            //        {
+            //            if (inputValue.toPortName != GetPositionNode.positionTypeDataName)
+            //            {
+            //                continue;
+            //            }
+            //            getPositionNodeUI.SetSetting((GetPositionSettings)(int)inputValue.value);
+            //        }
+            //    }
+            //}
             if (prefab.TryGetComponent<NodeMoveSystem>(out var moveSystem))
             {
                 moveSystem.IsDragging = false;
             }
         }
-        foreach (var nodeData in graphData.nodes)
+        foreach (var nodeData in manager.graphData.nodes)
         {
             if (nodeData.outputConnections == null || nodeData.outputConnections.Count == 0)
             {

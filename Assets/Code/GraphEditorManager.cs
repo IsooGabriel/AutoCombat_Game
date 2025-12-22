@@ -21,7 +21,7 @@ public class GraphEditorManager : MonoBehaviour
     public PortUI selectedPort = null;
     private float lineWidth = 0.05f;
     [NonSerialized]
-    public List<NodeUI> nodeUIs = new List<NodeUI>();
+    public List<NodeUI> nodeUIs = new();
     public GameObject nodesParent;
     public NodePrefab[] nodePrefabs;
     public GraphData graphData = new();
@@ -87,7 +87,12 @@ public class GraphEditorManager : MonoBehaviour
         AddNode(type);
     }
 
-    public void DeleteObject(InputAction.CallbackContext context)
+
+    /// <summary>
+    /// カーソル下のノードを削除
+    /// </summary>
+    /// <param name="context"></param>
+    public void DeleteNode(InputAction.CallbackContext context)
     {
         // Pointer 用のデータ作成
         PointerEventData pointerData = new PointerEventData(eventSystem);
@@ -104,27 +109,24 @@ public class GraphEditorManager : MonoBehaviour
 
         // interface を探す（Button の子にも付けられるように）
         var rightClickable = topUI.GetComponentInParent<NodeUI>();
-        if (rightClickable.node is StartNode)
+
+        if (rightClickable.node is StartNode || rightClickable == null)
         {
             return;
         }
-        if (rightClickable != null)
+
+        Instance.nodeUIs.Remove(rightClickable);
+        Node deleteNode = rightClickable.node;
+
+        foreach (var nodeDeta in Instance.nodeUIs)
         {
-            nodeUIs.Remove(rightClickable);
-            Node deleteNode = rightClickable.node;
-            graphData.nodes.RemoveAll(n => n.id == deleteNode.id);
-
-            foreach (var nodeDeta in graphData.nodes)
+            foreach (var port in nodeDeta.node.outputPorts)
             {
-                foreach (var portConection in nodeDeta.outputConnections)
-                {
-                    portConection.toPortNodes.RemoveAll(p => p.nodeId == deleteNode.id);
-
-                }
+                port.outputConections.RemoveAll(c => c.node.id == deleteNode.id);
             }
-
-            Destroy(rightClickable.gameObject);
         }
+
+        Destroy(rightClickable.gameObject);
     }
 
     public void ResetGraph()
@@ -449,7 +451,7 @@ public class GraphEditorManager : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInput.actions["Delete"].performed += DeleteObject;
+        playerInput.actions["Delete"].performed += DeleteNode;
     }
 }
 

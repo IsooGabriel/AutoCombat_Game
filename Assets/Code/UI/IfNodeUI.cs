@@ -8,11 +8,12 @@ public enum IfSettings
     GreaterThan,
     LessThan,
 }
-public class IfNodeUI : NodeUI
+public class IfNodeUI : NodeUI, IUserVariable
 {
     public const string settingKey = "if setting";
     public const string valueAPortKey = "valueA";
     public const string valueBPortKey = "valueB";
+    public string[] names => new string[] { settingKey, valueAPortKey, valueBPortKey };
     public TMP_Dropdown setting;
     private Dictionary<IfSettings, string> settings = new Dictionary<IfSettings, string>()
     {
@@ -20,16 +21,36 @@ public class IfNodeUI : NodeUI
         { IfSettings.NotEquals, "Not =" },
         { IfSettings.GreaterThan, ">" },
         { IfSettings.LessThan, "<" },
-};
+    };
+    private bool isStarted = false;
 
     void Start()
     {
-        setting.ClearOptions();
+        if (isStarted)
+        {
+            return;
+        }
+            setting.ClearOptions();
         List<string> options = new List<string>(settings.Values);
         setting.AddOptions(options);
         setting.value = 0;
+        isStarted = true;
     }
 
+    public bool TrySetVariable(float value, string name)
+    {
+        Start();
+        if (name != settingKey)
+        {
+            return false;
+        }
+
+        SetSetting((IfSettings)(int)value);
+        setting.value = (int)2;
+        setting.SetValueWithoutNotify((int)2);
+        setting.RefreshShownValue();
+        return true;
+    }
     public void SetSetting(IfSettings value)
     {
         SetInputValue((float)value, settingKey);
@@ -44,7 +65,7 @@ public class IfNodeUI : NodeUI
     }
     public void SetValueB(string value)
     {
-        SetInputValue(float.Parse(value), valueAPortKey);
+        SetInputValue(float.Parse(value), valueBPortKey);
     }
 
     private void SetInputValue(float value, string key)
