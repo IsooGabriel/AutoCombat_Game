@@ -10,7 +10,14 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
-
+    public void OnQuit()
+    {
+        Application.Quit();
+    }
+    public void ChangeTimescale(int scale)
+    {
+        Time.timeScale = scale;
+    }
     private void OnGraphEditor(CallbackContext context)
     {
         SceneManager.LoadScene("GraphEditor");
@@ -34,4 +41,5 @@ public class SceneLoader : MonoBehaviour
         playerInput.actions["GraphEditor"].performed -= OnGraphEditor;
         playerInput.actions["Game"].performed -= OnGame;
     }
+    
 }

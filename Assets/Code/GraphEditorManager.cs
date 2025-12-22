@@ -432,6 +432,7 @@ public class GraphEditorManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1f;
         if (Instance != null && Instance != this)
         {
             Destroy(this);

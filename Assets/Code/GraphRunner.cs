@@ -1,10 +1,17 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
 public class GraphRunner : MonoBehaviour
 {
+    public GameObject winResult;
+    public GameObject loseResult;
+
     public Character player;
     public Character enemy;
     public TextAsset playerGraphJson;
@@ -17,9 +24,11 @@ public class GraphRunner : MonoBehaviour
 
     private bool isRunning = false;
 
-    private void InstanceExecutor()
+    private readonly string graphPath = "GraphData";
+
+    private async void InstanceExecutor()
     {
-        string path = $"{(Application.persistentDataPath.Replace("/", "\\"))}\\{GraphEditorManager.defaultPath}\\{GraphEditorManager.playerDataFileName}";
+        string path = await OpenFileDialog();
         string json = File.ReadAllText(path);
         string enemypath = $"{(Application.persistentDataPath.Replace("/", "\\"))}\\{EnemyGraphLoader.graphPath}";
         string enemyjson = File.ReadAllText(enemypath);
@@ -38,17 +47,81 @@ public class GraphRunner : MonoBehaviour
     }
 
     private void OnPlayerWin()
-    {
-        SceneManager.LoadScene("GraphEditor");
+    { 
+        Time.timeScale = 0f;
+        winResult.SetActive(true);
     }
     private void OnEnemyWin()
     {
-        SceneManager.LoadScene("GraphEditor");
+        Time.timeScale = 0f;
+        loseResult.SetActive(true);
     }
 
+    [DllImport("comdlg32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+    private static extern bool GetOpenFileName(ref OpenFileName ofn);
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    public struct OpenFileName
+    {
+        public int lStructSize;
+        public IntPtr hwndOwner;
+        public IntPtr hInstance;
+        public string lpstrFilter;
+        public string lpstrCustomFilter;
+        public int nMaxCustFilter;
+        public int nFilterIndex;
+        public string lpstrFile;
+        public int nMaxFile;
+        public string lpstrFileTitle;
+        public int nMaxFileTitle;
+        public string lpstrInitialDir;
+        public string lpstrTitle;
+        public int Flags;
+        public short nFileOffset;
+        public short nFileExtension;
+        public string lpstrDefExt;
+        public IntPtr lCustData;
+        public IntPtr lpfnHook;
+        public string lpTemplateName;
+        public IntPtr pvReserved;
+        public int dwReserved;
+        public int FlagsEx;
+    }
+
+    private Task<string> OpenFileDialog()
+    {
+        string prevDir = Environment.CurrentDirectory;
+        try
+        {
+            OpenFileName ofn = new OpenFileName();
+            ofn.lStructSize = Marshal.SizeOf(ofn);
+            ofn.lpstrFilter = "グラフデータ\0*.json;*.acjson\0";
+            ofn.lpstrFile = new string(new char[256]);
+            ofn.nMaxFile = ofn.lpstrFile.Length;
+            ofn.lpstrFileTitle = new string(new char[64]);
+            ofn.nMaxFileTitle = ofn.lpstrFileTitle.Length;
+            ofn.lpstrTitle = "ファイルを選択";
+            ofn.lpstrInitialDir = $"{Application.persistentDataPath.Replace("/", "\\")}\\{graphPath}\\";
+
+            if (!Directory.Exists(ofn.lpstrInitialDir))
+            {
+                Directory.CreateDirectory(ofn.lpstrInitialDir);
+            }
+            if (GetOpenFileName(ref ofn))
+            {
+                return Task.FromResult<string>(ofn.lpstrFile);
+            }
+            return null;
+        }
+        finally
+        {
+            Environment.CurrentDirectory = prevDir;
+        }
+    }
 
     void Start()
-    {
+    { 
+        Time.timeScale = 1f;
         Application.targetFrameRate = 30;
 
         InstanceExecutor();
