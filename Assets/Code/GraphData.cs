@@ -142,4 +142,5 @@ public enum NodeType
     IF,
     BreakVector,
     GetPosition,
+    SetBool,
 }

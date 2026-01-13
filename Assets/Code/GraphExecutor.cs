@@ -245,7 +245,7 @@ public static class NodeFactory
     {
         { NodeType.Start, () => new StartNode() },
         { NodeType.Move, () => new MoveNode() },
-        //{ NodeType.Attack, () => new AttackNode() },
+        { NodeType.Attack, () => new AttackNode() },
         //{ NodeType.Jump, () => new JumpNode() },
         //{ NodeType.GetDistance, () => new GetDistanceNode() },
         //{ NodeType.GetHP, () => new GetHPNode() },
@@ -258,6 +258,7 @@ public static class NodeFactory
         { NodeType.IF, () => new IfNode() },
         { NodeType.BreakVector, () => new BreakVectorNode() },
         { NodeType.GetPosition, () => new GetPositionNode() },
+        { NodeType.SetBool, () => new SetBoolNode() },
     };
 
     public static Node Create(NodeType type)

@@ -5,26 +5,36 @@ public interface IDeathable
 {
     public void Death();
 }
+public interface IDamageable
+{
+    public void TakeDamage(int damage);
+}
 
-public class Character : MonoBehaviour, IDeathable
+public class Character : MonoBehaviour, IDeathable, IDamageable
 {
     public Status baseStatus { get; set; } = new() { hp = 10, attack = 1, attackCooltime = 1, criticalChance = 20, criticalDamage = 40 };
     public Status aditionalStatus { get; set; } = new() { hp = 0, attack = 0, attackCooltime = 0, criticalChance = 0, criticalDamage = 0 };
+    public int currentHP = 10;
     const decimal speed = 5;
     public Weapon weapon;
     public Action<Character> takeDamage;
+    public Action<Character> onDeath;
     public bool isPlayer = false;
 
     public void Death()
     {
-        takeDamage?.Invoke(this);
+        onDeath?.Invoke(this);
         Destroy(this);
     }
 
     public void TakeDamage(int damage)
     {
-        baseStatus.hp -= damage;
+        currentHP -= damage;
         takeDamage?.Invoke(this);
+        if (currentHP <= 0)
+        {
+            Death();
+        }
     }
 
     public Vector2 Move(Vector2 direction)
@@ -44,10 +54,30 @@ public class Character : MonoBehaviour, IDeathable
         return transform.position;
     }
 
+    public void Attack(GraphExecutor exector, Vector3 direction, Action<Character> onHit)
+    {
+        weapon.TryAttack(direction);
+        weapon.hitAttack += onHit;
+    }
     public Action<Character> Attack(GraphExecutor exector, Vector2 direction)
     {
-        weapon.Attack(exector.myCharacter == this ? exector.enemy : exector.myCharacter);
+        Attack(exector, direction, null);
         return weapon.hitAttack;
+    }
+    public void Attack(GraphExecutor exector, Transform target, Action<Character> onHit)
+    {
+        weapon.Attack(target);
+        weapon.hitAttack += onHit;
+    }
+    public Action<Character> Attack(GraphExecutor exector, Transform target)
+    {
+        Attack(exector, target, null);
+        return weapon.hitAttack;
+    }
+
+    public void Start()
+    {
+        currentHP = baseStatus.hp + aditionalStatus.hp;
     }
 }
 [Serializable]

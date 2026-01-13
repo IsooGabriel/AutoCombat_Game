@@ -25,6 +25,7 @@ public class PortUI : MonoBehaviour
         OTHER = 262,
         DECIMAL = 50,
         VECTOR = 326,
+        BOOLEAN = 190,
         EXECUTION = 130,
     }
 
