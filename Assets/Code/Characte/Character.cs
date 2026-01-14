@@ -78,6 +78,10 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
     public void Start()
     {
         currentHP = baseStatus.hp + aditionalStatus.hp;
+        if(weapon == null)
+        {
+            weapon = new Weapon();
+        }
     }
 }
 [Serializable]
