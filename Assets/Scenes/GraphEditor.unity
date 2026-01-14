@@ -6507,7 +6507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7931992192290030719, guid: b5409c6baacd0ae49b51551b7b6ae034, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SaveGraphTestVersion
+      value: SaveGraphDefaultPath
       objectReference: {fileID: 0}
     - target: {fileID: 7931992192290030719, guid: b5409c6baacd0ae49b51551b7b6ae034, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

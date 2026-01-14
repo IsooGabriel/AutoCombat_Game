@@ -350,7 +350,7 @@ public class GraphEditorManager : MonoBehaviour
     {
         SaveGraph("PlaeyreData.json");
     }
-    public void SaveGraphTestVersion(bool isPlayer = true)
+    public void SaveGraphDefaultPath(bool isPlayer = true)
     {
         string parent = Application.persistentDataPath.Replace("/", "\\");
         SaveGraph($"{parent}\\{defaultPath}\\{(isPlayer ? playerDataFileName:enemyDataFileName)}");

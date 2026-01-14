@@ -24,7 +24,7 @@ public class AttackNode : Node
 
     public override void Initialize()
     {
-        nodeType = NodeType.BreakVector;
+        nodeType = NodeType.Attack;
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
