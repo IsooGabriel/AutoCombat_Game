@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TMPro;
-using UnityEngine.UI;
 class GetPositionNodeUI : NodeUI, IUserVariable
 {
     public TMP_Dropdown setting;

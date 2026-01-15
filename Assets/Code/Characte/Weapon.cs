@@ -35,7 +35,8 @@ public class Weapon : MonoBehaviour
         Ray ray = new Ray(transform.position, direction);
         int layerMask = 0;
         RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, range, layerMask); ;
-        if(hit.collider)
+        Debug.DrawRay(transform.position, direction, Color.red);
+        if (hit.collider)
         {
             IDamageable target = hit.collider.GetComponent<IDamageable>();
             if (target != null && target != user)
@@ -52,7 +53,7 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        if(timer > 0)
+        if (timer > 0)
         {
             timer -= Time.deltaTime;
         }

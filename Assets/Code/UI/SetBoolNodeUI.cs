@@ -1,6 +1,5 @@
 ﻿using UnityEngine.UI;
 using System.Collections.Generic;
-using TMPro;
 public class SetBoolNodeUI : NodeUI, IUserVariable
 {
 
@@ -26,7 +25,7 @@ public class SetBoolNodeUI : NodeUI, IUserVariable
         }
         node.inputValues = new List<InputValue<object>>()
         {
-            new InputValue<object>(names[0], (object)toggle.isOn, isUserset:true)
+            new InputValue<object>(names[0], (object)(toggle.isOn? 1f:0f), isUserset:true)
         };
     }
     public void SetData(bool value)
@@ -38,7 +37,7 @@ public class SetBoolNodeUI : NodeUI, IUserVariable
     {
         base.Awake();
         node = new SetValueNode();
-        toggle.onValueChanged.AddListener(delegate { SetData(); });
+        toggle?.onValueChanged.AddListener(delegate { SetData(toggle.isOn); });
     }
 }
 

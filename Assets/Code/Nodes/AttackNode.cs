@@ -42,21 +42,23 @@ public class AttackNode : Node
     {
         executor = exector;
         Vector2 direction;
-        if (!TryGetInputValueWithPort(inputDirection, out direction))
-        {
-            if (!TryGetInputValueWithPort(inputDirection, out Vector3 vector3))
-            {
-                return;
-            }
-            direction = new Vector2(vector3.x, vector3.y);
-        }
+
         if (isAutoAim)
         {
-            exector.myCharacter.Attack(exector, direction, onHit);
+            exector.myCharacter.Attack(exector, exector.enemy.transform, onHit);
         }
         else
         {
-            exector.myCharacter.Attack(exector, exector.enemy.transform, onHit);
+            if (!TryGetInputValueWithPort(inputDirection, out direction))
+            {
+                if (!TryGetInputValueWithPort(inputDirection, out Vector3 vector3))
+                {
+                    return;
+                }
+                direction = new Vector2(vector3.x, vector3.y);
+            }
+
+            exector.myCharacter.Attack(exector, direction, onHit);
         }
         exector.EnqueueConnected(this, executePortName);
     }
