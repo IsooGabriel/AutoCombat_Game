@@ -111,7 +111,7 @@
     "graphName": "New AI",
     "author": "",
     "aditionalStatus": {
-        "hp": 0,
+        "hp": 6,
         "attack": 0,
         "attackCooltime": 0.0,
         "criticalChance": 0.0,

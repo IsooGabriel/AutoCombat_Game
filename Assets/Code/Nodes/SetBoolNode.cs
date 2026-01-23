@@ -1,4 +1,7 @@
 ﻿
+using TMPro;
+using static UnityEngine.Rendering.DebugUI;
+
 public class SetBoolNode : Node
 {
     public const string inputBool = "inputBool";
@@ -18,7 +21,16 @@ public class SetBoolNode : Node
     }
     public override void Execute(GraphExecutor executor)
     {
-        bool value = TryGetInputValueWithPort(inputBool, out value);
+        float binary = 1;
+        bool value = true;
+        if(!TryGetInputValueWithPort(inputBool, out binary))
+        {
+            value = true;
+        }
+        else
+        {
+            value = binary != 0;
+        }
         executor.SendData(this, outBool, value);
         executor.EnqueueConnected(this, outputPorts[0].portName);
     }

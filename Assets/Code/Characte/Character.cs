@@ -24,7 +24,7 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
     public void Death()
     {
         onDeath?.Invoke(this);
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
     public void TakeDamage(int damage)
@@ -89,7 +89,7 @@ public class Status
 {
     public int hp;
     public int attack;
-    public float attackCooltime;
-    public float criticalChance;
-    public float criticalDamage;
+    public int attackCooltime;
+    public int criticalChance;
+    public int criticalDamage;
 }

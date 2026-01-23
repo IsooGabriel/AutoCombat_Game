@@ -2,9 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class GraphRunner : MonoBehaviour
@@ -26,6 +24,10 @@ public class GraphRunner : MonoBehaviour
 
     private readonly string graphPath = "GraphData";
 
+    readonly private float submitTimeScale = 0.05f;
+    readonly private float minTimeScale = 0.07f;
+
+
     private async void InstanceExecutor()
     {
         string path = await OpenFileDialog();
@@ -34,6 +36,7 @@ public class GraphRunner : MonoBehaviour
         string enemyjson = File.ReadAllText(enemypath);
 
         var playerGraph = JsonUtility.FromJson<GraphData>(json);
+        GraphEditorManager.Instance.AjustAdditionalStatus(playerGraph.aditionalStatus);
         var enemyGraph = JsonUtility.FromJson<GraphData>(enemyjson);
         //var playerGraph = JsonUtility.FromJson<GraphData>(playerGraphJson.text);
         //var enemyGraph = JsonUtility.FromJson<GraphData>(enemyGraphJson.text);
@@ -44,16 +47,16 @@ public class GraphRunner : MonoBehaviour
         }
         _playerExecutor = new GraphExecutor(playerGraph, player, enemy);
         _enemyExecutor = new GraphExecutor(enemyGraph, enemy, player);
+        player.Start();
+        enemy.Start();
     }
 
     private void OnPlayerWin()
-    { 
-        Time.timeScale = 0f;
+    {
         winResult.SetActive(true);
     }
     private void OnEnemyWin()
     {
-        Time.timeScale = 0f;
         loseResult.SetActive(true);
     }
 
@@ -120,14 +123,26 @@ public class GraphRunner : MonoBehaviour
     }
 
     void Start()
-    { 
+    {
         Time.timeScale = 1f;
         Application.targetFrameRate = 30;
 
         InstanceExecutor();
         isRunning = true;
     }
-
+    private void FixedUpdate()
+    {
+        if (enemy == null || player == null)
+        {
+            if (Time.timeScale <= minTimeScale)
+            {
+                Time.timeScale = 0;
+                return;
+            }
+            Time.timeScale -= Time.timeScale * Time.deltaTime + submitTimeScale;
+            Debug.Log(Time.timeScale + "============");
+        }
+    }
     void Update()
     {
 
@@ -135,12 +150,16 @@ public class GraphRunner : MonoBehaviour
         {
             OnPlayerWin();
             isRunning = false;
+            return;
         }
         else if (player == null)
         {
             OnEnemyWin();
             isRunning = false;
+            return;
         }
+
+        Debug.Log(enemy.currentHP + "============");
 
         if (!isRunning)
         {

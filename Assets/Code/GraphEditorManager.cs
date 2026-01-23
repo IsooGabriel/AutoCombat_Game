@@ -44,6 +44,8 @@ public class GraphEditorManager : MonoBehaviour
     public const string defaultPath = "GraphData";
     public const string playerDataFileName = "player.acjson";
     public const string enemyDataFileName = "enemy.acjson";
+    public readonly int[] maxNodesForPoints = { 987, 610, 377, 233, 144, 89, 55, 34, 21, 13 };
+    private int aditionableStatusCount = 0;
 
     #region 関数
 
@@ -64,6 +66,8 @@ public class GraphEditorManager : MonoBehaviour
         SetPortUIsPort(nodeUI.outputPorts, node.outputPorts);
 
         Instance.nodeUIs.Add(nodeUI);
+        Instance.AjustAdditionalStatus(Instance.graphData.aditionalStatus);
+        Instance.UpdateAdditionalStatus();
     }
     public void SetPortUIsPort(PortUI[] portUIs, Port[] ports)
     {
@@ -137,78 +141,189 @@ public class GraphEditorManager : MonoBehaviour
             Destroy(nodeUI.gameObject);
         }
         nodeUIs.Clear();
+        aditionableStatusCount = 0;
     }
 
     #region 追加ステータス
 
     public void UpdateAdditionalStatus()
     {
-        additionalHP.text = Instance.graphData.aditionalStatus.hp.ToString();
+        additionalHP.text = $"{Instance.graphData.aditionalStatus.hp}";
         additionalAttack.text = $"{Instance.graphData.aditionalStatus.attack}";
         additionalAttackCT.text = $"{Instance.graphData.aditionalStatus.attackCooltime}";
         additionalCriticalChance.text = $"{Instance.graphData.aditionalStatus.criticalChance}";
         additionalCriticalDamage.text = $"{Instance.graphData.aditionalStatus.criticalDamage}";
     }
 
-    public void AddHP(int value)
+    /// <summary>
+    /// アディショナルステータスを加算する
+    /// </summary>
+    /// <param name="value">加算する量</param>
+    /// <param name="status">実際のアディショナルステータス</param>
+    public void SetAdditionalStatus(int value, ref int status)
     {
-        Instance.graphData.aditionalStatus.hp += value;
+        if (value < 0)
+        {
+            value = 0;
+        }
+        int old = status;
+        if (aditionableStatusCount - old + value > CheckMaxAdditionableStatus())
+        {
+            value = CheckMaxAdditionableStatus() - (aditionableStatusCount - old);
+        }
+        aditionableStatusCount += value - old;
+        status = value;
+        UpdateAdditionalStatus();
     }
+
     public void SetHP(int value)
     {
-        Instance.graphData.aditionalStatus.hp = value;
+        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.hp);
     }
     public void SetHP(string value)
     {
         Instance.SetHP(int.Parse(value));
     }
-    public void AddAttack(int value)
+    public void AddHP(int value)
     {
-        Instance.graphData.aditionalStatus.attack += value;
+        value += Instance.graphData.aditionalStatus.hp;
+        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.hp);
     }
+
+
     public void SetAttack(int value)
     {
-        Instance.graphData.aditionalStatus.attack = value;
+        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attack);
     }
     public void SetAttack(string value)
     {
         Instance.SetAttack(int.Parse(value));
     }
-    public void AddAttackCT(int value)
+    public void AddAttack(int value)
     {
-        Instance.graphData.aditionalStatus.attackCooltime += value;
+        value += Instance.graphData.aditionalStatus.attack;
+        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attack);
     }
+
+
     public void SetAttackCT(int value)
     {
-        Instance.graphData.aditionalStatus.attackCooltime = value;
+        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attackCooltime);
     }
     public void SetAttackCT(string value)
     {
         Instance.SetAttackCT(int.Parse(value));
     }
-    public void AddCriticalChance(int value)
+
+    public void AddAttackCT(int value)
     {
-        Instance.graphData.aditionalStatus.criticalChance += value;
+        value += Instance.graphData.aditionalStatus.attackCooltime;
+        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attackCooltime);
     }
+
+
     public void SetCriticalChance(int value)
     {
-        Instance.graphData.aditionalStatus.criticalChance = value;
+        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalChance);
     }
     public void SetCriticalChance(string value)
     {
         Instance.SetCriticalChance(int.Parse(value));
     }
-    public void AddCriticalDamage(int value)
+    public void AddCriticalChance(int value)
     {
-        Instance.graphData.aditionalStatus.criticalDamage += value;
+        value += Instance.graphData.aditionalStatus.criticalChance;
+        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalChance);
     }
+
+
     public void SetCriticalDamage(int value)
     {
-        Instance.graphData.aditionalStatus.criticalDamage = value;
+        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalDamage);
     }
     public void SetCriticalDamage(string value)
     {
         Instance.SetCriticalDamage(int.Parse(value));
+    }
+    public void AddCriticalDamage(int value)
+    {
+        value += Instance.graphData.aditionalStatus.criticalDamage;
+        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalDamage);
+    }
+
+    /// <summary>
+    /// アディショナルステータスが追加可能かどうかを返す
+    /// </summary>
+    /// <param name="addition">いくつ追加するか</param>
+    /// <returns>可能か不可能か</returns>
+    public bool CheckAdditionableStatus(int addition)
+    {
+        return aditionableStatusCount + addition <= CheckMaxAdditionableStatus();
+    }
+
+    /// <summary>
+    /// ノード数から追加可能なステータスの最大値を返す
+    /// </summary>
+    /// <returns>追加可能なアディショナルステータス</returns>
+    public int CheckMaxAdditionableStatus(int Nodecount)
+    {
+        for (int i = 0; maxNodesForPoints.Length > i; ++i)
+        {
+            if (Nodecount > maxNodesForPoints[i])
+            {
+                return i;
+            }
+        }
+        return maxNodesForPoints.Length;
+    }
+    public int CheckMaxAdditionableStatus()
+    {
+        return CheckMaxAdditionableStatus(Instance.nodeUIs.Count);
+    }
+
+    /// <summary>
+    /// アディショナルステータスを調整
+    /// </summary>
+    /// <param name="status">調整するアディショナルステータス</param>
+    /// <returns>最終的なアディショナルステータス数</returns>
+    public int AjustAdditionalStatus(Status status)
+    {
+        int max = CheckMaxAdditionableStatus();
+        int sum = status.hp + status.attack + status.attackCooltime + status.criticalChance + status.criticalDamage;
+        if (sum <= max)
+        {
+            return sum;
+        }
+
+        for (int i = sum - max; i > 0; --i)
+        {
+            if (status.hp > 0)
+            {
+                status.hp -= 1;
+                continue;
+            }
+            else if (status.attack > 0)
+            {
+                status.attack -= 1;
+                continue;
+            }
+            else if (status.attackCooltime > 0)
+            {
+                status.attackCooltime -= 1;
+                continue;
+            }
+            else if (status.criticalChance > 0)
+            {
+                status.criticalChance -= 1;
+                continue;
+            }
+            else if (status.criticalDamage > 0)
+            {
+                status.criticalDamage -= 1;
+                continue;
+            }
+        }
+        return sum - max;
     }
 
     #endregion
@@ -297,7 +412,7 @@ public class GraphEditorManager : MonoBehaviour
         from.outputLines.Add(line);
     }
 
-    public void SaveGraph(string path, string graphName , string author)
+    public void SaveGraph(string path, string graphName, string author)
     {
         HashSet<string> usedNodeIds = new HashSet<string>() { };
         foreach (var nodeUI in GraphEditorManager.Instance.nodeUIs)
@@ -311,9 +426,9 @@ public class GraphEditorManager : MonoBehaviour
             Instance.graphData.nodes.Add(nodeData);
             usedNodeIds.Add(nodeUI.node.id);
 
-            if(nodeUI.node is LinkedNode linkedNode)
+            if (nodeUI.node is LinkedNode linkedNode)
             {
-                List<string>　inputIDs = new List<string>();
+                List<string> inputIDs = new List<string>();
                 List<string> outputIDs = new List<string>();
                 foreach (var inputNode in linkedNode.inputNodes)
                 {
@@ -327,6 +442,7 @@ public class GraphEditorManager : MonoBehaviour
                 Instance.graphData.linkedNodes.Add(linkedNodeData);
             }
         }
+        Instance.AjustAdditionalStatus(Instance.graphData.aditionalStatus);
         Instance.graphData.createdDate = DateTime.Now;
         Instance.graphData.graphName = graphName;
         Instance.graphData.author = author;
@@ -338,7 +454,7 @@ public class GraphEditorManager : MonoBehaviour
     public void SaveGraph(string graphName, string author)
     {
         string parent = Application.persistentDataPath.Replace("/", "\\");
-        
+
         SaveGraph($"{parent}\\{defaultPath}\\{SanitizeFileName(graphName)}{SanitizeFileName(author)}{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.acjson", graphName, author);
     }
     public void SaveGraph(string path)
@@ -353,7 +469,7 @@ public class GraphEditorManager : MonoBehaviour
     public void SaveGraphDefaultPath(bool isPlayer = true)
     {
         string parent = Application.persistentDataPath.Replace("/", "\\");
-        SaveGraph($"{parent}\\{defaultPath}\\{(isPlayer ? playerDataFileName:enemyDataFileName)}");
+        SaveGraph($"{parent}\\{defaultPath}\\{(isPlayer ? playerDataFileName : enemyDataFileName)}");
     }
 
     public static string SanitizeFileName(string name)

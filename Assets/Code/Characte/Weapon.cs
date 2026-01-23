@@ -1,5 +1,7 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Rendering;
+using static UnityEngine.UI.Image;
 
 public class Weapon : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class Weapon : MonoBehaviour
     }
     public float damageMultiply = 1;
     public float range;
+    public Vector2 originOffset;
     public float attackSpeed;
     public Character user;
     public Action<Character> hitAttack;
@@ -32,10 +35,10 @@ public class Weapon : MonoBehaviour
             return false;
         }
         timer = attackSpeed;
-        Ray ray = new Ray(transform.position, direction);
-        int layerMask = 0;
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, range, layerMask); ;
-        Debug.DrawRay(transform.position, direction, Color.red);
+        Vector2 origin = (Vector2)transform.position + MakeOrigin(originOffset, direction);
+        RaycastHit2D hit = Physics2D.Raycast(origin, (Vector2)direction, range);
+
+        Debug.DrawRay(origin, direction * range, Color.magenta);
         if (hit.collider)
         {
             IDamageable target = hit.collider.GetComponent<IDamageable>();
@@ -49,6 +52,13 @@ public class Weapon : MonoBehaviour
     public virtual void Attack(Transform target)
     {
         TryAttack(target.position - transform.position);
+    }
+
+    public Vector2 MakeOrigin(Vector2 offset, Vector2 direction)
+    {
+        var result = new Vector2(-direction.normalized.y, direction.normalized.x);
+        result = result * offset.y + direction.normalized * offset.x;
+        return result;
     }
 
     private void Update()
