@@ -16,7 +16,7 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
     public Status aditionalStatus { get; set; } = new() { hp = 0, attack = 0, attackCooltime = 0, criticalChance = 0, criticalDamage = 0 };
     public int currentHP = 10;
     const decimal speed = 5;
-    public Weapon weapon;
+    public Weapon.Weapon weapon;
     public Action<Character> takeDamage;
     public Action<Character> onDeath;
     public bool isPlayer = false;
@@ -80,7 +80,7 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
         currentHP = baseStatus.hp + aditionalStatus.hp;
         if(weapon == null)
         {
-            weapon = new Weapon();
+            weapon = new Weapon.Weapon();
         }
     }
 }

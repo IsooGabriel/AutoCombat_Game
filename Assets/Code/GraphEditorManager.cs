@@ -47,6 +47,8 @@ public class GraphEditorManager : MonoBehaviour
     public readonly int[] maxNodesForPoints = { 987, 610, 377, 233, 144, 89, 55, 34, 21, 13 };
     private int aditionableStatusCount = 0;
 
+    public Action onLoardGraph;
+
     #region ä÷êî
 
     public void AddNode(NodeType type)

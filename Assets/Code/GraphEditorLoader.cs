@@ -206,6 +206,7 @@ public class GraphEditorLoader : MonoBehaviour
                 }
             }
         }
+        GraphEditorManager.Instance.onLoardGraph?.Invoke();
     }
 
     //private void Start()

@@ -418,7 +418,7 @@
     "graphName": "_DEFAULT_bb6559ea-5159-4b5b-bcc8-84598aa2efc3",
     "author": "_DEFAULT_18fbcf90-5c56-49ef-9487-fffec7d82f52",
     "aditionalStatus": {
-        "hp": 0,
+        "hp": 1000,
         "attack": 0,
         "attackCooltime": 0.0,
         "criticalChance": 0.0,

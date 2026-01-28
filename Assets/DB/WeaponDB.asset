@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58de2323590f8da47a46e98be0fdb762, type: 3}
+  m_Name: WeaponDB
+  m_EditorClassIdentifier: 
+  weaponDatas:
+  - weaponName: Gamma-ray LASER
+    prefab: {fileID: 3334296252503296023, guid: d943d8ea15532ad4fba5535d5804ad4a, type: 3}
+    icon: {fileID: 0}
+    childPrefabIndex: -1
+    enableThisElements: 0
+    damageMultiply: 0
+    range: 0
+    attackCT: 0
+    originOffset: {x: 0, y: 0}
+    attackSpeed: 0
+    timer: 0
+  - weaponName: Sword
+    prefab: {fileID: 3334296252503296023, guid: d943d8ea15532ad4fba5535d5804ad4a, type: 3}
+    icon: {fileID: 8928576263349182094, guid: a1c245ae03c2d414d81b49b994c01d32, type: 3}
+    childPrefabIndex: -1
+    enableThisElements: 0
+    damageMultiply: 0
+    range: 0
+    attackCT: 0
+    originOffset: {x: 0, y: 0}
+    attackSpeed: 0
+    timer: 0
+  - weaponName: Arrow
+    prefab: {fileID: 3334296252503296023, guid: d943d8ea15532ad4fba5535d5804ad4a, type: 3}
+    icon: {fileID: -6476533822251832446, guid: 3a768841c54d2df4e8930ca56cd0a365, type: 3}
+    childPrefabIndex: -1
+    enableThisElements: 0
+    damageMultiply: 0
+    range: 0
+    attackCT: 0
+    originOffset: {x: 0, y: 0}
+    attackSpeed: 0
+    timer: 0
+  childPrefabs: []

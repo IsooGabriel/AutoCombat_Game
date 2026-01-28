@@ -1,71 +1,73 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEngine.UI.Image;
-
-public class Weapon : MonoBehaviour
+﻿namespace Weapon
 {
-    public string weaponName;
-    public decimal damage
-    {
-        get
-        {
-            decimal baseDamage = user != null ? user.baseStatus.attack + user.aditionalStatus.attack : 1;
-            return baseDamage * (decimal)damageMultiply;
-        }
-    }
-    public float damageMultiply = 1;
-    public float range;
-    public Vector2 originOffset;
-    public float attackSpeed;
-    public Character user;
-    public Action<Character> hitAttack;
+using System;
+    using UnityEngine;
 
-    public float timer = 0;
-
-    private void SetDamage(Character target)
+    public class Weapon : MonoBehaviour
     {
-        target.TakeDamage((int)damage);
-        hitAttack?.Invoke(target);
-    }
-    public virtual bool TryAttack(Vector2 direction)
-    {
-        if (timer > 0)
+        public decimal damage
         {
-            return false;
-        }
-        timer = attackSpeed;
-        Vector2 origin = (Vector2)transform.position + MakeOrigin(originOffset, direction);
-        RaycastHit2D hit = Physics2D.Raycast(origin, (Vector2)direction, range);
-
-        Debug.DrawRay(origin, direction * range, Color.magenta);
-        if (hit.collider)
-        {
-            IDamageable target = hit.collider.GetComponent<IDamageable>();
-            if (target != null && target != user)
+            get
             {
-                target.TakeDamage((int)damage);
+                decimal baseDamage = user != null ? user.baseStatus.attack + user.aditionalStatus.attack : 1;
+                return baseDamage * (decimal)damageMultiply;
             }
         }
-        return true;
-    }
-    public virtual void Attack(Transform target)
-    {
-        TryAttack(target.position - transform.position);
-    }
+        public float damageMultiply = 1;
+        public float range;
+        public float attackCT = 1;
+        readonly float attackCoottimeMultiply = 0.1f;
+        public Vector2 originOffset;
+        public float attackSpeed;
+        public Character user;
+        public Action<Character> hitAttack;
 
-    public Vector2 MakeOrigin(Vector2 offset, Vector2 direction)
-    {
-        var result = new Vector2(-direction.normalized.y, direction.normalized.x);
-        result = result * offset.y + direction.normalized * offset.x;
-        return result;
-    }
+        public float timer = 0;
 
-    private void Update()
-    {
-        if (timer > 0)
+        private void SetDamage(Character target)
         {
-            timer -= Time.deltaTime;
+            target.TakeDamage((int)damage);
+            hitAttack?.Invoke(target);
+        }
+        public virtual bool TryAttack(Vector2 direction)
+        {
+            if (timer > 0)
+            {
+                return false;
+            }
+            timer = attackCT - attackCoottimeMultiply*(user.baseStatus.attackCooltime + user.aditionalStatus.attackCooltime);
+            Vector2 origin = (Vector2)transform.position + MakeOrigin(originOffset, direction);
+            RaycastHit2D hit = Physics2D.Raycast(origin, (Vector2)direction, range);
+
+            Debug.DrawRay(origin, direction * range, Color.magenta);
+            if (hit.collider)
+            {
+                IDamageable target = hit.collider.GetComponent<IDamageable>();
+                if (target != null && target != user)
+                {
+                    target.TakeDamage((int)damage);
+                }
+            }
+            return true;
+        }
+        public virtual void Attack(Transform target)
+        {
+            TryAttack(target.position - transform.position);
+        }
+
+        public Vector2 MakeOrigin(Vector2 offset, Vector2 direction)
+        {
+            var result = new Vector2(-direction.normalized.y, direction.normalized.x);
+            result = result * offset.y + direction.normalized * offset.x;
+            return result;
+        }
+
+        private void Update()
+        {
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
         }
     }
 }

@@ -10,6 +10,8 @@ public class GraphRunner : MonoBehaviour
     public GameObject winResult;
     public GameObject loseResult;
 
+    [SerializeField]
+    private WeaponDB weaponDB;
     public Character player;
     public Character enemy;
     public TextAsset playerGraphJson;
@@ -36,6 +38,7 @@ public class GraphRunner : MonoBehaviour
         string enemyjson = File.ReadAllText(enemypath);
 
         var playerGraph = JsonUtility.FromJson<GraphData>(json);
+        GraphEditorManager.Instance ??= new GraphEditorManager();
         GraphEditorManager.Instance.AjustAdditionalStatus(playerGraph.aditionalStatus);
         var enemyGraph = JsonUtility.FromJson<GraphData>(enemyjson);
         //var playerGraph = JsonUtility.FromJson<GraphData>(playerGraphJson.text);
@@ -45,6 +48,10 @@ public class GraphRunner : MonoBehaviour
             Debug.LogError("なんかたんない");
             return;
         }
+
+        SetWeaponCharacter(player, playerGraph);
+        SetWeaponCharacter(enemy, enemyGraph);
+
         _playerExecutor = new GraphExecutor(playerGraph, player, enemy);
         _enemyExecutor = new GraphExecutor(enemyGraph, enemy, player);
         player.Start();
@@ -120,6 +127,27 @@ public class GraphRunner : MonoBehaviour
         {
             Environment.CurrentDirectory = prevDir;
         }
+    }
+
+    private void SetWeaponCharacter(Character chara, GraphData graph)
+    {
+        Weapon.Weapon weapon;
+        if (graph.weapon != GraphData.noWeapon || graph.weapon > -1)
+        {
+            GameObject weponObj = Instantiate
+                (
+                    weaponDB.weaponDatas[graph.weapon].prefab,
+                    player.transform
+                );
+            weponObj.transform.localPosition = Vector3.zero;
+            weapon = weponObj.GetComponent<Weapon.Weapon>();
+        }
+        else
+        {
+            weapon = null;
+        }
+        chara.weapon = weapon;
+        weapon.user = chara;
     }
 
     void Start()

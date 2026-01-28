@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Weapon;
 [Serializable]
 public class GraphData
 {
@@ -12,6 +13,8 @@ public class GraphData
     public string author = "";
     public DateTime createdDate = DateTime.Now;
     public Status aditionalStatus = new() { hp = 0, attack = 0, attackCooltime = 0, criticalChance = 0, criticalDamage = 0 };
+    public int weapon = 0;
+    public const int noWeapon = -1;    
 
     public GraphData()
     {
@@ -143,4 +146,11 @@ public enum NodeType
     BreakVector,
     GetPosition,
     SetBool,
+}
+
+public enum Weapons
+{
+    GAMMARAY_LASER = 0,
+    SWORD,
+    ARROW,
 }
