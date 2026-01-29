@@ -36,7 +36,7 @@ MonoBehaviour:
     attackSpeed: 0
     timer: 0
   - weaponName: Arrow
-    prefab: {fileID: 3334296252503296023, guid: d943d8ea15532ad4fba5535d5804ad4a, type: 3}
+    prefab: {fileID: 3334296252503296023, guid: 8e6080884044dea4eb1115f4d8b48ad4, type: 3}
     icon: {fileID: -6476533822251832446, guid: 3a768841c54d2df4e8930ca56cd0a365, type: 3}
     childPrefabIndex: -1
     enableThisElements: 0

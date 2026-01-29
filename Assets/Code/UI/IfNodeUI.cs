@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-
 public enum IfSettings
 {
     Equals,
@@ -30,7 +29,7 @@ public class IfNodeUI : NodeUI, IUserVariable
         {
             return;
         }
-            setting.ClearOptions();
+        setting.ClearOptions();
         List<string> options = new List<string>(settings.Values);
         setting.AddOptions(options);
         setting.value = 0;

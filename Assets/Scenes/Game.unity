@@ -1630,6 +1630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winResult: {fileID: 1400179738}
   loseResult: {fileID: 1123229474}
+  weaponDB: {fileID: 11400000, guid: dda7f1669d35a8542b108612029c468e, type: 2}
   player: {fileID: 997290823}
   enemy: {fileID: 486008869}
   playerGraphJson: {fileID: 4900000, guid: 66245d8d660f3ab4ba7a0cfbc29e66e0, type: 3}
