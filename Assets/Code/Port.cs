@@ -8,7 +8,7 @@ public class Port
     public string portName;
     public Type portType;
     public bool isRequired;
-    public bool isInput;
+    public bool isToPort;
     public bool isExecutionPort;
     public Node owner;
     public List<(Node node, string portName)> outputConections = new() { };
@@ -38,7 +38,7 @@ public class Port
         this.portName = name;
         this.portType = type;
         this.isRequired = isRequired;
-        this.isInput = isInput;
+        this.isToPort = isInput;
         this.isExecutionPort = isExecutionPort;
         this.owner = owner;
     }

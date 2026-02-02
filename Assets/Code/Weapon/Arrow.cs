@@ -1,19 +1,30 @@
 ﻿
+using UnityEngine;
 namespace Weapon
 {
-    using UnityEngine;
-    public class Arrow:Weapon
+    public class Arrow : Weapon, IDeathable
     {
+        [SerializeField]
+        private float speed = 8f;
 
-        public override bool TryAttack(Vector2 direction)
+        public void Death()
         {
-            if (timer > 0)
-            {
-                return false;
-            }
-            timer = attackSpeed;
+            Destroy(this.gameObject);
+        }
 
-            return true;
+        private void OnTriggerEnter2D(Collider2D collieder)
+        {
+            if (collieder.gameObject == user.gameObject || !collieder.gameObject.TryGetComponent<Character>(out Character target))
+            {
+                return;
+            }
+            target.TakeDamage((int)damage);
+            Death();
+        }
+
+        private void Update()
+        {
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
     }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5948808087522380280}
-  - component: {fileID: 9015583537300461169}
+  - component: {fileID: 4391512203050466444}
   m_Layer: 0
   m_Name: GammaRayLaser
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9015583537300461169
+--- !u!114 &4391512203050466444
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,13 +41,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3334296252503296023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa4eff2ae36d9e848b62d3980cfa21f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a2ccb96a32c6cd4a94a0ca9ca6f91e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageMultiply: 1
-  range: 11111
+  range: 0
   attackCT: 1
-  originOffset: {x: 0.72, y: 0}
-  attackSpeed: 1
+  originOffset: {x: 0, y: 0}
+  attackSpeed: 0
   user: {fileID: 0}
   timer: 0
+  laserPrefab: {fileID: 0}

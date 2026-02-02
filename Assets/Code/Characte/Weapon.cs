@@ -1,6 +1,6 @@
 ﻿namespace Weapon
 {
-using System;
+    using System;
     using UnityEngine;
 
     public class Weapon : MonoBehaviour
@@ -15,8 +15,16 @@ using System;
         }
         public float damageMultiply = 1;
         public float range;
-        public float attackCT = 1;
-        readonly float attackCoottimeMultiply = 0.1f;
+        public float baseCT = 1;
+        public float attackCT
+        {
+            get
+            {
+                return baseCT - attackCoottimeMultiply * (user.baseStatus.attackCooltime + user.aditionalStatus.attackCooltime);
+            }
+        }
+
+        protected const float attackCoottimeMultiply = 0.1f;
         public Vector2 originOffset;
         public float attackSpeed;
         public Character user;
@@ -35,19 +43,8 @@ using System;
             {
                 return false;
             }
-            timer = attackCT - attackCoottimeMultiply*(user.baseStatus.attackCooltime + user.aditionalStatus.attackCooltime);
-            Vector2 origin = (Vector2)transform.position + MakeOrigin(originOffset, direction);
-            RaycastHit2D hit = Physics2D.Raycast(origin, (Vector2)direction, range);
+            timer = baseCT - attackCoottimeMultiply * (user.baseStatus.attackCooltime + user.aditionalStatus.attackCooltime);
 
-            Debug.DrawRay(origin, direction * range, Color.magenta);
-            if (hit.collider)
-            {
-                IDamageable target = hit.collider.GetComponent<IDamageable>();
-                if (target != null && target != user)
-                {
-                    target.TakeDamage((int)damage);
-                }
-            }
             return true;
         }
         public virtual void Attack(Transform target)
@@ -62,7 +59,15 @@ using System;
             return result;
         }
 
-        private void Update()
+        protected Quaternion ArmRotation(Vector2 direction)
+        {
+            return Quaternion.Euler(0, 0, (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg));
+        }
+        protected Quaternion ArmRotation(Vector2 direction, float angleOffset)
+        {
+            return Quaternion.Euler(0, 0, (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) + angleOffset);
+        }
+        protected void Update()
         {
             if (timer > 0)
             {

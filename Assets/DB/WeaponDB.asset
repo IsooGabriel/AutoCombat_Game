@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponDatas:
   - weaponName: Gamma-ray LASER
     prefab: {fileID: 3334296252503296023, guid: d943d8ea15532ad4fba5535d5804ad4a, type: 3}
-    icon: {fileID: 0}
+    icon: {fileID: -3509329834246070350, guid: a2421f3be5e02b84fa8a29eeec980f63, type: 3}
     childPrefabIndex: -1
     enableThisElements: 0
     damageMultiply: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
     attackSpeed: 0
     timer: 0
   - weaponName: Sword
-    prefab: {fileID: 3334296252503296023, guid: d943d8ea15532ad4fba5535d5804ad4a, type: 3}
+    prefab: {fileID: 3334296252503296023, guid: 9b20d70da5297b844bc471a57ed3089e, type: 3}
     icon: {fileID: 8928576263349182094, guid: a1c245ae03c2d414d81b49b994c01d32, type: 3}
     childPrefabIndex: -1
     enableThisElements: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
     attackSpeed: 0
     timer: 0
   - weaponName: Arrow
-    prefab: {fileID: 3334296252503296023, guid: 8e6080884044dea4eb1115f4d8b48ad4, type: 3}
+    prefab: {fileID: 3334296252503296023, guid: de0efaa4ae0a86b44a8b570421f8988e, type: 3}
     icon: {fileID: -6476533822251832446, guid: 3a768841c54d2df4e8930ca56cd0a365, type: 3}
     childPrefabIndex: -1
     enableThisElements: 0

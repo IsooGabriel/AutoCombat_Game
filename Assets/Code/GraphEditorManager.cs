@@ -116,7 +116,15 @@ public class GraphEditorManager : MonoBehaviour
         // interface を探す（Button の子にも付けられるように）
         var rightClickable = topUI.GetComponentInParent<NodeUI>();
 
-        if (rightClickable.node is StartNode || rightClickable == null)
+        if(rightClickable == null)
+        {
+            if(topUI.TryGetComponent<PortUI>(out var portUI))
+            {
+                DisconectPort(portUI);
+            }
+            return;
+        }
+        if (rightClickable.node is StartNode)
         {
             return;
         }
@@ -333,7 +341,7 @@ public class GraphEditorManager : MonoBehaviour
 
     static public void ConectPorts(PortUI from, PortUI to)
     {
-        if (from.port.isInput && !to.port.isInput)
+        if (from.port.isToPort && !to.port.isToPort)
         {
             (from, to) = (to, from);
         }
@@ -373,7 +381,7 @@ public class GraphEditorManager : MonoBehaviour
         {
             return false;
         }
-        if (from.port.isInput || !to.port.isInput)
+        if (from.port.isToPort || !to.port.isToPort)
         {
             return false;
         }
@@ -413,6 +421,28 @@ public class GraphEditorManager : MonoBehaviour
         line.gameObject.layer = LayerMask.NameToLayer(Instance.editorLayer);
         from.outputLines.Add(line);
     }
+
+    public void DisconectPort(PortUI target)
+    {
+        if (!target.port.isToPort)
+        {
+            foreach (var line in target.outputLines)
+            {
+                Destroy(line.gameObject);
+            }
+            target.outputLines.Clear();
+            target.port.outputConections.Clear();
+        }
+        else if (target.owner.node is LinkedNode)
+        {
+        
+        }
+        else
+        {
+
+        }
+    }
+
 
     public void SaveGraph(string path, string graphName, string author)
     {

@@ -137,7 +137,7 @@ public class GraphRunner : MonoBehaviour
             GameObject weponObj = Instantiate
                 (
                     weaponDB.weaponDatas[graph.weapon].prefab,
-                    player.transform
+                    chara.transform
                 );
             weponObj.transform.localPosition = Vector3.zero;
             weapon = weponObj.GetComponent<Weapon.Weapon>();
