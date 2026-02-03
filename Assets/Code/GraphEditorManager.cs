@@ -416,6 +416,7 @@ public class GraphEditorManager : MonoBehaviour
         line.SetPosition(1, to.portPosition.position);
         line.gameObject.layer = LayerMask.NameToLayer(Instance.editorLayer);
         from.outputLines.Add(line);
+        from.outputConectionsUI.Add(conection);
     }
 
     public void DisconectPort(PortUI target)
@@ -429,13 +430,15 @@ public class GraphEditorManager : MonoBehaviour
             target.outputLines.Clear();
             target.port.outputConections.Clear();
         }
-        else if (target.owner.node is LinkedNode)
-        {
-
-        }
         else
         {
-
+            foreach (var node in Instance.nodeUIs)
+            {
+                foreach(var portUI in node.outputPorts)
+                {
+                    portUI.Disconect(target);
+                }
+            }
         }
     }
 

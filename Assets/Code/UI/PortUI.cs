@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 public class PortUI : MonoBehaviour
@@ -19,6 +20,8 @@ public class PortUI : MonoBehaviour
     public Image portImage;
     [NonSerialized]
     public List<LineRenderer> outputLines = new();
+    [NonSerialized]
+    public List<ConectionUI> outputConectionsUI = new();
 
     public enum PortTypeHue
     {
@@ -47,6 +50,22 @@ public class PortUI : MonoBehaviour
             GraphEditorManager.Instance.isSelected = false;
             GraphEditorManager.Instance.selectedPort = null;
         }
+    }
+
+    public void Disconect(PortUI target)
+    {
+        outputLines.RemoveAll(l => l.gameObject.GetComponent<ConectionUI>().toPort == target);
+        for(int i = 0; outputConectionsUI.Count > i; ++i)
+        {
+            var conn = outputConectionsUI[i];
+            if (conn.toPort == target)
+            {
+                outputConectionsUI.RemoveAt(i);
+                Destroy(conn.gameObject);
+                break;
+            }
+        }
+        port.outputConections.RemoveAll(c => c.portName == target.port.portName && c.node == target.port.owner);
     }
 
     public void Start()

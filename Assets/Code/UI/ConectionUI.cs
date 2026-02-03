@@ -40,4 +40,8 @@ public class ConectionUI : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void OnDestroy()
+    {
+        Destroy(lineRenderer);
+    }
 }
