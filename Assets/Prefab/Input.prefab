@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3990478306271308805}
   - component: {fileID: 4300165153062589771}
+  - component: {fileID: 2883765616693676685}
   m_Layer: 5
   m_Name: Port (1)
   m_TagString: Untagged
@@ -49,16 +50,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85c6b99c2de5884ea6d357917a5c06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port:
-    name: 
-    isRequired: 0
-    isInput: 1
-    isExecutionPort: 0
   owner: {fileID: 0}
   portTypeHue: 0
+  tmpUGUI: {fileID: 0}
   portPosition: {fileID: 5451762255015983839}
   portImage: {fileID: 5606117555321569170}
-  outputLines: []
+--- !u!222 &2883765616693676685
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256889315614438746}
+  m_CullTransparentMesh: 1
 --- !u!1 &1529352951209022317
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -567,6 +571,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2200058212583124647}
   - component: {fileID: 3376407015552718463}
+  - component: {fileID: 4662138632918063994}
   m_Layer: 5
   m_Name: Port
   m_TagString: Untagged
@@ -606,16 +611,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85c6b99c2de5884ea6d357917a5c06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port:
-    name: 
-    isRequired: 0
-    isInput: 1
-    isExecutionPort: 0
   owner: {fileID: 0}
   portTypeHue: 0
+  tmpUGUI: {fileID: 0}
   portPosition: {fileID: 3536474920848302356}
   portImage: {fileID: 5726119203215634968}
-  outputLines: []
+--- !u!222 &4662138632918063994
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4542297517917837930}
+  m_CullTransparentMesh: 1
 --- !u!1 &6044829545190428119
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,7 +952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

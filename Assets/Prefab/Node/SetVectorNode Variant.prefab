@@ -405,7 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -470,17 +470,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85c6b99c2de5884ea6d357917a5c06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port:
-    name: y
-    isRequired: 0
-    isInput: 1
-    isExecutionPort: 0
   owner: {fileID: 8269456461143548491}
   portTypeHue: 50
   tmpUGUI: {fileID: 0}
   portPosition: {fileID: 7371343303935417124}
   portImage: {fileID: 788545201027173551}
-  outputLines: []
 --- !u!1001 &6047451142194989055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -693,7 +687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7795022118312424193, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_fontSize
-      value: 10.75
+      value: 13.4
       objectReference: {fileID: 0}
     - target: {fileID: 8130235904526101330, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_Name

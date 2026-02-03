@@ -269,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -295,6 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1118485553176265756}
   - component: {fileID: 8240256288130005889}
+  - component: {fileID: 2419518269428157342}
   m_Layer: 6
   m_Name: Port (2)
   m_TagString: Untagged
@@ -339,6 +340,14 @@ MonoBehaviour:
   tmpUGUI: {fileID: 3677503214270469504}
   portPosition: {fileID: 1317164248985503211}
   portImage: {fileID: 8567157272689009740}
+--- !u!222 &2419518269428157342
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113288627425440614}
+  m_CullTransparentMesh: 1
 --- !u!1 &8478165747374543736
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2460284092861710261, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 70
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 2460284092861710261, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -634,6 +643,14 @@ PrefabInstance:
     - target: {fileID: 2901296327591716692, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796622683180575844, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593071129279254815, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: pivotOffset.y
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 4844456563717552189, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: portTypeHue

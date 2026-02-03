@@ -1007,6 +1007,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6818316863708656193, guid: 40d57063add9b224ca48b0babd90d4c8, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6971233128045613734, guid: 40d57063add9b224ca48b0babd90d4c8, type: 3}
       propertyPath: owner
       value: 

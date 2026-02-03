@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -309,17 +309,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85c6b99c2de5884ea6d357917a5c06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port:
-    name: output value
-    isRequired: 0
-    isInput: 0
-    isExecutionPort: 0
   owner: {fileID: 7168000377381407688}
   portTypeHue: 32
   tmpUGUI: {fileID: 0}
   portPosition: {fileID: 4652742779142067029}
   portImage: {fileID: 233830529551715561}
-  outputLines: []
 --- !u!1 &3406579493432095185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,7 +1220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878197732558657264, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_fontSize
-      value: 9.9
+      value: 12.35
       objectReference: {fileID: 0}
     - target: {fileID: 8130235904526101330, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_Name

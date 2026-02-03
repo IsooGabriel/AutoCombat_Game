@@ -100,37 +100,33 @@ public class GraphEditorManager : MonoBehaviour
     /// <param name="context"></param>
     public void DeleteNode(InputAction.CallbackContext context)
     {
-        // Pointer 用のデータ作成
         PointerEventData pointerData = new PointerEventData(eventSystem);
         pointerData.position = Mouse.current.position.ReadValue();
 
-        // UI レイキャスト
         List<RaycastResult> results = new List<RaycastResult>();
         raycaster.Raycast(pointerData, results);
 
-        if (results.Count == 0) return;
+        if (results.Count == 0)
+        {
+            return;
+        }
 
-        // 最前面の UI オブジェクトを取得（Button を含む）
         GameObject topUI = results[0].gameObject;
-
-        // interface を探す（Button の子にも付けられるように）
-        var rightClickable = topUI.GetComponentInParent<NodeUI>();
-
-        if(rightClickable == null)
+        PortUI portUI = topUI.GetComponentInParent<PortUI>();
+        if (portUI != null)
         {
-            if(topUI.TryGetComponent<PortUI>(out var portUI))
-            {
-                DisconectPort(portUI);
-            }
+            DisconectPort(portUI);
             return;
         }
-        if (rightClickable.node is StartNode)
+
+        NodeUI nodeUI = topUI.GetComponentInParent<NodeUI>();
+        if (nodeUI.node is StartNode)
         {
             return;
         }
 
-        Instance.nodeUIs.Remove(rightClickable);
-        Node deleteNode = rightClickable.node;
+        Instance.nodeUIs.Remove(nodeUI);
+        Node deleteNode = nodeUI.node;
 
         foreach (var nodeDeta in Instance.nodeUIs)
         {
@@ -140,7 +136,7 @@ public class GraphEditorManager : MonoBehaviour
             }
         }
 
-        Destroy(rightClickable.gameObject);
+        Destroy(nodeUI.gameObject);
     }
 
     public void ResetGraph()
@@ -435,7 +431,7 @@ public class GraphEditorManager : MonoBehaviour
         }
         else if (target.owner.node is LinkedNode)
         {
-        
+
         }
         else
         {

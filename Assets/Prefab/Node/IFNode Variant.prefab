@@ -257,7 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1807,7 +1807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2481933388263511940, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_fontSize
-      value: 10.8
+      value: 13.4
       objectReference: {fileID: 0}
     - target: {fileID: 2901296327591716692, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y
