@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -54,12 +55,16 @@ public class PortUI : MonoBehaviour
 
     public void Disconect(PortUI target)
     {
-        outputLines.RemoveAll(l => l.gameObject.GetComponent<ConectionUI>().toPort == target);
         for(int i = 0; outputConectionsUI.Count > i; ++i)
         {
             var conn = outputConectionsUI[i];
             if (conn.toPort == target)
             {
+                owner.node.outputPorts.ToList().ForEach(p =>
+                {
+                    p.outputConections.RemoveAll(c => c.node == target.port.owner && c.portName == target.port.portName);
+                });
+                outputLines.RemoveAll(l => l == outputConectionsUI[i].lineRenderer);
                 outputConectionsUI.RemoveAt(i);
                 Destroy(conn.gameObject);
                 break;

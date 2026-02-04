@@ -1,0 +1,30 @@
+﻿{
+    "nodes": [
+        {
+            "id": "cbdc0253-27fc-4766-bbcd-51405b1178ca",
+            "type": 0,
+            "position": {
+                "x": 3.140495777130127,
+                "y": -1.3228362798690797
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": []
+                }
+            ],
+            "inputValues": []
+        }
+    ],
+    "linkedNodes": [],
+    "graphName": "_DEFAULT_4f6c3510-cb20-470d-a47e-bdbb397c8274",
+    "author": "_DEFAULT_fdc34562-5d76-4bc9-950a-1e6127ce4581",
+    "aditionalStatus": {
+        "hp": 0,
+        "attack": 0,
+        "attackCooltime": 0,
+        "criticalChance": 0,
+        "criticalDamage": 0
+    },
+    "weapon": 0
+}

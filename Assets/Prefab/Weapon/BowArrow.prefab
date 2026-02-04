@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageMultiply: 1
   range: 0
-  attackCT: 1
+  baseCT: 1.5
   originOffset: {x: 1, y: 0}
   attackSpeed: 0
   user: {fileID: 0}

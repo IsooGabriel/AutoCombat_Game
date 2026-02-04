@@ -19,7 +19,7 @@
                 IDamageable target = hit.collider.GetComponent<IDamageable>();
                 if (target != null && target != user)
                 {
-                    target.TakeDamage((int)damage);
+                    target.TakeDamage(damage);
                 }
             }
             return true;

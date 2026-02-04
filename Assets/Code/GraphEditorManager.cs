@@ -42,8 +42,9 @@ public class GraphEditorManager : MonoBehaviour
     public GraphicRaycaster raycaster;
 
     public const string defaultPath = "GraphData";
+    public const string enemyPath = "EnemyGraph";
     public const string playerDataFileName = "player.acjson";
-    public const string enemyDataFileName = "enemy.acjson";
+    public const string enemyDataFileName = "enemy.json";
     public readonly int[] maxNodesForPoints = { 987, 610, 377, 233, 144, 89, 55, 34, 21, 13 };
     private int aditionableStatusCount = 0;
 
@@ -428,7 +429,9 @@ public class GraphEditorManager : MonoBehaviour
                 Destroy(line.gameObject);
             }
             target.outputLines.Clear();
+            target.outputConectionsUI.Clear();
             target.port.outputConections.Clear();
+            target.owner.node.outputPorts.ToList().ForEach(p => p.outputConections.Clear());
         }
         else
         {
@@ -446,6 +449,7 @@ public class GraphEditorManager : MonoBehaviour
     public void SaveGraph(string path, string graphName, string author)
     {
         HashSet<string> usedNodeIds = new HashSet<string>() { };
+        Instance.graphData.nodes.Clear();
         foreach (var nodeUI in GraphEditorManager.Instance.nodeUIs)
         {
             if (usedNodeIds.Contains(nodeUI.node.id))
@@ -486,7 +490,7 @@ public class GraphEditorManager : MonoBehaviour
     {
         string parent = Application.persistentDataPath.Replace("/", "\\");
 
-        SaveGraph($"{parent}\\{defaultPath}\\{SanitizeFileName(graphName)}{SanitizeFileName(author)}{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.acjson", graphName, author);
+        SaveGraph($"{parent}\\{defaultPath}\\{SanitizeFileName(graphName)}{SanitizeFileName(author)}__{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.acjson", graphName, author);
     }
     public void SaveGraph(string path)
     {
@@ -497,10 +501,21 @@ public class GraphEditorManager : MonoBehaviour
     {
         SaveGraph("PlaeyreData.json");
     }
+    public void SaveEnemyGraph()
+    {
+        SaveGraph(enemyDataFileName);
+    }
     public void SaveGraphDefaultPath(bool isPlayer = true)
     {
         string parent = Application.persistentDataPath.Replace("/", "\\");
-        SaveGraph($"{parent}\\{defaultPath}\\{(isPlayer ? playerDataFileName : enemyDataFileName)}");
+        if (isPlayer)
+        { 
+        SaveGraph($"{parent}\\{defaultPath}\\{playerDataFileName}");
+        }
+        else
+        {
+            SaveGraph($"{parent}\\{enemyPath}\\{enemyDataFileName}");
+        }
     }
 
     public static string SanitizeFileName(string name)
@@ -515,6 +530,7 @@ public class GraphEditorManager : MonoBehaviour
     }
     private void EnsureDirectoryExists(string path)
     {
+        return;
         path = Path.GetDirectoryName(path);
         if (!Directory.Exists(path))
         {

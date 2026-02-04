@@ -44,11 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2ccb96a32c6cd4a94a0ca9ca6f91e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiply: 1
-  range: 0
-  attackCT: 1
-  originOffset: {x: 0, y: 0}
+  damageMultiply: 0.02
+  range: 20
+  baseCT: 0
+  originOffset: {x: 1.41, y: 0}
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
-  laserPrefab: {fileID: 0}

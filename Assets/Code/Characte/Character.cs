@@ -7,14 +7,14 @@ public interface IDeathable
 }
 public interface IDamageable
 {
-    public void TakeDamage(int damage);
+    public void TakeDamage(decimal damage);
 }
 
 public class Character : MonoBehaviour, IDeathable, IDamageable
 {
     public Status baseStatus { get; set; } = new() { hp = 10, attack = 1, attackCooltime = 1, criticalChance = 20, criticalDamage = 40 };
     public Status aditionalStatus { get; set; } = new() { hp = 0, attack = 0, attackCooltime = 0, criticalChance = 0, criticalDamage = 0 };
-    public int currentHP = 10;
+    public decimal currentHP = 10;
     const decimal speed = 5;
     public Weapon.Weapon weapon;
     public Action<Character> takeDamage;
@@ -27,7 +27,7 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
         Destroy(this.gameObject);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(decimal damage)
     {
         currentHP -= damage;
         takeDamage?.Invoke(this);
