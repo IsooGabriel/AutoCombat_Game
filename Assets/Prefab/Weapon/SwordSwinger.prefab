@@ -53,7 +53,7 @@ MonoBehaviour:
   user: {fileID: 0}
   timer: 0
   sword: {fileID: 8717065934791099542}
-  swingAngle: 180
+  swingAngle: 90
 --- !u!1001 &327022652773596674
 PrefabInstance:
   m_ObjectHideFlags: 0

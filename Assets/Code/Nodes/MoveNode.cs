@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MoveNode : Node
 {
+
+    public const string fripPortName = "isEnemyFrip";
     public override void Initialize()
     {
         nodeType = NodeType.Move;
@@ -10,6 +12,7 @@ public class MoveNode : Node
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
             new Port("direction", typeof(Vector2), true, true, false, this),
+            new Port(fripPortName, typeof(bool), false, true, false, this),
         };
         outputPorts = new Port[]
         {
@@ -25,6 +28,7 @@ public class MoveNode : Node
         }
         List<Vector2> directions = new() { };
        Vector2 direction = TryGetInputValueWithPort("direction", out directions) == true ? directions[0] : Vector2.zero;
+        if (TryGetInputValueWithPort(fripPortName, out bool flip) &&  flip && !executor.myCharacter.isPlayer) direction.x *= -1;
         executor.myCharacter.Move(direction);
         executor.EnqueueConnected(this, executePortName);
     }

@@ -29,9 +29,9 @@
             float elapsed = 0f;
             Quaternion initialRotation = ArmRotation(direction, -halfAngle);
             Quaternion finalRotation = ArmRotation(direction, halfAngle);
-            sword.transform.localRotation = initialRotation;
+            sword.transform.rotation = initialRotation;
 
-            if (direction.x > 0)
+            if (direction.x >= 0)
             {
                 (finalRotation, initialRotation) = (initialRotation, finalRotation);
             }
@@ -40,12 +40,12 @@
             while (elapsed < duration)
             {
                 float t = elapsed / duration;
-                sword.transform.localRotation = Quaternion.Slerp(initialRotation, finalRotation, t);
+                sword.transform.rotation = Quaternion.Slerp(initialRotation, finalRotation, t);
                 elapsed += Time.deltaTime;
                 await System.Threading.Tasks.Task.Yield();
             }
 
-            sword.transform.localRotation = initialRotation;
+            sword.transform.rotation = initialRotation;
             sword.SetActive(false);
         }
 

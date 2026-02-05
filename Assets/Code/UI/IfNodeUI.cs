@@ -45,8 +45,8 @@ public class IfNodeUI : NodeUI, IUserVariable
         }
 
         SetSetting((IfSettings)(int)value);
-        setting.value = (int)2;
-        setting.SetValueWithoutNotify((int)2);
+        setting.value = (int)value;
+        setting.SetValueWithoutNotify((int)value);
         setting.RefreshShownValue();
         return true;
     }

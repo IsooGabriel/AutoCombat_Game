@@ -39,7 +39,7 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
 
     public Vector2 Move(Vector2 direction)
     {
-        direction.Normalize();
+        if(direction.magnitude>1f)direction.Normalize();
         float multiply = (float)speed * Time.deltaTime;
         direction = new Vector2(direction.x * multiply, direction.y * multiply);
 

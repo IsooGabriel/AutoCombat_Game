@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6651216280136542199}
   - component: {fileID: 7321637023137927784}
   - component: {fileID: 66643279851611776}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Template
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 1559205378885519712}
   - component: {fileID: 5759066311428343460}
   - component: {fileID: 3242231785879516887}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Viewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 3155399254868931836}
   - component: {fileID: 2973410422096295451}
   - component: {fileID: 1592414382393617178}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 7763201100025625941}
   - component: {fileID: 8099555184542637908}
   - component: {fileID: 7282534951163102038}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Item Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 7773894631195364903}
   - component: {fileID: 2458244837294391248}
   - component: {fileID: 4691535485607741144}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6955248308673873320}
   - component: {fileID: 4857139260050758700}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,7 +581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5635638329112126703}
   - component: {fileID: 6330396534454239873}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Port (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -634,7 +634,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1882899268779809269}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +672,7 @@ GameObject:
   - component: {fileID: 6148757487394760216}
   - component: {fileID: 2849752443201318838}
   - component: {fileID: 7621643806285397871}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -809,7 +809,7 @@ GameObject:
   - component: {fileID: 3032047894318147476}
   - component: {fileID: 4620613119984131998}
   - component: {fileID: 8679598986869905559}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Button (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -941,7 +941,7 @@ GameObject:
   - component: {fileID: 7745831593214082497}
   - component: {fileID: 6980428225591225989}
   - component: {fileID: 2368859739856595790}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Item Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1077,7 +1077,7 @@ GameObject:
   - component: {fileID: 268908168942158993}
   - component: {fileID: 2432983788940780643}
   - component: {fileID: 5561720433034067324}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1152,7 +1152,7 @@ GameObject:
   - component: {fileID: 4016732863036123942}
   - component: {fileID: 902881982135939448}
   - component: {fileID: 5674994123801808179}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Item Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1228,7 +1228,7 @@ GameObject:
   - component: {fileID: 7427184652598723565}
   - component: {fileID: 7021057439046806628}
   - component: {fileID: 6581995863316409585}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Scrollbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1353,7 +1353,7 @@ GameObject:
   - component: {fileID: 2058244339484397897}
   - component: {fileID: 7606335488085444700}
   - component: {fileID: 1665014630626323727}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1428,7 +1428,7 @@ GameObject:
   - component: {fileID: 2509143195111103644}
   - component: {fileID: 5072634557713364701}
   - component: {fileID: 2855574208513419912}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Port (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1506,7 +1506,7 @@ GameObject:
   - component: {fileID: 8743150964454783646}
   - component: {fileID: 8348488120523529930}
   - component: {fileID: 8437403617088609748}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Dropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1633,6 +1633,9 @@ MonoBehaviour:
     - m_Text: Option C
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
+    - m_Text: Option C
+      m_Image: {fileID: 0}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1658,7 +1661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5619894824114957051}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Sliding Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
