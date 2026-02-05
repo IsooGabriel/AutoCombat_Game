@@ -16,6 +16,7 @@ public class GraphRunner : MonoBehaviour
     public Character enemy;
     public TextAsset playerGraphJson;
     public TextAsset enemyGraphJson;
+    public bool isLoadEnemyGraph = false;
 
     private GraphExecutor _playerExecutor;
     private GraphExecutor _enemyExecutor;
@@ -40,9 +41,17 @@ public class GraphRunner : MonoBehaviour
         var playerGraph = JsonUtility.FromJson<GraphData>(json);
         GraphEditorManager.Instance ??= new GraphEditorManager();
         GraphEditorManager.Instance.AjustAdditionalStatus(playerGraph.aditionalStatus);
-        var enemyGraph = JsonUtility.FromJson<GraphData>(enemyjson);
-        //var playerGraph = JsonUtility.FromJson<GraphData>(playerGraphJson.text);
-        //var enemyGraph = JsonUtility.FromJson<GraphData>(enemyGraphJson.text);
+
+        GraphData enemyGraph;
+        if (isLoadEnemyGraph)
+        {
+            enemyGraph = JsonUtility.FromJson<GraphData>(enemyGraphJson.text);
+        }
+        else
+        {
+            enemyGraph = JsonUtility.FromJson<GraphData>(enemyjson);
+        }
+
         if (playerGraph == null || enemyGraph == null || player == null || enemy == null)
         {
             Debug.LogError("なんかたんない");
