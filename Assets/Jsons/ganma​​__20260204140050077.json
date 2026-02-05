@@ -1,0 +1,148 @@
+﻿{
+    "nodes": [
+        {
+            "id": "197b6d04-499d-40ec-9d2c-8441d3db6eca",
+            "type": 0,
+            "position": {
+                "x": -4.495867729187012,
+                "y": 0.2804698646068573
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "e171111c-fa1b-429b-8dd2-2867fdea5ea5",
+                            "portName": "Execute"
+                        }
+                    ]
+                }
+            ],
+            "inputValues": []
+        },
+        {
+            "id": "e171111c-fa1b-429b-8dd2-2867fdea5ea5",
+            "type": 14,
+            "position": {
+                "x": 0.8595035076141357,
+                "y": 0.42922961711883547
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "faafb652-100d-4eec-96f9-1e7951d1a918",
+                            "portName": "Execute"
+                        }
+                    ]
+                },
+                {
+                    "fromPortName": "position",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "faafb652-100d-4eec-96f9-1e7951d1a918",
+                            "portName": "direction"
+                        }
+                    ]
+                }
+            ],
+            "inputValues": [
+                {
+                    "toPortName": "isCharacterPostion",
+                    "value": 1.0,
+                    "isUserset": true
+                }
+            ]
+        },
+        {
+            "id": "faafb652-100d-4eec-96f9-1e7951d1a918",
+            "type": 1,
+            "position": {
+                "x": 6.396693706512451,
+                "y": 0.1482376903295517
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "633c935a-4c92-431c-8c64-2d2ec9e92363",
+                            "portName": "Execute"
+                        }
+                    ]
+                },
+                {
+                    "fromPortName": "newPosition",
+                    "toPortNodes": []
+                }
+            ],
+            "inputValues": []
+        },
+        {
+            "id": "ff40d277-4120-4d09-a785-e3036c5ff5f3",
+            "type": 2,
+            "position": {
+                "x": 14.148760795593262,
+                "y": -0.4633321166038513
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": []
+                },
+                {
+                    "fromPortName": "onHit",
+                    "toPortNodes": []
+                }
+            ],
+            "inputValues": []
+        },
+        {
+            "id": "633c935a-4c92-431c-8c64-2d2ec9e92363",
+            "type": 15,
+            "position": {
+                "x": 9.966940879821778,
+                "y": -1.6060246229171754
+            },
+            "outputConnections": [
+                {
+                    "fromPortName": "Execute",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "ff40d277-4120-4d09-a785-e3036c5ff5f3",
+                            "portName": "Execute"
+                        }
+                    ]
+                },
+                {
+                    "fromPortName": "outBool",
+                    "toPortNodes": [
+                        {
+                            "nodeId": "ff40d277-4120-4d09-a785-e3036c5ff5f3",
+                            "portName": "isAutoAim"
+                        }
+                    ]
+                }
+            ],
+            "inputValues": [
+                {
+                    "toPortName": "inputBool",
+                    "value": 1.0,
+                    "isUserset": true
+                }
+            ]
+        }
+    ],
+    "linkedNodes": [],
+    "graphName": "ganma​",
+    "author": "​",
+    "aditionalStatus": {
+        "hp": 0,
+        "attack": 0,
+        "attackCooltime": 0,
+        "criticalChance": 0,
+        "criticalDamage": 0
+    },
+    "weapon": 0
+}

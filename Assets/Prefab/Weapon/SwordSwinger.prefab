@@ -70,9 +70,21 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5127462129466557650, guid: e00922d480e5eeb4fa1d2f24c965c960, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6646849554137552877, guid: e00922d480e5eeb4fa1d2f24c965c960, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8144344478120354620, guid: e00922d480e5eeb4fa1d2f24c965c960, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8144344478120354620, guid: e00922d480e5eeb4fa1d2f24c965c960, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8144344478120354620, guid: e00922d480e5eeb4fa1d2f24c965c960, type: 3}
       propertyPath: m_LocalPosition.x

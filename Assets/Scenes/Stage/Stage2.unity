@@ -4274,7 +4274,7 @@ MonoBehaviour:
   player: {fileID: 1032939234}
   enemy: {fileID: 1716267443}
   playerGraphJson: {fileID: 4900000, guid: 66245d8d660f3ab4ba7a0cfbc29e66e0, type: 3}
-  enemyGraphJson: {fileID: 4900000, guid: 003282406fff05249acdae0313adb07e, type: 3}
+  enemyGraphJson: {fileID: 4900000, guid: 66245d8d660f3ab4ba7a0cfbc29e66e0, type: 3}
   isLoadEnemyGraph: 1
 --- !u!4 &1753127397
 Transform:
