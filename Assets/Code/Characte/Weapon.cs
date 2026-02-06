@@ -9,7 +9,7 @@
         {
             get
             {
-                decimal baseDamage = user != null ? user.baseStatus.attack + user.aditionalStatus.attack : 1;
+                decimal baseDamage = user != null ? (user.baseStatus.attack + user.aditionalStatus.attack)*(decimal)0.1 : 1;
                 return baseDamage * (decimal)damageMultiply;
             }
         }
@@ -24,7 +24,7 @@
             }
         }
 
-        protected const float attackCoottimeMultiply = 0.1f;
+        protected const float attackCoottimeMultiply = 0.05f;
         public Vector2 originOffset;
         public float attackSpeed;
         public Character user;

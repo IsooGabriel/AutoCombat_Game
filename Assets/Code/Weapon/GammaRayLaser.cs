@@ -17,7 +17,7 @@
             if (hit.collider)
             {
                 IDamageable target = hit.collider.GetComponent<IDamageable>();
-                if (target != null && target != user)
+                if (target != null && target.HitCheck(user))
                 {
                     target.TakeDamage(damage);
                 }

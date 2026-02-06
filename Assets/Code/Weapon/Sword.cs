@@ -4,6 +4,9 @@ namespace Weapon
     using UnityEngine;
     public class Sword : Weapon
     {
+        [SerializeField]
+        private float hitCooltime = 0.0f;
+        private float timer = 0;
         private void OnTriggerEnter2D(Collider2D collision)
         {
             Hit(collision.gameObject);
@@ -14,11 +17,23 @@ namespace Weapon
         }
         void Hit(GameObject hit)
         {
-            if (hit == user.gameObject || !hit.TryGetComponent<IDamageable>(out IDamageable target))
+            if (timer > 0 || !hit.TryGetComponent<IDamageable>(out IDamageable target))
             {
                 return;
             }
-            target.TakeDamage(damage);
+            if (target.HitCheck(user))
+            {
+                timer = hitCooltime;
+                target.TakeDamage(damage);
+            }
+        }
+
+        private void Update()
+        {
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
         }
     }
 }

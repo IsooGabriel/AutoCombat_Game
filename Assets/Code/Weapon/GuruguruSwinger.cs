@@ -1,21 +1,21 @@
-﻿namespace Weapon
+using DG.Tweening;
+using UnityEngine;
+namespace Weapon
 {
-    using UnityEngine;
-    public class SwordSwinger : Weapon
+    public class GuruguruSwinger : Weapon
     {
         [SerializeField]
         private GameObject sword;
+        [SerializeField] float activeTime;
         [SerializeField]
-        private float swingAngle = 160f;
-
-
+        float guruguruSpeed;
         private float animationSpeed = 10f;
 
         private float duration
         {
             get
             {
-                return Mathf.Clamp((1 / attackSpeed), 0, attackCT);
+                return activeTime;
             }
         }
 
@@ -38,27 +38,17 @@
 
         async void Swing(Vector2 direction)
         {
-            float halfAngle = swingAngle / 2f;
             float elapsed = 0f;
-            Quaternion initialRotation = ArmRotation(direction, -halfAngle);
-            Quaternion finalRotation = ArmRotation(direction, halfAngle);
-            sword.transform.rotation = initialRotation;
-
-            if (direction.x >= 0)
-            {
-                (finalRotation, initialRotation) = (initialRotation, finalRotation);
-            }
+            sword.transform.rotation = ArmRotation(direction);
             sword.SetActive(true);
 
             while (elapsed < duration)
             {
                 float t = elapsed / duration;
-                sword.transform.rotation = Quaternion.Slerp(initialRotation, finalRotation, t);
+                sword.transform.rotation = ArmRotation(direction,guruguruSpeed * elapsed);
                 elapsed += Time.deltaTime;
                 await System.Threading.Tasks.Task.Yield();
             }
-
-            sword.transform.rotation = initialRotation;
             sword.SetActive(false);
         }
 

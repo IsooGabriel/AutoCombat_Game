@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InstructionsSpaceAnimation : MonoBehaviour, IUIAnimation

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TextAnimation_Gabu : UISystem_Gabu
 {
     #region 変数
-    private TextMeshProUGUI tmp;    
+    private TextMeshProUGUI tmp;
     #endregion
 
     #region 関数

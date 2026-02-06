@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3068020785006756358}
   - component: {fileID: 3554555465201736320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 4786599455052725719}
   - component: {fileID: 3270496663315490433}
   - component: {fileID: -4964299932989676173}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,8 @@ MonoBehaviour:
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
-  speed: 1
+  speed: 3
+  hp: 1
 --- !u!60 &3270496663315490433
 PolygonCollider2D:
   m_ObjectHideFlags: 0

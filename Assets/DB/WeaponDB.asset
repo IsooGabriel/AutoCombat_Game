@@ -46,4 +46,70 @@ MonoBehaviour:
     originOffset: {x: 0, y: 0}
     attackSpeed: 0
     timer: 0
+  - weaponName: Shooter
+    prefab: {fileID: 3334296252503296023, guid: b0896ed9e0409434eb73c4ff9e372b62, type: 3}
+    icon: {fileID: -8036611144385000861, guid: 4a89ca2f012b77940a5f1721711bb84d, type: 3}
+    childPrefabIndex: -1
+    enableThisElements: 0
+    damageMultiply: 0
+    range: 0
+    attackCT: 0
+    originOffset: {x: 0, y: 0}
+    attackSpeed: 0
+    timer: 0
+  - weaponName: Gun
+    prefab: {fileID: 3334296252503296023, guid: 5363af476d0a4f441909f3b72d06d60f, type: 3}
+    icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    childPrefabIndex: -1
+    enableThisElements: 0
+    damageMultiply: 0
+    range: 0
+    attackCT: 0
+    originOffset: {x: 0, y: 0}
+    attackSpeed: 0
+    timer: 0
+  - weaponName: SwordEX
+    prefab: {fileID: 3334296252503296023, guid: 8c4e2ff19a2615740a14cf9664e82a1d, type: 3}
+    icon: {fileID: 21300000, guid: c706f86f6fd02084f9a14727d08b844d, type: 3}
+    childPrefabIndex: -1
+    enableThisElements: 0
+    damageMultiply: 0
+    range: 0
+    attackCT: 0
+    originOffset: {x: 0, y: 0}
+    attackSpeed: 0
+    timer: 0
+  - weaponName: Swing
+    prefab: {fileID: 3334296252503296023, guid: d4ff83efe77d709439c61283dd4e9eb5, type: 3}
+    icon: {fileID: 21300000, guid: 85be10d80c20c4181b8d53e425fb92a4, type: 3}
+    childPrefabIndex: -1
+    enableThisElements: 0
+    damageMultiply: 0
+    range: 0
+    attackCT: 0
+    originOffset: {x: 0, y: 0}
+    attackSpeed: 0
+    timer: 0
+  - weaponName: Circle
+    prefab: {fileID: 3334296252503296023, guid: 954ed8416e333c748acd4994a4866345, type: 3}
+    icon: {fileID: 21300000, guid: e28734586fb9bd2408cbbeab4fec93a6, type: 3}
+    childPrefabIndex: -1
+    enableThisElements: 0
+    damageMultiply: 0
+    range: 0
+    attackCT: 0
+    originOffset: {x: 0, y: 0}
+    attackSpeed: 0
+    timer: 0
+  - weaponName: PL
+    prefab: {fileID: 3334296252503296023, guid: e97e7222b0ec4d448b12c98c5b39524e, type: 3}
+    icon: {fileID: 21300000, guid: b533c652136df4744a089524507a44c6, type: 3}
+    childPrefabIndex: -1
+    enableThisElements: 0
+    damageMultiply: 0
+    range: 0
+    attackCT: 0
+    originOffset: {x: 0, y: 0}
+    attackSpeed: 0
+    timer: 0
   childPrefabs: []
