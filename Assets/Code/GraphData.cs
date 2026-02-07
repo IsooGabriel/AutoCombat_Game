@@ -14,6 +14,7 @@ public class GraphData
     public DateTime createdDate = DateTime.Now;
     public Status aditionalStatus = new() { hp = 0, attack = 0, attackCooltime = 0, criticalChance = 0, criticalDamage = 0 };
     public int weapon = 0;
+    public int skin = 0;
     public const int noWeapon = -1;    
 
     public GraphData()

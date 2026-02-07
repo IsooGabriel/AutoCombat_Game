@@ -22,6 +22,7 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
     public Action<Character> takeDamage;
     public Action<Character> onDeath;
     public bool isPlayer = false;
+    public SkinObject[] skins;
 
     public void Death()
     {
@@ -81,6 +82,15 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
         return weapon.hitAttack;
     }
 
+    public void ChangeSkin(int index)
+    {
+        if(index < 0 || index >= skins.Length)
+        {
+            return;
+        }
+        skins[index].Wear();
+    }
+
     public void Start()
     {
         currentHP = baseStatus.hp + aditionalStatus.hp;
@@ -90,6 +100,7 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
         }
     }
 }
+
 [Serializable]
 public class Status
 {
@@ -98,4 +109,24 @@ public class Status
     public int attackCooltime;
     public int criticalChance;
     public int criticalDamage;
+}
+
+[Serializable]
+public class SkinObject 
+{
+    [SerializeField]
+    public GameObject[] enable;
+    [SerializeField]
+    public GameObject[] disable;
+    public void Wear()
+    {
+        foreach (var obj in enable)
+        {
+            obj.SetActive(true);
+        }
+        foreach (var obj in disable)
+        {
+            obj.SetActive(false);
+        }
+    }
 }

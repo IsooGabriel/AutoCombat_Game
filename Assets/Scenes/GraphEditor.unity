@@ -258,6 +258,7 @@ MonoBehaviour:
       criticalChance: 0
       criticalDamage: 0
     weapon: 0
+    skin: 0
   additionalHP: {fileID: 565318387}
   additionalAttack: {fileID: 1053731681}
   additionalAttackCT: {fileID: 2084817370}
@@ -5531,7 +5532,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2002696200}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

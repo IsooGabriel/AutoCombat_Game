@@ -63,6 +63,10 @@ public class GraphRunner : MonoBehaviour
 
         _playerExecutor = new GraphExecutor(playerGraph, player, enemy);
         _enemyExecutor = new GraphExecutor(enemyGraph, enemy, player);
+
+        player.ChangeSkin(playerGraph.skin);
+        enemy.ChangeSkin(enemyGraph.skin);
+
         player.Start();
         enemy.Start();
     }
