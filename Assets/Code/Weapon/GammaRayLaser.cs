@@ -16,11 +16,12 @@
             Debug.DrawRay(origin, direction * range, Color.magenta);
             if (hit.collider)
             {
-                IDamageable target = hit.collider.GetComponent<IDamageable>();
-                if (target != null && target.HitCheck(user))
+                if (hit.collider.TryGetComponent<IDestructible>(out var destructible))
                 {
-                    target.TakeDamage(damage);
+                    destructible.TryDestruct(user, damage);
                 }
+                IDamageable target = hit.collider.GetComponent<IDamageable>();
+                target?.TakeDamage(damage);
             }
             return true;
         }

@@ -6,7 +6,7 @@ namespace Weapon
     {
         [SerializeField]
         private float hitCooltime = 0.0f;
-        private float timer = 0;
+        private float hitTimer = 0;
         private void OnTriggerEnter2D(Collider2D collision)
         {
             Hit(collision.gameObject);
@@ -17,22 +17,25 @@ namespace Weapon
         }
         void Hit(GameObject hit)
         {
+            if (hit.TryGetComponent<DestructibleWeapon>(out DestructibleWeapon destructible))
+            {
+                destructible.Destruct();
+                return;
+            }
             if (timer > 0 || !hit.TryGetComponent<IDamageable>(out IDamageable target))
             {
                 return;
             }
-            if (target.HitCheck(user))
-            {
-                timer = hitCooltime;
-                target.TakeDamage(damage);
-            }
+            hitTimer = hitCooltime;
+            target.TakeDamage(damage);
+
         }
 
         private void Update()
         {
-            if (timer > 0)
+            if (hitTimer > 0)
             {
-                timer -= Time.deltaTime;
+                hitTimer -= Time.deltaTime;
             }
         }
     }

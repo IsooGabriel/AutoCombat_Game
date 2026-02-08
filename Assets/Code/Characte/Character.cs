@@ -7,7 +7,6 @@ public interface IDeathable
 }
 public interface IDamageable
 {
-    public bool HitCheck(Character user);
     public decimal HPGet { get; }
     public void TakeDamage(decimal damage);
 }
@@ -28,10 +27,6 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
     {
         onDeath?.Invoke(this);
         Destroy(this.gameObject);
-    }
-    bool IDamageable.HitCheck(Character user)
-    {
-        return user != this;
     }
     decimal IDamageable.HPGet => currentHP;
     public void TakeDamage(decimal damage)

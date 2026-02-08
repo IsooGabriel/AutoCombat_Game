@@ -3,13 +3,19 @@
     using System;
     using UnityEngine;
 
+    public interface IDestructible
+    {
+        public decimal TryDestruct(Character destructer, decimal damage);
+        public void Destruct();
+    }
+
     public class Weapon : MonoBehaviour
     {
         public decimal damage
         {
             get
             {
-                decimal baseDamage = user != null ? (user.baseStatus.attack + user.aditionalStatus.attack)*(decimal)0.1 : 1;
+                decimal baseDamage = user != null ? (user.baseStatus.attack + user.aditionalStatus.attack) * (decimal)0.1 : 1;
                 return baseDamage * (decimal)damageMultiply;
             }
         }

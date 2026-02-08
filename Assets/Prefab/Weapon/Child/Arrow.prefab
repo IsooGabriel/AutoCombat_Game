@@ -141,8 +141,9 @@ MonoBehaviour:
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
-  speed: 3
   hp: 1
+  recoilMultiply: 2
+  speed: 3
 --- !u!60 &3270496663315490433
 PolygonCollider2D:
   m_ObjectHideFlags: 0
