@@ -141,7 +141,7 @@ MonoBehaviour:
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
-  hp: 2
+  hp: 5
   recoilMultiply: 1
   speed: 8
 --- !u!60 &3270496663315490433

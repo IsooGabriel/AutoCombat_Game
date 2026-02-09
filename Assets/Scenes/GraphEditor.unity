@@ -1171,7 +1171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5468122937374444236, guid: b5c601112d23bcc41843f6bf4782bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetCriticalDamage
+      value: AddCriticalDamage
       objectReference: {fileID: 0}
     - target: {fileID: 5468122937374444236, guid: b5c601112d23bcc41843f6bf4782bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -1235,7 +1235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7328361503452560585, guid: b5c601112d23bcc41843f6bf4782bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetCriticalDamage
+      value: AddCriticalDamage
       objectReference: {fileID: 0}
     - target: {fileID: 7328361503452560585, guid: b5c601112d23bcc41843f6bf4782bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -5341,7 +5341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5468122937374444236, guid: b5c601112d23bcc41843f6bf4782bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetCriticalChance
+      value: AddCriticalChance
       objectReference: {fileID: 0}
     - target: {fileID: 5468122937374444236, guid: b5c601112d23bcc41843f6bf4782bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -5405,7 +5405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7328361503452560585, guid: b5c601112d23bcc41843f6bf4782bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetCriticalChance
+      value: AddCriticalChance
       objectReference: {fileID: 0}
     - target: {fileID: 7328361503452560585, guid: b5c601112d23bcc41843f6bf4782bcd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

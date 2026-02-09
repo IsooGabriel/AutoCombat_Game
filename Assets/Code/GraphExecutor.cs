@@ -213,8 +213,8 @@ public class GraphExecutor
                 }
                 outputNodes.Add(nodes[outputID]);
             }
-            linkedNode.inputNodes = inputNodes.ToArray();
-            linkedNode.outputNodes = outputNodes.ToArray();
+            linkedNode.toNodes = inputNodes.ToArray();
+            linkedNode.fromNodes = outputNodes.ToArray();
             nodes[linkedNodeData.id] = linkedNode;
         }
         myCharacter.aditionalStatus = graphData.aditionalStatus;

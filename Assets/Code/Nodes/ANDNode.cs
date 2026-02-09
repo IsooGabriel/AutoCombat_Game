@@ -35,7 +35,7 @@ public class ANDNode : LinkedNode
             firstExecution = false;
         }
         executionCount++;
-        if (executionCount < inputNodes.Length)
+        if (executionCount < toNodes.Length)
         {
             return;
         }

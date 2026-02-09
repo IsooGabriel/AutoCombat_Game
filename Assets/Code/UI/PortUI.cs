@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 public class PortUI : MonoBehaviour
 {
@@ -53,9 +53,9 @@ public class PortUI : MonoBehaviour
         }
     }
 
-    public void Disconect(PortUI target)
+    public void DisconectWithPortUI(PortUI target)
     {
-        for(int i = 0; outputConectionsUI.Count > i; ++i)
+        for (int i = 0; outputConectionsUI.Count > i; ++i)
         {
             var conn = outputConectionsUI[i];
             if (conn.toPort == target)
@@ -71,6 +71,32 @@ public class PortUI : MonoBehaviour
             }
         }
         port.outputConections.RemoveAll(c => c.portName == target.port.portName && c.node == target.port.owner);
+    }
+
+    public void DisconectFromThis()
+    {
+        foreach (var conn in outputConectionsUI)
+        {
+            Destroy(conn.gameObject);
+        }
+        outputConectionsUI.Clear();
+
+        foreach (var connection in port.outputConections)
+        {
+            if (connection.node is not LinkedNode linked)
+            {
+                continue;
+            }
+            for (int i = 0; i < linked.fromNodes.Length; ++i)
+            {
+                if (linked.fromNodes[i] == owner.node)
+                {
+                    linked.fromNodes.TryRemoveElementsInRange(i, 1, out var e);
+                }
+            }
+        }
+        port.outputConections.Clear();
+        outputLines.Clear();
     }
 
     public void Start()

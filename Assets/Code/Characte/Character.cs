@@ -13,7 +13,7 @@ public interface IDamageable
 
 public class Character : MonoBehaviour, IDeathable, IDamageable
 {
-    public Status baseStatus { get; set; } = new() { hp = 10, attack = 10, attackCooltime = 0, criticalChance = 20, criticalDamage = 40 };
+    public Status baseStatus { get; set; } = new() { hp = 10, attack = 10, attackCooltime = 0, criticalChance = 20, criticalDamage = 100 };
     public Status aditionalStatus { get; set; } = new() { hp = 0, attack = 0, attackCooltime = 0, criticalChance = 0, criticalDamage = 0 };
     public decimal currentHP = 10;
     const decimal speed = 5;

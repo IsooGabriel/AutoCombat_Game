@@ -1,5 +1,5 @@
 ﻿public abstract class LinkedNode : Node
 {
-    public Node[] inputNodes = new Node[] { };
-    public Node[] outputNodes = new Node[] { };
+    public Node[] toNodes = new Node[] { };
+    public Node[] fromNodes = new Node[] { };
 }

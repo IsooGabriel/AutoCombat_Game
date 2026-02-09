@@ -174,18 +174,18 @@ public class GraphEditorManager : MonoBehaviour
             value = 0;
         }
         int old = status;
-        if (aditionableStatusCount - old + value > CheckMaxAdditionableStatus())
+        if (aditionableStatusCount - old + value > Instance.CheckMaxAdditionableStatus())
         {
-            value = CheckMaxAdditionableStatus() - (aditionableStatusCount - old);
+            value = Instance.CheckMaxAdditionableStatus() - (aditionableStatusCount - old);
         }
         aditionableStatusCount += value - old;
         status = value;
-        UpdateAdditionalStatus();
+        Instance.UpdateAdditionalStatus();
     }
 
     public void SetHP(int value)
     {
-        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.hp);
+        Instance.SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.hp);
     }
     public void SetHP(string value)
     {
@@ -194,13 +194,13 @@ public class GraphEditorManager : MonoBehaviour
     public void AddHP(int value)
     {
         value += Instance.graphData.aditionalStatus.hp;
-        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.hp);
+        Instance.SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.hp);
     }
 
 
     public void SetAttack(int value)
     {
-        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attack);
+        Instance.SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attack);
     }
     public void SetAttack(string value)
     {
@@ -209,13 +209,13 @@ public class GraphEditorManager : MonoBehaviour
     public void AddAttack(int value)
     {
         value += Instance.graphData.aditionalStatus.attack;
-        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attack);
+        Instance.SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attack);
     }
 
 
     public void SetAttackCT(int value)
     {
-        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attackCooltime);
+        Instance.SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attackCooltime);
     }
     public void SetAttackCT(string value)
     {
@@ -225,13 +225,13 @@ public class GraphEditorManager : MonoBehaviour
     public void AddAttackCT(int value)
     {
         value += Instance.graphData.aditionalStatus.attackCooltime;
-        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attackCooltime);
+        Instance.SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.attackCooltime);
     }
 
 
     public void SetCriticalChance(int value)
     {
-        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalChance);
+        Instance.SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalChance);
     }
     public void SetCriticalChance(string value)
     {
@@ -240,13 +240,13 @@ public class GraphEditorManager : MonoBehaviour
     public void AddCriticalChance(int value)
     {
         value += Instance.graphData.aditionalStatus.criticalChance;
-        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalChance);
+        Instance.SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalChance);
     }
 
 
     public void SetCriticalDamage(int value)
     {
-        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalDamage);
+        Instance.SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalDamage);
     }
     public void SetCriticalDamage(string value)
     {
@@ -255,7 +255,7 @@ public class GraphEditorManager : MonoBehaviour
     public void AddCriticalDamage(int value)
     {
         value += Instance.graphData.aditionalStatus.criticalDamage;
-        SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalDamage);
+        Instance.SetAdditionalStatus(value, ref Instance.graphData.aditionalStatus.criticalDamage);
     }
 
     /// <summary>
@@ -355,13 +355,13 @@ public class GraphEditorManager : MonoBehaviour
         from.port.outputConections.Add((to.port.owner, to.port.portName));
         if (from.port.owner is LinkedNode fromLinkedNode)
         {
-            Array.Resize(ref fromLinkedNode.outputNodes, fromLinkedNode.outputNodes.Length + 1);
-            fromLinkedNode.outputNodes[fromLinkedNode.outputNodes.Length - 1] = to.port.owner;
+            Array.Resize(ref fromLinkedNode.fromNodes, fromLinkedNode.fromNodes.Length + 1);
+            fromLinkedNode.fromNodes[fromLinkedNode.fromNodes.Length - 1] = to.port.owner;
         }
         if (to.port.owner is LinkedNode linkedNode)
         {
-            Array.Resize(ref linkedNode.inputNodes, linkedNode.inputNodes.Length + 1);
-            linkedNode.inputNodes[linkedNode.inputNodes.Length - 1] = from.port.owner;
+            Array.Resize(ref linkedNode.toNodes, linkedNode.toNodes.Length + 1);
+            linkedNode.toNodes[linkedNode.toNodes.Length - 1] = from.port.owner;
         }
 
         GraphEditorManager.Instance.SetLine(from, to);
@@ -428,10 +428,7 @@ public class GraphEditorManager : MonoBehaviour
             {
                 Destroy(line.gameObject);
             }
-            target.outputLines.Clear();
-            target.outputConectionsUI.Clear();
-            target.port.outputConections.Clear();
-            target.owner.node.outputPorts.ToList().ForEach(p => p.outputConections.Clear());
+            target.DisconectFromThis();
         }
         else
         {
@@ -439,7 +436,7 @@ public class GraphEditorManager : MonoBehaviour
             {
                 foreach(var portUI in node.outputPorts)
                 {
-                    portUI.Disconect(target);
+                    portUI.DisconectWithPortUI(target);
                 }
             }
         }
@@ -465,11 +462,11 @@ public class GraphEditorManager : MonoBehaviour
             {
                 List<string> inputIDs = new List<string>();
                 List<string> outputIDs = new List<string>();
-                foreach (var inputNode in linkedNode.inputNodes)
+                foreach (var inputNode in linkedNode.toNodes)
                 {
                     inputIDs.Add(inputNode.id);
                 }
-                foreach (var outputNode in linkedNode.outputNodes)
+                foreach (var outputNode in linkedNode.fromNodes)
                 {
                     outputIDs.Add(outputNode.id);
                 }
@@ -490,7 +487,7 @@ public class GraphEditorManager : MonoBehaviour
     {
         string parent = Application.persistentDataPath.Replace("/", "\\");
 
-        SaveGraph($"{parent}\\{defaultPath}\\{SanitizeFileName(graphName)}{SanitizeFileName(author)}__{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.acjson", graphName, author);
+        SaveGraph($"{parent}\\{defaultPath}\\{SanitizeFileName(graphName)}-{SanitizeFileName(author)}__{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.acjson", graphName, author);
     }
     public void SaveGraph(string path)
     {
