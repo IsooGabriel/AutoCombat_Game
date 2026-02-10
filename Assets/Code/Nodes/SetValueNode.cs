@@ -4,14 +4,15 @@ public class SetValueNode : Node
     public override void Initialize()
     {
         nodeType = NodeType.SetValue;
+        const string outputValuePortName = "output number";
         inputPorts = new Port[]
         {
-            new Port("Execute", typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
+            new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
         };
         outputPorts = new Port[]
         {
-            new Port("Execute", typeof(bool), false, false, true, this),
-            new Port("output number", typeof(float), false, false, false, this),
+            new Port(executePortName, typeof(bool), false, false, true, this),
+            new Port(outputValuePortName, typeof(float), false, false, false, this),
         };
     }
     public override void Execute(GraphExecutor executor)

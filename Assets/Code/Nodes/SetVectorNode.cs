@@ -5,19 +5,20 @@ public class SetVectorNode : Node
 {
     const string portXname = "x";
     const string portYname = "y";
+    const string outputVectorPortName = "output vector2";
     public override void Initialize()
     {
         nodeType = NodeType.SetVector;
         inputPorts = new Port[]
         {
-            new Port("Execute", typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
+            new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
             new Port(portXname, typeof(float), isRequired:false, isInput:true, isExecutionPort:false, this),
             new Port(portYname, typeof(float), isRequired:false, isInput:true, isExecutionPort:false, this),
         };
         outputPorts = new Port[]
         {
-            new Port("Execute", typeof(bool), false, false, true, this),
-            new Port("output vector2", typeof(Vector2), false, false, false, this),
+            new Port(executePortName, typeof(bool), false, false, true, this),
+            new Port(outputVectorPortName, typeof(Vector2), false, false, false, this),
         };
     }
 

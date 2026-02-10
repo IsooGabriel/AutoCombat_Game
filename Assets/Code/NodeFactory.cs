@@ -1,27 +1,31 @@
 ﻿
 using System.Collections.Generic;
 using System.Linq;
+using static NodeType;
 
 public static class NodeFactory
 {
     private static Dictionary<NodeType, System.Func<Node>> _creators = new()
     {
-        { NodeType.Start, () => new StartNode() },
-        { NodeType.Move, () => new MoveNode() },
-        { NodeType.Attack, () => new AttackNode() },
+        { Start, () => new StartNode() },
+        { Move, () => new MoveNode() },
+        { Attack, () => new AttackNode() },
         //{ NodeType.Jump, () => new JumpNode() },
         //{ NodeType.GetDistance, () => new GetDistanceNode() },
         //{ NodeType.GetHP, () => new GetHPNode() },
         //{ NodeType.Compare, () => new CompareNode() },
         //{ NodeType.Branch, () => new BranchNode() },
-        { NodeType.DEBUG, () => new _DebugNode() },
-        { NodeType.SetValue, () => new SetValueNode() },
-        { NodeType.SetVector, () => new SetVectorNode() },
-        { NodeType.AND, () => new ANDNode() },
-        { NodeType.IF, () => new IfNode() },
-        { NodeType.BreakVector, () => new BreakVectorNode() },
-        { NodeType.GetPosition, () => new GetPositionNode() },
-        { NodeType.SetBool, () => new SetBoolNode() },
+        { DEBUG, () => new _DebugNode() },
+        { SetValue, () => new SetValueNode() },
+        { SetVector, () => new SetVectorNode() },
+        { AND, () => new ANDNode() },
+        { IF, () => new IfNode() },
+        { BreakVector, () => new BreakVectorNode() },
+        { GetPosition, () => new GetPositionNode() },
+        { SetBool, () => new SetBoolNode() },
+        { DoNTime, () => new DoNTimeNode() },
+        { Sum, () => new SumNode()},
+        { GetStatus, () => new GetStatusNode() }
     };
 
     public static Node Create(NodeType type)

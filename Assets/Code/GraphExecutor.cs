@@ -9,6 +9,7 @@ public class GraphExecutor
     private Dictionary<string, LinkedNode> linkedNodes = new Dictionary<string, LinkedNode> { };
     public Queue<Node> executionQueue;
     public Node startNode = null;
+    public HashSet<string> startedNodes = new HashSet<string> { };
 
     #region public関数
 
@@ -18,7 +19,6 @@ public class GraphExecutor
         this.myCharacter = myCharacter;
         this.enemy = enemy;
         LoadGraph(graphData);
-        
     }
 
     /// <summary>
@@ -36,9 +36,15 @@ public class GraphExecutor
         while (executionQueue.Count > 0)
         {
             Node node = executionQueue.Dequeue();
+            if(!startedNodes.Contains(node.id))
+            {
+                node.StartInitialize();
+                startedNodes.Add(node.id);
+            }
             if (!executed.Contains(node.id))
             {
                 node.useCount = 1;
+                node.FlameInitialize();
                 executed.Add(node.id);
             }
             else if (node.useLimit < 0)
@@ -64,6 +70,7 @@ public class GraphExecutor
         }
         foreach (var node in executed)
         {
+            nodes[node].FinaryFlame();
             List<InputValue<object>> usersets = nodes[node].inputValues.Where(v => v.isUserset).ToList();
             nodes[node].inputValues = usersets;
         }

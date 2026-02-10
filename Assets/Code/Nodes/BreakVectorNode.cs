@@ -16,8 +16,8 @@ public class BreakVectorNode : Node
         outputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), false, false, true, this),
-            new Port(fromXPort, typeof(float), false, false, true, this),
-            new Port(fromYPort, typeof(float), false, false, true, this),
+            new Port(fromXPort, typeof(float), false, false, false, this),
+            new Port(fromYPort, typeof(float), false, false, false, this),
         };
     }
     public override void Execute(GraphExecutor executor)

@@ -147,11 +147,7 @@ public enum NodeType
     BreakVector,
     GetPosition,
     SetBool,
-}
-
-public enum Weapons
-{
-    GAMMARAY_LASER = 0,
-    SWORD,
-    ARROW,
+    DoNTime,
+    Sum,
+    GetStatus,
 }

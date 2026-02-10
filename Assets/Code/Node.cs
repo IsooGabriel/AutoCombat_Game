@@ -33,6 +33,14 @@ public abstract class Node
     {
         return;
     }
+
+    /// <summary>
+    /// ìØÉtÉåÅ[ÉÄÇ≈QueueÇ…ì¸Ç¡ÇƒÇ¢ÇΩèÍçáÇÃÇ›é¿çsÇ≥ÇÍÇÈ
+    /// </summary>
+    public virtual void FinaryFlame()
+    {
+        return;
+    }
     public virtual void SetData(NodeData data)
     {
         id = data.id;
@@ -119,5 +127,43 @@ public abstract class Node
             }
         }
         return found;
+    }
+    protected Type GetConnectionType()
+    {
+        Type connectionType = typeof(float);
+        HashSet<Node> visitedNodes = new HashSet<Node>();
+        foreach (var fromPort in outputPorts)
+        {
+            foreach (var toPort in fromPort.outputConections)
+            {
+                if (visitedNodes.Contains(toPort.node))
+                {
+                    continue;
+                }
+                visitedNodes.Add(toPort.node);
+                foreach (var inputPort in toPort.node.inputPorts)
+                {
+                    if (inputPort.portName != toPort.portName)
+                    {
+                        continue;
+                    }
+                    if (inputPort.portType == typeof(Vector2))
+                    {
+                        return typeof(Vector2);
+                    }
+                    if (inputPort.portType == typeof(float))
+                    {
+                        connectionType = typeof(float);
+                    }
+                    else if (inputPort.portType == typeof(bool))
+                    {
+                        connectionType = typeof(bool);
+                    }
+                    connectionType = inputPort.portType;
+                    break;
+                }
+            }
+        }
+        return connectionType;
     }
 }

@@ -45,9 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4eff2ae36d9e848b62d3980cfa21f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplies:
+    finaryDamage: 1
+    attack: 1
+    aditionalAttack: 1
+    finaryAttack: 0.1
+    criticalChance: 1
+    aditionalCriticalChance: 0.2
+    finaryCriticalChance: 1
+    criticalDamage: 1
+    aditionalCriticalDamage: 1
+    finaryCriticalDamage: 0.1
   damageMultiply: 1
   range: 11111
-  attackCT: 1
+  baseCT: 1
   originOffset: {x: 0.72, y: 0}
   attackSpeed: 1
   user: {fileID: 0}

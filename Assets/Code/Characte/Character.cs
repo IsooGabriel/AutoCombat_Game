@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public interface IDeathable
@@ -13,8 +14,22 @@ public interface IDamageable
 
 public class Character : MonoBehaviour, IDeathable, IDamageable
 {
-    public Status baseStatus { get; set; } = new() { hp = 10, attack = 10, attackCooltime = 0, criticalChance = 20, criticalDamage = 100 };
+    public Status baseStatus { get; set; } = new() { hp = 10, attack = 10, attackCooltime = 0, criticalChance = 10, criticalDamage = 10 };
     public Status aditionalStatus { get; set; } = new() { hp = 0, attack = 0, attackCooltime = 0, criticalChance = 0, criticalDamage = 0 };
+    public Status statsu
+    {
+        get
+        {
+            return new Status() 
+            {
+                hp = baseStatus.hp + aditionalStatus.hp,
+                attack = baseStatus.attack + aditionalStatus.attack,
+                attackCooltime = baseStatus.attackCooltime + aditionalStatus.attackCooltime,
+                criticalChance = baseStatus.criticalChance + aditionalStatus.criticalChance,
+                criticalDamage = baseStatus.criticalDamage + aditionalStatus.criticalDamage,
+            };
+        }
+    }
     public decimal currentHP = 10;
     const decimal speed = 5;
     public Weapon.Weapon weapon;

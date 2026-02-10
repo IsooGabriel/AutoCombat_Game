@@ -333,6 +333,11 @@ public class GraphEditorManager : MonoBehaviour
         return sum - max;
     }
 
+    public void ChangeSkin(int skinID)
+    {
+        Instance.graphData.skin = skinID;
+    }
+
     #endregion
 
 
@@ -386,7 +391,7 @@ public class GraphEditorManager : MonoBehaviour
         {
             return true;
         }
-        if (from.port.portType != to.port.portType && from.port.portType.GetType() != to.port.portType.GetType())
+        if (from.port.portType != to.port.portType || from.port.portType.GetType() != to.port.portType.GetType())
         {
             return false;
         }

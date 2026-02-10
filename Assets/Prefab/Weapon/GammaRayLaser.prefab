@@ -44,6 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2ccb96a32c6cd4a94a0ca9ca6f91e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplies:
+    finaryDamage: 1
+    attack: 1
+    aditionalAttack: 1
+    finaryAttack: 0.1
+    criticalChance: 1
+    aditionalCriticalChance: 0.2
+    finaryCriticalChance: 1
+    criticalDamage: 1
+    aditionalCriticalDamage: 1
+    finaryCriticalDamage: 0.1
   damageMultiply: 0.02
   range: 20
   baseCT: 0

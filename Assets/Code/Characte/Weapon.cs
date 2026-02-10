@@ -11,18 +11,38 @@
 
     public class Weapon : MonoBehaviour
     {
+        [SerializeField]
+        protected DamageMultiply multiplies = new();
         public const decimal adiCritChanceMult = 2.0m;
         public const decimal criticalMultiplier = 25.0m;
         public decimal damage
         {
             get
             {
-                decimal baseDamage = user != null ? (user.baseStatus.attack + user.aditionalStatus.attack) * (decimal)0.1 : 1;
-                if (UnityEngine.Random.Range(0, 100) < (user != null ? (user.baseStatus.criticalChance + user.aditionalStatus.criticalChance* adiCritChanceMult) : 0))
+                decimal baseDamage = 1m;
+                decimal criticalChange = 50m;
+                decimal criticalMultipy = 1m;
+                if (user != null)
                 {
-                    baseDamage *= 1 + (user != null ? (user.baseStatus.criticalDamage + user.aditionalStatus.criticalDamage * criticalMultiplier) * 0.01m : 0);
+                    float baseAttack = user.baseStatus.attack * multiplies.attack;
+                    float addAttack = user.aditionalStatus.attack * multiplies.aditionalAttack;
+                    baseDamage = (decimal)((baseAttack + addAttack) * multiplies.finaryAttack);
+
+                    float baseCritCh = user.baseStatus.criticalChance * multiplies.criticalChance;
+                    float addCritCh = user.aditionalStatus.criticalChance * multiplies.aditionalCriticalChance;
+                    criticalChange = (decimal)((baseCritCh + addCritCh) * multiplies.finaryCriticalChance);
+
+                    float baseMultipy = user.baseStatus.criticalDamage * multiplies.criticalDamage;
+                    float addMultipy = user.aditionalStatus.criticalDamage * multiplies.aditionalCriticalDamage;
+                    criticalMultipy = (decimal)((baseMultipy + addMultipy)* multiplies.finaryCriticalDamage);
                 }
-                return baseDamage * (decimal)damageMultiply;
+
+                if ((decimal)UnityEngine.Random.Range(0f, 100f) < criticalChange)
+                {
+
+                    baseDamage *= 1 + criticalMultipy;
+                }
+                return baseDamage * (decimal)damageMultiply * (decimal)multiplies.finaryDamage;
             }
         }
         public float damageMultiply = 1;
@@ -86,5 +106,26 @@
                 timer -= Time.deltaTime;
             }
         }
+
+        [ContextMenu("Reset multipies Only")]
+        private void ResetMultipies()
+        {
+            multiplies = new DamageMultiply();
+        }
+    }
+
+    [Serializable]
+    public class DamageMultiply
+    {
+        public float finaryDamage = 1f;
+        public float attack = 1f;
+        public float aditionalAttack = 1f;
+        public float finaryAttack = 0.1f;
+        public float criticalChance = 1f;
+        public float aditionalCriticalChance = 0.2f;
+        public float finaryCriticalChance = 1f;
+        public float criticalDamage = 1f;
+        public float aditionalCriticalDamage = 1f;
+        public float finaryCriticalDamage = 0.1f;
     }
 }

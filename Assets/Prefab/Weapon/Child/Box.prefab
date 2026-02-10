@@ -181,6 +181,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5e1f8ab79cb544db4c4c087cb9903c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplies:
+    finaryDamage: 1
+    attack: 1
+    aditionalAttack: 1
+    finaryAttack: 0.1
+    criticalChance: 1
+    aditionalCriticalChance: 0.2
+    finaryCriticalChance: 1
+    criticalDamage: 1
+    aditionalCriticalDamage: 1
+    finaryCriticalDamage: 0.1
   damageMultiply: 1
   range: 0
   baseCT: 1
@@ -188,8 +199,9 @@ MonoBehaviour:
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
-  speed: 1
   hp: 3
+  recoilMultiply: 1
+  speed: 1
 --- !u!50 &-4964299932989676173
 Rigidbody2D:
   serializedVersion: 5

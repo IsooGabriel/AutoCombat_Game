@@ -17,12 +17,12 @@ public class ANDNode : LinkedNode
         nodeType = NodeType.AND;
         inputPorts = new Port[]
         {
-            new Port("Execute", typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
+            new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
             new Port(elementPortName, typeof(object), isRequired:false, isInput:true, isExecutionPort:false, this),
         };
         outputPorts = new Port[]
         {
-            new Port("Execute", typeof(bool), false, false, true, this),
+            new Port(executePortName, typeof(bool), false, false, true, this),
             new Port(resultPortName, typeof(object), false, false, false, this),
         };
     }
@@ -154,43 +154,5 @@ public class ANDNode : LinkedNode
             }
         }
         return result;
-    }
-    private Type GetConnectionType()
-    {
-        Type connectionType = typeof(float);
-        HashSet<Node> visitedNodes = new HashSet<Node>();
-        foreach (var fromPort in outputPorts)
-        {
-            foreach (var toPort in fromPort.outputConections)
-            {
-                if (visitedNodes.Contains(toPort.node))
-                {
-                    continue;
-                }
-                visitedNodes.Add(toPort.node);
-                foreach (var inputPort in toPort.node.inputPorts)
-                {
-                    if (inputPort.portName != toPort.portName)
-                    {
-                        continue;
-                    }
-                    if (inputPort.portType == typeof(Vector2))
-                    {
-                        return typeof(Vector2);
-                    }
-                    if (inputPort.portType == typeof(float))
-                    {
-                        connectionType = typeof(float);
-                    }
-                    else if (inputPort.portType == typeof(bool))
-                    {
-                        connectionType = typeof(bool);
-                    }
-                    connectionType = inputPort.portType;
-                    break;
-                }
-            }
-        }
-        return connectionType;
     }
 }

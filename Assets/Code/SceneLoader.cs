@@ -27,6 +27,12 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void SelectStage(string sceneName)
+    {
+        OnClick(sceneName);
+        StageSerector.sceneName = sceneName;
+    }
+
     private void OnEnable()
     {
         if(playerInput == null)
