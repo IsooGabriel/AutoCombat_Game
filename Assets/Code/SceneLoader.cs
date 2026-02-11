@@ -29,8 +29,8 @@ public class SceneLoader : MonoBehaviour
 
     public void SelectStage(string sceneName)
     {
-        OnClick(sceneName);
         StageSerector.sceneName = sceneName;
+        OnClick(sceneName);
     }
 
     private void OnEnable()
