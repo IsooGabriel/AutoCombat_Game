@@ -24,7 +24,11 @@ public class SceneLoader : MonoBehaviour
     }
     private void OnGame(CallbackContext context)
     {
-        SceneManager.LoadScene("Game");
+        LoadGameScene();
+    }
+    public void LoadGameScene()
+    {
+        SceneManager.LoadScene(StageSerector.sceneName);
     }
 
     public void SelectStage(string sceneName)
@@ -35,7 +39,7 @@ public class SceneLoader : MonoBehaviour
 
     private void OnEnable()
     {
-        if(playerInput == null)
+        if (playerInput == null)
         {
             playerInput = GetComponent<PlayerInput>();
         }
@@ -47,5 +51,5 @@ public class SceneLoader : MonoBehaviour
         playerInput.actions["GraphEditor"].performed -= OnGraphEditor;
         playerInput.actions["Game"].performed -= OnGame;
     }
-    
+
 }
