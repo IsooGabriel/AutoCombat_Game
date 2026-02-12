@@ -10,7 +10,7 @@ namespace Weapon
 
         public void Death()
         {
-            Destroy(this.gameObject);
+            Destruct();
         }
         public void TakeDamage(decimal damage)
         {
@@ -25,14 +25,22 @@ namespace Weapon
         {
             if (collieder.gameObject.TryGetComponent<IDestructible>(out IDestructible destructible))
             {
-                decimal recoil = destructible.TryDestruct(user, (decimal)hp);
-                if (hp - (float)recoil < 0)
+                if(collided.Contains(collieder.gameObject))
+                {
+                    return;
+                }
+                else
+                {
+                    collided.Add(collieder.gameObject);
+                }
+                hp -= (float)destructible.TryDestruct(user, (decimal)hp);
+                if (hp <= 0)
                 {
                     Destruct();
                 }
                 return;
             }
-            if (!collieder.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
+            if (!collieder.gameObject.TryGetComponent<IDamageable>(out IDamageable target) || target == user as IDamageable)
             {
                 return;
             }

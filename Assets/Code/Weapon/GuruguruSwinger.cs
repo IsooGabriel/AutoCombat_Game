@@ -57,7 +57,6 @@ namespace Weapon
             if (sword.TryGetComponent<Weapon>(out Weapon swordWeapon))
             {
                 swordWeapon.user = user;
-                swordWeapon.damageMultiply = damageMultiply;
                 swordWeapon.hitAttack = hitAttack;
             }
         }

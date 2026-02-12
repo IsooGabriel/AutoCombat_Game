@@ -52,7 +52,6 @@ namespace Weapon
         private void SettingArrow(Arrow arrowComponent)
         {
             arrowComponent.user = user;
-            arrowComponent.damageMultiply = damageMultiply;
             arrowComponent.hitAttack = hitAttack;
         }
 

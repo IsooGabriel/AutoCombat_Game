@@ -290,11 +290,11 @@ MonoBehaviour:
   _selectedScaleDuration: 0.2
   _disabledScaleDuration: 0.05
   _normalEase: 10
-  _highlightedEase: 27
+  _highlightedEase: 10
   _pressedEase: 26
   _selectedEase: 1
   _disabledEase: 1
-  _normalScaleMultiplier: 0
+  _normalScaleMultiplier: 1
   _highlightedScaleMultiplier: 1
   _pressedScaleMultiplier: 1.05
   _selectedScaleMultiplier: 1
@@ -487,8 +487,8 @@ MonoBehaviour:
   _pressedScaleDuration: 0
   _selectedScaleDuration: 0.2
   _disabledScaleDuration: 0.05
-  _normalEase: 9
-  _highlightedEase: 27
+  _normalEase: 10
+  _highlightedEase: 10
   _pressedEase: 26
   _selectedEase: 1
   _disabledEase: 1
@@ -777,7 +777,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.45
+  m_fontSize: 8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

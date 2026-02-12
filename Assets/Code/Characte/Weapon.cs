@@ -42,10 +42,10 @@
 
                     baseDamage *= 1 + criticalMultipy;
                 }
-                return baseDamage * (decimal)damageMultiply * (decimal)multiplies.finaryDamage;
+                return baseDamage * (decimal)damageMultiply * (decimal)multiplies.finaryDamage ;
             }
         }
-        public float damageMultiply = 1;
+        protected const float damageMultiply = 1.0f;
         public float range;
         public float baseCT = 1;
         public float attackCT
