@@ -20,4 +20,4 @@ MonoBehaviour:
   - sceneName: Stage2
     scenePath: Assets/Scenes/Stages/Stage2.unity
     thumbnail: {fileID: 0}
-    stageNumber: 0
+    stageNumber: 9

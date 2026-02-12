@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class StageButtonInits : MonoBehaviour
 {
@@ -12,10 +12,12 @@ public class StageButtonInits : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < stageDatabase.stages.Count; i++)
+        for (int i = 0; i < stageDatabase.stages.Count; i++)
         {
+            button.onClick.RemoveAllListeners();
+            int j = i;
+            button.onClick.AddListener(() => sceneLoader.SelectStage(stageDatabase.stages[j].sceneName));
             buttonText.text = stageDatabase.stages[i].sceneName;
-            button.onClick.AddListener(() => sceneLoader.SelectStage(stageDatabase.stages[i].sceneName));
             GameObject buttonObj = Instantiate(stageButtonPrefab, stageButtonPrefab.transform.parent);
         }
         stageButtonPrefab.SetActive(false);

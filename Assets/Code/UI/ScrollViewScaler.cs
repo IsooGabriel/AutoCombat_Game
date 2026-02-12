@@ -30,13 +30,13 @@ public class ScrollViewScaler : MonoBehaviour
         {
             float distance = Mathf.Abs(child.position.x - viewportCenter.x);
 
-            float normalizedDistance = distance / (viewport.rect.width * 0.5f);
+            float normalizedDistance = distance / (Mathf.Abs(viewportCenter.x));
             normalizedDistance = Mathf.Clamp01(normalizedDistance);
 
             float curveValue = scaleCurve.Evaluate(1 - normalizedDistance);
             float scale = Mathf.Lerp(minScale, maxScale, curveValue);
 
-            child.GetChild(0).localScale = Vector3.one * scale;
+            child.localScale = Vector3.one * scale;
         }
     }
 

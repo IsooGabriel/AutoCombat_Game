@@ -3826,6 +3826,7 @@ GameObject:
   - component: {fileID: 1123229478}
   - component: {fileID: 1123229477}
   - component: {fileID: 1123229476}
+  - component: {fileID: 1123229479}
   m_Layer: 0
   m_Name: lose
   m_TagString: Untagged
@@ -3916,8 +3917,34 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
+--- !u!114 &1123229479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123229474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e1fd1f1591e2c4db5d19d09ef1a2f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 0
+  playOnEnable: 1
+  playOnDisable: 0
+  _startPosition: {x: 0, y: 0}
+  _endPosition: {x: 0, y: 0}
+  _startMinAnchor: {x: 0, y: 0}
+  _startMaxAnchor: {x: 0, y: 0}
+  _endMinAnchor: {x: 0, y: 0}
+  _endMaxAnchor: {x: 0, y: 0}
+  _useAnchorPosition: 1
+  _duration: 0.3
+  _easeType: 1
+  _loopCount: 0
+  _loopType: 0
 --- !u!1 &1191979370
 GameObject:
   m_ObjectHideFlags: 0
@@ -4422,6 +4449,7 @@ GameObject:
   - component: {fileID: 1400179742}
   - component: {fileID: 1400179741}
   - component: {fileID: 1400179740}
+  - component: {fileID: 1400179743}
   m_Layer: 0
   m_Name: win
   m_TagString: Untagged
@@ -4514,8 +4542,34 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
+--- !u!114 &1400179743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400179738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e1fd1f1591e2c4db5d19d09ef1a2f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 0
+  playOnEnable: 1
+  playOnDisable: 0
+  _startPosition: {x: 0, y: 0}
+  _endPosition: {x: 0, y: 0}
+  _startMinAnchor: {x: 0, y: 0}
+  _startMaxAnchor: {x: 0, y: 0}
+  _endMinAnchor: {x: 0, y: 0}
+  _endMaxAnchor: {x: 0, y: 0}
+  _useAnchorPosition: 1
+  _duration: 0.3
+  _easeType: 1
+  _loopCount: 0
+  _loopType: 0
 --- !u!1 &1462980960
 GameObject:
   m_ObjectHideFlags: 0

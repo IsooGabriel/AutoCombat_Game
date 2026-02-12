@@ -496,6 +496,7 @@ public class GraphEditorManager : MonoBehaviour
     }
     public void SaveGraph(string path)
     {
+        Debug.Log("save enemy =========");
         SaveGraph(path, $"_DEFAULT_{System.Guid.NewGuid().ToString()}", $"_DEFAULT_{System.Guid.NewGuid().ToString()}");
     }
 
