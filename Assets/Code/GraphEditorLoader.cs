@@ -118,48 +118,7 @@ public class GraphEditorLoader : MonoBehaviour
                 }
             }
 
-            //if (nodeUI is SetValueNodeUI setValueNodeUI)
-            //{
-            //    if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
-            //    {
-            //        foreach (var inputValue in nodeData.inputValues)
-            //        {
-            //            if (inputValue.toPortName != SetValueNodeUI.settingKey)
-            //            {
-            //                continue;
-            //            }
-            //            setValueNodeUI.SetData((float)inputValue.value);
-            //        }
-            //    }
-            //}
-            //else if (nodeUI is IfNodeUI ifNodeUI)
-            //{
-            //    if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
-            //    {
-            //        foreach (var inputValue in nodeData.inputValues)
-            //        {
-            //            if (inputValue.toPortName != IfNodeUI.settingKey)
-            //            {
-            //                continue;
-            //            }
-            //            ifNodeUI.SetSetting((IfSettings)(int)inputValue.value);
-            //        }
-            //    }
-            //}
-            //else if (nodeUI is GetPositionNodeUI getPositionNodeUI)
-            //{
-            //    if (nodeData.inputValues != null || nodeData.inputValues.Count != 0)
-            //    {
-            //        foreach (var inputValue in nodeData.inputValues)
-            //        {
-            //            if (inputValue.toPortName != GetPositionNode.positionTypeDataName)
-            //            {
-            //                continue;
-            //            }
-            //            getPositionNodeUI.SetSetting((GetPositionSettings)(int)inputValue.value);
-            //        }
-            //    }
-            //}
+            
             if (prefab.TryGetComponent<NodeMoveSystem>(out var moveSystem))
             {
                 moveSystem.IsDragging = false;
@@ -191,8 +150,4 @@ public class GraphEditorLoader : MonoBehaviour
         GraphEditorManager.Instance.onLoardGraph?.Invoke();
     }
 
-    //private void Start()
-    //{
-    //    manager = GraphEditorManager.Instance;
-    //}
 }
