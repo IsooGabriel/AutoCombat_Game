@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using UnityEngine;
+using static GraphEditorManager;
+using static FileSelector;
 
 public class GraphEditorLoader : MonoBehaviour
 {
@@ -16,48 +18,9 @@ public class GraphEditorLoader : MonoBehaviour
     [DllImport("comdlg32.dll", SetLastError = true, CharSet = CharSet.Auto)]
     private static extern bool GetOpenFileName(ref OpenFileName ofn);
 
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-    public struct OpenFileName
-    {
-        public int lStructSize;
-        public IntPtr hwndOwner;
-        public IntPtr hInstance;
-        public string lpstrFilter;
-        public string lpstrCustomFilter;
-        public int nMaxCustFilter;
-        public int nFilterIndex;
-        public string lpstrFile;
-        public int nMaxFile;
-        public string lpstrFileTitle;
-        public int nMaxFileTitle;
-        public string lpstrInitialDir;
-        public string lpstrTitle;
-        public int Flags;
-        public short nFileOffset;
-        public short nFileExtension;
-        public string lpstrDefExt;
-        public IntPtr lCustData;
-        public IntPtr lpfnHook;
-        public string lpTemplateName;
-        public IntPtr pvReserved;
-        public int dwReserved;
-        public int FlagsEx;
-    }
 
 
-    public async void SelectFile()
-    {
-        this.path = await OpenFileDialog();
-        if (string.IsNullOrEmpty(path))
-        {
-            return;
-        }
-        manager.ResetGraph();
-        manager.graphData = LoadJson(path);
-        LoadEditor();
-    }
-
-    private Task<string> OpenFileDialog()
+    public Task<string> OpenFileDialog()
     {
         string prevDir = Environment.CurrentDirectory;
         try
@@ -78,6 +41,10 @@ public class GraphEditorLoader : MonoBehaviour
             }
             if (GetOpenFileName(ref ofn))
             {
+                if (!File.Exists(ofn.lpstrFile))
+                {
+                    File.WriteAllText(ofn.lpstrFile, "", System.Text.Encoding.UTF8);
+                }
                 return Task.FromResult<string>(ofn.lpstrFile);
             }
             return null;
@@ -87,6 +54,21 @@ public class GraphEditorLoader : MonoBehaviour
             Environment.CurrentDirectory = prevDir;
         }
     }
+
+    public async void SelectFile()
+    {
+        this.path = await OpenFileDialog();
+        if (string.IsNullOrEmpty(path))
+        {
+            string parent = Application.persistentDataPath.Replace("/", "\\");
+            path =
+                $"{parent}\\{defaultPath}\\{playerDataFileName}";
+        }
+        manager.ResetGraph();
+        manager.graphData = LoadJson(path);
+        LoadEditor();
+    }
+
 
     public GraphData LoadJson(string path)
     {

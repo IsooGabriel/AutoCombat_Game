@@ -133,7 +133,7 @@ MonoBehaviour:
   _selectedColor: {r: 1, g: 1, b: 1, a: 1}
   _disabledColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   _isGetColor: 1
-  _isAutoColor: 1
+  _isAutoColor: 0
   _isLockHue: 0
   _isLockSaturation: 0
   _isLockValue: 1
@@ -213,7 +213,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 6, y: 6}
+  m_SizeDelta: {x: 8, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8527576697664140815
 CanvasRenderer:
@@ -476,7 +476,7 @@ MonoBehaviour:
   _selectedColor: {r: 0, g: 0, b: 0, a: 0}
   _disabledColor: {r: 0.42352945, g: 0.42352945, b: 0.42352945, a: 0}
   _isGetColor: 1
-  _isAutoColor: 1
+  _isAutoColor: 0
   _isLockHue: 0
   _isLockSaturation: 0
   _isLockValue: 0
@@ -696,6 +696,7 @@ GameObject:
   - component: {fileID: 3961763484687054048}
   - component: {fileID: 6475801672355388884}
   - component: {fileID: 7105926579782004628}
+  - component: {fileID: 4998205808029391023}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -777,7 +778,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.65
+  m_fontSize: 30.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -821,3 +822,49 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4998205808029391023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7913407738273390857}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d452f58c5dcf6464c8ceea709eb1235d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsChangeable: 0
+  setStatu: 0
+  _animator: {fileID: 8290446735569438700}
+  _transform: {fileID: 3961763484687054048}
+  _unitPosition: {x: 1, y: 1, z: 1}
+  _unitRotation: {x: 1, y: 1, z: 1}
+  _unitScale: {x: 1, y: 1, z: 1}
+  _normalColor: {r: 0.8823529, g: 0.8823529, b: 0.8823529, a: 1}
+  _highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  _pressedColor: {r: 1, g: 1, b: 1, a: 1}
+  _selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  _disabledColor: {r: 0.7019608, g: 0.7019608, b: 0.7019608, a: 1}
+  _isGetColor: 0
+  _isAutoColor: 0
+  _isLockHue: 0
+  _isLockSaturation: 0
+  _isLockValue: 0
+  _disabledImage: {fileID: 2455611137002662289}
+  _isReset: 0
+  _normalScaleDuration: 0.4
+  _highlightedScaleDuration: 0.2
+  _pressedScaleDuration: 0
+  _selectedScaleDuration: 0.2
+  _disabledScaleDuration: 0.05
+  _normalEase: 4
+  _highlightedEase: 27
+  _pressedEase: 26
+  _selectedEase: 1
+  _disabledEase: 1
+  _normalScaleMultiplier: 1
+  _highlightedScaleMultiplier: 1
+  _pressedScaleMultiplier: 1
+  _selectedScaleMultiplier: 1
+  _disabledScaleMultiplier: 1

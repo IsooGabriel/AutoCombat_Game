@@ -14,11 +14,14 @@ public class StageButtonInits : MonoBehaviour
     {
         for (int i = 0; i < stageDatabase.stages.Count; i++)
         {
-            button.onClick.RemoveAllListeners();
-            int j = i;
-            button.onClick.AddListener(() => sceneLoader.SelectStage(stageDatabase.stages[j].sceneName));
             buttonText.text = stageDatabase.stages[i].sceneName;
             GameObject buttonObj = Instantiate(stageButtonPrefab, stageButtonPrefab.transform.parent);
+            if(buttonObj.transform.GetChild(0)?.TryGetComponent<Button>(out button)??false)
+            {
+                button.onClick.RemoveAllListeners();
+                int j = i;
+                button.onClick.AddListener(() => sceneLoader.SelectStage(stageDatabase.stages[j].sceneName));
+            }
         }
         stageButtonPrefab.SetActive(false);
     }

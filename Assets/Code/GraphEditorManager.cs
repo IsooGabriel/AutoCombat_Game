@@ -47,7 +47,7 @@ public class GraphEditorManager : MonoBehaviour
     public const string enemyDataFileName = "enemy.json";
     public readonly int[] maxNodesForPoints = { 987, 610, 377, 233, 144, 89, 55, 34, 21, 13 };
     private int aditionableStatusCount = 0;
-
+    private GraphEditorLoader loader;
     public Action onLoardGraph;
 
     #region ä÷êî
@@ -439,7 +439,7 @@ public class GraphEditorManager : MonoBehaviour
         {
             foreach (var node in Instance.nodeUIs)
             {
-                foreach(var portUI in node.outputPorts)
+                foreach (var portUI in node.outputPorts)
                 {
                     portUI.DisconectWithPortUI(target);
                 }
@@ -512,13 +512,25 @@ public class GraphEditorManager : MonoBehaviour
     {
         string parent = Application.persistentDataPath.Replace("/", "\\");
         if (isPlayer)
-        { 
-        SaveGraph($"{parent}\\{defaultPath}\\{playerDataFileName}");
+        {
+            SaveGraph($"{parent}\\{defaultPath}\\{playerDataFileName}");
         }
         else
         {
             SaveGraph($"{parent}\\{enemyPath}\\{enemyDataFileName}");
         }
+    }
+
+    public async void SaveWithDialog()
+    {
+        string path = await loader.OpenFileDialog(); 
+        if (string.IsNullOrEmpty(path))
+        {
+            string parent = Application.persistentDataPath.Replace("/", "\\");
+            path =
+                $"{parent}\\{defaultPath}\\{playerDataFileName}";
+        }
+        SaveGraph(path);
     }
 
     public static string SanitizeFileName(string name)
@@ -614,6 +626,7 @@ public class GraphEditorManager : MonoBehaviour
         };
         AddNode(NodeType.Start);
         UpdateAdditionalStatus();
+        loader = new GraphEditorLoader();
     }
 
     private void OnEnable()
