@@ -37,7 +37,7 @@ public class DoNTimeNode : Node
     {
         if (TryGetInputValueWithPort(resetLimitPortName, out bool b))
         {
-            _useLimit = 100;
+            _useLimit = _resetLimit;
         }
         if (_useLimit > 0)
         {
@@ -48,7 +48,7 @@ public class DoNTimeNode : Node
         {
             executor.EnqueueConnected(this, limitedPortName);
         }
-        executor.SendData(this, nowLimitPortName, _useLimit);
+        executor.SendData(this, nowLimitPortName, (float)_useLimit);
         return;
     }
 }

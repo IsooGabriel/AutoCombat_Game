@@ -45,7 +45,7 @@
                 return baseDamage * (decimal)damageMultiply * (decimal)multiplies.finaryDamage ;
             }
         }
-        protected const float damageMultiply = 1.0f;
+        protected const float damageMultiply = 0.1f;
         public float range;
         public float baseCT = 1;
         public float attackCT
