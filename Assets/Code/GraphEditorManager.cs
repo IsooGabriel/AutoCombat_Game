@@ -530,6 +530,10 @@ public class GraphEditorManager : MonoBehaviour
             path =
                 $"{parent}\\{defaultPath}\\{playerDataFileName}";
         }
+        if(!path.EndsWith(".acjson") && !path.EndsWith(".json"))
+        {
+            path += ".acjson";
+        }
         SaveGraph(path);
     }
 
