@@ -1,12 +1,29 @@
 ﻿using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+[Serializable]
+public class UIAnimationSettings
+{
+    public float normal = 0f;
+    public float highlighted = 0f;
+    public float pressed = 0f;
+    public float selected = 0f;
+    public float disabled = 0f;
+}
 public class ImageAnimation_Gabu : UISystem_Gabu
 {
     #region 変数
+
+    RectTransform rect;
+
     [SerializeField, Header("画像")]
     protected Image image;
+
+    [SerializeField, Header("←→↑↓")]
+    protected UIAnimationSettings[] sumSettings = {};
+    protected bool _isSettingsSum = true;
 
     #endregion
 
@@ -19,6 +36,13 @@ public class ImageAnimation_Gabu : UISystem_Gabu
         }
 
         _transform.DOScale(_unitScale * _normalScaleMultiplier, _normalScaleDuration).SetEase(_normalEase);
+        if (_isSettingsSum && rect)
+        {
+            DOLeft(rect, sumSettings[0].normal, _normalScaleDuration).SetEase(_normalEase);
+            DORight(rect, sumSettings[1].normal, _normalScaleDuration).SetEase(_normalEase);
+            DOTop(rect, sumSettings[2].normal, _normalScaleDuration).SetEase(_normalEase);
+            DOBottom(rect, sumSettings[3].normal, _normalScaleDuration).SetEase(_normalEase);
+        }
         image.DOColor(_normalColor, _normalScaleDuration);
     }
 
@@ -30,6 +54,16 @@ public class ImageAnimation_Gabu : UISystem_Gabu
         }
 
         _transform.DOScale(_unitScale * _highlightedScaleMultiplier, _highlightedScaleDuration).SetEase(_highlightedEase);
+        if (_isSettingsSum && rect)
+        {
+            for (int i = 0; i < sumSettings.Length; i++)
+            {
+                DOLeft(rect, sumSettings[0].highlighted, _highlightedScaleDuration).SetEase(_highlightedEase);
+                DORight(rect, sumSettings[1].highlighted, _highlightedScaleDuration).SetEase(_highlightedEase);
+                DOTop(rect, sumSettings[2].highlighted, _highlightedScaleDuration).SetEase(_highlightedEase);
+                DOBottom(rect, sumSettings[3].highlighted, _highlightedScaleDuration).SetEase(_highlightedEase);
+            }
+        }
         image.DOColor(_highlightedColor, _highlightedScaleDuration);
     }
 
@@ -41,6 +75,16 @@ public class ImageAnimation_Gabu : UISystem_Gabu
         }
         Debug.Log("PressedAnimation");
         _transform.DOScale(_unitScale * _pressedScaleMultiplier, _pressedScaleDuration).SetEase(_pressedEase);
+        if (_isSettingsSum && rect)
+        {
+            for (int i = 0; i < sumSettings.Length; i++)
+            {
+                DOLeft(rect, sumSettings[0].pressed, _pressedScaleDuration).SetEase(_pressedEase);
+                DORight(rect, sumSettings[1].pressed, _pressedScaleDuration).SetEase(_pressedEase);
+                DOTop(rect, sumSettings[2].pressed, _pressedScaleDuration).SetEase(_pressedEase);
+                DOBottom(rect, sumSettings[3].pressed, _pressedScaleDuration).SetEase(_pressedEase);
+            }
+        }
         image.DOColor(_pressedColor, _pressedScaleDuration);
     }
 
@@ -52,13 +96,34 @@ public class ImageAnimation_Gabu : UISystem_Gabu
         }
 
         _transform.DOScale(_unitScale * _selectedScaleMultiplier, _selectedScaleDuration).SetEase(_selectedEase);
+        if (_isSettingsSum && rect)
+        {
+            for (int i = 0; i < sumSettings.Length; i++)
+            {
+                DOLeft(rect, sumSettings[0].selected, _selectedScaleDuration).SetEase(_selectedEase);
+                DORight(rect, sumSettings[1].selected, _selectedScaleDuration).SetEase(_selectedEase);
+                DOTop(rect, sumSettings[2].selected, _selectedScaleDuration).SetEase(_selectedEase);
+                DOBottom(rect, sumSettings[3].selected, _selectedScaleDuration).SetEase(_selectedEase);
+            }
+        }
         image.DOColor(_selectedColor, _selectedScaleDuration);
     }
 
     protected override void DisabledAnimation()
     {
         _transform.DOScale(_unitScale * _disabledScaleMultiplier, _disabledScaleDuration).SetEase(_disabledEase);
+        if (_isSettingsSum && rect)
+        {
+            for (int i = 0; i < sumSettings.Length; i++)
+            {
+                DOLeft(rect, sumSettings[0].disabled, _disabledScaleDuration).SetEase(_disabledEase);
+                DORight(rect, sumSettings[1].disabled, _disabledScaleDuration).SetEase(_disabledEase);
+                DOTop(rect, sumSettings[2].disabled, _disabledScaleDuration).SetEase(_disabledEase);
+                DOBottom(rect, sumSettings[3].disabled, _disabledScaleDuration).SetEase(_disabledEase);
+            }
+        }
         image.DOColor(_disabledColor, _disabledScaleDuration);
+
 
         if (_disabledImage != null)
         {
@@ -91,6 +156,22 @@ public class ImageAnimation_Gabu : UISystem_Gabu
             }
         }
         image.color = SetNormalColor(image.color);
+
+        rect = _transform as RectTransform;
+
+        if (sumSettings != null && sumSettings.Length >= 4)
+        {
+            _isSettingsSum = true;
+        }
+        else if (sumSettings.Length == 1)
+        {
+            sumSettings = new UIAnimationSettings[4] { sumSettings[0], sumSettings[0], sumSettings[0], sumSettings[0] };
+            _isSettingsSum = true;
+        }
+        else
+        {
+            _isSettingsSum = false;
+        }
 
         base.Start();
 
@@ -148,5 +229,62 @@ public class ImageAnimation_Gabu : UISystem_Gabu
                 break;
         }
         _i_lastAnimation = _i_currentAnimation;
+    }
+
+    protected Tweener DOLeft(RectTransform rt, float endValue, float duration)
+    {
+        return DOTween.To(
+            () => rt.offsetMin.x,
+            x =>
+            {
+                var v = rt.offsetMin;
+                v.x = x;
+                rt.offsetMin = v;
+            },
+            endValue,
+            duration
+        );
+    }
+    protected Tweener DORight(RectTransform rt, float endValue, float duration)
+    {
+        return DOTween.To(
+            () => rt.offsetMax.x,
+            x =>
+            {
+                var v = rt.offsetMax;
+                v.x = x;
+                rt.offsetMax = v;
+            },
+            endValue,
+            duration
+        );
+    }
+    protected Tweener DOTop(RectTransform rt, float endValue, float duration)
+    {
+        return DOTween.To(
+            () => rt.offsetMax.y,
+            y =>
+            {
+                var v = rt.offsetMax;
+                v.y = y;
+                rt.offsetMax = v;
+            },
+            endValue,
+            duration
+        );
+    }
+    protected Tweener DOBottom(RectTransform rt, float endValue, float duration)
+    {
+        return DOTween.To(
+            () => rt.offsetMin.y,
+            y =>
+            {
+                var v = rt.offsetMin;
+                v.y = y;
+                rt.offsetMin = v;
+            },
+            endValue,
+            duration
+        );
     }
 }
