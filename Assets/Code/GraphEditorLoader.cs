@@ -18,6 +18,15 @@ public class GraphEditorLoader : MonoBehaviour
     [DllImport("comdlg32.dll", SetLastError = true, CharSet = CharSet.Auto)]
     private static extern bool GetOpenFileName(ref OpenFileName ofn);
 
+    private Vector2 functionPosition = Vector2.zero;
+    public void SetFunctionPositionX(string x)
+    {
+        functionPosition.x = float.Parse(x);
+    }
+    public void SetFunctionPositionY(string y)
+    {
+        functionPosition.y = float.Parse(y);
+    }
 
 
     public Task<string> OpenFileDialog()
@@ -85,6 +94,7 @@ public class GraphEditorLoader : MonoBehaviour
             {
                 continue;
             }
+            node.position += functionPosition;
             manager.graphData.nodes.Add(node);
         }
         fanctionData.linkedNodes.ForEach(n => manager.graphData.linkedNodes.Add(n));

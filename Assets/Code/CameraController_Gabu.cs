@@ -8,8 +8,9 @@ public class CameraController_Gabu : MonoBehaviour
     public Camera camera;
     public float moveSpeed = 10f;
     public float dragSpeed = 10f;
-    public float cameraPositionY = 10f;
-    public float cameraPositionX = 10f;
+    public float dragMultiplier = 1f;
+    public float cameraPositionY = 10000f;
+    public float cameraPositionX = 10000f;
     public float zoomSpeed = 0.1f;
     public float maxZoom = 50f;
     public float minZoom = 1f;
@@ -30,7 +31,6 @@ public class CameraController_Gabu : MonoBehaviour
         playerInput.actions["Move"].performed += OnMoveCamera;
         playerInput.actions["Move"].canceled += OnMoveCamera;
         playerInput.actions["Drag"].started += OnDragCameraStart;
-        playerInput.actions["Drag"].performed += OnDragCamera;
         playerInput.actions["Drag"].canceled += OnDragCameraEnd;
         playerInput.actions["Zoom"].performed += OnZoomCamera;
     }
@@ -42,7 +42,6 @@ public class CameraController_Gabu : MonoBehaviour
         playerInput.actions["Move"].performed -= OnMoveCamera;
         playerInput.actions["Move"].canceled -= OnMoveCamera;
         playerInput.actions["Drag"].started -= OnDragCameraStart;
-        playerInput.actions["Drag"].performed -= OnDragCamera;
         playerInput.actions["Drag"].canceled -= OnDragCameraEnd;
         playerInput.actions["Zoom"].performed -= OnZoomCamera;
     }
@@ -58,19 +57,10 @@ public class CameraController_Gabu : MonoBehaviour
     private void OnDragCameraStart(InputAction.CallbackContext context)
     {
         // マウスドラッグの開始位置を記録
-        dragOrigin = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        dragOrigin = Camera.main.WorldToScreenPoint(Mouse.current.position.ReadValue());
         isDragging = true;
     }
-    private void OnDragCamera(InputAction.CallbackContext context)
-    {
-        if (isDragging)
-        {
-            // マウスドラッグによるカメラ移動
-            Vector3 currentPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            Vector3 move = dragOrigin - currentPos;
-            transform.Translate(move * dragSpeed, Space.World);
-        }
-    }
+
     private void OnDragCameraEnd(InputAction.CallbackContext context)
     {
         // ドラッグ終了
@@ -83,6 +73,8 @@ public class CameraController_Gabu : MonoBehaviour
         // マウススクロールによるカメラのズーム
         float scrollValue = context.ReadValue<float>() * zoomSpeed;
         camera.orthographicSize = Mathf.Clamp(camera.orthographicSize - scrollValue, minZoom, maxZoom);
+        moveSpeed = camera.orthographicSize;
+        dragSpeed = camera.orthographicSize;
     }
 
     #endregion
@@ -107,13 +99,14 @@ public class CameraController_Gabu : MonoBehaviour
 
         if (isDragging)
         {
-            Vector3 currentPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            Vector3 currentPosition = Camera.main.WorldToScreenPoint(Mouse.current.position.ReadValue());
             if (Vector3.Distance(dragOrigin, currentPosition) < correction)
             {
                 return;
             }
 
             move = dragOrigin - currentPosition;
+            move = move * dragSpeed * dragMultiplier * Time.deltaTime;
             dragOrigin = currentPosition;
             newPosition = transform.position + move;
 
