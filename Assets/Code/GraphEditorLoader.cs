@@ -69,6 +69,35 @@ public class GraphEditorLoader : MonoBehaviour
         LoadEditor();
     }
 
+    public async void LoadFunction()
+    {
+        this.path = await OpenFileDialog();
+        if (string.IsNullOrEmpty(path))
+        {
+            string parent = Application.persistentDataPath.Replace("/", "\\");
+            path =
+                $"{parent}\\{defaultPath}\\{playerDataFileName}";
+        }
+        GraphData fanctionData = LoadJson(path);
+        foreach(var node in fanctionData.nodes)
+        {
+            if (node.type == NodeType.Start)
+            {
+                continue;
+            }
+            manager.graphData.nodes.Add(node);
+        }
+        fanctionData.linkedNodes.ForEach(n => manager.graphData.linkedNodes.Add(n));
+        if(manager.graphData.author != fanctionData.author)
+        {
+            manager.graphData.author += nameSpacer + fanctionData.author;
+        }
+        if(manager.graphData.graphName != fanctionData.graphName)
+        {
+            manager.graphData.graphName += nameSpacer + fanctionData.graphName;
+        }
+        LoadEditor();
+    }
 
     public GraphData LoadJson(string path)
     {

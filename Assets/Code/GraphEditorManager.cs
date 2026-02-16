@@ -45,6 +45,7 @@ public class GraphEditorManager : MonoBehaviour
     public const string enemyPath = "EnemyGraph";
     public const string playerDataFileName = "player.acjson";
     public const string enemyDataFileName = "enemy.json";
+    public const string nameSpacer = ", ";
     public readonly int[] maxNodesForPoints = { 987, 610, 377, 233, 144, 89, 55, 34, 21, 13 };
     private int aditionableStatusCount = 0;
     private GraphEditorLoader loader;
@@ -481,8 +482,22 @@ public class GraphEditorManager : MonoBehaviour
         }
         Instance.AjustAdditionalStatus(Instance.graphData.aditionalStatus);
         Instance.graphData.createdDate = DateTime.Now;
-        Instance.graphData.graphName = graphName;
-        Instance.graphData.author = author;
+        if(Instance.graphData.graphName.Contains(nameSpacer))
+        {
+            Instance.graphData.graphName = graphName+nameSpacer+Instance.graphData.graphName;
+        }
+        else
+        {
+            Instance.graphData.graphName += graphName;
+        }
+        if (Instance.graphData.author.Contains(nameSpacer))
+        {
+            Instance.graphData.author = author + nameSpacer + Instance.graphData.author;
+        }
+        else
+        {
+            Instance.graphData.author += author;
+        }
         string json = JsonUtility.ToJson(Instance.graphData, true);
         EnsureDirectoryExists(path);
 
