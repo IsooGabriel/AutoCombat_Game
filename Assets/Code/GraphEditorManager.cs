@@ -19,7 +19,7 @@ public class GraphEditorManager : MonoBehaviour
     public bool isSelected = false;
     [NonSerialized]
     public PortUI selectedPort = null;
-    private float lineWidth = 0.05f;
+    private float lineWidth = 1f;
     [NonSerialized]
     public List<NodeUI> nodeUIs = new();
     public GameObject nodesParent;

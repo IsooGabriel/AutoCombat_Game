@@ -89,6 +89,8 @@ public class CameraController_Gabu : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log($"{Screen.height}");
+
         Vector3 move = new Vector3(moveInput.x, moveInput.y, 0) * moveSpeed * Time.deltaTime;
         Vector3 newPosition = transform.position + move;
 
@@ -106,6 +108,7 @@ public class CameraController_Gabu : MonoBehaviour
             }
 
             move = dragOrigin - currentPosition;
+            dragMultiplier = Camera.main.orthographicSize/(Screen.height*2);
             move = move * dragSpeed * dragMultiplier * Time.deltaTime;
             dragOrigin = currentPosition;
             newPosition = transform.position + move;

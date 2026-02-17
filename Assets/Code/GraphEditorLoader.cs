@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using static GraphEditorManager;
 using static FileSelector;
+using System.Collections.Generic;
 
 public class GraphEditorLoader : MonoBehaviour
 {
@@ -87,24 +88,42 @@ public class GraphEditorLoader : MonoBehaviour
             path =
                 $"{parent}\\{defaultPath}\\{playerDataFileName}";
         }
-        GraphData fanctionData = LoadJson(path);
-        foreach(var node in fanctionData.nodes)
+        GraphData functionData = LoadJson(path);
+
+        Dictionary<string, string> newIDs = new();
+        foreach (var node in functionData.nodes)
         {
             if (node.type == NodeType.Start)
             {
                 continue;
             }
             node.position += functionPosition;
+            newIDs.Add(node.id, Guid.NewGuid().ToString());
+            node.id = newIDs[node.id];
             manager.graphData.nodes.Add(node);
         }
-        fanctionData.linkedNodes.ForEach(n => manager.graphData.linkedNodes.Add(n));
-        if(manager.graphData.author != fanctionData.author)
+        foreach (var node in functionData.nodes)
         {
-            manager.graphData.author += nameSpacer + fanctionData.author;
+            foreach (var port in node.outputConnections)
+            {
+                if (port.toPortNodes == null || port.toPortNodes.Count == 0)
+                {
+                    continue;
+                }
+                foreach (var toPortNode in port.toPortNodes)
+                {
+                    toPortNode.nodeId = newIDs[toPortNode.nodeId];
+                }
+            }
         }
-        if(manager.graphData.graphName != fanctionData.graphName)
+        functionData.linkedNodes.ForEach(n => manager.graphData.linkedNodes.Add(n));
+        if (manager.graphData.author != functionData.author)
         {
-            manager.graphData.graphName += nameSpacer + fanctionData.graphName;
+            manager.graphData.author += nameSpacer + functionData.author;
+        }
+        if (manager.graphData.graphName != functionData.graphName)
+        {
+            manager.graphData.graphName += nameSpacer + functionData.graphName;
         }
         LoadEditor();
     }
@@ -113,7 +132,16 @@ public class GraphEditorLoader : MonoBehaviour
     {
         this.path = path;
         string json = File.ReadAllText(path, System.Text.Encoding.UTF8);
-        return JsonUtility.FromJson<GraphData>(json);
+        var data = JsonUtility.FromJson<GraphData>(json);
+        foreach (var node in data.nodes)
+        {
+            if (data.version < 0.2f)
+            {
+
+                node.position = new Vector2(node.position.x * 100, node.position.y * 100);
+            }
+        }
+        return data;
     }
 
     public void LoadEditor()
@@ -157,7 +185,7 @@ public class GraphEditorLoader : MonoBehaviour
                 }
             }
 
-            
+
             if (prefab.TryGetComponent<NodeMoveSystem>(out var moveSystem))
             {
                 moveSystem.IsDragging = false;
