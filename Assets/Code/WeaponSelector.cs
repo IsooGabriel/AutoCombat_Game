@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic; 
 
-public class WeaponSelector:MonoBehaviour
+public class WeaponSelector : MonoBehaviour
 {
     [SerializeField]
     private TMP_Dropdown dropdown;
@@ -13,17 +14,18 @@ public class WeaponSelector:MonoBehaviour
     private TextMeshProUGUI weaponName;
     [SerializeField]
     private WeaponDB weaponDB;
-
+    [SerializeField]
+    private List<int> indexes = new() { };
     public void ChangeWeapon(int index)
     {
         if (weaponDB == null)
         {
             return;
         }
-        
+        index = indexes.IndexOf(index);
         bool isValid = index >= 0 && index < weaponDB.weaponDatas.Length;
-        icon.sprite = isValid? weaponDB.weaponDatas[index].icon : null;
-        weaponName.text = isValid? weaponDB.weaponDatas[index].weaponName : "(≡^ ^≡)";
+        icon.sprite = isValid ? weaponDB.weaponDatas[index].icon : null;
+        weaponName.text = isValid ? weaponDB.weaponDatas[index].weaponName : "(≡^ ^≡)";
         GraphEditorManager.Instance.graphData.weapon = index;
     }
 
@@ -42,10 +44,19 @@ public class WeaponSelector:MonoBehaviour
 
         dropdown.options.Clear();
         List<TMP_Dropdown.OptionData> options = new() { };
-        foreach (var weapon in weaponDB.weaponDatas)
+        indexes = new();
+        for (int i = 0; i < weaponDB.weaponDatas.Length; ++i)
         {
+            var weapon = weaponDB.weaponDatas[i];
+            bool isValid = weapon.usableStage.reverseStages.Contains(StageSelector.sceneName);
+            bool isDefault = weapon.usableStage.defaultUsable;
+            if (!(isValid ^ isDefault))
+            {
+                continue;
+            }
+            indexes.Add(i);
             string weaponLabel = weapon?.weaponName;
-            Sprite iconSprite = weapon?.icon? weapon.icon: null;
+            Sprite iconSprite = weapon?.icon ? weapon.icon : null;
 
             options.Add(new TMP_Dropdown.OptionData(weaponLabel, iconSprite, Color.white));
         }
@@ -57,5 +68,6 @@ public class WeaponSelector:MonoBehaviour
     {
         Init();
         GraphEditorManager.Instance.onLoardGraph += Init;
+        ChangeWeapon(0);
     }
 }

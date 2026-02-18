@@ -1,9 +1,8 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "WeaponDB", menuName = "ScriptableObjects/WeaponDB", order = 1)]
-public class WeaponDB:ScriptableObject
+public class WeaponDB : ScriptableObject
 {
     public WeaponData[] weaponDatas;
     public GameObject[] childPrefabs;
@@ -24,4 +23,14 @@ public class WeaponData
     public Vector2 originOffset;
     public float attackSpeed;
     public float timer = 0;
+    public UsableStage usableStage = new();
+}
+
+[Serializable]
+public class UsableStage
+{
+    [SerializeField]
+    public bool defaultUsable = true;
+    [SerializeField]
+    public string[] reverseStages = { };
 }

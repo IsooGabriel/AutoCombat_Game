@@ -73,8 +73,6 @@ public class CameraController_Gabu : MonoBehaviour
         // マウススクロールによるカメラのズーム
         float scrollValue = context.ReadValue<float>() * zoomSpeed;
         camera.orthographicSize = Mathf.Clamp(camera.orthographicSize - scrollValue, minZoom, maxZoom);
-        moveSpeed = camera.orthographicSize;
-        dragSpeed = camera.orthographicSize;
     }
 
     #endregion
@@ -89,7 +87,8 @@ public class CameraController_Gabu : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"{Screen.height}");
+        moveSpeed = camera.orthographicSize;
+        dragSpeed = camera.orthographicSize;
 
         Vector3 move = new Vector3(moveInput.x, moveInput.y, 0) * moveSpeed * Time.deltaTime;
         Vector3 newPosition = transform.position + move;
