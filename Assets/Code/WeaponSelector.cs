@@ -22,7 +22,7 @@ public class WeaponSelector : MonoBehaviour
         {
             return;
         }
-        index = indexes.IndexOf(index);
+        index = indexes[index];
         bool isValid = index >= 0 && index < weaponDB.weaponDatas.Length;
         icon.sprite = isValid ? weaponDB.weaponDatas[index].icon : null;
         weaponName.text = isValid ? weaponDB.weaponDatas[index].weaponName : "(≡^ ^≡)";

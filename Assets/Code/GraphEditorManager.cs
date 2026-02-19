@@ -127,8 +127,14 @@ public class GraphEditorManager : MonoBehaviour
             return;
         }
 
-        Instance.nodeUIs.Remove(nodeUI);
+        DeleteNode(nodeUI);
+    }
+
+    public void DeleteNode(NodeUI nodeUI)
+    {
         Node deleteNode = nodeUI.node;
+
+        Instance.nodeUIs.Remove(nodeUI);
 
         foreach (var nodeDeta in Instance.nodeUIs)
         {

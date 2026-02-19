@@ -22,7 +22,7 @@ public class ImageAnimation_Gabu : UISystem_Gabu
     protected Image image;
 
     [SerializeField, Header("←→↑↓")]
-    protected UIAnimationSettings[] sumSettings = {};
+    protected UIAnimationSettings[] sumSettings = { };
     protected bool _isSettingsSum = true;
 
     #endregion
@@ -139,6 +139,23 @@ public class ImageAnimation_Gabu : UISystem_Gabu
             image = imageAnimation.image;
         }
         image.color = imageAnimation._normalColor;
+    }
+
+    public void ChangeColors(AnimatorStatu statu, Color color)
+    {
+        switch (statu)
+        {
+            case AnimatorStatu.Normal:
+                _normalColor = color; break;
+            case AnimatorStatu.Highlighted:
+                _highlightedColor = color; break;
+            case AnimatorStatu.Selected:
+                _selectedColor = color; break;
+            case AnimatorStatu.Pressed:
+                _pressedColor = color; break;
+            case AnimatorStatu.Disabled:
+                _disabledColor = color; break;
+        }
     }
 
     #endregion

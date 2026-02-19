@@ -1,19 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using JetBrains.Annotations;
-using UnityEditor.Search;
-using System.Linq;
-using UnityEngine.SceneManagement;
 
 public class GraphEditorCustumer : MonoBehaviour
 {
     [SerializeField]
     public CustumSettings[] custums;
     [SerializeField]
-    private ButtonToNode[] nodeButtons;
+    private ButtonToNode[] nodeButtons = { };
     [SerializeField]
-    private NodeSerializeWhithStage[] nodeSerialize;
+    private NodeSerializeWhithStage[] nodeSerialize = { };
     void Start()
     {
         foreach (var custum in custums)

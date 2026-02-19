@@ -154,13 +154,13 @@ public class GraphRunner : MonoBehaviour
                 );
             weponObj.transform.localPosition = Vector3.zero;
             weapon = weponObj.GetComponent<Weapon.Weapon>();
+            weapon.user = chara;
         }
         else
         {
             weapon = null;
         }
         chara.weapon = weapon;
-        weapon.user = chara;
     }
 
     void Start()
