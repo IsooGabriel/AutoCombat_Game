@@ -172,7 +172,6 @@ public class GraphEditorLoader : MonoBehaviour
         {
             if (float.Parse(data.version) < 0.2f)
             {
-
                 node.position = new Vector2(node.position.x * 100, node.position.y * 100);
             }
         }
@@ -287,14 +286,14 @@ public class GraphEditorLoader : MonoBehaviour
             {
                 if (linked.Value.Contains(ui.node.id))
                 {
-                    linked.Key.toNodes.AddRange(new Node[] { ui.node });
+                    linked.Key.toNodes.ToList().AddRange(new Node[] { ui.node });
                 }
             }
             foreach (var linked in outputlinkeds)
             {
                 if (linked.Value.Contains(ui.node.id))
                 {
-                    linked.Key.toNodes.AddRange(new Node[] { ui.node });
+                    linked.Key.toNodes.ToList().AddRange(new Node[] { ui.node });
                 }
             }
         }
