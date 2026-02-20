@@ -22,6 +22,10 @@ public class WeaponSelector : MonoBehaviour
         {
             return;
         }
+        if(indexes.Count <= index)
+        {
+            index = 0;
+        }
         index = indexes[index];
         bool isValid = index >= 0 && index < weaponDB.weaponDatas.Length;
         icon.sprite = isValid ? weaponDB.weaponDatas[index].icon : null;

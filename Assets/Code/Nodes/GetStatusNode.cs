@@ -21,7 +21,7 @@ public class GetStatusNode:Node
 
     public override void Initialize()
     {
-        nodeType = NodeType.DoNTime;
+        nodeType = NodeType.GetStatus;
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.Text;
 using UnityEngine;
 
 public class FileSelector : MonoBehaviour
@@ -42,7 +44,7 @@ public class FileSelector : MonoBehaviour
             string path = OpenFileDialog();
             if (!string.IsNullOrEmpty(path))
             {
-                Debug.Log("選択されたファイル: " + path);
+               UnityEngine.Debug.Log("選択されたファイル: " + path);
             }
         }
     }
@@ -52,11 +54,12 @@ public class FileSelector : MonoBehaviour
         OpenFileName ofn = new OpenFileName();
         ofn.lStructSize = Marshal.SizeOf(ofn);
         ofn.lpstrFilter = "All Files\0*.*\0\0";
-        ofn.lpstrFile = new string(new char[256]);
+        ofn.lpstrFile = new string(new char[512]);
         ofn.nMaxFile = ofn.lpstrFile.Length;
-        ofn.lpstrFileTitle = new string(new char[64]);
+        ofn.lpstrFileTitle = new string(new char[128]);
         ofn.nMaxFileTitle = ofn.lpstrFileTitle.Length;
         ofn.lpstrTitle = "ファイルを選択";
+        ofn.hwndOwner = Process.GetCurrentProcess().MainWindowHandle;
 
         if (GetOpenFileName(ref ofn))
         {

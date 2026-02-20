@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using static FileSelector;
 using static GraphEditorManager;
@@ -39,13 +39,13 @@ public class GraphEditorLoader : MonoBehaviour
             OpenFileName ofn = new OpenFileName();
             ofn.lStructSize = Marshal.SizeOf(ofn);
             ofn.lpstrFilter = "グラフデータ\0*.json;*.acjson\0";
-            ofn.lpstrFile = new string(new char[256]);
+            ofn.lpstrFile = new string(new char[512]);
             ofn.nMaxFile = ofn.lpstrFile.Length;
-            ofn.lpstrFileTitle = new string(new char[64]);
+            ofn.lpstrFileTitle = new string(new char[128]);
             ofn.nMaxFileTitle = ofn.lpstrFileTitle.Length;
             ofn.lpstrTitle = "ファイルを選択";
             ofn.lpstrInitialDir = $"{Application.persistentDataPath.Replace("/", "\\")}\\{graphPath}\\";
-
+            ofn.hwndOwner = Process.GetCurrentProcess().MainWindowHandle;
             if (!Directory.Exists(ofn.lpstrInitialDir))
             {
                 Directory.CreateDirectory(ofn.lpstrInitialDir);

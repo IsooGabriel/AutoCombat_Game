@@ -54,6 +54,10 @@ public class SceneLoader : MonoBehaviour
     }
     private void OnDisable()
     {
+        if(playerInput == null)
+        {
+            return;
+        }
         playerInput.actions["GraphEditor"].performed -= OnGraphEditor;
         playerInput.actions["Game"].performed -= OnGame;
     }
