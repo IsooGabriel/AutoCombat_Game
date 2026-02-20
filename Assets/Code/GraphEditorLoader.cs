@@ -102,21 +102,15 @@ public class GraphEditorLoader : MonoBehaviour
             var targetID = manager.nodeUIs[i].node.id;
             for (int j = 0; j < manager.graphData.nodes.Count; ++j)
             {
-                Debug.Log($"(s) {manager.nodeUIs[i]}:{targetID}, {manager.graphData.nodes[j].id}");
-                if (stopwatch.ElapsedMilliseconds >= 3)
+                if (false && stopwatch.ElapsedMilliseconds >= 3)
                 {
-                    Debug.Log($"(y) {manager.nodeUIs[i]}:{targetID}, {manager.graphData.nodes[j].id}");
                     stopwatch.Restart();
                     await Task.Yield();
                 }
-                Debug.Log($"(r) {manager.nodeUIs[i]}:{targetID}, {manager.graphData.nodes[j].id}");
-
-                if (targetID == manager.graphData.nodes[j].id)
-                {
-                    manager.DeleteNode(manager.nodeUIs[i]);
-                }
+                manager.DeleteNode(manager.nodeUIs[i]);
             }
         }
+
         Dictionary<string, string> newIDs = new();
         foreach (var node in functionData.nodes)
         {
@@ -165,6 +159,7 @@ public class GraphEditorLoader : MonoBehaviour
         {
             manager.graphData.graphName += nameSpacer + functionData.graphName;
         }
+
         await LoadEditor();
     }
 
@@ -175,7 +170,7 @@ public class GraphEditorLoader : MonoBehaviour
         var data = JsonUtility.FromJson<GraphData>(json);
         foreach (var node in data.nodes)
         {
-            if (data.version < 0.2f)
+            if (float.Parse(data.version) < 0.2f)
             {
 
                 node.position = new Vector2(node.position.x * 100, node.position.y * 100);

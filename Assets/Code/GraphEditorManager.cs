@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
 public class GraphEditorManager : MonoBehaviour
 {
     public Camera graphCamera;
@@ -455,8 +457,11 @@ public class GraphEditorManager : MonoBehaviour
     }
 
 
-    public void SaveGraph(string path, string graphName, string author)
+    public async Task SaveGraph(string path, string graphName, string author)
     {
+        var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
+
         HashSet<string> usedNodeIds = new HashSet<string>() { };
         Instance.graphData.nodes.Clear();
         foreach (var nodeUI in GraphEditorManager.Instance.nodeUIs)
@@ -464,6 +469,11 @@ public class GraphEditorManager : MonoBehaviour
             if (usedNodeIds.Contains(nodeUI.node.id))
             {
                 continue;
+            }
+            if (stopwatch.ElapsedMilliseconds > 3)
+            {
+                stopwatch.Restart();
+                await Task.Yield();
             }
             nodeUI.node.position = nodeUI.transform.position;
             NodeData nodeData = GenerateNodeData(nodeUI);
@@ -488,9 +498,9 @@ public class GraphEditorManager : MonoBehaviour
         }
         Instance.AjustAdditionalStatus(Instance.graphData.aditionalStatus);
         Instance.graphData.createdDate = DateTime.Now;
-        if(Instance.graphData.graphName.Contains(nameSpacer))
+        if (Instance.graphData.graphName.Contains(nameSpacer))
         {
-            Instance.graphData.graphName = graphName+nameSpacer+Instance.graphData.graphName;
+            Instance.graphData.graphName = graphName + nameSpacer + Instance.graphData.graphName;
         }
         else
         {
@@ -544,14 +554,14 @@ public class GraphEditorManager : MonoBehaviour
 
     public async void SaveWithDialog()
     {
-        string path = await loader.OpenFileDialog(); 
+        string path = await loader.OpenFileDialog();
         if (string.IsNullOrEmpty(path))
         {
             string parent = Application.persistentDataPath.Replace("/", "\\");
             path =
                 $"{parent}\\{defaultPath}\\{playerDataFileName}";
         }
-        if(!path.EndsWith(".acjson") && !path.EndsWith(".json") && !path.Contains("."))
+        if (!path.EndsWith(".acjson") && !path.EndsWith(".json") && !path.Contains("."))
         {
             path += ".acjson";
         }

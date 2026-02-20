@@ -5,7 +5,7 @@ using Weapon;
 [Serializable]
 public class GraphData
 {
-    public float version = 0.2f;
+    public string version ="0.21";
     public List<NodeData> nodes = new();
     public List<LinkedNodeData> linkedNodes = new();
     const string startNodeId = "START_NODE";
