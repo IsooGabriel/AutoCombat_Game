@@ -355,8 +355,6 @@ MonoBehaviour:
     _nodeTypes:
     - _nodeType: 2
       isSerialize: 0
-    - _nodeType: 10
-      isSerialize: 0
     - _nodeType: 12
       isSerialize: 0
     - _nodeType: 13
@@ -370,6 +368,8 @@ MonoBehaviour:
     - _nodeType: 17
       isSerialize: 0
     - _nodeType: 18
+      isSerialize: 0
+    - _nodeType: 11
       isSerialize: 0
 --- !u!224 &56275366 stripped
 RectTransform:
@@ -9736,7 +9736,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2002696200}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16539,7 +16539,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.8
+  m_fontSize: 21.65
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1

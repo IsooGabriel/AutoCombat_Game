@@ -1,5 +1,5 @@
 ﻿{
-    "version": 0.20000000298023225,
+    "version": "0.200000",
     "nodes": [
         {
             "id": "98f0e6d2-e9f4-4c35-97d2-615f4580c40a",
@@ -208,7 +208,7 @@
             "inputValues": [
                 {
                     "toPortName": "Limit",
-                    "value": 300.0,
+                    "value": 5.0,
                     "isUserset": true
                 }
             ]
@@ -234,11 +234,11 @@
         }
     ],
     "linkedNodes": [],
-    "graphName": "_DEFAULT_51e0e637-3e62-4fe5-b81f-bfecb6a598e6, New AI, New AI_DEFAULT_33d0efb5-8f55-44a7-95ef-39e58af83177",
-    "author": "_DEFAULT_698183f3-8ff6-41fe-86cb-e5b7011fe58f, , _DEFAULT_252522ad-840d-445d-8621-1039da040e5e",
+    "graphName": "_DEFAULT_da238d3a-8bc5-4af9-b0a1-99ee027dfb67, _DEFAULT_51e0e637-3e62-4fe5-b81f-bfecb6a598e6, New AI, New AI_DEFAULT_33d0efb5-8f55-44a7-95ef-39e58af83177",
+    "author": "_DEFAULT_bf163766-20c7-41f2-b7d8-d18f2f30a5db, _DEFAULT_698183f3-8ff6-41fe-86cb-e5b7011fe58f, , _DEFAULT_252522ad-840d-445d-8621-1039da040e5e",
     "aditionalStatus": {
         "hp": 0,
-        "attack": 0,
+        "attack": 10,
         "attackCooltime": 0,
         "criticalChance": 0,
         "criticalDamage": 0

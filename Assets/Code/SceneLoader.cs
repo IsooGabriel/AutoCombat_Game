@@ -38,9 +38,8 @@ public class SceneLoader : MonoBehaviour
 
     public void SelectStage(string sceneName)
     {
-        Debug.Log("====button=====");
         SetStage(sceneName);
-        OnClick(sceneName);
+        OnGraphEditor(new CallbackContext());
     }
 
     private void OnEnable()
