@@ -1,4 +1,4 @@
-﻿
+﻿using UnityEngine;
 public class DoNTimeNode : Node
 {
     public const string limitPortName = "Limit";
@@ -48,6 +48,7 @@ public class DoNTimeNode : Node
         {
             executor.EnqueueConnected(this, limitedPortName);
         }
+
         executor.SendData(this, nowLimitPortName, (float)_useLimit);
         return;
     }

@@ -18,7 +18,9 @@ public class GraphRunner : MonoBehaviour
     public TextAsset enemyGraphJson;
     public bool isLoadEnemyGraph = false;
 
+    [SerializeField]
     private GraphExecutor _playerExecutor;
+    [SerializeField]
     private GraphExecutor _enemyExecutor;
     private float _tickTimer;
     private const float TickInterval = 1f / 30f; // 30tick/秒
@@ -200,7 +202,6 @@ public class GraphRunner : MonoBehaviour
             return;
         }
 
-        Debug.Log(enemy.currentHP + "============");
 
         if (!isRunning)
         {

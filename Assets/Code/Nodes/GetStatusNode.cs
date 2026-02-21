@@ -12,7 +12,7 @@ public enum StatusType
 public class GetStatusNode:Node
 {
 
-    public const string targetPortName = "target";
+    public const string targetPortName = "enemy is target";
     public const string statusPortName = "source";
     public const string returnPortName = "result";
 
@@ -36,7 +36,11 @@ public class GetStatusNode:Node
 
     public override void Execute(GraphExecutor executor)
     {
-        if (!TryGetInputValueWithPort<bool>(targetPortName, out isTargetPlayer) || !TryGetInputValueWithPort<float>(statusPortName, out targetStartsu))
+        if(!TryGetInputValueWithPort<bool>(targetPortName, out isTargetPlayer))
+        {
+            isTargetPlayer = true;
+        }
+        if (!TryGetInputValueWithPort<float>(statusPortName, out targetStartsu))
         {
             return;
         }

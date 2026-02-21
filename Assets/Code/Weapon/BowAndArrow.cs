@@ -21,7 +21,6 @@ namespace Weapon
             {
                 return false;
             }
-            Debug.Log(direction);
             GameObject arrow = Instantiate
                 (
                     arrowPrefab,

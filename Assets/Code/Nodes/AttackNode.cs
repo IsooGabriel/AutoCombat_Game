@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class AttackNode : Node
 {
-    readonly public string inputDirection = "direction";
-    readonly public string inputAutoAim = "isAutoAim";
-    readonly public string outOnHit = "onHit";
+    const string inputDirection = "direction";
+    const string inputAutoAim = "isAutoAim";
+    const string outOnHit = "onHit";
 
     private GraphExecutor executor;
     private Action<Character> onHit;
