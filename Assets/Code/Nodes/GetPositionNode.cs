@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 public class GetPositionNode : Node
 {
     public const string positionTypeDataName = "isCharacterPostion";
     private string positionPortName = "position";
+    private GetPositionSettings isCharacterPostion = GetPositionSettings.CharacterPosition;
     public override void Initialize()
     {
         nodeType = NodeType.GetPosition;
@@ -20,22 +20,25 @@ public class GetPositionNode : Node
 
     public override void Execute(GraphExecutor executor)
     {
-        if (!TryGetInputValueWithPort(positionTypeDataName, out float isCharacterPostion))
+        if(TryGetInputValueWithPort(positionTypeDataName, out float newValue))
         {
-            return;
+            isCharacterPostion = (GetPositionSettings)(int)newValue;
         }
 
-        switch ((GetPositionSettings)isCharacterPostion)
+
+        Vector2 send = Vector2.zero;
+        switch (isCharacterPostion)
         {
             case GetPositionSettings.CharacterPosition:
-                executor.SendData(this, positionPortName, (object)executor.myCharacter.transform.position);
+                send = executor.myCharacter.transform.position;
                 break;
             case GetPositionSettings.EnemyPosition:
-                executor.SendData(this, positionPortName, (object)executor.enemy.transform.position);
+                send = executor.enemy.transform.position;
                 break;
             default:
                 break;
         }
+                executor.SendData(this, positionPortName, (object)new Vector2(send.x, send.y));
         executor.EnqueueConnected(this, executePortName);
     }
 }

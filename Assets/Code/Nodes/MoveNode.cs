@@ -29,9 +29,12 @@ public class MoveNode : Node
         {
             return;
         }
-        List<Vector2> directions = new() { };
-        Vector2 direction = TryGetInputValueWithPort(directionPortName, out directions) == true ? directions[0] : Vector2.zero;
-        if (TryGetInputValueWithPort(fripPortName, out bool flip) && flip && !executor.myCharacter.isPlayer) direction.x *= -1;
+        Vector2 directions = new() { };
+        Vector2 direction = TryGetInputValueWithPort(directionPortName, out directions) == true ? directions : Vector2.zero;
+        if (TryGetInputValueWithPort(fripPortName, out bool flip) && flip && !executor.myCharacter.isPlayer)
+        {
+            direction.x *= -1;
+        }
         executor.myCharacter.Move(direction);
         executor.EnqueueConnected(this, executePortName);
     }

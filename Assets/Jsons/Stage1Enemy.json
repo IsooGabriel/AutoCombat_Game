@@ -2,18 +2,18 @@
     "version": "0.21",
     "nodes": [
         {
-            "id": "987479dd-7fc4-4839-9318-aa4196427cb9",
+            "id": "f5411a2e-0c66-4973-8b95-bcda5e8f665d",
             "type": 0,
             "position": {
-                "x": -185.88357543945313,
-                "y": -86.34237670898438
+                "x": -214.0032958984375,
+                "y": -24.678756713867189
             },
             "outputConnections": [
                 {
                     "fromPortName": "Execute",
                     "toPortNodes": [
                         {
-                            "nodeId": "3b61e015-4420-424e-bea3-99772becb44e",
+                            "nodeId": "a29a471a-5376-4788-854a-513f7c2456b3",
                             "portName": "Execute"
                         }
                     ]
@@ -22,16 +22,21 @@
             "inputValues": []
         },
         {
-            "id": "ab8a47c9-36c7-434e-b438-679136784858",
+            "id": "744d67da-d86d-4e33-a5c5-754026215ee6",
             "type": 2,
             "position": {
-                "x": 207.23681640625,
-                "y": -189.07894897460938
+                "x": 151.08636474609376,
+                "y": -183.27166748046876
             },
             "outputConnections": [
                 {
                     "fromPortName": "Execute",
-                    "toPortNodes": []
+                    "toPortNodes": [
+                        {
+                            "nodeId": "e1363dc5-887a-40d1-ac25-6d5655ee74fb",
+                            "portName": "Execute"
+                        }
+                    ]
                 },
                 {
                     "fromPortName": "onHit",
@@ -41,7 +46,7 @@
             "inputValues": []
         },
         {
-            "id": "3b61e015-4420-424e-bea3-99772becb44e",
+            "id": "a29a471a-5376-4788-854a-513f7c2456b3",
             "type": 16,
             "position": {
                 "x": -22.697378158569337,
@@ -52,7 +57,7 @@
                     "fromPortName": "Execute",
                     "toPortNodes": [
                         {
-                            "nodeId": "83fa329c-9258-4906-916a-f08b5ffc210d",
+                            "nodeId": "e1363dc5-887a-40d1-ac25-6d5655ee74fb",
                             "portName": "Execute"
                         }
                     ]
@@ -65,7 +70,7 @@
                     "fromPortName": "whithLimit",
                     "toPortNodes": [
                         {
-                            "nodeId": "ab8a47c9-36c7-434e-b438-679136784858",
+                            "nodeId": "744d67da-d86d-4e33-a5c5-754026215ee6",
                             "portName": "Execute"
                         }
                     ]
@@ -80,7 +85,7 @@
             ]
         },
         {
-            "id": "f4669f4a-4f5a-4cfc-bbec-30160a2c29e5",
+            "id": "28a7e983-ba17-4b56-982f-414ba003eb2d",
             "type": 1,
             "position": {
                 "x": 887.0148315429688,
@@ -99,7 +104,7 @@
             "inputValues": []
         },
         {
-            "id": "d296931c-9fff-42ab-81f0-baadb66360bd",
+            "id": "2c88da05-4dd4-40d9-ae85-4bd2f93a5f79",
             "type": 9,
             "position": {
                 "x": 312.82891845703127,
@@ -110,7 +115,7 @@
                     "fromPortName": "Execute",
                     "toPortNodes": [
                         {
-                            "nodeId": "ecd0ee48-6e04-4423-a85c-7c6856755330",
+                            "nodeId": "920d1a0a-f4a5-40ea-9c5a-cc2a3c5139f7",
                             "portName": "Execute"
                         }
                     ]
@@ -119,7 +124,7 @@
                     "fromPortName": "output number",
                     "toPortNodes": [
                         {
-                            "nodeId": "ecd0ee48-6e04-4423-a85c-7c6856755330",
+                            "nodeId": "920d1a0a-f4a5-40ea-9c5a-cc2a3c5139f7",
                             "portName": "x"
                         }
                     ]
@@ -134,7 +139,7 @@
             ]
         },
         {
-            "id": "83fa329c-9258-4906-916a-f08b5ffc210d",
+            "id": "e1363dc5-887a-40d1-ac25-6d5655ee74fb",
             "type": 9,
             "position": {
                 "x": 157.8946990966797,
@@ -145,7 +150,7 @@
                     "fromPortName": "Execute",
                     "toPortNodes": [
                         {
-                            "nodeId": "d296931c-9fff-42ab-81f0-baadb66360bd",
+                            "nodeId": "2c88da05-4dd4-40d9-ae85-4bd2f93a5f79",
                             "portName": "Execute"
                         }
                     ]
@@ -154,7 +159,7 @@
                     "fromPortName": "output number",
                     "toPortNodes": [
                         {
-                            "nodeId": "ecd0ee48-6e04-4423-a85c-7c6856755330",
+                            "nodeId": "920d1a0a-f4a5-40ea-9c5a-cc2a3c5139f7",
                             "portName": "y"
                         }
                     ]
@@ -169,7 +174,7 @@
             ]
         },
         {
-            "id": "ecd0ee48-6e04-4423-a85c-7c6856755330",
+            "id": "920d1a0a-f4a5-40ea-9c5a-cc2a3c5139f7",
             "type": 10,
             "position": {
                 "x": 507.80694580078127,
@@ -180,7 +185,7 @@
                     "fromPortName": "Execute",
                     "toPortNodes": [
                         {
-                            "nodeId": "ca43ad87-2fb6-4e11-863b-8b283db09e2a",
+                            "nodeId": "38b5fd10-7a44-4b74-8ce1-1e217a1fc113",
                             "portName": "Execute"
                         }
                     ]
@@ -189,7 +194,7 @@
                     "fromPortName": "output vector2",
                     "toPortNodes": [
                         {
-                            "nodeId": "f4669f4a-4f5a-4cfc-bbec-30160a2c29e5",
+                            "nodeId": "28a7e983-ba17-4b56-982f-414ba003eb2d",
                             "portName": "direction"
                         }
                     ]
@@ -198,7 +203,7 @@
             "inputValues": []
         },
         {
-            "id": "ca43ad87-2fb6-4e11-863b-8b283db09e2a",
+            "id": "38b5fd10-7a44-4b74-8ce1-1e217a1fc113",
             "type": 15,
             "position": {
                 "x": 701.9932861328125,
@@ -209,7 +214,7 @@
                     "fromPortName": "Execute",
                     "toPortNodes": [
                         {
-                            "nodeId": "f4669f4a-4f5a-4cfc-bbec-30160a2c29e5",
+                            "nodeId": "28a7e983-ba17-4b56-982f-414ba003eb2d",
                             "portName": "Execute"
                         }
                     ]
@@ -218,7 +223,7 @@
                     "fromPortName": "outBool",
                     "toPortNodes": [
                         {
-                            "nodeId": "f4669f4a-4f5a-4cfc-bbec-30160a2c29e5",
+                            "nodeId": "28a7e983-ba17-4b56-982f-414ba003eb2d",
                             "portName": "isEnemyFrip"
                         }
                     ]
@@ -234,8 +239,8 @@
         }
     ],
     "linkedNodes": [],
-    "graphName": "_DEFAULT_c646178d-7287-406e-a15a-e4919804c6ea, _DEFAULT_56a2183c-23fc-4580-802c-9c4bf4d340f9, New AI, New AI_DEFAULT_400a04e5-d9e4-45b6-8de3-28aee9c1cd00",
-    "author": "_DEFAULT_03e98dd7-27e1-4b59-8d5b-795f84f8e451, _DEFAULT_362a7e69-c61e-43c1-a520-1961a8ac956d, , _DEFAULT_3d50ccff-6694-4db9-9af8-014e86819c3b",
+    "graphName": "_DEFAULT_3e0c227e-1f11-4031-bccc-b37d6b391f86, _DEFAULT_09f796e5-876e-4a06-b3d5-f8b1419c6670, New AI, _DEFAULT_c646178d-7287-406e-a15a-e4919804c6ea, _DEFAULT_56a2183c-23fc-4580-802c-9c4bf4d340f9, New AI, New AI_DEFAULT_400a04e5-d9e4-45b6-8de3-28aee9c1cd00",
+    "author": "_DEFAULT_d81e104c-3199-486d-82db-65e0dc180a33, _DEFAULT_5a41d048-b921-41a0-899c-61b41bb573fe, , _DEFAULT_03e98dd7-27e1-4b59-8d5b-795f84f8e451, _DEFAULT_362a7e69-c61e-43c1-a520-1961a8ac956d, , _DEFAULT_3d50ccff-6694-4db9-9af8-014e86819c3b",
     "aditionalStatus": {
         "hp": 0,
         "attack": 10,
@@ -243,6 +248,6 @@
         "criticalChance": 0,
         "criticalDamage": 0
     },
-    "weapon": 0,
+    "weapon": 3,
     "skin": 0
 }

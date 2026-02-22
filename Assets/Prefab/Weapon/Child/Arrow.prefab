@@ -135,17 +135,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplies:
-    finaryDamage: 1
+    finaryDamage: 2
     attack: 1
     aditionalAttack: 1
     finaryAttack: 0.1
-    criticalChance: 900
+    criticalChance: 1
     aditionalCriticalChance: 0.2
     finaryCriticalChance: 1
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.1
-  damageMultiply: 1
   range: 0
   baseCT: 1
   originOffset: {x: 0, y: 0}
@@ -153,7 +152,6 @@ MonoBehaviour:
   user: {fileID: 0}
   timer: 0
   hp: 1
-  recoilMultiply: 2
   speed: 3
 --- !u!60 &3270496663315490433
 PolygonCollider2D:
