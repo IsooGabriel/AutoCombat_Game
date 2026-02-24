@@ -106,14 +106,24 @@ public class UISystem_Gabu : ColorSystem
         {
             return setStatu;
         }
-        if (_isButton || _animator == null)
+        if (_isButton)
+        {
+            return (int)AnimatorStatu.Normal;
+        }
+
+        return CheckAnimationState(_animator);
+    }
+
+    public static int CheckAnimationState(Animator animator)
+    {
+        if (animator == null)
         {
             return (int)AnimatorStatu.Normal;
         }
 
         foreach (string state in Enum.GetNames(typeof(AnimatorStatu)))
         {
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName(state))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName(state))
             {
                 return (int)Enum.Parse(typeof(AnimatorStatu), state);
             }
@@ -121,7 +131,6 @@ public class UISystem_Gabu : ColorSystem
 
         return (int)AnimatorStatu.Normal;
     }
-
 
     protected virtual void NormalAnimation()
     {

@@ -36,7 +36,7 @@ public class GraphExecutor
         while (executionQueue.Count > 0)
         {
             Node node = executionQueue.Dequeue();
-            if(!startedNodes.Contains(node.id))
+            if (!startedNodes.Contains(node.id))
             {
                 node.StartInitialize();
                 startedNodes.Add(node.id);
@@ -192,7 +192,8 @@ public class GraphExecutor
         LinkedNode linkedNode = null;
         foreach (var linkedNodeData in graphData.linkedNodes)
         {
-            if(nodes[linkedNodeData.id]is LinkedNode lNode)
+            UnityEngine.Debug.Log(linkedNodeData.id + nodes.ContainsKey(linkedNodeData.id) + linkedNodes.ContainsKey(linkedNodeData.id));
+            if (nodes.ContainsKey(linkedNodeData.id) && nodes[linkedNodeData.id] is LinkedNode lNode)
             {
                 linkedNodes[linkedNodeData.id] = lNode;
             }
@@ -206,7 +207,7 @@ public class GraphExecutor
             List<Node> outputNodes = new List<Node> { };
             foreach (var inputID in linkedNodeData.inputNodeIDs)
             {
-                if(!nodes.ContainsKey(inputID))
+                if (!nodes.ContainsKey(inputID))
                 {
                     continue;
                 }

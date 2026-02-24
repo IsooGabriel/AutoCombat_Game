@@ -11,11 +11,14 @@ using static GraphEditorManager;
 
 public class GraphEditorLoader : MonoBehaviour
 {
+    public const string chanceledMessage = "ファイルの選択がキャンセルされました。⊂(^w^;";
+
     [SerializeField]
     private GraphEditorManager manager => GraphEditorManager.Instance;
     private readonly string graphPath = "GraphData";
     private string path;
     private GraphData graphData;
+
 
     [DllImport("comdlg32.dll", SetLastError = true, CharSet = CharSet.Auto)]
     private static extern bool GetOpenFileName(ref OpenFileName ofn);
@@ -58,7 +61,10 @@ public class GraphEditorLoader : MonoBehaviour
                 }
                 return Task.FromResult<string>(ofn.lpstrFile);
             }
-            return null;
+            else
+            {
+                return Task.FromResult<string>(chanceledMessage);
+            }
         }
         finally
         {
@@ -69,6 +75,10 @@ public class GraphEditorLoader : MonoBehaviour
     public async void SelectFile()
     {
         this.path = await OpenFileDialog();
+        if (this.path == chanceledMessage)
+        {
+            return;
+        }
         if (string.IsNullOrEmpty(path))
         {
             string parent = Application.persistentDataPath.Replace("/", "\\");
@@ -85,6 +95,10 @@ public class GraphEditorLoader : MonoBehaviour
         var stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
         this.path = await OpenFileDialog();
+        if (this.path == GraphEditorLoader.chanceledMessage)
+        {
+            return;
+        }
         if (string.IsNullOrEmpty(path))
         {
             string parent = Application.persistentDataPath.Replace("/", "\\");

@@ -555,6 +555,10 @@ public class GraphEditorManager : MonoBehaviour
     public async void SaveWithDialog()
     {
         string path = await loader.OpenFileDialog();
+        if (path == GraphEditorLoader.chanceledMessage)
+        {
+            return;
+        }
         if (string.IsNullOrEmpty(path))
         {
             string parent = Application.persistentDataPath.Replace("/", "\\");
