@@ -24,8 +24,8 @@ public class SetVectorNode : Node
 
     public override void Execute(GraphExecutor executor)
     {
-        if (TryGetInputValueWithPort(portXname, out List<float> valuesX) &&
-            TryGetInputValueWithPort(portYname, out List<float> valuesY))
+        if (TryGetInputValuesWithPort(portXname, out List<float> valuesX) &&
+            TryGetInputValuesWithPort(portYname, out List<float> valuesY))
         {
             executor.SendData(this, outputPorts[1].portName, new List<Vector2>() { new Vector2(valuesX[0], valuesY[0]) });
         }

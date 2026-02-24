@@ -25,6 +25,9 @@ public class AddNodeButtonFuctory : MonoBehaviour
     private ImageAnimation_Gabu imageAnimation;
     [SerializeField]
     private OutlineColor outlineColor;
+    [SerializeField]
+    private GraphEditorManager manager;
+
     public enum OutlineColor
     {
         None = 0,
@@ -37,7 +40,6 @@ public class AddNodeButtonFuctory : MonoBehaviour
         {   ACTION, new Color(229,  23,  57)},
         {   GETSET, new Color(92,  229,  183)},
         {   MATH,   new Color(23 , 92 , 229)},
-
     };
 
     public void Awake()
@@ -47,7 +49,7 @@ public class AddNodeButtonFuctory : MonoBehaviour
             button = GetComponentInChildren<Button>();
         }
         button?.onClick.RemoveAllListeners();
-        button?.onClick.AddListener(() => GraphEditorManager.Instance.AddNode(nodeType));
+        button?.onClick.AddListener(() => manager.AddNode(nodeType));
 
         if (text == null)
         {

@@ -25,7 +25,8 @@ public static class NodeFactory
         { SetBool, () => new SetBoolNode() },
         { DoNTime, () => new DoNTimeNode() },
         { Sum, () => new SumNode()},
-        { GetStatus, () => new GetStatusNode() }
+        { GetStatus, () => new GetStatusNode() },
+        { Multiply, () => new MultipyNode() }, 
     };
 
     public static Node Create(NodeType type)

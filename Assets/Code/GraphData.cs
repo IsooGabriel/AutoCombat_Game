@@ -5,7 +5,7 @@ using Weapon;
 [Serializable]
 public class GraphData
 {
-    public string version ="0.21";
+    public string version = "0.21";
     public List<NodeData> nodes = new();
     public List<LinkedNodeData> linkedNodes = new();
     const string startNodeId = "START_NODE";
@@ -15,7 +15,7 @@ public class GraphData
     public Status aditionalStatus = new() { hp = 0, attack = 0, attackCooltime = 0, criticalChance = 0, criticalDamage = 0 };
     public int weapon = 0;
     public int skin = 0;
-    public const int noWeapon = -1;    
+    public const int noWeapon = -1;
 
     public GraphData()
     {
@@ -131,8 +131,8 @@ public class InputValue<T>
 }
 public enum NodeType
 {
-    Start =0,
-    Move,
+    Start = 0,
+    Move = 1,
     Attack,
     Jump,
     GetDistance,
@@ -150,4 +150,5 @@ public enum NodeType
     DoNTime,
     Sum,
     GetStatus,
+    Multiply,
 }

@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-
-public class SumNode : Node
+public class MultipyNode : Node
 {
     public const string elementsPortName = "elements";
     public const string resultPortName = "Result";
 
     public override void Initialize()
     {
-        nodeType = NodeType.Sum;
+        nodeType = NodeType.Multiply;
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
@@ -24,12 +23,12 @@ public class SumNode : Node
     {
         if (TryGetInputValuesWithPort<float>(elementsPortName, out List<float> elements))
         {
-            float sum = 0f;
+            float multi = 0f;
             foreach (var element in elements)
             {
-                sum += element;
+                multi *= element;
             }
-            executor.SendData(this, resultPortName, sum);
+            executor.SendData(this, resultPortName, multi);
         }
         executor.EnqueueConnected(this, executePortName);
     }

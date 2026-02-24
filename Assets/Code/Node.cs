@@ -70,7 +70,7 @@ public abstract class Node
         }
         return false;
     }
-    public virtual bool TryGetInputValueWithPort<T>(string toPortName, out List<T> value)
+    public virtual bool TryGetInputValuesWithPort<T>(string toPortName, out List<T> value)
     {
         value = new List<T>();
         if (InputValueContainsPort(toPortName) == false)
@@ -94,15 +94,15 @@ public abstract class Node
             }
             if(value.Count <= 0)
             {
-                return false;
+                continue;
             }
-                found = true;
+            found = true;
         }
         return found;
     }
     public virtual bool TryGetInputValueWithPort<T>(string toPortName, out T value)
     {
-        if (TryGetInputValueWithPort<T>(toPortName, out List<T> values))
+        if (TryGetInputValuesWithPort<T>(toPortName, out List<T> values))
         {
             value = values[0];
             return true;
@@ -112,7 +112,7 @@ public abstract class Node
     }
     public virtual bool TryGetInputValueWithPort<T>(Port toPort, out List<T> value)
     {
-        return TryGetInputValueWithPort<T>(toPort.portName, out value);
+        return TryGetInputValuesWithPort<T>(toPort.portName, out value);
     }
     public virtual bool TryGetInputValueWithType<T>(out List<T> value)
     {

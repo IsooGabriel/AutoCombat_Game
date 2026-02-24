@@ -396,9 +396,9 @@ public class GraphEditorManager : MonoBehaviour
         {
             return false;
         }
-        if (from.port.isExecutionPort && to.port.isExecutionPort)
+        if (from.port.isExecutionPort ^ to.port.isExecutionPort)
         {
-            return true;
+            return false;
         }
         if (from.port.portType != to.port.portType || from.port.portType.GetType() != to.port.portType.GetType())
         {

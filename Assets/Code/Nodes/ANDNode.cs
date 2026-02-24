@@ -39,7 +39,7 @@ public class ANDNode : LinkedNode
         {
             return;
         }
-        TryGetInputValueWithPort(elementPortName, out List<object> values);
+        TryGetInputValuesWithPort(elementPortName, out List<object> values);
         switch (connectionType)
         {
             case Type t when t == typeof(float):
