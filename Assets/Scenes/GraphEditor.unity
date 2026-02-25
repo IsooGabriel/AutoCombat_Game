@@ -360,6 +360,10 @@ MonoBehaviour:
     button: {fileID: 547019465}
   - nodeType: 19
     button: {fileID: 63588418}
+  - nodeType: 19
+    button: {fileID: 63588418}
+  - nodeType: 19
+    button: {fileID: 63588418}
   nodeSerialize:
   - _stageName: freeFight
     _stageIndex: 0
@@ -384,6 +388,10 @@ MonoBehaviour:
     - _nodeType: 18
       isSerialize: 0
     - _nodeType: 11
+      isSerialize: 0
+    - _nodeType: 19
+      isSerialize: 0
+    - _nodeType: 19
       isSerialize: 0
     - _nodeType: 19
       isSerialize: 0
