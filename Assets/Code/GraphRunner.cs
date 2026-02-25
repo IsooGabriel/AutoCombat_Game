@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GraphRunner : MonoBehaviour
@@ -16,12 +17,14 @@ public class GraphRunner : MonoBehaviour
     public Character enemy;
     public TextAsset playerGraphJson;
     public TextAsset enemyGraphJson;
-    public bool isLoadEnemyGraph = false;
+    public bool isLoadUserEnemyGraph = false;
 
     [SerializeField]
     private GraphExecutor _playerExecutor;
     [SerializeField]
     private GraphExecutor _enemyExecutor;
+    [SerializeField]
+    private StageSettings[] settings = { };
     private float _tickTimer;
     private const float TickInterval = 1f / 30f; // 30tick/秒
 
@@ -31,10 +34,11 @@ public class GraphRunner : MonoBehaviour
 
     readonly private float submitTimeScale = 0.05f;
     readonly private float minTimeScale = 0.07f;
+    readonly private int invalidIndex = -1;
 
-
-    private async void InstanceExecutor()
+    private async Task InstanceExecutor()
     {
+
         string path = await OpenFileDialog();
         string json = File.ReadAllText(path);
         string enemypath = $"{(Application.persistentDataPath.Replace("/", "\\"))}\\{EnemyGraphLoader.graphPath}";
@@ -44,14 +48,16 @@ public class GraphRunner : MonoBehaviour
         GraphEditorManager.Instance ??= new GraphEditorManager();
         GraphEditorManager.Instance.AjustAdditionalStatus(playerGraph.aditionalStatus);
 
+        int stageIndex = StageSelector.stageIndex;
         GraphData enemyGraph;
-        if (isLoadEnemyGraph)
+        isLoadUserEnemyGraph = (stageIndex == invalidIndex) ? true : settings[stageIndex].isUseUserEnemy;
+        if (isLoadUserEnemyGraph)
         {
-            enemyGraph = JsonUtility.FromJson<GraphData>(enemyGraphJson.text);
+            enemyGraph = JsonUtility.FromJson<GraphData>(enemyjson);
         }
         else
         {
-            enemyGraph = JsonUtility.FromJson<GraphData>(enemyjson);
+            enemyGraph = JsonUtility.FromJson<GraphData>(settings[stageIndex].enemyGraph.text);
         }
 
         if (playerGraph == null || enemyGraph == null || player == null || enemy == null)
@@ -165,12 +171,13 @@ public class GraphRunner : MonoBehaviour
         chara.weapon = weapon;
     }
 
-    void Start()
+    async void Start()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = 0;
         Application.targetFrameRate = 30;
-
-        InstanceExecutor();
+        await Task.Delay(150);
+        await InstanceExecutor();
+        Time.timeScale = 1f;
         isRunning = true;
     }
     private void FixedUpdate()
@@ -189,6 +196,12 @@ public class GraphRunner : MonoBehaviour
     void Update()
     {
 
+
+        if (!isRunning)
+        {
+            return;
+        }
+
         if (enemy == null)
         {
             OnPlayerWin();
@@ -202,12 +215,6 @@ public class GraphRunner : MonoBehaviour
             return;
         }
 
-
-        if (!isRunning)
-        {
-            return;
-        }
-
         _tickTimer += Time.deltaTime;
 
         if (_tickTimer >= TickInterval)
@@ -217,4 +224,12 @@ public class GraphRunner : MonoBehaviour
             _enemyExecutor.ExecuteTick();
         }
     }
+}
+
+[Serializable]
+public class StageSettings
+{
+    public int stageIndex;
+    public bool isUseUserEnemy = false;
+    public TextAsset enemyGraph;
 }

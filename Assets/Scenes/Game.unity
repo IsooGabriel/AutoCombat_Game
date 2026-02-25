@@ -2246,6 +2246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 600126437}
   - component: {fileID: 600126438}
+  - component: {fileID: 600126439}
   m_Layer: 0
   m_Name: Runner
   m_TagString: Untagged
@@ -2287,7 +2288,32 @@ MonoBehaviour:
   enemy: {fileID: 486008869}
   playerGraphJson: {fileID: 4900000, guid: 66245d8d660f3ab4ba7a0cfbc29e66e0, type: 3}
   enemyGraphJson: {fileID: 4900000, guid: 66245d8d660f3ab4ba7a0cfbc29e66e0, type: 3}
-  isLoadEnemyGraph: 0
+  isLoadUserEnemyGraph: 0
+  settings:
+  - stageIndex: 0
+    isUseUserEnemy: 1
+    enemyGraph: {fileID: 0}
+  - stageIndex: 1
+    isUseUserEnemy: 0
+    enemyGraph: {fileID: 4900000, guid: fbd0ab53e79ca084ab37e6e7730a4b96, type: 3}
+  - stageIndex: 2
+    isUseUserEnemy: 0
+    enemyGraph: {fileID: 4900000, guid: d7d0dcaf093d7e947843fe0fd9c0163e, type: 3}
+--- !u!114 &600126439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600126436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3faa656cb79bd94d8e31aad7ed0d639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  custums: []
+  nodeButtons: []
+  nodeSerialize: []
 --- !u!1 &612725254
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,6 +2932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2020987422}
+  stageDatabase: {fileID: 0}
 --- !u!1 &872739087
 GameObject:
   m_ObjectHideFlags: 0
@@ -5008,6 +5035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2020987422}
+  stageDatabase: {fileID: 0}
 --- !u!1001 &1603952735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6782,6 +6810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 0}
+  stageDatabase: {fileID: 0}
 --- !u!1 &1995807539
 GameObject:
   m_ObjectHideFlags: 0
@@ -7180,6 +7209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2020987422}
+  stageDatabase: {fileID: 0}
 --- !u!1 &2048184039
 GameObject:
   m_ObjectHideFlags: 0

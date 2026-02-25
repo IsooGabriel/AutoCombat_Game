@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: StageDatabase
   m_EditorClassIdentifier: 
   stages:
-  - sceneName: Stage1
-    scenePath: Assets/Scenes/Stages/Stage1.unity
+  - sceneName: FreeFight
+    scenePath: Assets/Scenes/Game.unity
     thumbnail: {fileID: 0}
     stageNumber: 0
-  - sceneName: Stage2
-    scenePath: Assets/Scenes/Stages/Stage2.unity
+  - sceneName: Stage1
+    scenePath: Assets/Scenes/Game.unity
     thumbnail: {fileID: 0}
-    stageNumber: 9
+    stageNumber: 1
+  - sceneName: Stage2
+    scenePath: Assets/Scenes/Game.unity
+    thumbnail: {fileID: 0}
+    stageNumber: 2

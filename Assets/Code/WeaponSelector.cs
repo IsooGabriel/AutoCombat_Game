@@ -56,7 +56,7 @@ public class WeaponSelector : MonoBehaviour
         for (int i = 0; i < weaponDB.weaponDatas.Length; ++i)
         {
             var weapon = weaponDB.weaponDatas[i];
-            bool isValid = weapon.usableStage.reverseStages.Contains(StageSelector.sceneName);
+            bool isValid = weapon.usableStage.reverseStages.Contains(StageSelector.stageName);
             bool isDefault = weapon.usableStage.defaultUsable;
             if (!(isValid ^ isDefault))
             {

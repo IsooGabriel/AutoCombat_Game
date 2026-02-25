@@ -6,6 +6,8 @@ public class SceneLoader : MonoBehaviour
 {
     [SerializeField]
     private PlayerInput playerInput;
+    [SerializeField]
+    private StageDatabase stageDatabase;
     public void OnClick(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -30,10 +32,29 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(StageSelector.sceneName);
     }
-
     public void SetStage(string seneName)
     {
-        StageSelector.sceneName = seneName;
+        StageSelector.stageName = seneName;
+        bool isHit = false;
+        foreach(var stage in stageDatabase.stages)
+        {
+            if(stage.sceneName == seneName)
+            {
+                isHit = true;
+                SetStage(stage.stageNumber);
+                break;
+            }
+        }
+        if (!isHit)
+        {
+            StageSelector.stageName = StageSelector.freeFightStageName;
+            StageSelector.stageIndex = StageSelector.freeFightStageIndex;
+        }
+    }
+
+    public void SetStage(int index)
+    {
+        StageSelector.stageIndex = index;
     }
 
     public void SelectStage(string sceneName)

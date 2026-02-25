@@ -317,11 +317,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   custums:
-  - _stageName: Game
+  - _stageName: freeFight
+    _stageIndex: 0
     _enables:
     - {fileID: 1175154949}
     _disables: []
   - _stageName: Stage1
+    _stageIndex: 1
     _enables: []
     _disables:
     - {fileID: 1175154949}
@@ -355,7 +357,11 @@ MonoBehaviour:
   - nodeType: 19
     button: {fileID: 63588418}
   nodeSerialize:
+  - _stageName: freeFight
+    _stageIndex: 0
+    _nodeTypes: []
   - _stageName: Stage1
+    _stageIndex: 1
     _nodeTypes:
     - _nodeType: 2
       isSerialize: 0
@@ -375,7 +381,7 @@ MonoBehaviour:
       isSerialize: 0
     - _nodeType: 11
       isSerialize: 0
-    - _nodeType: 11
+    - _nodeType: 19
       isSerialize: 0
 --- !u!224 &56275366 stripped
 RectTransform:
@@ -9523,7 +9529,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1732654733}
   m_HandleRect: {fileID: 1732654732}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -9945,8 +9951,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2002696201}
   m_HandleRect: {fileID: 2002696200}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10875,8 +10881,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 131935819}
   m_HandleRect: {fileID: 131935818}
   m_Direction: 2
-  m_Value: 1.0000002
-  m_Size: 0.69750005
+  m_Value: 1
+  m_Size: 0.6975001
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -15205,6 +15211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1635736672}
+  stageDatabase: {fileID: 0}
 --- !u!4 &1635736674
 Transform:
   m_ObjectHideFlags: 0
@@ -15595,6 +15602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1635736672}
+  stageDatabase: {fileID: 0}
 --- !u!224 &1658902477 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5700189636571011641, guid: 2ecfcce7aaf337240a31eac1345b6a74, type: 3}
@@ -16395,7 +16403,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.4
+  m_fontSize: 20.1
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -16601,6 +16609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1635736672}
+  stageDatabase: {fileID: 0}
 --- !u!224 &1949142989 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5700189636571011641, guid: 2ecfcce7aaf337240a31eac1345b6a74, type: 3}
