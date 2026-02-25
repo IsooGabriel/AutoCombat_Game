@@ -517,6 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
+  damageText: {fileID: 9042065018275242214, guid: 3548fa78f01a0da4a8ef8083474084fa, type: 3}
   isPlayer: 1
   skins:
   - enable:

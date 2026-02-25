@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 
 public interface IDeathable
@@ -32,6 +33,7 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
     public decimal currentHP = 10;
     const decimal speed = 5;
     public Weapon.Weapon weapon;
+    public TextMeshPro damageText;
     public Action<Character> takeDamage;
     public Action<Character> onDeath;
     public bool isPlayer = false;
@@ -45,6 +47,11 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
     decimal IDamageable.HPGet => currentHP;
     public void TakeDamage(decimal damage)
     {
+        var dam = Instantiate(damageText, transform.position,Quaternion.identity);
+        dam.GetComponent<Rigidbody2D>().AddForce((0.5f+Mathf.Log(1f + (float)damage,2))*Vector2.up*100);
+        dam.fontSize *= Mathf.Log(2f + (float)damage, 2);
+        dam.text = damage.ToString();
+        dam.color = isPlayer ? Color.red : Color.blue;
         currentHP -= damage;
         takeDamage?.Invoke(this);
         if (currentHP <= 0)

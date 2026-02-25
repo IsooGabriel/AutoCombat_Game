@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplies:
-    finaryDamage: 1
+    finaryDamage: 8
     attack: 1
     aditionalAttack: 1
     finaryAttack: 0.1

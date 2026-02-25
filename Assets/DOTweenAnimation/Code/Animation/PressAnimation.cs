@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using static UISystem_Gabu;
+using static UnityEngine.UI.Button;
 public class PressAnimation : MonoBehaviour
 {
     [SerializeField]
@@ -19,10 +20,13 @@ public class PressAnimation : MonoBehaviour
     private float endPosition = 0f;
 
     private float timer = 0f;
+    private ButtonClickedEvent onClick;
 
     private void Start()
     {
         target.anchorMax = new Vector2(startPosition, target.anchorMax.y);
+        onClick = button.onClick;
+        button.onClick = null;
     }
 
     private void FixedUpdate()
@@ -37,10 +41,11 @@ public class PressAnimation : MonoBehaviour
         else
         {
             timer = 0f;
+            target.anchorMax = new Vector2(startPosition, target.anchorMax.y);
         }
-        if(timer >= duration)
+        if (timer >= duration)
         {
-            button.onClick?.Invoke();
+            onClick?.Invoke();
         }
     }
 }

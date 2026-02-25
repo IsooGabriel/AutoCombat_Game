@@ -199,16 +199,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplies:
-    finaryDamage: 1
+    finaryDamage: 10
     attack: 1
     aditionalAttack: 1
-    finaryAttack: 1
+    finaryAttack: 0.1
     criticalChance: 1
-    aditionalCriticalChance: 1
+    aditionalCriticalChance: 0.2
     finaryCriticalChance: 1
     criticalDamage: 1
     aditionalCriticalDamage: 1
-    finaryCriticalDamage: 1
+    finaryCriticalDamage: 0.1
   range: 0
   baseCT: 1
   originOffset: {x: 0, y: 0}

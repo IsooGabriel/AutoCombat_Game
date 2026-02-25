@@ -7209,7 +7209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2020987422}
-  stageDatabase: {fileID: 0}
+  stageDatabase: {fileID: 11400000, guid: 5e2de4c0d35d6df4fbb869a0e30f159a, type: 2}
 --- !u!1 &2048184039
 GameObject:
   m_ObjectHideFlags: 0

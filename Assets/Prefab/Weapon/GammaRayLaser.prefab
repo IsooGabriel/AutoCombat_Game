@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplies:
-    finaryDamage: 1
+    finaryDamage: 0.3
     attack: 1
     aditionalAttack: 1
     finaryAttack: 0.1
@@ -55,7 +55,6 @@ MonoBehaviour:
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.1
-  damageMultiply: 0.02
   range: 20
   baseCT: 0
   originOffset: {x: 1.41, y: 0}

@@ -15211,7 +15211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1635736672}
-  stageDatabase: {fileID: 0}
+  stageDatabase: {fileID: 11400000, guid: 5e2de4c0d35d6df4fbb869a0e30f159a, type: 2}
 --- !u!4 &1635736674
 Transform:
   m_ObjectHideFlags: 0
