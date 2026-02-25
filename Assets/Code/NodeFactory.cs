@@ -26,7 +26,9 @@ public static class NodeFactory
         { DoNTime, () => new DoNTimeNode() },
         { Sum, () => new SumNode()},
         { GetStatus, () => new GetStatusNode() },
-        { Multiply, () => new MultipyNode() }, 
+        { Multiply, () => new MultipyNode() },
+        { Accele, () => new AcceleNode() },
+        { Stop, ()=> new StopNode() },
     };
 
     public static Node Create(NodeType type)

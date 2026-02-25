@@ -514,6 +514,8 @@ public class GraphEditorManager : MonoBehaviour
         {
             Instance.graphData.author += author;
         }
+
+        Instance.graphData.version = GraphData.currentVersion;
         string json = JsonUtility.ToJson(Instance.graphData, true);
         EnsureDirectoryExists(path);
 

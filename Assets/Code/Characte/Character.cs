@@ -20,7 +20,7 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
     {
         get
         {
-            return new Status() 
+            return new Status()
             {
                 hp = baseStatus.hp + aditionalStatus.hp,
                 attack = baseStatus.attack + aditionalStatus.attack,
@@ -38,6 +38,16 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
     public Action<Character> onDeath;
     public bool isPlayer = false;
     public SkinObject[] skins;
+    [SerializeField]
+    private Rigidbody2D rigidBody;
+    [SerializeField]
+    private float acceleForce = 500f;
+    [SerializeField]
+    private float acceleCT = 5f;
+    private float acceleTimer = 0;
+    [SerializeField]
+    private float stopCT = 5f;
+    private float stopTimer = 0;
 
     public void Death()
     {
@@ -47,8 +57,8 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
     decimal IDamageable.HPGet => currentHP;
     public void TakeDamage(decimal damage)
     {
-        var dam = Instantiate(damageText, transform.position,Quaternion.identity);
-        dam.GetComponent<Rigidbody2D>().AddForce((0.5f+Mathf.Log(1f + (float)damage,2))*Vector2.up*100);
+        var dam = Instantiate(damageText, transform.position, Quaternion.identity);
+        dam.GetComponent<Rigidbody2D>().AddForce((0.5f + Mathf.Log(1f + (float)damage, 2)) * Vector2.up * 100);
         dam.fontSize *= Mathf.Log(2f + (float)damage, 2);
         dam.text = damage.ToString();
         dam.color = isPlayer ? Color.red : Color.blue;
@@ -62,13 +72,16 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
 
     public Vector2 Move(Vector2 direction)
     {
-        if(direction.magnitude>1f)direction.Normalize();
+        if (direction.magnitude > 1f)
+        {
+            direction.Normalize();
+        }
         float multiply = (float)speed * Time.deltaTime;
         direction = new Vector2(direction.x * multiply, direction.y * multiply);
 
-        if (TryGetComponent<Rigidbody2D>(out var rb))
+        if (rigidBody)
         {
-            rb.AddForce(direction * 75, ForceMode2D.Force);
+            rigidBody.AddForce(direction * 75, ForceMode2D.Force);
         }
         else
         {
@@ -98,21 +111,61 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
         return weapon.hitAttack;
     }
 
+    public void Accele(Vector2 direction)
+    {
+        if (acceleTimer > 0)
+        {
+            return;
+        }
+        acceleTimer = acceleCT;
+        if (direction.magnitude > 1f)
+        {
+            direction.Normalize();
+        }
+        rigidBody.AddForce(direction * acceleForce);
+    }
+
+    public void Stop()
+    {
+        if (stopTimer > 0)
+        {
+            return;
+        }
+        stopTimer = stopCT;
+        rigidBody.linearVelocity = Vector3.zero;
+    }
+
     public void ChangeSkin(int index)
     {
-        if(index < 0 || index >= skins.Length)
+        if (index < 0 || index >= skins.Length)
         {
             return;
         }
         skins[index].Wear();
     }
 
+    public void Update()
+    {
+        if (acceleTimer > 0)
+        {
+            acceleTimer -= Time.deltaTime;
+        }
+        if (stopTimer > 0)
+        {
+            acceleTimer -= Time.deltaTime;
+        }
+    }
+
     public void Start()
     {
         currentHP = baseStatus.hp + aditionalStatus.hp;
-        if(weapon == null)
+        if (weapon == null)
         {
             weapon = new Weapon.Weapon();
+        }
+        if (!rigidBody)
+        {
+            rigidBody = GetComponent<Rigidbody2D>();
         }
     }
 }
@@ -128,7 +181,7 @@ public class Status
 }
 
 [Serializable]
-public class SkinObject 
+public class SkinObject
 {
     [SerializeField]
     public GameObject[] enable;

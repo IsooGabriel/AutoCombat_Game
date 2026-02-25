@@ -5,7 +5,8 @@ using Weapon;
 [Serializable]
 public class GraphData
 {
-    public string version = "0.21";
+    public const string currentVersion = "0.21";
+    public string version = currentVersion;
     public List<NodeData> nodes = new();
     public List<LinkedNodeData> linkedNodes = new();
     const string startNodeId = "START_NODE";
@@ -151,4 +152,6 @@ public enum NodeType
     Sum,
     GetStatus,
     Multiply,
+    Accele,
+    Stop, 
 }

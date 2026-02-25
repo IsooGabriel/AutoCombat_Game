@@ -53,15 +53,16 @@ MonoBehaviour:
     criticalChance: 1
     aditionalCriticalChance: 0.2
     finaryCriticalChance: 1
-    criticalDamage: 1
+    criticalDamage: 1.1
     aditionalCriticalDamage: 1
-    finaryCriticalDamage: 0.1
+    finaryCriticalDamage: 0.15
   range: 0
   baseCT: 1
+  usableFirstTime: 1
   originOffset: {x: 1, y: 0}
   attackSpeed: 3
   user: {fileID: 0}
-  timer: 0
+  timer: 3
   sword: {fileID: 8717065934791099542}
   swingAngle: 90
 --- !u!1 &6392731222703237615
@@ -210,7 +211,8 @@ MonoBehaviour:
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.1
   range: 0
-  baseCT: 1
+  baseCT: 5
+  usableFirstTime: 1
   originOffset: {x: 0, y: 0}
   attackSpeed: 0
   user: {fileID: 0}

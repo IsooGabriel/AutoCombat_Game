@@ -143,10 +143,11 @@ MonoBehaviour:
     aditionalCriticalChance: 0.2
     finaryCriticalChance: 1
     criticalDamage: 1
-    aditionalCriticalDamage: 1
+    aditionalCriticalDamage: 3
     finaryCriticalDamage: 0.1
   range: 0
   baseCT: 1
+  usableFirstTime: 1
   originOffset: {x: 0, y: 0}
   attackSpeed: 0
   user: {fileID: 0}

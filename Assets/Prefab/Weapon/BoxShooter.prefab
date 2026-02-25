@@ -143,13 +143,13 @@ MonoBehaviour:
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.1
-  damageMultiply: 2
   range: 0
-  baseCT: 3
+  baseCT: 12
+  usableFirstTime: 1
   originOffset: {x: 1, y: 0}
   attackSpeed: 0
   user: {fileID: 0}
-  timer: 0
+  timer: 7
   arrowPrefab: {fileID: 8966926441135651476, guid: 99d163f147d29884ca2f61b286d7ff42, type: 3}
   bow: {fileID: 6084814645745201861}
 --- !u!1 &6084814645745201861

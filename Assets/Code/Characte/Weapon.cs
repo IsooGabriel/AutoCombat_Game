@@ -48,6 +48,8 @@
         protected const float damageMultiply = 0.1f;
         public float range;
         public float baseCT = 1;
+        [SerializeField]
+        private bool usableFirstTime = true;
         public float attackCT
         {
             get
@@ -98,6 +100,13 @@
         protected Quaternion ArmRotation(Vector2 direction, float angleOffset)
         {
             return Quaternion.Euler(0, 0, (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) + angleOffset);
+        }
+        protected void Start()
+        {
+            if (usableFirstTime)
+            {
+                timer = 0;
+            }
         }
         protected void Update()
         {
