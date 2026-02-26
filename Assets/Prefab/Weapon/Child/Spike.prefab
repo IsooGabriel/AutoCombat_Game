@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5306141464620323111, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
+      propertyPath: multiplies.aditionalCriticalChance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8130337896845292266, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
       propertyPath: m_Name
-      value: Sword Variant
+      value: Spike
       objectReference: {fileID: 0}
     - target: {fileID: 9052984077445606210, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
       propertyPath: m_LocalPosition.x

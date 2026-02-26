@@ -57,7 +57,7 @@ MonoBehaviour:
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.15
   range: 0
-  baseCT: 1
+  baseCT: 3
   usableFirstTime: 1
   originOffset: {x: 1, y: 0}
   attackSpeed: 3
@@ -73,6 +73,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5948808087522380280}
     m_Modifications:
+    - target: {fileID: 5306141464620323111, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
+      propertyPath: multiplies.finaryDamage
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306141464620323111, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
+      propertyPath: multiplies.criticalDamage
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306141464620323111, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
+      propertyPath: multiplies.finaryCriticalDamage
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306141464620323111, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
+      propertyPath: multiplies.aditionalCriticalChance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8130337896845292266, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
       propertyPath: m_Name
       value: Sword

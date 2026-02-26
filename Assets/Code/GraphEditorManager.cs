@@ -667,6 +667,7 @@ public class GraphEditorManager : MonoBehaviour
         };
         AddNode(NodeType.Start);
         UpdateAdditionalStatus();
+        onLoardGraph += UpdateAdditionalStatus;
         loader = new GraphEditorLoader();
     }
 

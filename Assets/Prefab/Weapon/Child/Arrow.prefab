@@ -135,12 +135,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplies:
-    finaryDamage: 12
+    finaryDamage: 10
     attack: 1
     aditionalAttack: 1
     finaryAttack: 0.1
     criticalChance: 1
-    aditionalCriticalChance: 0.2
+    aditionalCriticalChance: 5
     finaryCriticalChance: 1
     criticalDamage: 1
     aditionalCriticalDamage: 3

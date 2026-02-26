@@ -139,13 +139,14 @@ MonoBehaviour:
     aditionalAttack: 1
     finaryAttack: 0.1
     criticalChance: 1
-    aditionalCriticalChance: 0.2
+    aditionalCriticalChance: 5
     finaryCriticalChance: 1
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.1
   range: 0
   baseCT: 1
+  usableFirstTime: 1
   originOffset: {x: 0, y: 0}
   attackSpeed: 0
   user: {fileID: 0}
@@ -211,6 +212,7 @@ MonoBehaviour:
     finaryCriticalDamage: 1
   range: 0
   baseCT: 999
+  usableFirstTime: 1
   originOffset: {x: 0, y: 0}
   attackSpeed: 0
   user: {fileID: 0}
@@ -362,6 +364,7 @@ MonoBehaviour:
     finaryCriticalDamage: 1
   range: 0
   baseCT: 18
+  usableFirstTime: 1
   originOffset: {x: 0, y: 0}
   attackSpeed: 0
   user: {fileID: 0}
@@ -423,13 +426,14 @@ MonoBehaviour:
     aditionalAttack: 1
     finaryAttack: 1
     criticalChance: 1
-    aditionalCriticalChance: 1
+    aditionalCriticalChance: 5
     finaryCriticalChance: 1
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 1
   range: 0
   baseCT: 1
+  usableFirstTime: 1
   originOffset: {x: 0, y: 0}
   attackSpeed: 0
   user: {fileID: 0}

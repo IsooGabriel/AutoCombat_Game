@@ -36,6 +36,7 @@ public class MoveNode : Node
             direction.x *= -1;
         }
         executor.myCharacter.Move(direction);
+        executor.SendData(this, newPositionPortName, (Vector2)executor.myCharacter.transform.position);
         executor.EnqueueConnected(this, executePortName);
     }
 }

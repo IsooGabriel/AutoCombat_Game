@@ -8,6 +8,7 @@ public class SumNode : Node
     public override void Initialize()
     {
         nodeType = NodeType.Sum;
+        useLimit = 99;
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),

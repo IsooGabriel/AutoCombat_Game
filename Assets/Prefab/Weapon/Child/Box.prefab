@@ -317,18 +317,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplies:
-    finaryDamage: 8
+    finaryDamage: 10
     attack: 1
     aditionalAttack: 1
     finaryAttack: 0.1
-    criticalChance: 1
-    aditionalCriticalChance: 0.2
+    criticalChance: 0.5
+    aditionalCriticalChance: 5
     finaryCriticalChance: 1
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.1
   range: 0
   baseCT: 1
+  usableFirstTime: 1
   originOffset: {x: 0, y: 0}
   attackSpeed: 0
   user: {fileID: 0}

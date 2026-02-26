@@ -23,7 +23,7 @@ public class MultipyNode : Node
     {
         if (TryGetInputValuesWithPort<float>(elementsPortName, out List<float> elements))
         {
-            float multi = 0f;
+            float multi = 1f;
             foreach (var element in elements)
             {
                 multi *= element;

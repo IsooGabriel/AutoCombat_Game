@@ -8,6 +8,7 @@ public class BreakVectorNode : Node
     public override void Initialize()
     {
         nodeType = NodeType.BreakVector;
+        useLimit = 99;
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),

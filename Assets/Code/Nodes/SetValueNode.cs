@@ -4,6 +4,7 @@ public class SetValueNode : Node
     public override void Initialize()
     {
         nodeType = NodeType.SetValue;
+        useLimit = 99;
         const string outputValuePortName = "output number";
         inputPorts = new Port[]
         {

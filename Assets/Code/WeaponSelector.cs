@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,19 +23,16 @@ public class WeaponSelector : MonoBehaviour
         {
             return;
         }
-        if(indexes.Count <= index)
+        if (indexes.Count <= index)
         {
             index = 0;
         }
-        if(dropdown.value != index)
-        {
-            dropdown.value = index;
-        }
-        index = indexes[index];
-        bool isValid = index >= 0 && index < weaponDB.weaponDatas.Length;
-        icon.sprite = isValid ? weaponDB.weaponDatas[index].icon : null;
-        weaponName.text = isValid ? weaponDB.weaponDatas[index].weaponName : "(≡^ ^≡)";
-        GraphEditorManager.Instance.graphData.weapon = index;
+        int weaponIndex = indexes[index];
+        bool isValid = weaponIndex >= 0 && weaponIndex < weaponDB.weaponDatas.Length;
+        dropdown.value = index;
+        icon.sprite = isValid ? weaponDB.weaponDatas[weaponIndex].icon : null;
+        weaponName.text = isValid ? weaponDB.weaponDatas[weaponIndex].weaponName : "(≡^ ^≡)?";
+        GraphEditorManager.Instance.graphData.weapon = weaponIndex;
     }
 
     public void OnChangeWeapon()
@@ -69,13 +67,17 @@ public class WeaponSelector : MonoBehaviour
             options.Add(new TMP_Dropdown.OptionData(weaponLabel, iconSprite, Color.white));
         }
         dropdown.AddOptions(options);
-        ChangeWeapon(GraphEditorManager.Instance.graphData.weapon);
+        int weaponIndex = GraphEditorManager.Instance.graphData.weapon;
+        if (indexes.Contains(weaponIndex))
+        {
+            int dropdownIndex = indexes.IndexOf(weaponIndex);
+            ChangeWeapon(dropdownIndex);
+        }
     }
 
     public void Start()
     {
         Init();
         GraphEditorManager.Instance.onLoardGraph += Init;
-        ChangeWeapon(0);
     }
 }

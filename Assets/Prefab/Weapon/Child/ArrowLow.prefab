@@ -140,20 +140,19 @@ MonoBehaviour:
     aditionalAttack: 1
     finaryAttack: 0.1
     criticalChance: 1
-    aditionalCriticalChance: 0.2
+    aditionalCriticalChance: 5
     finaryCriticalChance: 1
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.1
-  damageMultiply: 0.4
   range: 0
   baseCT: 1
+  usableFirstTime: 1
   originOffset: {x: 0, y: 0}
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
   hp: 0.2
-  recoilMultiply: 1
   speed: 2
 --- !u!60 &3270496663315490433
 PolygonCollider2D:

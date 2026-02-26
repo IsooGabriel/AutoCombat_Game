@@ -311,7 +311,23 @@ public class GraphEditorLoader : MonoBehaviour
                 }
             }
         }
-        GraphEditorManager.Instance.onLoardGraph?.Invoke();
-    }
 
+        var status = manager.graphData.aditionalStatus;
+        manager.graphData.aditionalStatus = new Status()
+        {
+            hp = 0,
+            attack = 0,
+            attackCooltime = 0,
+            criticalChance = 0,
+            criticalDamage = 0,
+        };
+        manager.SetHP(status.hp);
+        manager.SetAttack(status.attack);
+        manager.SetAttackCT(status.attackCooltime);
+        manager.SetCriticalChance(status.criticalChance);
+        manager.SetCriticalDamage(status.criticalDamage);
+
+
+        manager.onLoardGraph?.Invoke();
+    }
 }
