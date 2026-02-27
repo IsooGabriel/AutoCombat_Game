@@ -144,7 +144,7 @@ MonoBehaviour:
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.1
   range: 0
-  baseCT: 8
+  baseCT: 3
   usableFirstTime: 1
   originOffset: {x: 1.42, y: 0}
   attackSpeed: 0
@@ -152,6 +152,7 @@ MonoBehaviour:
   timer: 7
   arrowPrefab: {fileID: 8966926441135651476, guid: 99d163f147d29884ca2f61b286d7ff42, type: 3}
   bow: {fileID: 6084814645745201861}
+  arrowSpeed: 100
 --- !u!1 &6084814645745201861
 GameObject:
   m_ObjectHideFlags: 0

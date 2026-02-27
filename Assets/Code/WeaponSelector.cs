@@ -79,5 +79,6 @@ public class WeaponSelector : MonoBehaviour
     {
         Init();
         GraphEditorManager.Instance.onLoardGraph += Init;
+        ChangeWeapon(1);
     }
 }

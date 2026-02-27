@@ -65,6 +65,7 @@ MonoBehaviour:
   timer: 4
   arrowPrefab: {fileID: 8966926441135651476, guid: 1334e0ffb6dcc5e43bd8262db6f882ef, type: 3}
   bow: {fileID: 6084814645745201861}
+  arrowSpeed: 150
 --- !u!1 &6084814645745201861
 GameObject:
   m_ObjectHideFlags: 0

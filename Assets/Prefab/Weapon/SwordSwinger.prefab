@@ -57,7 +57,7 @@ MonoBehaviour:
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.15
   range: 0
-  baseCT: 5
+  baseCT: 3
   usableFirstTime: 1
   originOffset: {x: 1.42, y: 0}
   attackSpeed: 3

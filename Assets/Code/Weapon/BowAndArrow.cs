@@ -8,7 +8,7 @@ namespace Weapon
         private GameObject arrowPrefab;
         [SerializeField]
         private GameObject bow;
-
+        [SerializeField] float arrowSpeed=10;
         private float bowSpeed = 100f;
         private readonly float bowHideDelay = 0.2f;
         private float bowHideTimer = 0f;
@@ -29,12 +29,16 @@ namespace Weapon
                     transform.root.parent
                 );
 
-            Arrow arrowComponent;
-            if (!arrow.TryGetComponent<Arrow>(out arrowComponent)) 
+            Weapon arrowComponent;
+            if (arrow.TryGetComponent<Weapon>(out arrowComponent)) 
             {
-                arrowComponent = arrow.AddComponent<Arrow>();
+                SettingArrow(arrowComponent);
             }
-            SettingArrow(arrowComponent);
+            Rigidbody2D rigid;
+            if (arrow.TryGetComponent<Rigidbody2D>(out rigid))
+            {
+                rigid.AddForce(direction.normalized * arrowSpeed);
+            }
 
             return true;
         }
@@ -48,7 +52,7 @@ namespace Weapon
             bow.transform.rotation = ArmRotation(direction, bowAngle);
         }
 
-        private void SettingArrow(Arrow arrowComponent)
+        private void SettingArrow(Weapon arrowComponent)
         {
             arrowComponent.user = user;
             arrowComponent.hitAttack = hitAttack;

@@ -4,8 +4,6 @@ namespace Weapon
 {
     public class Arrow : DestructibleWeapon, IDeathable, IDamageable
     {
-        [SerializeField]
-        private float speed = 8f;
         public decimal HPGet => (decimal)hp;
 
         public void Death()
@@ -46,11 +44,6 @@ namespace Weapon
             }
             target.TakeDamage(damage);
             Destruct();
-        }
-
-        private void Update()
-        {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
     }
 }

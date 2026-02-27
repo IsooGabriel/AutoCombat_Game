@@ -5,8 +5,6 @@ namespace Weapon
     public class Pusher : DestructibleWeapon, IDeathable, IDamageable
     {
         [SerializeField]
-        private float speed = 8f;
-        [SerializeField]
         private float pushForce = 5f;
         [SerializeField]
         private Rigidbody2D rigidBody;
@@ -50,20 +48,19 @@ namespace Weapon
                 return;
             }
             target.TakeDamage(damage);
+            if (collieder.gameObject.TryGetComponent<Rigidbody2D>(out Rigidbody2D outrigidbody))
+            {
+                outrigidbody.AddForce(-rigidBody.linearVelocity.normalized * pushForce, ForceMode2D.Impulse);
+            }
             Destruct();
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if(collision.gameObject.TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody))
+            if(collision.gameObject.TryGetComponent<Rigidbody2D>(out Rigidbody2D outrigidbody))
             {
-                rigidbody.AddForce(rigidBody.linearVelocity * pushForce * Time.deltaTime, ForceMode2D.Impulse);
+                outrigidbody.AddForce(-rigidBody.linearVelocity.normalized * pushForce, ForceMode2D.Impulse);
             }
-        }
-
-        private void Update()
-        {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
     }
 }

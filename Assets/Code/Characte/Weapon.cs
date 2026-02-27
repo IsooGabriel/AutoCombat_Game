@@ -34,7 +34,7 @@
 
                     float baseMultipy = user.baseStatus.criticalDamage * multiplies.criticalDamage;
                     float addMultipy = user.aditionalStatus.criticalDamage * multiplies.aditionalCriticalDamage;
-                    criticalMultipy = (decimal)((baseMultipy + addMultipy)* multiplies.finaryCriticalDamage);
+                    criticalMultipy = (decimal)((baseMultipy + addMultipy) * multiplies.finaryCriticalDamage);
                 }
 
                 if ((decimal)UnityEngine.Random.Range(0f, 100f) < criticalChange)
@@ -42,7 +42,7 @@
 
                     baseDamage *= 1 + criticalMultipy;
                 }
-                return baseDamage * (decimal)damageMultiply * (decimal)multiplies.finaryDamage ;
+                return baseDamage * (decimal)damageMultiply * (decimal)multiplies.finaryDamage;
             }
         }
         protected const float damageMultiply = 0.1f;
@@ -54,11 +54,10 @@
         {
             get
             {
-                return baseCT - attackCoottimeMultiply * (user.baseStatus.attackCooltime + user.aditionalStatus.attackCooltime);
+                return baseCT - (baseCT * attackCTMultiply) * (user.baseStatus.attackCooltime + user.aditionalStatus.attackCooltime);
             }
         }
-
-        protected const float attackCoottimeMultiply = 0.05f;
+        public const float attackCTMultiply = 1/11;
         public Vector2 originOffset;
         public float attackSpeed;
         public Character user;
@@ -77,7 +76,7 @@
             {
                 return false;
             }
-            timer = baseCT - attackCoottimeMultiply * (user.baseStatus.attackCooltime + user.aditionalStatus.attackCooltime);
+            timer = attackCT;
 
             return true;
         }
@@ -109,7 +108,7 @@
             }
             else
             {
-                timer = baseCT - attackCoottimeMultiply * (user.baseStatus.attackCooltime + user.aditionalStatus.attackCooltime);
+                timer = attackCT;
             }
         }
         protected void Update()
