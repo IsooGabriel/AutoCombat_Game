@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5808083693259693971}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 0.25, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 0, z: -0.40673664, w: 0.9135455}
+  m_LocalPosition: {x: 1.78, y: 0, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9052984077445606210}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -48}
 --- !u!212 &4118763662868835788
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 8928576263349182094, guid: a1c245ae03c2d414d81b49b994c01d32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,7 +105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9052984077445606210
 Transform:
   m_ObjectHideFlags: 0
@@ -135,16 +135,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplies:
-    finaryDamage: 10
-    attack: 1
-    aditionalAttack: 1
+    finaryDamage: 11
+    attack: 0.9
+    aditionalAttack: 1.5
     finaryAttack: 0.1
-    criticalChance: 1
-    aditionalCriticalChance: 5
+    criticalChance: 2
+    aditionalCriticalChance: 7
     finaryCriticalChance: 1
-    criticalDamage: 1
-    aditionalCriticalDamage: 1
-    finaryCriticalDamage: 0.1
+    criticalDamage: 1.5
+    aditionalCriticalDamage: 1.1
+    finaryCriticalDamage: 0.15
   range: 0
   baseCT: 5
   usableFirstTime: 1

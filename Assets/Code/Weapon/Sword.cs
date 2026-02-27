@@ -6,9 +6,16 @@ namespace Weapon
     {
         [SerializeField]
         private float hitCooltime = 0.0f;
+        [SerializeField] bool stayHit = false;
         private float hitTimer = 0;
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (stayHit) return;
+            Hit(collision.gameObject);
+        }
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            if (!stayHit || hitTimer > 0f) return;
             Hit(collision.gameObject);
         }
         private void OnCollisionEnter2D(Collision2D collision)

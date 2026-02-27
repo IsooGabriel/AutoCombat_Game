@@ -52,6 +52,7 @@ public class GraphEditorManager : MonoBehaviour
     private int aditionableStatusCount = 0;
     private GraphEditorLoader loader;
     public Action onLoardGraph;
+    public Action onChangeNodeCount;
 
     #region 関数
 
@@ -74,6 +75,8 @@ public class GraphEditorManager : MonoBehaviour
         Instance.nodeUIs.Add(nodeUI);
         Instance.AjustAdditionalStatus(Instance.graphData.aditionalStatus);
         Instance.UpdateAdditionalStatus();
+
+        onChangeNodeCount?.Invoke();
     }
     public void SetPortUIsPort(PortUI[] portUIs, Port[] ports)
     {
@@ -147,6 +150,7 @@ public class GraphEditorManager : MonoBehaviour
         }
 
         Destroy(nodeUI.gameObject);
+        onChangeNodeCount?.Invoke();
     }
 
     public void ResetGraph()
@@ -158,6 +162,7 @@ public class GraphEditorManager : MonoBehaviour
         }
         nodeUIs.Clear();
         aditionableStatusCount = 0;
+        onChangeNodeCount?.Invoke();
     }
 
     #region 追加ステータス
@@ -281,11 +286,11 @@ public class GraphEditorManager : MonoBehaviour
     /// ノード数から追加可能なステータスの最大値を返す
     /// </summary>
     /// <returns>追加可能なアディショナルステータス</returns>
-    public int CheckMaxAdditionableStatus(int Nodecount)
+    public int CheckMaxAdditionableStatus(int nodeCount)
     {
         for (int i = 0; maxNodesForPoints.Length > i; ++i)
         {
-            if (Nodecount > maxNodesForPoints[i])
+            if (nodeCount > maxNodesForPoints[i])
             {
                 return i;
             }
@@ -668,6 +673,7 @@ public class GraphEditorManager : MonoBehaviour
         AddNode(NodeType.Start);
         UpdateAdditionalStatus();
         onLoardGraph += UpdateAdditionalStatus;
+        onLoardGraph += () => onChangeNodeCount?.Invoke();
         loader = new GraphEditorLoader();
     }
 

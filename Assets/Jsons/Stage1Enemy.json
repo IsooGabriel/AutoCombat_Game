@@ -79,7 +79,7 @@
             "inputValues": [
                 {
                     "toPortName": "Limit",
-                    "value": 300.0,
+                    "value": 100.0,
                     "isUserset": true
                 }
             ]
@@ -242,12 +242,12 @@
     "graphName": "_DEFAULT_3e0c227e-1f11-4031-bccc-b37d6b391f86, _DEFAULT_09f796e5-876e-4a06-b3d5-f8b1419c6670, New AI, _DEFAULT_c646178d-7287-406e-a15a-e4919804c6ea, _DEFAULT_56a2183c-23fc-4580-802c-9c4bf4d340f9, New AI, New AI_DEFAULT_400a04e5-d9e4-45b6-8de3-28aee9c1cd00",
     "author": "_DEFAULT_d81e104c-3199-486d-82db-65e0dc180a33, _DEFAULT_5a41d048-b921-41a0-899c-61b41bb573fe, , _DEFAULT_03e98dd7-27e1-4b59-8d5b-795f84f8e451, _DEFAULT_362a7e69-c61e-43c1-a520-1961a8ac956d, , _DEFAULT_3d50ccff-6694-4db9-9af8-014e86819c3b",
     "aditionalStatus": {
-        "hp": 0,
+        "hp": -9,
         "attack": 10,
-        "attackCooltime": 0,
-        "criticalChance": 0,
-        "criticalDamage": 0
+        "attackCooltime": -9,
+        "criticalChance": 12,
+        "criticalDamage": 6
     },
-    "weapon": 3,
+    "weapon": 1,
     "skin": 0
 }

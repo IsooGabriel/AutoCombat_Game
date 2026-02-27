@@ -57,12 +57,12 @@ MonoBehaviour:
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.15
   range: 0
-  baseCT: 3
+  baseCT: 5
   usableFirstTime: 1
-  originOffset: {x: 1, y: 0}
+  originOffset: {x: 1.42, y: 0}
   attackSpeed: 3
   user: {fileID: 0}
-  timer: 3
+  timer: 0
   sword: {fileID: 8717065934791099542}
   swingAngle: 90
 --- !u!1001 &589406908943562364
@@ -73,25 +73,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5948808087522380280}
     m_Modifications:
-    - target: {fileID: 5306141464620323111, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
-      propertyPath: multiplies.finaryDamage
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 5306141464620323111, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
-      propertyPath: multiplies.criticalDamage
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5306141464620323111, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
-      propertyPath: multiplies.finaryCriticalDamage
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5306141464620323111, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
-      propertyPath: multiplies.aditionalCriticalChance
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8130337896845292266, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
       propertyPath: m_Name
       value: Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130337896845292266, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9052984077445606210, guid: ee220b0d2347c434ca8f2221d33bb937, type: 3}
       propertyPath: m_LocalPosition.x

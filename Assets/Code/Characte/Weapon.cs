@@ -107,6 +107,10 @@
             {
                 timer = 0;
             }
+            else
+            {
+                timer = baseCT - attackCoottimeMultiply * (user.baseStatus.attackCooltime + user.aditionalStatus.attackCooltime);
+            }
         }
         protected void Update()
         {

@@ -25,3 +25,11 @@ MonoBehaviour:
     scenePath: Assets/Scenes/Game.unity
     thumbnail: {fileID: 0}
     stageNumber: 2
+  - sceneName: Stage3
+    scenePath: Assets/Scenes/Game.unity
+    thumbnail: {fileID: 0}
+    stageNumber: 3
+  - sceneName: Stage4
+    scenePath: Assets/Scenes/Game.unity
+    thumbnail: {fileID: 0}
+    stageNumber: 4
