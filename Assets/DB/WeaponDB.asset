@@ -56,9 +56,9 @@ MonoBehaviour:
     usableStage:
       defaultUsable: 1
       reverseStages: []
-  - weaponName: Shooter
+  - weaponName: Pusher
     prefab: {fileID: 3334296252503296023, guid: b0896ed9e0409434eb73c4ff9e372b62, type: 3}
-    icon: {fileID: -8036611144385000861, guid: 4a89ca2f012b77940a5f1721711bb84d, type: 3}
+    icon: {fileID: -4693999269964320489, guid: d80fbaada770e774796d0adff36063c6, type: 3}
     childPrefabIndex: -1
     enableThisElements: 0
     damageMultiply: 0

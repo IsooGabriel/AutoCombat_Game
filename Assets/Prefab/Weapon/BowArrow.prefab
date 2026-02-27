@@ -59,7 +59,7 @@ MonoBehaviour:
   range: 0
   baseCT: 4
   usableFirstTime: 1
-  originOffset: {x: 1, y: 0}
+  originOffset: {x: 1.42, y: 0}
   attackSpeed: 0
   user: {fileID: 0}
   timer: 4
