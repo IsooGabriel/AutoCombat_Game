@@ -1238,6 +1238,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 168565689919379017, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 1102541988941141614}
+    - target: {fileID: 168565689919379017, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: portTypeHue
+      value: 326
+      objectReference: {fileID: 0}
+    - target: {fileID: 232940000565171499, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 932428502416646223, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 965482838403210424, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: owner
       value: 
@@ -1246,10 +1262,18 @@ PrefabInstance:
       propertyPath: portTypeHue
       value: 326
       objectReference: {fileID: 0}
+    - target: {fileID: 1636574619490953610, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1733952516563230604, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: owner
       value: 
       objectReference: {fileID: 1102541988941141614}
+    - target: {fileID: 1836747953133935854, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2391374102005097908, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: inputPorts.Array.size
       value: 1
@@ -1354,6 +1378,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3604454859843841681, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604454859843841681, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604454859843841681, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604454859843841681, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604454859843841681, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804290619298907338, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5577553824926233006, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5761986420672201075, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1382,6 +1434,14 @@ PrefabInstance:
       propertyPath: owner
       value: 
       objectReference: {fileID: 1102541988941141614}
+    - target: {fileID: 6278460560577837163, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6407115832968498447, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7358771523002041297, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1406,10 +1466,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: GetPositionNode Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8960327676822800916, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8960327676822800916, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8960327676822800916, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8960327676822800916, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8960327676822800916, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2391374102005097908, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8865073663929751596, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+    - {fileID: 6762203507535445721, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4346385068483182477, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       insertIndex: -1
@@ -1451,7 +1532,7 @@ MonoBehaviour:
   - {fileID: 564799718577036072}
   outputPorts:
   - {fileID: 5299171397551374253}
-  - {fileID: 6700328655778921625}
+  - {fileID: 6038361133053015656}
   setting: {fileID: 7107257613350019484}
 --- !u!114 &5299171397551374253 stripped
 MonoBehaviour:
@@ -1464,9 +1545,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85c6b99c2de5884ea6d357917a5c06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6700328655778921625 stripped
+--- !u!114 &6038361133053015656 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 965482838403210424, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 168565689919379017, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
   m_PrefabInstance: {fileID: 5880096853635162145}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

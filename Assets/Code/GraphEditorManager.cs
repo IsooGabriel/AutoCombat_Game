@@ -51,6 +51,10 @@ public class GraphEditorManager : MonoBehaviour
     public readonly int[] maxNodesForPoints = { 987, 610, 377, 233, 144, 89, 55, 34, 21, 13 };
     private int aditionableStatusCount = 0;
     private GraphEditorLoader loader;
+    [SerializeField]
+    private GameObject loadObject;
+    [SerializeField]
+    private Slider loadSlider;
     public Action onLoardGraph;
     public Action onChangeNodeCount;
 
@@ -466,11 +470,17 @@ public class GraphEditorManager : MonoBehaviour
     {
         var stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
+        loadObject.SetActive(true);
 
         HashSet<string> usedNodeIds = new HashSet<string>() { };
         Instance.graphData.nodes.Clear();
-        foreach (var nodeUI in GraphEditorManager.Instance.nodeUIs)
+
+        NodeUI nodeUI;
+        for(int i = 0; i < GraphEditorManager.Instance.nodeUIs.Count; ++i)
         {
+            loadSlider.value += ((float)1 / Instance.nodeUIs.Count) * 0.8f*loadSlider.maxValue;
+
+            nodeUI = Instance.nodeUIs[i];
             if (usedNodeIds.Contains(nodeUI.node.id))
             {
                 continue;
@@ -524,7 +534,12 @@ public class GraphEditorManager : MonoBehaviour
         string json = JsonUtility.ToJson(Instance.graphData, true);
         EnsureDirectoryExists(path);
 
+        loadSlider.value =0.9f * loadSlider.maxValue;
+
+
         File.WriteAllText(path, json, System.Text.Encoding.UTF8);
+
+        loadObject.SetActive(false);
     }
     public void SaveGraph(string graphName, string author)
     {

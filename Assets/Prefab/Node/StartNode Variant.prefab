@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 232940000565171499, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 567244503068502247, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -47,6 +51,22 @@ PrefabInstance:
     - target: {fileID: 567244503068502247, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 932428502416646223, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1636574619490953610, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1636574619490953610, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.025000572
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836747953133935854, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2391374102005097908, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: inputPorts.Array.size
@@ -200,6 +220,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3665143908795298410, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.79999924
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665143908795298410, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4270298541101383563, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -337,6 +365,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 1876185565881241608, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
     - {fileID: 3844934517022784681, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+    - {fileID: 1406475854497651292, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}

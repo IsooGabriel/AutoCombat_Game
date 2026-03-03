@@ -105,7 +105,7 @@ public class PortUI : MonoBehaviour
         {
             portImage.color = Color.HSVToRGB(((float)portTypeHue) / 360, GraphEditorManager.Instance.portUISaturation, GraphEditorManager.Instance.portUIValue);
         }
-        if (port.owner == null)
+        if (port.owner == null && owner != null)
         {
             port.owner = owner.node;
         }

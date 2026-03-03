@@ -58,12 +58,15 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
     public void TakeDamage(decimal damage)
     {
         var dam = Instantiate(damageText, transform.position, Quaternion.identity);
-        dam.GetComponent<Rigidbody2D>().AddForce((0.5f + Mathf.Log(1f + (float)damage, 2)) * Vector2.up * 100);
+
+        dam.GetComponent<Rigidbody2D>().AddForce((0.5f + Mathf.Clamp(Mathf.Log(1f + (float)damage, 2), 0, Mathf.Log(4, 2))) * Vector2.up * 100);
         dam.fontSize *= Mathf.Log(2f + (float)damage, 2);
-        dam.text = damage.ToString();
+        dam.text = (damage*100m).ToString("0");
         dam.color = isPlayer ? Color.red : Color.blue;
+
         currentHP -= damage;
         takeDamage?.Invoke(this);
+
         if (currentHP <= 0)
         {
             Death();

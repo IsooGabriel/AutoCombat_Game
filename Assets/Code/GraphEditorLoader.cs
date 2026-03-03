@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using static FileSelector;
 using static GraphEditorManager;
+using UnityEngine.UI;
 
 public class GraphEditorLoader : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class GraphEditorLoader : MonoBehaviour
     private readonly string graphPath = "GraphData";
     private string path;
     private GraphData graphData;
+
+    [SerializeField]
+    private GameObject loadingObject;
+    [SerializeField]
+    private Slider loadingSlider;
 
 
     [DllImport("comdlg32.dll", SetLastError = true, CharSet = CharSet.Auto)]
@@ -105,6 +111,9 @@ public class GraphEditorLoader : MonoBehaviour
             path =
                 $"{parent}\\{defaultPath}\\{playerDataFileName}";
         }
+
+        loadingObject.SetActive(true);
+
         GraphData functionData = LoadJson(path);
         if (functionData == null)
         {
@@ -113,6 +122,7 @@ public class GraphEditorLoader : MonoBehaviour
 
         for (int i = 0; i < manager.nodeUIs.Count; ++i)
         {
+            loadingSlider.value += ((float)1f / manager.nodeUIs.Count) * 0.2f * loadingSlider.maxValue;
             var targetID = manager.nodeUIs[i].node.id;
             for (int j = 0; j < manager.graphData.nodes.Count; ++j)
             {
@@ -126,8 +136,12 @@ public class GraphEditorLoader : MonoBehaviour
         }
 
         Dictionary<string, string> newIDs = new();
-        foreach (var node in functionData.nodes)
+        NodeData node;
+        for(int i = 0; i < functionData.nodes.Count; ++i)
         {
+            node = functionData.nodes[i];
+            loadingSlider.value += ((float)1f / manager.nodeUIs.Count) * 0.2f * loadingSlider.maxValue;
+
             if (node.type == NodeType.Start)
             {
                 continue;
@@ -137,8 +151,10 @@ public class GraphEditorLoader : MonoBehaviour
             node.id = newIDs[node.id];
             manager.graphData.nodes.Add(node);
         }
-        foreach (var node in functionData.nodes)
+        for(int i = 0; i < functionData.nodes.Count; ++i)
         {
+            node = functionData.nodes[i];
+            loadingSlider.value += ((float)1f / manager.nodeUIs.Count) * 0.2f * loadingSlider.maxValue;
             foreach (var port in node.outputConnections)
             {
                 if (port.toPortNodes == null || port.toPortNodes.Count == 0)
@@ -159,8 +175,12 @@ public class GraphEditorLoader : MonoBehaviour
                 }
             }
         }
-        foreach (var linked in functionData.linkedNodes)
+        LinkedNodeData linked;
+        for(int i = 0; i < functionData.linkedNodes.Count; ++i)
         {
+            loadingSlider.value += ((float)1f / manager.nodeUIs.Count) * 0.4f * loadingSlider.maxValue;
+
+            linked = functionData.linkedNodes[i];
             linked.inputNodeIDs.ForEach(id => id = newIDs[id]);
             linked.outputNodeIDs.ForEach(id => id = newIDs[id]);
             manager.graphData.linkedNodes.Add(linked);
@@ -201,8 +221,11 @@ public class GraphEditorLoader : MonoBehaviour
         Dictionary<LinkedNode, List<string>> inputlinkeds = new Dictionary<LinkedNode, List<string>>();
         Dictionary<LinkedNode, List<string>> outputlinkeds = new Dictionary<LinkedNode, List<string>>();
 
+        loadingObject.SetActive(true);
+
         for (int i = 0; i < manager.graphData.nodes.Count; ++i)
         {
+            loadingSlider.value += ((float)1f / manager.graphData.nodes.Count)*0.3f*loadingSlider.maxValue;
             if (stopwatch.ElapsedMilliseconds > 3)
             {
                 stopwatch.Restart();
@@ -259,19 +282,22 @@ public class GraphEditorLoader : MonoBehaviour
                 moveSystem.IsDragging = false;
             }
         }
-        foreach (var nodeData in manager.graphData.nodes)
+        NodeData graphNodeData;  
+        for (int i = 0; i < manager.graphData.nodes.Count; ++i)
         {
-            if (nodeData.outputConnections == null || nodeData.outputConnections.Count == 0)
+            loadingSlider.value += (1f / manager.graphData.nodes.Count) * 0.3f * loadingSlider.maxValue;
+            graphNodeData = manager.graphData.nodes[i];
+            if (graphNodeData.outputConnections == null || graphNodeData.outputConnections.Count == 0)
             {
                 continue;
             }
-            foreach (var outputConnection in nodeData.outputConnections)
+            foreach (var outputConnection in graphNodeData.outputConnections)
             {
                 if (outputConnection.toPortNodes == null || outputConnection.toPortNodes.Count == 0)
                 {
                     continue;
                 }
-                var fromNodeUI = manager.nodeUIs.First(n => n.node.id == nodeData.id);
+                var fromNodeUI = manager.nodeUIs.First(n => n.node.id == graphNodeData.id);
                 foreach (var conection in outputConnection.toPortNodes)
                 {
                     if (stopwatch.ElapsedMilliseconds > 3)
@@ -288,9 +314,11 @@ public class GraphEditorLoader : MonoBehaviour
                 }
             }
         }
-        foreach (var ui in manager.nodeUIs)
+        NodeUI ui;
+        for (int i = 0; i < manager.nodeUIs.Count; ++i)
         {
-
+            loadingSlider.value += (1f / manager.nodeUIs.Count) * 0.39f * loadingSlider.maxValue;
+            ui = manager.nodeUIs[i];
             if (stopwatch.ElapsedMilliseconds > 3)
             {
                 stopwatch.Restart();
@@ -312,6 +340,8 @@ public class GraphEditorLoader : MonoBehaviour
             }
         }
 
+        loadingSlider.value = 99;
+
         var status = manager.graphData.aditionalStatus;
         manager.graphData.aditionalStatus = new Status()
         {
@@ -327,7 +357,8 @@ public class GraphEditorLoader : MonoBehaviour
         manager.SetCriticalChance(status.criticalChance);
         manager.SetCriticalDamage(status.criticalDamage);
 
-
         manager.onLoardGraph?.Invoke();
+
+        loadingObject.SetActive(false);
     }
 }
