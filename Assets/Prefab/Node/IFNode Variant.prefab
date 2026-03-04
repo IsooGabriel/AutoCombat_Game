@@ -1243,7 +1243,7 @@ PrefabInstance:
       objectReference: {fileID: 2854508121597946046}
     - target: {fileID: 168565689919379017, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: portTypeHue
-      value: 190
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 232940000565171499, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1369,6 +1369,10 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 13.4
       objectReference: {fileID: 0}
+    - target: {fileID: 2524295137828385397, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 13.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2901296327591716692, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1384,6 +1388,14 @@ PrefabInstance:
     - target: {fileID: 2901296327591716692, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129510827165383600, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_text
+      value: "\u5024A"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129510827165383600, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 13.6
       objectReference: {fileID: 0}
     - target: {fileID: 4804290619298907338, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1435,7 +1447,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6004632841000259201, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_text
-      value: IF
+      value: "\u6761\u4EF6"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004632841000259201, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 18.15
       objectReference: {fileID: 0}
     - target: {fileID: 6218590055248083721, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: owner
@@ -1483,15 +1499,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878197732558657264, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_text
-      value: True
+      value: "\u771F"
       objectReference: {fileID: 0}
     - target: {fileID: 7878197732558657264, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_fontSize
-      value: 13.4
+      value: 13.6
       objectReference: {fileID: 0}
     - target: {fileID: 8130235904526101330, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_Name
       value: IFNode Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579948975784828725, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_text
+      value: "\u507D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579948975784828725, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 13.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579948975784828725, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8960327676822800916, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1610,6 +1638,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2979498600791266494}
     m_Modifications:
+    - target: {fileID: 3827763001984540718, guid: 2b5cac925afc6514abf84c6d0a4e54ba, type: 3}
+      propertyPath: m_text
+      value: "\u5024B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827763001984540718, guid: 2b5cac925afc6514abf84c6d0a4e54ba, type: 3}
+      propertyPath: m_fontSize
+      value: 13.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4637077672243816786, guid: 2b5cac925afc6514abf84c6d0a4e54ba, type: 3}
       propertyPath: owner
       value: 

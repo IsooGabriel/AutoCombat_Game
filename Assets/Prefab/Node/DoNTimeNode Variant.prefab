@@ -118,10 +118,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Value...
+  m_text: "\u5B9F\u884C\u56DE\u6570..."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 74eca9d9e0169ca4089ca80f226a7121, type: 2}
+  m_sharedMaterial: {fileID: -7905213272195677656, guid: 74eca9d9e0169ca4089ca80f226a7121, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -543,6 +543,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4217165376741644191}
     m_Modifications:
+    - target: {fileID: 772645429169455873, guid: 5891f817cd50cf0488d27dfc3ffee4d0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 1328948916543058922, guid: 5891f817cd50cf0488d27dfc3ffee4d0, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -642,6 +646,14 @@ PrefabInstance:
     - target: {fileID: 3742501396044531495, guid: 5891f817cd50cf0488d27dfc3ffee4d0, type: 3}
       propertyPath: m_Name
       value: FromPortUI Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297964413496181326, guid: 5891f817cd50cf0488d27dfc3ffee4d0, type: 3}
+      propertyPath: m_text
+      value: "n\u56DE\u5B9F\u884C\u5F8C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297964413496181326, guid: 5891f817cd50cf0488d27dfc3ffee4d0, type: 3}
+      propertyPath: m_fontSize
+      value: 13.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -840,6 +852,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3083905308735954554, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3604454859843841681, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -855,6 +871,14 @@ PrefabInstance:
     - target: {fileID: 3604454859843841681, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129510827165383600, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_text
+      value: "\u30EA\u30BB\u30C3\u30C8"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129510827165383600, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 12.75
       objectReference: {fileID: 0}
     - target: {fileID: 4593071129279254815, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: pivotOffset.y
@@ -902,7 +926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6004632841000259201, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_text
-      value: Do n Times
+      value: "n\u56DE\u5B9F\u884C"
       objectReference: {fileID: 0}
     - target: {fileID: 6218590055248083721, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: owner
@@ -915,6 +939,10 @@ PrefabInstance:
     - target: {fileID: 6407115832968498447, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246531078735149823, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7358771523002041297, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -938,15 +966,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878197732558657264, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_text
-      value: Execute
+      value: "\u5B9F\u884C"
       objectReference: {fileID: 0}
     - target: {fileID: 7878197732558657264, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_fontSize
-      value: 12.35
+      value: 13.6
       objectReference: {fileID: 0}
     - target: {fileID: 8130235904526101330, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_Name
       value: DoNTimeNode Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579948975784828725, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_text
+      value: "\u6B8B\u308A\u5B9F\u884C\u56DE\u6570"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579948975784828725, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 10.25
       objectReference: {fileID: 0}
     - target: {fileID: 8960327676822800916, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y

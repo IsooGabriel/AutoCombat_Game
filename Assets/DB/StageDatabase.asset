@@ -1,35 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 473137f7978fe50489cb6f12aa10c5d8, type: 3}
-  m_Name: StageDatabase
-  m_EditorClassIdentifier: 
-  stages:
-  - sceneName: FreeFight
-    scenePath: Assets/Scenes/Game.unity
-    thumbnail: {fileID: 0}
-    stageNumber: 0
-  - sceneName: Stage1
-    scenePath: Assets/Scenes/Game.unity
-    thumbnail: {fileID: 0}
-    stageNumber: 1
-  - sceneName: Stage2
-    scenePath: Assets/Scenes/Game.unity
-    thumbnail: {fileID: 0}
-    stageNumber: 2
-  - sceneName: Stage3
-    scenePath: Assets/Scenes/Game.unity
-    thumbnail: {fileID: 0}
-    stageNumber: 3
-  - sceneName: Stage4
-    scenePath: Assets/Scenes/Game.unity
-    thumbnail: {fileID: 0}
-    stageNumber: 4
+version https://git-lfs.github.com/spec/v1
+oid sha256:6d40483800fb49edfd98465e73de40203c49351f6ccdf77c1c1110d7e343aacd
+size 990

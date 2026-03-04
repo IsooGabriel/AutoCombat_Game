@@ -226,11 +226,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6004632841000259201, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_text
-      value: AND
+      value: "\u5F85\u6A5F"
       objectReference: {fileID: 0}
     - target: {fileID: 6004632841000259201, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_fontSize
-      value: 17.9
+      value: 18.15
       objectReference: {fileID: 0}
     - target: {fileID: 6278460560577837163, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_SizeDelta.y

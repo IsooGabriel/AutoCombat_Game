@@ -180,6 +180,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4129510827165383600, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_text
+      value: "\u30D9\u30AF\u30C8\u30EB"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129510827165383600, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 10.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4804290619298907338, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -222,7 +230,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6004632841000259201, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_text
-      value: BreakVector
+      value: "\u30D9\u30AF\u30C8\u30EB\u5909\u63DB"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004632841000259201, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 17.5
       objectReference: {fileID: 0}
     - target: {fileID: 6278460560577837163, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_SizeDelta.y
@@ -263,6 +275,18 @@ PrefabInstance:
     - target: {fileID: 8130235904526101330, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_Name
       value: BreakVectorNode Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579948975784828725, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_text
+      value: "\u5024x"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579948975784828725, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 13.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579948975784828725, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8960327676822800916, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -433,6 +457,18 @@ PrefabInstance:
     - target: {fileID: 3742501396044531495, guid: 5891f817cd50cf0488d27dfc3ffee4d0, type: 3}
       propertyPath: m_Name
       value: ToPortUI (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297964413496181326, guid: 5891f817cd50cf0488d27dfc3ffee4d0, type: 3}
+      propertyPath: m_text
+      value: "\u5024y"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297964413496181326, guid: 5891f817cd50cf0488d27dfc3ffee4d0, type: 3}
+      propertyPath: m_fontSize
+      value: 13.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297964413496181326, guid: 5891f817cd50cf0488d27dfc3ffee4d0, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

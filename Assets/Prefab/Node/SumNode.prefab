@@ -176,9 +176,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3083905308735954554, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3796622683180575844, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_Sprite
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129510827165383600, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_text
+      value: "\u5024\u30AD\u30E5\u30FC"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129510827165383600, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 12.75
       objectReference: {fileID: 0}
     - target: {fileID: 4593071129279254815, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: pivotOffset.y
@@ -222,7 +234,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6004632841000259201, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_text
-      value: Sum
+      value: "\u8DB3\u3057\u7B97"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004632841000259201, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 18.15
       objectReference: {fileID: 0}
     - target: {fileID: 6278460560577837163, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_SizeDelta.y
@@ -231,6 +247,10 @@ PrefabInstance:
     - target: {fileID: 6407115832968498447, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246531078735149823, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7358771523002041297, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -267,6 +287,14 @@ PrefabInstance:
     - target: {fileID: 8130235904526101330, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_Name
       value: SumNode
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579948975784828725, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_text
+      value: "\u8A08\u7B97\u7D50\u679C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579948975784828725, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
+      propertyPath: m_fontSize
+      value: 12.75
       objectReference: {fileID: 0}
     - target: {fileID: 8960327676822800916, guid: 3cdce96d89a10614490795ecef47e2d4, type: 3}
       propertyPath: m_AnchorMax.y

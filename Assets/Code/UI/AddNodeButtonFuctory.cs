@@ -12,7 +12,10 @@ public class AddNodeButtonFuctory : MonoBehaviour
     [SerializeField]
     private Button button;
     [SerializeField]
-    private bool changeText = false;
+    private bool isChangeText = false;
+    [SerializeField]
+    private string changeText = noChangeText;
+    private const string noChangeText = "1";
     [SerializeField]
     private TextMeshProUGUI text;
     [SerializeField]
@@ -55,7 +58,11 @@ public class AddNodeButtonFuctory : MonoBehaviour
         {
             text = GetComponentInChildren<TextMeshProUGUI>();
         }
-        if (changeText && text != null)
+        if(changeText != noChangeText)
+        {
+            text.text = changeText;
+        }
+        if (isChangeText && text != null)
         {
             text.text = $"{nodeType.ToString()}";
         }
