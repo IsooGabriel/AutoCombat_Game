@@ -1,15 +1,17 @@
-﻿
-using TMPro;
-using static UnityEngine.Rendering.DebugUI;
-
-public class SetBoolNode : Node
+﻿public class SetBoolNode : Node
 {
     public const string inputBool = "inputBool";
     readonly string outBool = "outBool";
+
+    public const string inputBoolJP = "inputBool";
+
     public override void Initialize()
     {
         nodeType = NodeType.SetBool;
         useLimit = 99;
+
+        nameToJP.Add(inputBool, inputBoolJP);
+
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
@@ -24,7 +26,7 @@ public class SetBoolNode : Node
     {
         float binary = 1;
         bool value = true;
-        if(!TryGetInputValueWithPort(inputBool, out binary))
+        if (!TryGetInputValueWithPort(inputBool, out binary))
         {
             value = true;
         }

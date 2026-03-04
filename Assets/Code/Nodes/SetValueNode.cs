@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
 public class SetValueNode : Node
 {
+
+    const string outputValuePortName = "output number";
+
+    const string outputValuePortNameJP = "ベクトル";
     public override void Initialize()
     {
         nodeType = NodeType.SetValue;
         useLimit = 99;
-        const string outputValuePortName = "output number";
+
+        nameToJP.Add(outputValuePortName, outputValuePortNameJP);
+
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),

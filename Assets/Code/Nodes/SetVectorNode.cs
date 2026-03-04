@@ -6,10 +6,20 @@ public class SetVectorNode : Node
     const string portXname = "x";
     const string portYname = "y";
     const string outputVectorPortName = "output vector2";
+
+    const string portXnameJP = "値x";
+    const string portYnameJP = "値y";
+    const string outputVectorPortNameJP = "対象ベクトル";
+
     public override void Initialize()
     {
         nodeType = NodeType.SetVector;
         useLimit = 99;
+
+        nameToJP.Add(portXname, portXnameJP);
+        nameToJP.Add(portYname, portYnameJP);
+        nameToJP.Add(outputVectorPortName, outputVectorPortNameJP);
+
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),

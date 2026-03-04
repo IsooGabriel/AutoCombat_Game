@@ -6,10 +6,17 @@ public class IfNode : Node
     private readonly string valueAPortName = "value A";
     private readonly string valueBPortName = "value B";
 
+    private readonly string valueAPortNameJP = "’lA";
+    private readonly string valueBPortNameJP = "’lB";
+
     public override void Initialize()
     {
         nodeType = NodeType.IF;
         useLimit = 99;
+
+        nameToJP.Add(valueAPortName, valueAPortNameJP);
+        nameToJP.Add(valueBPortName, valueBPortNameJP);
+
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),

@@ -7,9 +7,9 @@ public class NodeCounter : MonoBehaviour
     [SerializeField]
     private TMPro.TextMeshProUGUI text;
     [SerializeField]
-    private string format1 = $"<size=80%>now Node count: </size>";
+    private string format1 = $"<size=80%>現在ノード数: </size>";
     [SerializeField]
-    private string format2 = $"\n<size=70%>max AdditionalSutatus:</size><size=80%>";
+    private string format2 = $"\n<size=70%>追加ステータス上限:</size><size=80%>";
     [SerializeField]
     private string format3 = $"</size>";
     private void OnChangeNodeCount()

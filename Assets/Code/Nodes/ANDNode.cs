@@ -7,6 +7,9 @@ public class ANDNode : LinkedNode
     const string elementPortName = "element";
     const string resultPortName = "result";
 
+    const string elementPortNameJP = "値";
+    const string resultPortNameJP = "結果";
+
     private Type connectionType = typeof(float);
     private bool firstExecution = true;
     private int executionCount = 0;
@@ -15,6 +18,10 @@ public class ANDNode : LinkedNode
     {
         useLimit = -1;
         nodeType = NodeType.AND;
+
+        nameToJP.Add(elementPortName, elementPortNameJP);
+        nameToJP.Add(resultPortName, resultPortNameJP);
+
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),

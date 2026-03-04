@@ -7,6 +7,10 @@ public class AttackNode : Node
     const string inputAutoAim = "isAutoAim";
     const string outOnHit = "onHit";
 
+    const string inputDirectionJP = "方向";
+    const string inputAutoAimJP = "自動エイム";
+    const string outOnHitJP = "ヒット時";
+
     private GraphExecutor executor;
     private Action<Character> onHit;
 
@@ -25,6 +29,11 @@ public class AttackNode : Node
     public override void Initialize()
     {
         nodeType = NodeType.Attack;
+
+        nameToJP.Add(inputDirection, inputDirectionJP);
+        nameToJP.Add(inputAutoAim, inputAutoAimJP);
+        nameToJP.Add(outOnHit, outOnHitJP);
+
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),

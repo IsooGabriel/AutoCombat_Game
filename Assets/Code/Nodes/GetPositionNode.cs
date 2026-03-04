@@ -3,10 +3,17 @@ public class GetPositionNode : Node
 {
     public const string positionTypeDataName = "isCharacterPostion";
     private string positionPortName = "position";
+
+    public const string positionTypeDataNameJP = "参照ターゲット";
+    public const string positionPortNameJP = "座標";
+
     private GetPositionSettings isCharacterPostion = GetPositionSettings.CharacterPosition;
     public override void Initialize()
     {
         nodeType = NodeType.GetPosition;
+
+        nameToJP.Add(positionPortName, positionPortNameJP);
+
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
@@ -20,7 +27,7 @@ public class GetPositionNode : Node
 
     public override void Execute(GraphExecutor executor)
     {
-        if(TryGetInputValueWithPort(positionTypeDataName, out float newValue))
+        if (TryGetInputValueWithPort(positionTypeDataName, out float newValue))
         {
             isCharacterPostion = (GetPositionSettings)(int)newValue;
         }
@@ -38,7 +45,7 @@ public class GetPositionNode : Node
             default:
                 break;
         }
-                executor.SendData(this, positionPortName, (object)new Vector2(send.x, send.y));
+        executor.SendData(this, positionPortName, (object)new Vector2(send.x, send.y));
         executor.EnqueueConnected(this, executePortName);
     }
 }

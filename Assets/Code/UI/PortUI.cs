@@ -24,6 +24,7 @@ public class PortUI : MonoBehaviour
     [NonSerialized]
     public List<ConectionUI> outputConectionsUI = new();
 
+
     public enum PortTypeHue
     {
         OTHER = 262,
@@ -115,7 +116,11 @@ public class PortUI : MonoBehaviour
         }
         if (tmpUGUI != null)
         {
-            tmpUGUI.text = port.portName;
+            if(port.portNameJP == Port.defaultPortName)
+            {
+                port.portNameJP = port.owner.nameToJP[port.portName];
+            }
+            tmpUGUI.text = port.portNameJP;
         }
     }
 }

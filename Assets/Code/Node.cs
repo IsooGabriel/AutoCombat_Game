@@ -11,12 +11,15 @@ public abstract class Node
     public int useLimit = 1;
     public int useCount = 0;
 
-    public string executePortName = "Execute";
+    public const string executePortName = "Execute";
+    public const string executePortNameJP = "é¿çs";
 
     [NonSerialized] public Port[] inputPorts = new Port[] { };
     [NonSerialized] public Port[] outputPorts = new Port[] { };
 
     [NonSerialized] public List<InputValue<object>> inputValues = new() { };
+
+    public Dictionary<string, string> nameToJP= new() { {executePortName, executePortNameJP } };
 
     public abstract void Initialize();
     public abstract void Execute(GraphExecutor executor);

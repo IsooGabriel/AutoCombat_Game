@@ -9,12 +9,16 @@ public enum StatusType
     CRITICAL_CHANCE,
     CRITICAL_DAMAGE,
 }
-public class GetStatusNode:Node
+public class GetStatusNode : Node
 {
 
     public const string targetPortName = "enemy is target";
     public const string statusPortName = "source";
     public const string returnPortName = "result";
+
+    public const string targetPortNameJP = "敵ステータス参照";
+    public const string statusPortNameJP = "対象ステータス";
+    public const string returnPortNameJP = "値";
 
     private bool isTargetPlayer = true;
     private float targetStartsu = 0f;
@@ -22,6 +26,11 @@ public class GetStatusNode:Node
     public override void Initialize()
     {
         nodeType = NodeType.GetStatus;
+
+        nameToJP.Add(targetPortName, targetPortNameJP);
+        nameToJP.Add(statusPortName, statusPortNameJP);
+        nameToJP.Add(returnPortName, returnPortNameJP);
+
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
@@ -36,7 +45,7 @@ public class GetStatusNode:Node
 
     public override void Execute(GraphExecutor executor)
     {
-        if(!TryGetInputValueWithPort<bool>(targetPortName, out isTargetPlayer))
+        if (!TryGetInputValueWithPort<bool>(targetPortName, out isTargetPlayer))
         {
             isTargetPlayer = true;
         }

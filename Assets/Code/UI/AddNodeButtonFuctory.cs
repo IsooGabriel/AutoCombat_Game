@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static AddNodeButtonFuctory.OutlineColor;
@@ -58,7 +57,7 @@ public class AddNodeButtonFuctory : MonoBehaviour
         {
             text = GetComponentInChildren<TextMeshProUGUI>();
         }
-        if(changeText != noChangeText)
+        if (changeText != noChangeText)
         {
             text.text = changeText;
         }

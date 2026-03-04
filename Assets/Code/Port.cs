@@ -6,6 +6,8 @@ public class Port
 
 {
     public string portName;
+    public string portNameJP = defaultPortName;
+    public const string defaultPortName = "デフォルト (x_x;";
     public Type portType;
     public bool isRequired;
     public bool isToPort;
@@ -41,5 +43,7 @@ public class Port
         this.isToPort = isInput;
         this.isExecutionPort = isExecutionPort;
         this.owner = owner;
+
+        portNameJP = owner?.nameToJP[portName];
     }
 }

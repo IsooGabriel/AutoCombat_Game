@@ -91,7 +91,7 @@ public class GraphExecutor
             }
             foreach (var connected in port.outputConections)
             {
-                SendData(node, node.executePortName, (bool)true);
+                SendData(node, Node.executePortName, (bool)true);
                 executionQueue.Enqueue(connected.Item1);
             }
         }

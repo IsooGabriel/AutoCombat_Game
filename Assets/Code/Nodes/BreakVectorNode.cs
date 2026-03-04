@@ -5,10 +5,19 @@ public class BreakVectorNode : Node
     readonly string fromXPort = "x";
     readonly string fromYPort = "y";
 
+    readonly string toVectorPortJP = "ベクトル";
+    readonly string fromXPortJP = "値x";
+    readonly string fromYPortJP = "値y";
+
     public override void Initialize()
     {
         nodeType = NodeType.BreakVector;
         useLimit = 99;
+
+        nameToJP.Add(toVectorPort, toVectorPortJP);
+        nameToJP.Add(fromXPort, fromXPortJP);
+        nameToJP.Add(fromYPort, fromYPortJP);
+
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
@@ -23,9 +32,9 @@ public class BreakVectorNode : Node
     }
     public override void Execute(GraphExecutor executor)
     {
-        if(!TryGetInputValueWithPort(toVectorPort, out Vector2 vector))
+        if (!TryGetInputValueWithPort(toVectorPort, out Vector2 vector))
         {
-            if(!TryGetInputValueWithPort(toVectorPort, out Vector3 vector3))
+            if (!TryGetInputValueWithPort(toVectorPort, out Vector3 vector3))
             {
                 return;
             }
