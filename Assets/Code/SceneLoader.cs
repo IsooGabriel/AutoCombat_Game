@@ -63,6 +63,16 @@ public class SceneLoader : MonoBehaviour
         OnGraphEditor(new CallbackContext());
     }
 
+    public void NextStage() 
+    {
+        StageSelector.stageIndex++;
+        if(stageDatabase.stages.Count < StageSelector.stageIndex)
+        {
+            StageSelector.stageIndex = StageSelector.freeFightStageIndex;
+        }
+        OnGraphEditor(new CallbackContext());
+    }
+
     private void OnEnable()
     {
         if (playerInput == null)

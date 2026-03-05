@@ -152,7 +152,8 @@ MonoBehaviour:
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
-  hitCooltime: 0
+  hitCooltime: 0.2
+  stayHit: 0
 --- !u!61 &4435779099456855536
 BoxCollider2D:
   m_ObjectHideFlags: 0

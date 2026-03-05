@@ -64,6 +64,7 @@
 
         private void Start()
         {
+            base.Start();
             if (sword.TryGetComponent<Weapon>(out Weapon swordWeapon))
             {
                 swordWeapon.user = user;
