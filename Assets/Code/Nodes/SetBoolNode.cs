@@ -4,6 +4,7 @@
     readonly string outBool = "outBool";
 
     public const string inputBoolJP = "inputBool";
+    public const string outBoolJP = "値";
 
     public override void Initialize()
     {
@@ -11,6 +12,7 @@
         useLimit = 99;
 
         nameToJP.Add(inputBool, inputBoolJP);
+        nameToJP.Add(outBool, outBoolJP);
 
         inputPorts = new Port[]
         {

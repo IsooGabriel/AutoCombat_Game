@@ -2722,6 +2722,7 @@ MonoBehaviour:
   - stageIndex: 4
     isUseUserEnemy: 0
     enemyGraph: {fileID: 4900000, guid: d7d0dcaf093d7e947843fe0fd9c0163e, type: 3}
+  resultDelay: 0.2
 --- !u!114 &600126439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8066,7 +8067,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 116.1
+  m_fontSize: 115.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

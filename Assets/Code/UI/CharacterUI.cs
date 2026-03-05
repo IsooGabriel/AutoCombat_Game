@@ -14,4 +14,12 @@ public class CharacterUI : MonoBehaviour
         }
         healthBar.value = (float)character.currentHP / (character.baseStatus.hp + character.aditionalStatus.hp);
     }
+    private void OnDestroy()
+    {
+        if(character == null || healthBar == null)
+        {
+            return;
+        }
+        healthBar.value = healthBar.minValue;
+    }
 }

@@ -4,7 +4,7 @@ public class SetValueNode : Node
 
     const string outputValuePortName = "output number";
 
-    const string outputValuePortNameJP = "ベクトル";
+    const string outputValuePortNameJP = "値";
     public override void Initialize()
     {
         nodeType = NodeType.SetValue;

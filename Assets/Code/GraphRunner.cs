@@ -23,6 +23,8 @@ public class GraphRunner : MonoBehaviour
     private GraphExecutor _enemyExecutor;
     [SerializeField]
     private StageSettings[] settings = { };
+    [SerializeField]
+    private float resultDelay = 0.2f;
     private float _tickTimer;
     private const float TickInterval = 1f / 30f; // 30tick/秒
 
@@ -77,12 +79,14 @@ public class GraphRunner : MonoBehaviour
         enemy.Start();
     }
 
-    private void OnPlayerWin()
+    private async void OnPlayerWin()
     {
+        await Task.Delay((int)(resultDelay*1000f));
         winResult.SetActive(true);
     }
-    private void OnEnemyWin()
+    private async void OnEnemyWin()
     {
+        await Task.Delay((int)(resultDelay * 1000f));
         loseResult.SetActive(true);
     }
 
@@ -193,8 +197,6 @@ public class GraphRunner : MonoBehaviour
     }
     void Update()
     {
-
-
         if (!isRunning)
         {
             return;

@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 public class IfNode : Node
 {
     private IfSettings ifSettings;
@@ -5,9 +7,13 @@ public class IfNode : Node
 
     private readonly string valueAPortName = "value A";
     private readonly string valueBPortName = "value B";
+    private const string truePortName = "True";
+    private const string falsePortName = "False";
 
     private readonly string valueAPortNameJP = "ílA";
     private readonly string valueBPortNameJP = "ílB";
+    private const string truePortNameJP = "ê^";
+    private const string falsePortNameJP = "ãU";
 
     public override void Initialize()
     {
@@ -16,17 +22,19 @@ public class IfNode : Node
 
         nameToJP.Add(valueAPortName, valueAPortNameJP);
         nameToJP.Add(valueBPortName, valueBPortNameJP);
+        nameToJP.Add(truePortName, truePortNameJP);
+        nameToJP.Add(falsePortName, falsePortNameJP);
 
         inputPorts = new Port[]
         {
             new Port(executePortName, typeof(bool), isRequired:true, isInput:true, isExecutionPort:true, this),
-            new Port("value A", typeof(float), isRequired:true, isInput:true, isExecutionPort:false, this),
-            new Port("value B", typeof(float), isRequired:true, isInput:true, isExecutionPort:false, this),
+            new Port(valueAPortName, typeof(float), isRequired:true, isInput:true, isExecutionPort:false, this),
+            new Port(valueBPortName, typeof(float), isRequired:true, isInput:true, isExecutionPort:false, this),
         };
         outputPorts = new Port[]
         {
-            new Port("True", typeof(bool), false, false, true, this),
-            new Port("False", typeof(bool), false, false, true, this),
+            new Port(truePortName, typeof(bool), false, false, true, this),
+            new Port(falsePortName, typeof(bool), false, false, true, this),
         };
     }
 
