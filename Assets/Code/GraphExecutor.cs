@@ -1,19 +1,24 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 public class GraphExecutor
 {
-    public Character myCharacter;
-    public Character enemy;
-    private Dictionary<string, Node> nodes = new Dictionary<string, Node> { };
-    private Dictionary<string, LinkedNode> linkedNodes = new Dictionary<string, LinkedNode> { };
-    public Queue<Node> executionQueue;
-    public Node startNode = null;
-    public HashSet<string> startedNodes = new HashSet<string> { };
+    public Character myCharacter; // このグラフを実行する自身のキャラクター
+    public Character enemy; // グラフの対象（敵）となるキャラクター
+    private Dictionary<string, Node> nodes = new Dictionary<string, Node> { }; // グラフを構成する全ノードの辞書（IDがキー）
+    private Dictionary<string, LinkedNode> linkedNodes = new Dictionary<string, LinkedNode> { }; // リンクされたノード（LinkedNode）の辞書
+    public Queue<Node> executionQueue; // 現在のTickで実行待ちのノードキュー
+    public Node startNode = null; // グラフの開始地点となるノード
+    public HashSet<string> startedNodes = new HashSet<string> { }; // すでに初期化（StartInitialize）済みのノードIDの集合
 
     #region public関数
 
-
+    /// <summary>
+    /// GraphExecutorのコンストラクタ。グラフデータを読み込み、実行環境を初期化します。
+    /// </summary>
+    /// <param name="graphData">読み込むグラフのデータ</param>
+    /// <param name="myCharacter">実行主体となるキャラクター</param>
+    /// <param name="enemy">対象となる敵キャラクター</param>
     public GraphExecutor(GraphData graphData, Character myCharacter, Character enemy)
     {
         this.myCharacter = myCharacter;
@@ -22,7 +27,7 @@ public class GraphExecutor
     }
 
     /// <summary>
-    /// 1tick分実行
+    /// 1Tick（フレーム）分のグラフ実行処理を行います。開始ノードから順に接続されたノードを処理します。
     /// </summary>
     public void ExecuteTick()
     {
@@ -77,10 +82,10 @@ public class GraphExecutor
     }
 
     /// <summary>
-    /// ノードが次のノードを実行キューに追加
+    /// 指定されたノードの出力ポートに接続されているすべてのノードを実行キューに追加します。
     /// </summary>
-    /// <param name="node">ポートの親</param>
-    /// <param name="portName">発火させるポート名</param>
+    /// <param name="node">接続元となるノード</param>
+    /// <param name="portName">発火させる出力ポートの名前</param>
     public void EnqueueConnected(Node node, string portName)
     {
         foreach (var port in node.outputPorts)
@@ -98,12 +103,12 @@ public class GraphExecutor
     }
 
     /// <summary>
-    /// ノードがデータを次のノードに送る
+    /// ノードから接続先のすべての入力ポートへデータを送信します。
     /// </summary>
-    /// <param name="fromNode">送信元ノード</param>
-    /// <param name="fromPortName">送信元ポート名</param>
-    /// <param name="data">送るデータ</param>
-    /// <returns>送信成功数が1以上かのbool、要するに送信できたかの判定</returns>
+    /// <param name="fromNode">送信元となるノード</param>
+    /// <param name="fromPortName">送信元となる出力ポートの名前</param>
+    /// <param name="data">送信するデータオブジェクト</param>
+    /// <returns>少なくとも1つのポートに送信できた場合はtrue、それ以外はfalse</returns>
     public bool SendData(Node fromNode, string fromPortName, object data)
     {
         bool isSent = false;
@@ -137,7 +142,10 @@ public class GraphExecutor
 
     #region private関数
 
-
+    /// <summary>
+    /// シリアライズされたGraphDataから実行用のノード構成と接続関係を構築します。
+    /// </summary>
+    /// <param name="graphData">読み込むソースデータ</param>
     private void LoadGraph(GraphData graphData)
     {
         nodes.Clear();
@@ -228,6 +236,11 @@ public class GraphExecutor
         myCharacter.aditionalStatus = graphData.aditionalStatus;
     }
 
+    /// <summary>
+    /// ノードの実行が可能かどうか（必須入力ポートがすべて接続されているか）をチェックします。
+    /// </summary>
+    /// <param name="node">チェック対象のノード</param>
+    /// <returns>実行可能な場合はtrue、不足がある場合はfalse</returns>
     private bool CheckExecutable(Node node)
     {
         foreach (var port in node.inputPorts)
