@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6575979628346912548}
   - component: {fileID: 7882410991924084691}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5948808087522380280}
   - component: {fileID: 6794987282759837232}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,12 +145,14 @@ MonoBehaviour:
     finaryCriticalDamage: 0.1
   range: 0
   baseCT: 1
+  usableFirstTime: 1
   originOffset: {x: 0, y: 0}
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
   arrowPrefab: {fileID: 798063513557360628, guid: fff8df9a2d8bd5f4e804f9524458de1d, type: 3}
   bow: {fileID: 4650641018906522162}
+  arrowSpeed: 10
 --- !u!1 &3603030130875485837
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2715660291334058415}
   - component: {fileID: 9161816616097713935}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5458222242451957849}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 926278398504465284}
   - component: {fileID: 2253090999072066555}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4233133824882527247}
   - component: {fileID: 7241618508040797888}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

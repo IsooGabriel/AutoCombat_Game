@@ -1,5 +1,6 @@
 using VContainer;
 using VContainer.Unity;
+using Weapon;
 
 public class GameLifetimeScope : LifetimeScope
 {

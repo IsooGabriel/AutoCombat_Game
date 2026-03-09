@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5948808087522380280}
   - component: {fileID: 9015583537300461169}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TestWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,9 +56,9 @@ MonoBehaviour:
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.1
-  damageMultiply: 1
   range: 11111
   baseCT: 1
+  usableFirstTime: 1
   originOffset: {x: 0.72, y: 0}
   attackSpeed: 1
   user: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 377332395650331420}
   - component: {fileID: 6367612067702014320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

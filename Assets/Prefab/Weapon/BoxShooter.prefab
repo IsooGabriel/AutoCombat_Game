@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6210736785267010533}
   - component: {fileID: 6710700088539975576}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5948808087522380280}
   - component: {fileID: 6794987282759837232}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BoxShooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,13 +163,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7176383153578572034}
   - component: {fileID: 1862712756460653574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7176383153578572034
 Transform:
   m_ObjectHideFlags: 0

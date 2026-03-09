@@ -317,7 +317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4857718104641599576}
   - component: {fileID: 2482564943343758260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -439,6 +439,7 @@ MonoBehaviour:
   user: {fileID: 0}
   timer: 0
   hitCooltime: 0
+  stayHit: 0
 --- !u!50 &2250268819565278053
 Rigidbody2D:
   serializedVersion: 5

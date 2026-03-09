@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 7942150686774063757}
   - component: {fileID: 133824178205343029}
   - component: {fileID: 5890529230181742415}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -556,6 +556,10 @@ MonoBehaviour:
     disable:
     - {fileID: 6816232129318493640}
     - {fileID: 3922533319683198885}
+  rigidBody: {fileID: 0}
+  acceleForce: 500
+  acceleCT: 5
+  stopCT: 5
 --- !u!114 &1566050617389176595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,7 +619,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3274264984095535681}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

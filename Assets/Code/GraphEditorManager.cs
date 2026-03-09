@@ -596,9 +596,9 @@ public class GraphEditorManager : MonoBehaviour
         Instance.graphData.nodes.Clear();
 
         NodeUI nodeUI;
-        for(int i = 0; i < GraphEditorManager.Instance.nodeUIs.Count; ++i)
+        for (int i = 0; i < GraphEditorManager.Instance.nodeUIs.Count; ++i)
         {
-            loadSlider.value += ((float)1 / Instance.nodeUIs.Count) * 0.8f*loadSlider.maxValue;
+            loadSlider.value += ((float)1 / Instance.nodeUIs.Count) * 0.8f * loadSlider.maxValue;
 
             nodeUI = Instance.nodeUIs[i];
             if (usedNodeIds.Contains(nodeUI.node.id))
@@ -654,7 +654,7 @@ public class GraphEditorManager : MonoBehaviour
         string json = JsonUtility.ToJson(Instance.graphData, true);
         EnsureDirectoryExists(path);
 
-        loadSlider.value =0.9f * loadSlider.maxValue;
+        loadSlider.value = 0.9f * loadSlider.maxValue;
 
 
         File.WriteAllText(path, json, System.Text.Encoding.UTF8);
@@ -676,18 +676,17 @@ public class GraphEditorManager : MonoBehaviour
     /// 指定されたパスにデフォルト名でグラフを保存します。
     /// </summary>
     /// <param name="path">保存先のフルパス</param>
-    public void SaveGraph(string path)
+    public async Task SaveGraph(string path)
     {
-        Debug.Log("save enemy =========");
-        SaveGraph(path, $"_DEFAULT_{System.Guid.NewGuid().ToString()}", $"_DEFAULT_{System.Guid.NewGuid().ToString()}");
+        await SaveGraph(path, $"_DEFAULT_{System.Guid.NewGuid().ToString()}", $"_DEFAULT_{System.Guid.NewGuid().ToString()}");
     }
 
     /// <summary>
     /// デフォルトのプレイヤーデータ名でグラフを保存します。
     /// </summary>
-    public void SaveGraph()
+    public async Task SaveGraph()
     {
-        SaveGraph("PlaeyreData.json");
+        await SaveGraph("PlaeyreData.json");
     }
     /// <summary>
     /// デフォルトの敵データ名でグラフを保存します。
@@ -818,7 +817,16 @@ public class GraphEditorManager : MonoBehaviour
         return nodeData;
     }
 
+    public async void ReloadPreview()
+    {
+        await SaveGraph();
+        graphData = loader.LoadJson($"{Application.persistentDataPath.Replace("/", "\\")}\\{defaultPath}\\{playerDataFileName}");
+        await loader.LoadEditor();
+        PreviewRunner.Instance.Reload();
+    }
+
     #endregion
+
 
     private void Awake()
     {

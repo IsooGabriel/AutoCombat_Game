@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6216856659291275816}
   - component: {fileID: 8183900455241596811}
   - component: {fileID: 8413256811550354828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 7609462130235909344}
   - component: {fileID: 2774769476137578846}
   - component: {fileID: 1423804008986891539}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

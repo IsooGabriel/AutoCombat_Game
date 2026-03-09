@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5948808087522380280}
   - component: {fileID: 7723742207693382340}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,9 +58,9 @@ MonoBehaviour:
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.1
-  damageMultiply: 1
   range: 0
   baseCT: 1
+  usableFirstTime: 1
   originOffset: {x: 0, y: 0}
   attackSpeed: 0
   user: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   m_Component:
   - component: {fileID: 704533443667814404}
   - component: {fileID: 5452599784215766694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sw (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,15 +125,16 @@ MonoBehaviour:
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 1
-  damageMultiply: 1
   range: 0
   baseCT: 4
+  usableFirstTime: 1
   originOffset: {x: 0, y: -1}
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
   arrowPrefab: {fileID: 8966926441135651476, guid: 329974e8d34b0784d8a4a895b6e66475, type: 3}
   bow: {fileID: 7597810761078304323}
+  arrowSpeed: 10
 --- !u!1 &4529328625521584494
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1276961047368033691}
   - component: {fileID: 7224241374939580435}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,15 +191,16 @@ MonoBehaviour:
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 1
-  damageMultiply: 0.03
   range: 0
   baseCT: 0.2
+  usableFirstTime: 1
   originOffset: {x: 1, y: 0}
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
   arrowPrefab: {fileID: 8966926441135651476, guid: abb7c2d7aaacdd74e8ec045da9a12825, type: 3}
   bow: {fileID: 6084814645745201861}
+  arrowSpeed: 10
 --- !u!1 &6084814645745201861
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7176383153578572034}
   - component: {fileID: 1862712756460653574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6269145284055688239}
   - component: {fileID: 7781586161107335642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5421916304316920753}
   - component: {fileID: 1724607999051610398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +472,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7375615229789938230}
   - component: {fileID: 5373739090831732498}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sw (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,12 +518,13 @@ MonoBehaviour:
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 1
-  damageMultiply: 0.3
   range: 0
   baseCT: 1.8
+  usableFirstTime: 1
   originOffset: {x: 0, y: 1}
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
   arrowPrefab: {fileID: 8966926441135651476, guid: 1334e0ffb6dcc5e43bd8262db6f882ef, type: 3}
   bow: {fileID: 7549388035154051446}
+  arrowSpeed: 10

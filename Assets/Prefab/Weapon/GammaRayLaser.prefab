@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5948808087522380280}
   - component: {fileID: 4391512203050466444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GammaRayLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}

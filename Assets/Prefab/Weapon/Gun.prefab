@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6210736785267010533}
   - component: {fileID: 6710700088539975576}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4423961997180578217}
   - component: {fileID: 7659267609350403604}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5948808087522380280}
   - component: {fileID: 6794987282759837232}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,12 +231,13 @@ MonoBehaviour:
     criticalDamage: 1
     aditionalCriticalDamage: 1
     finaryCriticalDamage: 0.1
-  damageMultiply: 2.5
   range: 0
   baseCT: 4
+  usableFirstTime: 1
   originOffset: {x: 1, y: 0}
   attackSpeed: 0
   user: {fileID: 0}
   timer: 0
   arrowPrefab: {fileID: 8966926441135651476, guid: 329974e8d34b0784d8a4a895b6e66475, type: 3}
   bow: {fileID: 140561842678098474}
+  arrowSpeed: 10
