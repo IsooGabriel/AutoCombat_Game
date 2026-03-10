@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GraphEditorManager : MonoBehaviour
@@ -819,8 +820,10 @@ public class GraphEditorManager : MonoBehaviour
 
     public async void ReloadPreview()
     {
-        await SaveGraph();
-        graphData = loader.LoadJson($"{Application.persistentDataPath.Replace("/", "\\")}\\{defaultPath}\\{playerDataFileName}");
+        string path = $"{Application.persistentDataPath.Replace("/", "\\")}\\{defaultPath}\\{playerDataFileName}";
+        await SaveGraph(path);
+        ResetGraph();
+        graphData = loader.LoadJson(path);
         await loader.LoadEditor();
         PreviewRunner.Instance.Reload();
     }
@@ -848,7 +851,15 @@ public class GraphEditorManager : MonoBehaviour
         UpdateAdditionalStatus();
         onLoardGraph += UpdateAdditionalStatus;
         onLoardGraph += () => onChangeNodeCount?.Invoke();
-        loader = new GraphEditorLoader();
+        if(loader == null)
+        {
+            loader = GetComponent<GraphEditorLoader>();
+        }
+        if (loader == null)
+        {
+            loader = new GraphEditorLoader();
+        }
+        SceneManager.LoadScene("Preview", LoadSceneMode.Additive);
     }
 
     private void OnEnable()

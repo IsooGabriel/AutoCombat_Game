@@ -420,10 +420,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 38037051}
   text: {fileID: 435806621}
-  format1: '<size=80%>now Node count: </size>'
-  format2: '
-
-    <size=70%>max AdditionalSutatus:</size><size=80%>'
+  format1: "<size=80%>\u73FE\u5728\u30CE\u30FC\u30C9\u6570: </size>"
+  format2: "\n<size=70%>\u8FFD\u52A0\u30B9\u30C6\u30FC\u30BF\u30B9\u4E0A\u9650:</size><size=80%>"
   format3: </size>
 --- !u!1 &40840563
 GameObject:
@@ -19936,7 +19934,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.55
+  m_fontSize: 22
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
