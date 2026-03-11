@@ -119,7 +119,6 @@ public class Character : MonoBehaviour, IDeathable, IDamageable
             direction.Normalize();
         }
         float multiply = (float)speed * 0.035f;
-        Debug.Log(Time.deltaTime);
         direction = new Vector2(direction.x * multiply, direction.y * multiply);
 
         if (rigidBody)

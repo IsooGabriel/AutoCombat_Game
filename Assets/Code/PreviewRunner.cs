@@ -9,8 +9,9 @@ public class PreviewRunner : MonoBehaviour
     [SerializeField]
     private WeaponDB weaponDB;
     public Character player;
-    private Character clone;
+    private Character clonePlayer;
     public Character enemy;
+    private Character cloneEnemy;
 
     [SerializeField]
     private GraphExecutor _playerExecutor;
@@ -70,15 +71,23 @@ public class PreviewRunner : MonoBehaviour
         {
             player.Death();
         }
-        player = Instantiate(clone);
+        player = Instantiate(clonePlayer);
         player.gameObject.SetActive(true);
+        if (enemy != null)
+        {
+            enemy.Death();
+        }
+        enemy = Instantiate(cloneEnemy);
+        enemy.gameObject.SetActive(true);
         Start();
     }
 
     private void Awake()
     {
-        clone = Instantiate(player);
-        clone.gameObject.SetActive(false);
+        clonePlayer = Instantiate(player);
+        clonePlayer.gameObject.SetActive(false);
+        cloneEnemy = Instantiate(enemy);
+        cloneEnemy.gameObject.SetActive(false);
     }
 
     async void Start()
@@ -106,7 +115,7 @@ public class PreviewRunner : MonoBehaviour
             return;
         }
 
-        if (player == null)
+        if (player == null || enemy == null)
         {
             Reload();
             return;

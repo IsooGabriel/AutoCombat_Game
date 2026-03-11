@@ -2715,16 +2715,22 @@ MonoBehaviour:
     enemyGraph: {fileID: 4900000, guid: fbd0ab53e79ca084ab37e6e7730a4b96, type: 3}
   - stageIndex: 2
     isUseUserEnemy: 0
-    enemyGraph: {fileID: 4900000, guid: d7d0dcaf093d7e947843fe0fd9c0163e, type: 3}
+    enemyGraph: {fileID: 4900000, guid: bb12be453d100ef419c4556bc9fa28df, type: 3}
   - stageIndex: 3
     isUseUserEnemy: 0
-    enemyGraph: {fileID: 4900000, guid: d7d0dcaf093d7e947843fe0fd9c0163e, type: 3}
+    enemyGraph: {fileID: 4900000, guid: 8ba1671bd8dbf1d4f954b8f58e38cc95, type: 3}
   - stageIndex: 4
     isUseUserEnemy: 0
     enemyGraph: {fileID: 4900000, guid: 807ae8293d19d014c972b7dae8fcbef3, type: 3}
   - stageIndex: 5
     isUseUserEnemy: 0
-    enemyGraph: {fileID: 4900000, guid: d7d0dcaf093d7e947843fe0fd9c0163e, type: 3}
+    enemyGraph: {fileID: 4900000, guid: 3fb91442a7634ff42a8237415146caa9, type: 3}
+  - stageIndex: 6
+    isUseUserEnemy: 0
+    enemyGraph: {fileID: 4900000, guid: be1c024b3d0957644b799e6895a2633c, type: 3}
+  - stageIndex: 7
+    isUseUserEnemy: 0
+    enemyGraph: {fileID: 4900000, guid: 87215e896cfb70c4293b2e4b37d9efc1, type: 3}
   resultDelay: 0.2
 --- !u!114 &600126439
 MonoBehaviour:

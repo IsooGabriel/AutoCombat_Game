@@ -13935,7 +13935,7 @@ GameObject:
   - component: {fileID: 1175154950}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: EditorOnly
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19934,7 +19934,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
+  m_fontSize: 20.55
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1

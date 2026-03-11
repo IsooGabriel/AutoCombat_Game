@@ -22,7 +22,16 @@ public class SceneLoader : MonoBehaviour
     }
     private void OnGraphEditor(CallbackContext context)
     {
-        SceneManager.LoadScene("GraphEditor");
+        if(SceneManager.GetActiveScene().name == "GraphEditor")
+        {
+            GraphEditorManager.Instance.ResetGraph();
+            GraphEditorManager.Instance.graphData = new GraphData();
+            GraphEditorManager.Instance.AddNode(NodeType.Start);
+        }
+        else
+        {
+            SceneManager.LoadScene("GraphEditor");
+        }
     }
     private void OnGame(CallbackContext context)
     {

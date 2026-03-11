@@ -831,7 +831,7 @@ public class GraphEditorManager : MonoBehaviour
     #endregion
 
 
-    private void Awake()
+    private async void Awake()
     {
         Time.timeScale = 1f;
         if (Instance != null && Instance != this)
@@ -843,21 +843,43 @@ public class GraphEditorManager : MonoBehaviour
         {
             Instance = this;
         }
-        Instance.graphData = new GraphData()
-        {
-            nodes = new List<NodeData>(),
-        };
         AddNode(NodeType.Start);
         UpdateAdditionalStatus();
         onLoardGraph += UpdateAdditionalStatus;
         onLoardGraph += () => onChangeNodeCount?.Invoke();
-        if(loader == null)
+        if (loader == null)
         {
             loader = GetComponent<GraphEditorLoader>();
         }
         if (loader == null)
         {
             loader = new GraphEditorLoader();
+        }
+
+        ResetGraph();
+        string path = Application.persistentDataPath.Replace("/", "\\");
+        path = $"{path}\\{defaultPath}\\{playerDataFileName}";
+        if (!File.Exists(path))
+        {
+            string json = JsonUtility.ToJson(new GraphData(), true);
+            File.WriteAllText(path, json, System.Text.Encoding.UTF8);
+        }
+        Instance.graphData = loader.LoadJson(path);
+        if (Instance.graphData == null)
+        {
+            Instance.graphData = new GraphData();
+        }
+        if (!Instance.graphData.nodes.Any(n => n.type == NodeType.Start))
+        {
+            Instance.graphData.nodes.Add(new NodeData("Start", NodeType.Start, Vector2.zero, new()));
+        }
+
+        await loader.LoadEditor();
+
+        bool isPreviewActive = false;
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            isPreviewActive = "Preview" == SceneManager.GetSceneAt(i).name;
         }
         SceneManager.LoadScene("Preview", LoadSceneMode.Additive);
     }
