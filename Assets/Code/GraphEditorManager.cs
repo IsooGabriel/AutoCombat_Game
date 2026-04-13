@@ -857,8 +857,13 @@ public class GraphEditorManager : MonoBehaviour
         }
 
         ResetGraph();
-        string path = Application.persistentDataPath.Replace("/", "\\");
-        path = $"{path}\\{defaultPath}\\{playerDataFileName}";
+        string directory = Application.persistentDataPath.Replace("/", "\\");
+        directory = $"{directory}\\{defaultPath}";
+        string path = $"{directory}\\{playerDataFileName}";
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
         if (!File.Exists(path))
         {
             string json = JsonUtility.ToJson(new GraphData(), true);
@@ -881,7 +886,10 @@ public class GraphEditorManager : MonoBehaviour
         {
             isPreviewActive = "Preview" == SceneManager.GetSceneAt(i).name;
         }
-        SceneManager.LoadScene("Preview", LoadSceneMode.Additive);
+        if (!isPreviewActive)
+        {
+            SceneManager.LoadScene("Preview", LoadSceneMode.Additive);
+        }
     }
 
     private void OnEnable()
