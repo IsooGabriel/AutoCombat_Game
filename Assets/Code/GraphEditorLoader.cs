@@ -255,6 +255,10 @@ public class GraphEditorLoader : MonoBehaviour
             prefab.transform.localScale = Vector3.one;
 
             nodeUI.node = NodeFactory.Create(nodeData.type);
+            if (nodeUI.node is GenericNode gn)
+            {
+                gn.customTypeName = nodeData.customTypeName;
+            }
             nodeUI.node.SetData(nodeData);
             manager.nodeUIs.Add(nodeUI);
             nodeUI.node.Initialize();

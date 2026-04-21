@@ -68,6 +68,23 @@ public class GraphEditorManager : MonoBehaviour
     public void AddNode(NodeType type)
     {
         Node node = NodeFactory.Create(type);
+        AddNodeInternal(node, type);
+    }
+
+    /// <summary>
+    /// 外部定義されたカスタムノードを追加します。
+    /// </summary>
+    public void AddCustomNode(string typeName)
+    {
+        var def = CustomNodeRegistry.GetDefinition(typeName);
+        if (def == null) return;
+        
+        GenericNode node = new GenericNode(def);
+        AddNodeInternal(node, NodeType.Custom);
+    }
+
+    private void AddNodeInternal(Node node, NodeType type)
+    {
         node.EditorInitialize();
         node.position = Vector2.zero;
 
@@ -77,6 +94,11 @@ public class GraphEditorManager : MonoBehaviour
         ).GetComponent<NodeUI>();
         nodeUI.node = node;
         nodeUI.transform.position = node.position;
+
+        if (nodeUI is DynamicNodeUI dynamicUI)
+        {
+            dynamicUI.RefreshDynamicPorts();
+        }
 
         SetPortUIsPort(nodeUI.inputPorts, node.inputPorts);
         SetPortUIsPort(nodeUI.outputPorts, node.outputPorts);
@@ -812,7 +834,8 @@ public class GraphEditorManager : MonoBehaviour
     public NodeData GenerateNodeData(NodeUI nodeUI)
     {
         Node node = nodeUI.node;
-        NodeData nodeData = new NodeData(node.id, node.nodeType, nodeUI.transform.position, new() { });
+        string customTypeName = (node is GenericNode gn) ? gn.customTypeName : "";
+        NodeData nodeData = new NodeData(node.id, node.nodeType, nodeUI.transform.position, new() { }, customTypeName: customTypeName);
         if (node.outputPorts == null || node.outputPorts.Length == 0)
         {
             return nodeData;

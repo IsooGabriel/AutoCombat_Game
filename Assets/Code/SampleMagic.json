@@ -1,0 +1,18 @@
+{
+  "typeName": "SampleMagicAttack",
+  "displayName": "魔法攻撃 (MOD)",
+  "category": "ACTION",
+  "width": 250,
+  "height": 0,
+  "inputs": [
+    { "name": "Power", "type": "float" },
+    { "name": "ManaCost", "type": "float" },
+    { "name": "IsCrit", "type": "bool" },
+    { "name": "ExtraInput1", "type": "float" },
+    { "name": "ExtraInput2", "type": "float" }
+  ],
+  "outputs": [
+    { "name": "Damage", "type": "float" },
+    { "name": "OnHit", "type": "execution" }
+  ]
+}

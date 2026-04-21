@@ -29,6 +29,7 @@ public static class NodeFactory
         { Multiply, () => new MultipyNode() },
         { Accele, () => new AcceleNode() },
         { Stop, ()=> new StopNode() },
+        { Custom, () => new GenericNode() },
     };
 
     public static Node Create(NodeType type)

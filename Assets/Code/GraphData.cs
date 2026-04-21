@@ -53,16 +53,18 @@ public class GraphData
 [Serializable]
 public class NodeData
 {
-    public NodeData(string id, NodeType type, Vector2 position, List<PortConections> outputConnection, List<InputValue<SerializedValue>> inpuValues = null)
+    public NodeData(string id, NodeType type, Vector2 position, List<PortConections> outputConnection, List<InputValue<SerializedValue>> inpuValues = null, string customTypeName = "")
     {
         this.id = id;
         this.type = type;
         this.position = position;
         this.outputConnections = outputConnection;
         this.inputValues = inpuValues;
+        this.customTypeName = customTypeName;
     }
     public string id;
     public NodeType type;
+    public string customTypeName;
     public Vector2 position;
     public List<PortConections> outputConnections = new();
     public List<InputValue<SerializedValue>> inputValues = new();
@@ -230,4 +232,28 @@ public enum NodeType
     Multiply,
     Accele,
     Stop, 
+    Custom = 999,
 }
+
+/// <summary>
+/// MOD用ノードの定義データ
+/// </summary>
+[Serializable]
+public class NodeDefinition
+{
+    public string typeName;
+    public string displayName;
+    public string category; // ACTION, MATH, GETSET
+    public float width = 200f; // デフォルト幅
+    public float height = 0f;  // 0なら自動計算
+    public List<PortDefinition> inputs = new();
+    public List<PortDefinition> outputs = new();
+}
+
+[Serializable]
+public class PortDefinition
+{
+    public string name;
+    public string type; // float, bool, vector2, execution
+}
+

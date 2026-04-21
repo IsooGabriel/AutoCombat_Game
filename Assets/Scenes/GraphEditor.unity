@@ -253,11 +253,14 @@ MonoBehaviour:
     prefab: {fileID: 7953510120649212299, guid: daa76410e73e7054daee071b83513069, type: 3}
   - type: 21
     prefab: {fileID: 6594185191575757822, guid: 3c946eaa98421f54e82f543f75b7c07a, type: 3}
+  - type: 999
+    prefab: {fileID: 7953510120649212299, guid: 1db61fd15790aba4b9d94df50c8e637b, type: 3}
   graphData:
     version: 0.2
     nodes:
     - id: START_NODE
       type: 0
+      customTypeName: 
       position: {x: 10, y: 0}
       outputConnections:
       - fromPortName: exec
@@ -19934,7 +19937,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.55
+  m_fontSize: 20.6
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -22085,6 +22088,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2056828589}
   - component: {fileID: 2056828590}
+  - component: {fileID: 2056828591}
   m_Layer: 5
   m_Name: Nodes
   m_TagString: Untagged
@@ -22124,6 +22128,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056828588}
   m_CullTransparentMesh: 1
+--- !u!114 &2056828591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056828588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e2252868f47934d874908f06f6fc24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customNodesPath: CustomNodes
+  buttonPrefab: {fileID: 1174537575}
+  buttonParent: {fileID: 382213739}
 --- !u!1 &2064992807
 GameObject:
   m_ObjectHideFlags: 0
