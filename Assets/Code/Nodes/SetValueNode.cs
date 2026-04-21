@@ -26,28 +26,31 @@ public class SetValueNode : Node
     {
         if (CheckValidence())
         {
-            executor.SendData(this, outputPorts[1].portName, new List<float>() { (float)inputValues[0].value });
+            object val = inputValues[0].value;
+            // 数値型ならfloatに変換して送信（現在のポート定義に合わせる）
+            if (val is float f)
+            {
+                executor.SendData(this, outputValuePortName, f);
+            }
+            else if (val is int i)
+            {
+                executor.SendData(this, outputValuePortName, (float)i);
+            }
+            else
+            {
+                executor.SendData(this, outputValuePortName, val);
+            }
         }
-        executor.EnqueueConnected(this, outputPorts[0].portName);
+        executor.EnqueueConnected(this, executePortName);
     }
     public bool CheckValidence(int index = 0)
     {
-        if (inputValues == null)
+        if (inputValues == null || inputValues.Count <= index || inputValues[index] == null)
         {
             return false;
         }
-        if (inputValues.Count <= index)
-        {
-            return false;
-        }
-        if (inputValues[index] == null)
-        {
-            return false;
-        }
-        if (inputValues[index].value is float == false)
-        {
-            return false;
-        }
-        return true;
+        
+        object val = inputValues[index].value;
+        return val is float || val is int || val is double || val is SerializedValue;
     }
 }

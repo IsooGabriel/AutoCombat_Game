@@ -1,5 +1,5 @@
 public interface IUserVariable
 {
     string[] names { get; }
-    public bool TrySetVariable(float value, string name);
+    bool TrySetVariable(object value, string name);
 }

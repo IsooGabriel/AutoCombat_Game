@@ -36,7 +36,7 @@ public class IfNodeUI : NodeUI, IUserVariable
         isStarted = true;
     }
 
-    public bool TrySetVariable(float value, string name)
+    public bool TrySetVariable(object value, string name)
     {
         Start();
         if (name != settingKey)
@@ -44,9 +44,19 @@ public class IfNodeUI : NodeUI, IUserVariable
             return false;
         }
 
-        SetSetting((IfSettings)(int)value);
-        setting.value = (int)value;
-        setting.SetValueWithoutNotify((int)value);
+        int iValue = 0;
+        if (value is int i)
+        {
+            iValue = i;
+        }
+        else if (value is float f)
+        {
+            iValue = (int)f;
+        }
+
+        SetSetting((IfSettings)iValue);
+        setting.value = iValue;
+        setting.SetValueWithoutNotify(iValue);
         setting.RefreshShownValue();
         return true;
     }
@@ -67,7 +77,7 @@ public class IfNodeUI : NodeUI, IUserVariable
         SetInputValue(float.Parse(value), valueBPortKey);
     }
 
-    private void SetInputValue(float value, string key)
+    private void SetInputValue(object value, string key)
     {
         foreach (var inputvalue in node.inputValues)
         {
@@ -75,13 +85,13 @@ public class IfNodeUI : NodeUI, IUserVariable
             {
                 continue;
             }
-            inputvalue.value = (object)(float)value;
+            inputvalue.value = value;
             return;
         }
         node.inputValues.Add(
             new InputValue<object>(
                 key,
-                (float)value,
+                value,
                 isUserset: true
             )
         );

@@ -26,16 +26,20 @@
     }
     public override void Execute(GraphExecutor executor)
     {
-        float binary = 1;
         bool value = true;
-        if (!TryGetInputValueWithPort(inputBool, out binary))
+        if (TryGetInputValueWithPort(inputBool, out bool boolVal))
         {
-            value = true;
+            value = boolVal;
         }
-        else
+        else if (TryGetInputValueWithPort(inputBool, out float floatVal))
         {
-            value = binary != 0;
+            value = floatVal != 0;
         }
+        else if (TryGetInputValueWithPort(inputBool, out int intVal))
+        {
+            value = intVal != 0;
+        }
+
         executor.SendData(this, outBool, value);
         executor.EnqueueConnected(this, outputPorts[0].portName);
     }

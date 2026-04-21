@@ -76,13 +76,14 @@ public abstract class Node
         nodeType = data.type;
         if (data.inputValues == null)
         {
-            data.inputValues = new List<InputValue<float>>() { };
+            data.inputValues = new List<InputValue<SerializedValue>>() { };
         }
         else if (data.inputValues.Count > 0)
         {
-            foreach (var value in data.inputValues)
+            foreach (var val in data.inputValues)
             {
-                inputValues.Add(new InputValue<object>(value.toPortName, (object)value.value, value.isUserset));
+                // SerializedValueからオブジェクトに復元して保持
+                inputValues.Add(new InputValue<object>(val.toPortName, val.value.ToObject(), val.isUserset));
             }
         }
     }
@@ -125,19 +126,52 @@ public abstract class Node
             {
                 continue;
             }
+            
+            // 1. そのままの型で追加できるか
             if (data.value is T setValue)
             {
-                value.Add((T)setValue);
+                value.Add(setValue);
+                found = true;
             }
-            else if (data.value is List<T> listSetValue)
+            // 2. リストの場合、最初の要素を取り出す（互換性維持）
+            else if (data.value is List<T> listSetValue && listSetValue.Count > 0)
             {
-                value.Add((T)listSetValue[0]);
+                value.Add(listSetValue[0]);
+                found = true;
             }
-            if(value.Count <= 0)
+            // 3. 型変換を試みる
+            else if (data.value != null)
             {
-                continue;
+                try
+                {
+                    Type targetType = typeof(T);
+                    object rawValue = data.value;
+
+                    // リストの場合は最初の要素を取得
+                    if (data.value is System.Collections.IList list && list.Count > 0)
+                    {
+                        rawValue = list[0];
+                    }
+
+                    if (targetType.IsEnum)
+                    {
+                        // Enumへの変換
+                        value.Add((T)Enum.ToObject(targetType, Convert.ChangeType(rawValue, Enum.GetUnderlyingType(targetType))));
+                        found = true;
+                    }
+                    else
+                    {
+                        // 通常の型変換
+                        value.Add((T)Convert.ChangeType(rawValue, targetType));
+                        found = true;
+                    }
+                }
+                catch
+                {
+                    // 変換に失敗した場合はスキップ
+                    continue;
+                }
             }
-            found = true;
         }
         return found;
     }

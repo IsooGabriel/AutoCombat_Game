@@ -26,15 +26,26 @@ class GetPositionNodeUI : NodeUI, IUserVariable
         isStarted = true;
     }
 
-    public bool TrySetVariable(float value, string name)
+    public bool TrySetVariable(object value, string name)
     {
         Start();
         if (name != GetPositionNode.positionTypeDataName)
         {
             return false;
         }
-        SetSetting((GetPositionSettings)(int)value);
-        setting.value = (int)value;
+
+        int iValue = 0;
+        if (value is int i)
+        {
+            iValue = i;
+        }
+        else if (value is float f)
+        {
+            iValue = (int)f;
+        }
+
+        SetSetting((GetPositionSettings)iValue);
+        setting.value = iValue;
         setting.RefreshShownValue();
         return true;
     }
@@ -46,7 +57,7 @@ class GetPositionNodeUI : NodeUI, IUserVariable
             new InputValue<object>
             (
                 GetPositionNode.positionTypeDataName,
-                (object)(float)value,
+                (float)value,
                 isUserset:true
             )
         };

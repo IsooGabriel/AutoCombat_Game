@@ -7,13 +7,18 @@ public class SetValueNodeUI : NodeUI, IUserVariable
     public string[] names => new string[] { settingKey };
 
 
-    public bool TrySetVariable(float value, string name)
+    public bool TrySetVariable(object value, string name)
     {
         if (name != settingKey)
         {
             return false;
         }
-        SetData(value);
+        float fValue = 0.0f;
+        if(value is float f)
+        {
+            fValue = f;
+        }
+        SetData(fValue);
         field.text = value.ToString();
         return true;
     }
@@ -24,9 +29,10 @@ public class SetValueNodeUI : NodeUI, IUserVariable
         {
             return;
         }
+        float val = float.Parse(string.IsNullOrEmpty(field.text) ? "0" : field.text);
         node.inputValues = new List<InputValue<object>>()
         {
-            new InputValue<object>(settingKey, (object)float.Parse(string.IsNullOrEmpty(field.text) ? "0" : field.text), isUserset:true)
+            new InputValue<object>(settingKey, val, isUserset:true)
         };
     }
     public void SetData(float value)

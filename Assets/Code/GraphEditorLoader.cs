@@ -272,7 +272,8 @@ public class GraphEditorLoader : MonoBehaviour
             {
                 foreach (var inputValue in nodeData.inputValues)
                 {
-                    userVariable.TrySetVariable((float)inputValue.value, inputValue.toPortName);
+                    // SerializedValueからオブジェクトに復元して渡す
+                    userVariable.TrySetVariable(inputValue.value.ToObject(), inputValue.toPortName);
                 }
             }
 

@@ -5,7 +5,7 @@ using Weapon;
 [Serializable]
 public class GraphData
 {
-    public const string currentVersion = "0.21";
+    public const string currentVersion = "0.3";
     public string version = currentVersion;
     public List<NodeData> nodes = new();
     public List<LinkedNodeData> linkedNodes = new();
@@ -53,7 +53,7 @@ public class GraphData
 [Serializable]
 public class NodeData
 {
-    public NodeData(string id, NodeType type, Vector2 position, List<PortConections> outputConnection, List<InputValue<float>> inpuValues = null)
+    public NodeData(string id, NodeType type, Vector2 position, List<PortConections> outputConnection, List<InputValue<SerializedValue>> inpuValues = null)
     {
         this.id = id;
         this.type = type;
@@ -65,7 +65,7 @@ public class NodeData
     public NodeType type;
     public Vector2 position;
     public List<PortConections> outputConnections = new();
-    public List<InputValue<float>> inputValues = new();
+    public List<InputValue<SerializedValue>> inputValues = new();
 }
 [Serializable]
 public class LinkedNodeData
@@ -128,6 +128,82 @@ public class InputValue<T>
         this.toPortName = toPortName;
         this.value = value;
         this.isUserset = isUserset;
+    }
+}
+
+/// <summary>
+/// JSON文字列と型情報を保持し、自由な型をシリアライズするためのクラス
+/// </summary>
+[Serializable]
+public class SerializedValue
+{
+    public string valueJson;
+    public string typeName;
+
+    public SerializedValue(object value)
+    {
+        if (value == null)
+        {
+            return;
+        }
+        this.typeName = value.GetType().AssemblyQualifiedName;
+        
+        // プリミティブ型や文字列はそのまま文字列として、それ以外はJSONとして保存
+        if (value.GetType().IsPrimitive || value is string)
+        {
+            this.valueJson = value.ToString();
+        }
+        else
+        {
+            this.valueJson = JsonUtility.ToJson(value);
+        }
+    }
+
+    /// <summary>
+    /// 指定されたターゲット型への変換を試みつつ、オブジェクトを復元します。
+    /// </summary>
+    public object ToObject(Type targetType = null)
+    {
+        if (string.IsNullOrEmpty(typeName))
+        {
+            return null;
+        }
+        Type originalType = Type.GetType(typeName);
+        if (originalType == null)
+        {
+            return null;
+        }
+
+        object result = null;
+        try
+        {
+            if (originalType.IsPrimitive || originalType == typeof(string))
+            {
+                result = Convert.ChangeType(valueJson, originalType);
+            }
+            else
+            {
+                result = JsonUtility.FromJson(valueJson, originalType);
+            }
+        }
+        catch
+        {
+            return null;
+        }
+
+        // int <-> float などの柔軟な型変換
+        if (targetType != null && targetType != originalType && result != null)
+        {
+            try
+            {
+                return Convert.ChangeType(result, targetType);
+            }
+            catch
+            {
+                return result;
+            }
+        }
+        return result;
     }
 }
 public enum NodeType

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class Port
@@ -7,7 +8,12 @@ public class Port
     public string portName; // ポートの内部的な識別名
     public string portNameJP = defaultPortName; // ポートの日本語表示名
     public const string defaultPortName = "デフォルト (x_x;"; // 日本語名が未設定の場合のデフォルト文字列
-    public Type portType; // このポートが扱うデータの型
+    [SerializeField] private string portTypeName; // シリアライズ可能な型名
+    public Type portType 
+    { 
+        get => string.IsNullOrEmpty(portTypeName) ? typeof(float) : Type.GetType(portTypeName);
+        set => portTypeName = value?.AssemblyQualifiedName;
+    }
     public bool isRequired; // このポートへの接続が必須かどうか
     public bool isToPort; // 入力ポート（接続を受ける側）かどうか
     public bool isExecutionPort; // 実行フローを制御する実行ポートかどうか

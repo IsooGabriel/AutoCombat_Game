@@ -28,6 +28,8 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         if (_attackCooldown > 0)
+        {
             _attackCooldown -= Time.deltaTime;
+        }
     }
 }

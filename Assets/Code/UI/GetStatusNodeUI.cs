@@ -31,15 +31,26 @@ public class GetStatusNodeUI : NodeUI, IUserVariable
         isStarted = true;
     }
 
-    public bool TrySetVariable(float value, string name)
+    public bool TrySetVariable(object value, string name)
     {
         Start();
         if (name != GetStatusNode.statusPortName)
         {
             return false;
         }
-        SetSetting((StatusType)(int)value);
-        setting.value = (int)value;
+
+        int iValue = 0;
+        if (value is int i)
+        {
+            iValue = i;
+        }
+        else if (value is float f)
+        {
+            iValue = (int)f;
+        }
+
+        SetSetting((StatusType)iValue);
+        setting.value = iValue;
         setting.RefreshShownValue();
         return true;
     }
@@ -51,7 +62,7 @@ public class GetStatusNodeUI : NodeUI, IUserVariable
             new InputValue<object>
             (
                 GetStatusNode.statusPortName,
-                (object)(float)value,
+                (float)value,
                 isUserset:true
             )
         };

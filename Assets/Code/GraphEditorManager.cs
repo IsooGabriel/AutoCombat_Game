@@ -515,11 +515,50 @@ public class GraphEditorManager : MonoBehaviour
         {
             return false;
         }
-        if (from.port.portType != to.port.portType || from.port.portType.GetType() != to.port.portType.GetType())
+
+        // 実行ポート同士なら接続可能
+        if (from.port.isExecutionPort && to.port.isExecutionPort)
         {
-            return false;
+            return true;
         }
-        return true;
+
+        // 型チェック: 厳密な一致、または割り当て可能か、または数値型同士か
+        Type fromType = from.port.portType;
+        Type toType = to.port.portType;
+
+        if (fromType == toType || toType.IsAssignableFrom(fromType))
+        {
+            return true;
+        }
+
+        // 数値型同士 (int, float, double等) の変換を許可
+        if (IsNumericType(fromType) && IsNumericType(toType))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool IsNumericType(Type type)
+    {
+        switch (Type.GetTypeCode(type))
+        {
+            case TypeCode.Byte:
+            case TypeCode.SByte:
+            case TypeCode.UInt16:
+            case TypeCode.UInt32:
+            case TypeCode.UInt64:
+            case TypeCode.Int16:
+            case TypeCode.Int32:
+            case TypeCode.Int64:
+            case TypeCode.Decimal:
+            case TypeCode.Double:
+            case TypeCode.Single:
+                return true;
+            default:
+                return false;
+        }
     }
 
     /// <summary>
@@ -804,15 +843,17 @@ public class GraphEditorManager : MonoBehaviour
             {
                 continue;
             }
-            if (node.inputValues[i].value.GetType() != typeof(float))
-            {
-                continue;
-            }
             if (nodeData.inputValues == null)
             {
-                nodeData.inputValues = new List<InputValue<float>>() { };
+                nodeData.inputValues = new List<InputValue<SerializedValue>>() { };
             }
-            nodeData.inputValues.Add(new InputValue<float>(node.inputValues[i].toPortName, (float)node.inputValues[i].value, isUserset: true));
+
+            // 既にSerializedValueならそのまま、そうでなければ新規作成
+            SerializedValue sVal = node.inputValues[i].value is SerializedValue existingSVal 
+                ? existingSVal 
+                : new SerializedValue(node.inputValues[i].value);
+
+            nodeData.inputValues.Add(new InputValue<SerializedValue>(node.inputValues[i].toPortName, sVal, isUserset: true));
         }
         Debug.Log("ノードデータ生成完了");
         return nodeData;

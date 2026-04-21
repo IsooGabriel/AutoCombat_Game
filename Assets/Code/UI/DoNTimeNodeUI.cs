@@ -6,14 +6,20 @@ public class DoNTimeNodeUI : NodeUI, IUserVariable
     public string[] names => new string[] { DoNTimeNode.limitPortName };
 
 
-    public bool TrySetVariable(float value, string name)
+    public bool TrySetVariable(object value, string name)
     {
         if (name != DoNTimeNode.limitPortName)
         {
             return false;
         }
-        SetData(value);
-        field.text = value.ToString();
+        float fValue = value is float ? (float)value : 0f;
+        if (value is int iValue)
+        {
+            fValue = (float)iValue;
+        }
+        
+        SetData(fValue);
+        field.text = fValue.ToString();
         return true;
     }
 
@@ -23,9 +29,10 @@ public class DoNTimeNodeUI : NodeUI, IUserVariable
         {
             return;
         }
+        float val = float.Parse(string.IsNullOrEmpty(field.text) ? "0" : field.text);
         node.inputValues = new List<InputValue<object>>()
         {
-            new InputValue<object>(DoNTimeNode.limitPortName, (object)float.Parse(string.IsNullOrEmpty(field.text) ? "0" : field.text), isUserset:true)
+            new InputValue<object>(DoNTimeNode.limitPortName, val, isUserset:true)
         };
     }
     public void SetData(float value)
