@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Linq;
-
+using TMPro;
 /// <summary>
 /// ポートの数に合わせて、実行時にポートUIを生成・配置するNodeUIの拡張
 /// </summary>
@@ -24,6 +24,39 @@ public class DynamicNodeUI : NodeUI
     {
         if (node == null) return;
 
+        GenericNode genericNode = node as GenericNode;
+
+        // タイトルの更新
+        if (titleText == null)
+        {
+            // "Title" という名前の子オブジェクトを探すか、最初に見つかったTMPを使用する
+            var titleObj = transform.Find("Title");
+            if (titleObj != null) titleText = titleObj.GetComponent<TextMeshProUGUI>();
+            
+            if (titleText == null)
+            {
+                // ポート用コンテナ以外にあるテキストを探す
+                titleText = GetComponentsInChildren<TextMeshProUGUI>()
+                    .FirstOrDefault(t => t.transform.parent != inputPortParent && t.transform.parent != outputPortParent);
+            }
+        }
+
+        if (titleText != null)
+        {
+            if (genericNode != null && genericNode.definition != null)
+            {
+                titleText.text = genericNode.definition.displayName;
+            }
+            else
+            {
+                titleText.text = node.nodeType.ToString();
+                if (genericNode != null && genericNode.definition == null)
+                {
+                    Debug.LogWarning($"GenericNode definition missing for: {genericNode.customTypeName}");
+                }
+            }
+        }
+
         // 既存をクリア
         foreach (Transform child in inputPortParent) Destroy(child.gameObject);
         foreach (Transform child in outputPortParent) Destroy(child.gameObject);
@@ -37,9 +70,9 @@ public class DynamicNodeUI : NodeUI
         SetOwnerInPorts(outputPorts);
 
         // サイズの適用
-        if (node is GenericNode gn && gn.definition != null)
+        if (genericNode != null && genericNode.definition != null)
         {
-            ApplySize(gn.definition);
+            ApplySize(genericNode.definition);
         }
     }
 

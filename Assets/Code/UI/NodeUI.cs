@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class NodeUI : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class NodeUI : MonoBehaviour
     public PortUI[] inputPorts; // 入力ポートのUIコンポーネント配列
     [SerializeField]
     public PortUI[] outputPorts; // 出力ポートのUIコンポーネント配列
+    [SerializeField]
+    public TextMeshProUGUI titleText; // ノードの名前を表示するテキスト
 
     /// <summary>
     /// 指定されたポートUI配列の各要素に対して、所有者となるNodeUIとNodeを設定します。

@@ -13,8 +13,11 @@ public class CustomNodeLoader : MonoBehaviour
     [SerializeField] private GameObject buttonPrefab; // AddNodeButtonのプレハブ
     [SerializeField] private Transform buttonParent; // ボタンを並べる親要素
 
-    private void Start()
+    public static CustomNodeLoader Instance { get; private set; }
+
+    private void Awake()
     {
+        Instance = this;
         LoadAllCustomNodes();
     }
 

@@ -921,6 +921,13 @@ public class GraphEditorManager : MonoBehaviour
         }
 
         ResetGraph();
+
+        // カスタムノードの読み込みを確実に行う
+        if (CustomNodeLoader.Instance != null)
+        {
+            CustomNodeLoader.Instance.LoadAllCustomNodes();
+        }
+
         string directory = Application.persistentDataPath.Replace("/", "\\");
         directory = $"{directory}\\{defaultPath}";
         string path = $"{directory}\\{playerDataFileName}";

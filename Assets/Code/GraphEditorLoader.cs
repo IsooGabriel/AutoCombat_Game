@@ -9,6 +9,7 @@ using UnityEngine;
 using static FileSelector;
 using static GraphEditorManager;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class GraphEditorLoader : MonoBehaviour
 {
@@ -120,19 +121,15 @@ public class GraphEditorLoader : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < manager.nodeUIs.Count; ++i)
+        for (int i = manager.nodeUIs.Count - 1; i >= 0; --i)
         {
-            loadingSlider.value += ((float)1f / manager.nodeUIs.Count) * 0.2f * loadingSlider.maxValue;
-            var targetID = manager.nodeUIs[i].node.id;
-            for (int j = 0; j < manager.graphData.nodes.Count; ++j)
+            loadingSlider.value += ((float)1f / Math.Max(1, manager.nodeUIs.Count)) * 0.2f * loadingSlider.maxValue;
+            if (stopwatch.ElapsedMilliseconds >= 3)
             {
-                if (false && stopwatch.ElapsedMilliseconds >= 3)
-                {
-                    stopwatch.Restart();
-                    await Task.Yield();
-                }
-                manager.DeleteNode(manager.nodeUIs[i]);
+                stopwatch.Restart();
+                await Task.Yield();
             }
+            manager.DeleteNode(manager.nodeUIs[i]);
         }
 
         Dictionary<string, string> newIDs = new();
@@ -223,147 +220,171 @@ public class GraphEditorLoader : MonoBehaviour
 
         loadingObject.SetActive(true);
 
-        for (int i = 0; i < manager.graphData.nodes.Count; ++i)
+        try
         {
-            loadingSlider.value += ((float)1f / manager.graphData.nodes.Count)*0.3f*loadingSlider.maxValue;
-            if (stopwatch.ElapsedMilliseconds > 3)
+            for (int i = 0; i < manager.graphData.nodes.Count; ++i)
             {
-                stopwatch.Restart();
-                await Task.Yield();
-            }
-
-            var nodeData = manager.graphData.nodes[i];
-
-            prefab = manager.nodePrefabs.First(p => p.type == nodeData.type).prefab;
-            if (prefab == null)
-            {
-                continue;
-            }
-            prefab = Instantiate(prefab, new Vector3(nodeData.position.x, nodeData.position.y, 0), Quaternion.identity);
-            nodeUI = prefab.GetComponent<NodeUI>();
-            if (prefab == null)
-            {
-                continue;
-            }
-            if (nodeUI == null)
-            {
-                Destroy(prefab);
-                continue;
-            }
-
-            prefab.transform.parent = manager.nodesParent.transform;
-            prefab.transform.localScale = Vector3.one;
-
-            nodeUI.node = NodeFactory.Create(nodeData.type);
-            if (nodeUI.node is GenericNode gn)
-            {
-                gn.customTypeName = nodeData.customTypeName;
-            }
-            nodeUI.node.SetData(nodeData);
-            manager.nodeUIs.Add(nodeUI);
-            nodeUI.node.Initialize();
-            nodeUI.node.id = nodeData.id;
-            if (nodeUI.node is LinkedNode linked)
-            {
-                inputlinkeds.Add(linked, manager.graphData.linkedNodes.First(l => l.id == linked.id).inputNodeIDs);
-                outputlinkeds.Add(linked, manager.graphData.linkedNodes.First(l => l.id == linked.id).outputNodeIDs);
-            }
-
-            manager.SetPortUIsPort(nodeUI.inputPorts, nodeUI.node.inputPorts);
-            manager.SetPortUIsPort(nodeUI.outputPorts, nodeUI.node.outputPorts);
-
-            if (nodeUI is IUserVariable userVariable)
-            {
-                foreach (var inputValue in nodeData.inputValues)
+                loadingSlider.value += ((float)1f / manager.graphData.nodes.Count) * 0.3f * loadingSlider.maxValue;
+                if (stopwatch.ElapsedMilliseconds > 3)
                 {
-                    // SerializedValueからオブジェクトに復元して渡す
-                    userVariable.TrySetVariable(inputValue.value.ToObject(), inputValue.toPortName);
+                    stopwatch.Restart();
+                    await Task.Yield();
+                }
+
+                var nodeData = manager.graphData.nodes[i];
+
+                var nodePrefab = manager.nodePrefabs.FirstOrDefault(p => p.type == nodeData.type);
+                if (nodePrefab == null || nodePrefab.prefab == null)
+                {
+                    Debug.LogError($"Prefab not found for node type: {nodeData.type}");
+                    continue;
+                }
+                prefab = Instantiate(nodePrefab.prefab, new Vector3(nodeData.position.x, nodeData.position.y, 0), Quaternion.identity);
+                nodeUI = prefab.GetComponent<NodeUI>();
+                if (nodeUI == null)
+                {
+                    Debug.LogError($"NodeUI component missing on prefab for type: {nodeData.type}");
+                    Destroy(prefab);
+                    continue;
+                }
+
+                prefab.transform.parent = manager.nodesParent.transform;
+                prefab.transform.localScale = Vector3.one;
+
+                nodeUI.node = NodeFactory.Create(nodeData.type);
+                if (nodeUI.node is GenericNode gn)
+                {
+                    gn.customTypeName = nodeData.customTypeName;
+                }
+                nodeUI.node.SetData(nodeData);
+                manager.nodeUIs.Add(nodeUI);
+                nodeUI.node.Initialize();
+                nodeUI.node.id = nodeData.id;
+
+                if (nodeUI is DynamicNodeUI dynamicUI)
+                {
+                    dynamicUI.RefreshDynamicPorts();
+                }
+
+                if (nodeUI.node is LinkedNode linked)
+                {
+                    var linkedData = manager.graphData.linkedNodes.FirstOrDefault(l => l.id == linked.id);
+                    if (linkedData != null)
+                    {
+                        inputlinkeds.Add(linked, linkedData.inputNodeIDs);
+                        outputlinkeds.Add(linked, linkedData.outputNodeIDs);
+                    }
+                }
+
+                manager.SetPortUIsPort(nodeUI.inputPorts, nodeUI.node.inputPorts);
+                manager.SetPortUIsPort(nodeUI.outputPorts, nodeUI.node.outputPorts);
+
+                if (nodeUI is IUserVariable userVariable)
+                {
+                    foreach (var inputValue in nodeData.inputValues)
+                    {
+                        // SerializedValueからオブジェクトに復元して渡す
+                        userVariable.TrySetVariable(inputValue.value.ToObject(), inputValue.toPortName);
+                    }
+                }
+
+
+                if (prefab.TryGetComponent<NodeMoveSystem>(out var moveSystem))
+                {
+                    moveSystem.IsDragging = false;
                 }
             }
-
-
-            if (prefab.TryGetComponent<NodeMoveSystem>(out var moveSystem))
+            NodeData graphNodeData;
+            for (int i = 0; i < manager.graphData.nodes.Count; ++i)
             {
-                moveSystem.IsDragging = false;
-            }
-        }
-        NodeData graphNodeData;  
-        for (int i = 0; i < manager.graphData.nodes.Count; ++i)
-        {
-            loadingSlider.value += (1f / manager.graphData.nodes.Count) * 0.3f * loadingSlider.maxValue;
-            graphNodeData = manager.graphData.nodes[i];
-            if (graphNodeData.outputConnections == null || graphNodeData.outputConnections.Count == 0)
-            {
-                continue;
-            }
-            foreach (var outputConnection in graphNodeData.outputConnections)
-            {
-                if (outputConnection.toPortNodes == null || outputConnection.toPortNodes.Count == 0)
+                loadingSlider.value += (1f / manager.graphData.nodes.Count) * 0.3f * loadingSlider.maxValue;
+                graphNodeData = manager.graphData.nodes[i];
+                if (graphNodeData.outputConnections == null || graphNodeData.outputConnections.Count == 0)
                 {
                     continue;
                 }
-                var fromNodeUI = manager.nodeUIs.First(n => n.node.id == graphNodeData.id);
-                foreach (var conection in outputConnection.toPortNodes)
+                foreach (var outputConnection in graphNodeData.outputConnections)
                 {
-                    if (stopwatch.ElapsedMilliseconds > 3)
+                    if (outputConnection.toPortNodes == null || outputConnection.toPortNodes.Count == 0)
                     {
-                        stopwatch.Restart();
-                        await Task.Yield();
+                        continue;
                     }
+                    var fromNodeUI = manager.nodeUIs.FirstOrDefault(n => n.node.id == graphNodeData.id);
+                    if (fromNodeUI == null) continue;
 
-                    var toNodeUI = manager.nodeUIs.First(n => n.node.id == conection.nodeId);
-                    GraphEditorManager.ConectPorts(
-                        fromNodeUI.outputPorts.First(p => p.port.portName == outputConnection.fromPortName),
-                        toNodeUI.inputPorts.First(p => p.port.portName == conection.portName)
-                    );
+                    foreach (var conection in outputConnection.toPortNodes)
+                    {
+                        if (stopwatch.ElapsedMilliseconds > 3)
+                        {
+                            stopwatch.Restart();
+                            await Task.Yield();
+                        }
+
+                        var toNodeUI = manager.nodeUIs.FirstOrDefault(n => n.node.id == conection.nodeId);
+                        if (toNodeUI == null) continue;
+
+                        var fromPortUI = fromNodeUI.outputPorts.FirstOrDefault(p => p.port.portName == outputConnection.fromPortName);
+                        var toPortUI = toNodeUI.inputPorts.FirstOrDefault(p => p.port.portName == conection.portName);
+
+                        if (fromPortUI != null && toPortUI != null)
+                        {
+                            GraphEditorManager.ConectPorts(fromPortUI, toPortUI);
+                        }
+                    }
                 }
             }
-        }
-        NodeUI ui;
-        for (int i = 0; i < manager.nodeUIs.Count; ++i)
-        {
-            loadingSlider.value += (1f / manager.nodeUIs.Count) * 0.39f * loadingSlider.maxValue;
-            ui = manager.nodeUIs[i];
-            if (stopwatch.ElapsedMilliseconds > 3)
+            NodeUI ui;
+            for (int i = 0; i < manager.nodeUIs.Count; ++i)
             {
-                stopwatch.Restart();
-                await Task.Yield();
-            }
-            foreach (var linked in inputlinkeds)
-            {
-                if (linked.Value.Contains(ui.node.id))
+                loadingSlider.value += (1f / manager.nodeUIs.Count) * 0.39f * loadingSlider.maxValue;
+                ui = manager.nodeUIs[i];
+                if (stopwatch.ElapsedMilliseconds > 3)
                 {
-                    linked.Key.toNodes.ToList().AddRange(new Node[] { ui.node });
+                    stopwatch.Restart();
+                    await Task.Yield();
                 }
-            }
-            foreach (var linked in outputlinkeds)
-            {
-                if (linked.Value.Contains(ui.node.id))
+                foreach (var linked in inputlinkeds)
                 {
-                    linked.Key.toNodes.ToList().AddRange(new Node[] { ui.node });
+                    if (linked.Value.Contains(ui.node.id))
+                    {
+                        linked.Key.toNodes.ToList().AddRange(new Node[] { ui.node });
+                    }
+                }
+                foreach (var linked in outputlinkeds)
+                {
+                    if (linked.Value.Contains(ui.node.id))
+                    {
+                        linked.Key.toNodes.ToList().AddRange(new Node[] { ui.node });
+                    }
                 }
             }
+
+            loadingSlider.value = 99;
+
+            var status = manager.graphData.aditionalStatus;
+            manager.graphData.aditionalStatus = new Status()
+            {
+                hp = 0,
+                attack = 0,
+                attackCooltime = 0,
+                criticalChance = 0,
+                criticalDamage = 0,
+            };
+            manager.SetHP(status.hp);
+            manager.SetAttack(status.attack);
+            manager.SetAttackCT(status.attackCooltime);
+            manager.SetCriticalChance(status.criticalChance);
+            manager.SetCriticalDamage(status.criticalDamage);
+
+            manager.onLoardGraph?.Invoke();
         }
-
-        loadingSlider.value = 99;
-
-        var status = manager.graphData.aditionalStatus;
-        manager.graphData.aditionalStatus = new Status()
+        catch (Exception e)
         {
-            hp = 0,
-            attack = 0,
-            attackCooltime = 0,
-            criticalChance = 0,
-            criticalDamage = 0,
-        };
-        manager.SetHP(status.hp);
-        manager.SetAttack(status.attack);
-        manager.SetAttackCT(status.attackCooltime);
-        manager.SetCriticalChance(status.criticalChance);
-        manager.SetCriticalDamage(status.criticalDamage);
-
-        manager.onLoardGraph?.Invoke();
-
-        loadingObject.SetActive(false);
+            Debug.LogException(e);
+        }
+        finally
+        {
+            loadingObject.SetActive(false);
+        }
     }
 }
