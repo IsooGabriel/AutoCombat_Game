@@ -20,14 +20,6 @@ public class GraphData
 
     public GraphData()
     {
-        nodes.Add(
-            new NodeData(
-                startNodeId,
-                NodeType.Start,
-                new Vector2(10, 0),
-                new() { new PortConections("exec", new() { }) }
-            )
-        );
     }
 
     public PortConections GetConection(string portName, string nodeID = startNodeId)

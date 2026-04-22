@@ -187,6 +187,12 @@ public class GraphEditorManager : MonoBehaviour
 
         Instance.nodeUIs.Remove(nodeUI);
 
+        // グラフデータ本体からも削除
+        if (Instance.graphData != null && Instance.graphData.nodes != null)
+        {
+            Instance.graphData.nodes.RemoveAll(n => n.id == deleteNode.id);
+        }
+
         foreach (var nodeDeta in Instance.nodeUIs)
         {
             foreach (var port in nodeDeta.node.outputPorts)

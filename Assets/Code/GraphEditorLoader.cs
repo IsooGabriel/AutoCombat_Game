@@ -26,6 +26,8 @@ public class GraphEditorLoader : MonoBehaviour
     [SerializeField]
     private Slider loadingSlider;
 
+    private bool isLoading = false;
+
 
     [DllImport("comdlg32.dll", SetLastError = true, CharSet = CharSet.Auto)]
     private static extern bool GetOpenFileName(ref OpenFileName ofn);
@@ -81,58 +83,77 @@ public class GraphEditorLoader : MonoBehaviour
 
     public async void SelectFile()
     {
-        this.path = await OpenFileDialog();
-        if (this.path == chanceledMessage)
+        if (isLoading) return;
+        isLoading = true;
+
+        try
         {
-            return;
+            this.path = await OpenFileDialog();
+            if (this.path == chanceledMessage)
+            {
+                return;
+            }
+            if (string.IsNullOrEmpty(path))
+            {
+                string parent = Application.persistentDataPath.Replace("/", "\\");
+                path =
+                    $"{parent}\\{defaultPath}\\{playerDataFileName}";
+            }
+            manager.ResetGraph();
+            manager.graphData = LoadJson(path);
+            await LoadEditor();
         }
-        if (string.IsNullOrEmpty(path))
+        finally
         {
-            string parent = Application.persistentDataPath.Replace("/", "\\");
-            path =
-                $"{parent}\\{defaultPath}\\{playerDataFileName}";
+            isLoading = false;
         }
-        manager.ResetGraph();
-        manager.graphData = LoadJson(path);
-        await LoadEditor();
     }
 
     public async void LoadFunction()
     {
-        var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+        if (isLoading) return;
+        isLoading = true;
 
-        this.path = await OpenFileDialog();
-        if (this.path == GraphEditorLoader.chanceledMessage)
+        try
         {
-            return;
-        }
-        if (string.IsNullOrEmpty(path))
-        {
-            string parent = Application.persistentDataPath.Replace("/", "\\");
-            path =
-                $"{parent}\\{defaultPath}\\{playerDataFileName}";
-        }
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
-        loadingObject.SetActive(true);
-
-        GraphData functionData = LoadJson(path);
-        if (functionData == null)
-        {
-            return;
-        }
-
-        for (int i = manager.nodeUIs.Count - 1; i >= 0; --i)
-        {
-            loadingSlider.value += ((float)1f / Math.Max(1, manager.nodeUIs.Count)) * 0.2f * loadingSlider.maxValue;
-            if (stopwatch.ElapsedMilliseconds >= 3)
+            this.path = await OpenFileDialog();
+            if (this.path == GraphEditorLoader.chanceledMessage)
             {
-                stopwatch.Restart();
-                await Task.Yield();
+                return;
             }
-            manager.DeleteNode(manager.nodeUIs[i]);
-        }
+            if (string.IsNullOrEmpty(path))
+            {
+                string parent = Application.persistentDataPath.Replace("/", "\\");
+                path =
+                    $"{parent}\\{defaultPath}\\{playerDataFileName}";
+            }
 
-        Dictionary<string, string> newIDs = new();
+            loadingObject.SetActive(true);
+
+            GraphData functionData = LoadJson(path);
+            if (functionData == null)
+            {
+                return;
+            }
+
+            for (int i = manager.nodeUIs.Count - 1; i >= 0; --i)
+            {
+                loadingSlider.value += ((float)1f / Math.Max(1, manager.nodeUIs.Count)) * 0.2f * loadingSlider.maxValue;
+                if (stopwatch.ElapsedMilliseconds >= 3)
+                {
+                    stopwatch.Restart();
+                    await Task.Yield();
+                }
+                manager.DeleteNode(manager.nodeUIs[i]);
+            }
+
+            // マネージャーのgraphData.nodesを一度クリアするか、
+            // 削除したノードが確実に消えていることを保証する必要がある。
+            // DeleteNodeの中でRemoveAllするようにしたので、ここでは追加のみでOK。
+
+            Dictionary<string, string> newIDs = new();
         NodeData node;
         for(int i = 0; i < functionData.nodes.Count; ++i)
         {
@@ -192,6 +213,11 @@ public class GraphEditorLoader : MonoBehaviour
         }
 
         await LoadEditor();
+        }
+        finally
+        {
+            isLoading = false;
+        }
     }
 
     public GraphData LoadJson(string path)
@@ -232,6 +258,12 @@ public class GraphEditorLoader : MonoBehaviour
                 }
 
                 var nodeData = manager.graphData.nodes[i];
+
+                // 同一IDのノードUIが既に存在する場合はスキップする（二重生成防止）
+                if (manager.nodeUIs.Any(ui => ui.node.id == nodeData.id))
+                {
+                    continue;
+                }
 
                 var nodePrefab = manager.nodePrefabs.FirstOrDefault(p => p.type == nodeData.type);
                 if (nodePrefab == null || nodePrefab.prefab == null)
