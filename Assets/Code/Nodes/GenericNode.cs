@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -42,14 +43,25 @@ public class GenericNode : Node
         List<Port> inputs = new List<Port>();
         List<Port> outputs = new List<Port>();
 
-        // 実行ポート
-        inputs.Add(new Port(executePortName, typeof(void), false, true, true, this));
-        outputs.Add(new Port(executePortName, typeof(void), false, false, true, this));
+        // 実行ポートの追加（JSON定義に明示的なExecuteがない場合のみ追加して重複を避ける）
+        if (!definition.inputs.Any(p => p.name == executePortName))
+        {
+            inputs.Add(new Port(executePortName, typeof(void), false, true, true, this));
+        }
+        
+        if (!definition.outputs.Any(p => p.name == executePortName))
+        {
+            outputs.Add(new Port(executePortName, typeof(void), false, false, true, this));
+        }
 
         foreach (var pDef in definition.inputs)
         {
             if (!nameToJP.ContainsKey(pDef.name)) nameToJP.Add(pDef.name, pDef.name);
             bool isExec = pDef.type.ToLower() == "execution";
+            
+            // すでにExecuteポートとして追加されている場合はスキップ
+            if (pDef.name == executePortName && inputs.Any(p => p.portName == executePortName)) continue;
+            
             inputs.Add(new Port(pDef.name, StringToType(pDef.type), false, true, isExec, this));
         }
 
@@ -57,6 +69,10 @@ public class GenericNode : Node
         {
             if (!nameToJP.ContainsKey(pDef.name)) nameToJP.Add(pDef.name, pDef.name);
             bool isExec = pDef.type.ToLower() == "execution";
+
+            // すでにExecuteポートとして追加されている場合はスキップ
+            if (pDef.name == executePortName && outputs.Any(p => p.portName == executePortName)) continue;
+
             outputs.Add(new Port(pDef.name, StringToType(pDef.type), false, false, isExec, this));
         }
 

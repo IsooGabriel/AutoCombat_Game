@@ -25,6 +25,11 @@ public class DynamicNodeUI : NodeUI
         if (node == null) return;
 
         GenericNode genericNode = node as GenericNode;
+        if (genericNode != null && genericNode.definition == null)
+        {
+            // 定義が欠落している場合は再取得を試みる
+            genericNode.definition = CustomNodeRegistry.GetDefinition(genericNode.customTypeName);
+        }
 
         // タイトルの更新
         if (titleText == null)
