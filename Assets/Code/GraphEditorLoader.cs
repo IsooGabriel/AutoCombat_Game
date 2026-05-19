@@ -224,7 +224,7 @@ public class GraphEditorLoader : MonoBehaviour
     {
         this.path = path;
         string json = File.ReadAllText(path, System.Text.Encoding.UTF8);
-        var data = JsonUtility.FromJson<GraphData>(json);
+        var data = GraphDataJsonUtility.FromJson(json);
         foreach (var node in data.nodes)
         {
             if (float.Parse(data.version) < 0.2f)

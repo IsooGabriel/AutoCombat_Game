@@ -83,7 +83,10 @@ public abstract class Node
             foreach (var val in data.inputValues)
             {
                 // SerializedValueからオブジェクトに復元して保持
-                inputValues.Add(new InputValue<object>(val.toPortName, val.value.ToObject(), val.isUserset));
+                if (val != null && val.value != null)
+                {
+                    inputValues.Add(new InputValue<object>(val.toPortName, val.value.ToObject(), val.isUserset));
+                }
             }
         }
     }

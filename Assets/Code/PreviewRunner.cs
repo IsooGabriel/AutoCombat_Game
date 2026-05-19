@@ -29,7 +29,7 @@ public class PreviewRunner : MonoBehaviour
         }
         string json = File.ReadAllText(path);
 
-        var playerGraph = JsonUtility.FromJson<GraphData>(json);
+        var playerGraph = GraphDataJsonUtility.FromJson(json);
         GraphEditorManager.Instance ??= new GraphEditorManager();
         GraphEditorManager.Instance.AjustAdditionalStatus(playerGraph.aditionalStatus);
 

@@ -44,7 +44,7 @@ public class GraphRunner : MonoBehaviour
         string enemypath = $"{(Application.persistentDataPath.Replace("/", "\\"))}\\{EnemyGraphLoader.graphPath}";
         string enemyjson = File.ReadAllText(enemypath);
 
-        var playerGraph = JsonUtility.FromJson<GraphData>(json);
+        var playerGraph = GraphDataJsonUtility.FromJson(json);
         GraphEditorManager.Instance ??= new GraphEditorManager();
         GraphEditorManager.Instance.AjustAdditionalStatus(playerGraph.aditionalStatus);
 
@@ -53,11 +53,11 @@ public class GraphRunner : MonoBehaviour
         isLoadUserEnemyGraph = (stageIndex == invalidIndex) ? true : settings[stageIndex].isUseUserEnemy;
         if (isLoadUserEnemyGraph)
         {
-            enemyGraph = JsonUtility.FromJson<GraphData>(enemyjson);
+            enemyGraph = GraphDataJsonUtility.FromJson(enemyjson);
         }
         else
         {
-            enemyGraph = JsonUtility.FromJson<GraphData>(settings[stageIndex].enemyGraph.text);
+            enemyGraph = GraphDataJsonUtility.FromJson(settings[stageIndex].enemyGraph.text);
         }
 
         if (playerGraph == null || enemyGraph == null || player == null || enemy == null)
